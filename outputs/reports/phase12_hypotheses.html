@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Phase 12 - Hypothesen</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script>
+    MathJax = {
+      tex: { inlineMath:[['$','$'],['\\(','\\)']] },
+      options: { skipHtmlTags:['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { background:#0d1117; color:#e6edf3; font-family:'Segoe UI',Arial,sans-serif; }
+    mjx-container, mjx-container * { color:#e6edf3 !important; fill:#e6edf3 !important; }
+    mjx-container svg path { fill:#e6edf3 !important; }
+    .MathJax { color:#e6edf3 !important; }
+    .ph-header { background:#a5d6ff22; border-left:5px solid #a5d6ff;
+                  padding:1.5rem 2rem; border-radius:8px; margin-bottom:2rem; }
+    .ph-header h1 { color:#a5d6ff; font-size:1.8rem; margin:0; }
+    .ph-header .sub { color:#8b949e; font-size:.95rem; margin-top:.4rem; }
+    .card { background:#161b22; border:1px solid #30363d; border-radius:8px; }
+    .card-header { background:#a5d6ff18; border-bottom:1px solid #30363d;
+                    color:#a5d6ff; font-weight:600; font-size:.95rem; }
+    .card-body { padding:1rem 1.25rem; }
+    table { color:#e6edf3 !important; font-size:.78rem; }
+    .table-dark { --bs-table-bg:#161b22; --bs-table-striped-bg:#1c2128;
+                   --bs-table-hover-bg:#21262d; }
+    .formula-box { background:#1c2128; border:1px solid #30363d; border-radius:6px;
+                    padding:1rem 1.5rem; margin:.5rem 0 1rem;
+                    font-size:1.05rem; color:#e6edf3 !important; }
+    .formula-box * { color:#e6edf3 !important; }
+    .interp-box { background:#0e3a1a; border-left:4px solid #3fb950;
+                   padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                   color:#e6edf3; margin-bottom:1rem; }
+    .warn-box  { background:#3a1e0e; border-left:4px solid #d29922;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .info-box  { background:#0e2a3a; border-left:4px solid #58a6ff;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .stat-card { background:#1c2128; border:1px solid #30363d; border-radius:8px;
+                  padding:1rem; text-align:center; }
+    .stat-card .val { font-size:1.6rem; font-weight:700; color:#a5d6ff; }
+    .stat-card .lbl { font-size:.78rem; color:#8b949e; }
+    .badge-ph { background:#a5d6ff33; color:#a5d6ff; border:1px solid #a5d6ff55;
+                 padding:.25rem .7rem; border-radius:12px; font-size:.8rem; }
+    .table-responsive { max-height:380px; overflow-y:auto; }
+    iframe { border:none; width:100%; border-radius:6px; }
+    h2,h3,h4 { color:#e6edf3; }
+    a { color:#a5d6ff; } a:hover { color:#a5d6ffcc; }
+    .breadcrumb-item.active { color:#8b949e; }
+    .slbl { font-size:.7rem; text-transform:uppercase; letter-spacing:.08em;
+             color:#8b949e; margin-bottom:.4rem; }
+  </style>
+</head>
+<body>
+<nav class="navbar" style="background:#010409;border-bottom:1px solid #30363d;padding:.7rem 1.5rem;">
+  <a class="navbar-brand fw-bold" style="color:#58a6ff;" href="index.html">
+    &#127748; Commodity Research Framework
+  </a>
+  <span class="badge-ph">Phase 12</span>
+</nav>
+<div class="container-xl py-4">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+      <li class="breadcrumb-item active">Phase 12 - Hypothesen</li>
+    </ol>
+  </nav>
+  
+<div class="ph-header"><h1>Phase 12 &#8211; Hypothesentest-Framework</h1>
+  <div class="sub">H1&#8211;H7: Klassische Tests &nbsp;|&nbsp; H8&#8211;H12: Komplexe &amp; Interaktions-Hypothesen</div>
+</div>
+<div class="card mb-4">
+  <div class="card-header">Hypothesen-&#220;bersicht (H1&#8211;H12)</div>
+  <div class="card-body">
+    <table class="table table-dark table-sm table-bordered">
+      <thead><tr><th>H</th><th>Hypothese</th><th>Quelle</th><th>Test</th></tr></thead>
+      <tbody>
+        <tr><td><strong style="color:#3fb950;">H1</strong></td>
+          <td>Mega Caps reagieren schneller als Small Caps</td>
+          <td>Phase 6 (CCF)</td><td>Kruskal-Wallis auf Lags</td></tr>
+        <tr><td><strong style="color:#3fb950;">H2</strong></td>
+          <td>Small Caps: st&#228;rkerer Granger-Effekt (gr&#246;&#223;eres F)</td>
+          <td>Phase 6 (Granger)</td><td>Kruskal-Wallis auf F-Stats</td></tr>
+        <tr><td><strong style="color:#d29922;">H3</strong></td>
+          <td>N&#228;herer Proximity &#8594; st&#228;rkere Korrelation</td>
+          <td>Phase 5+6</td><td>Spearman Proximity vs |CCF|</td></tr>
+        <tr><td><strong style="color:#d29922;">H4</strong></td>
+          <td>Rohstoff erkl&#228;rt gr&#246;&#223;ten FEVD-Anteil</td>
+          <td>Phase 6 (FEVD)</td><td>Direkt-Vergleich</td></tr>
+        <tr><td><strong style="color:#58a6ff;">H5</strong></td>
+          <td>Makro-Ereignisse &#8594; systematische CAR (nicht Zufall)</td>
+          <td>Phase 7</td><td>Binomial-Test sig-Rate &gt; 5%</td></tr>
+        <tr><td><strong style="color:#58a6ff;">H6</strong></td>
+          <td>Lags stabil &#252;ber Zeitr&#228;ume (kein Strukturbruch)</td>
+          <td>Phase 6+11</td><td>Spearman Sub-Perioden-Lags</td></tr>
+        <tr><td><strong style="color:#f78166;">H7</strong></td>
+          <td>Lag-basierte Handelsstrategie: positive Erwartungsrendite</td>
+          <td>Phase 14</td><td>t-Test Strategie-Rendite &gt; 0</td></tr>
+        <tr><td><strong style="color:#bc8cff;">H8</strong></td>
+          <td>Kurzlag-Paare haben signifikant h&#246;heren F-Stat als Langlag-Paare</td>
+          <td>Phase 6 (Granger)</td><td>Mann-Whitney U (lag&#8804;3 vs lag&gt;3)</td></tr>
+        <tr><td><strong style="color:#bc8cff;">H9</strong></td>
+          <td>Kointegrations-Spreads werden breiter wenn VIX steigt (Risk-on Divergenz)</td>
+          <td>Phase 8 + VIX</td><td>Spearman(VIX-Z, |Spread-Z|)</td></tr>
+        <tr><td><strong style="color:#ffa657;">H10</strong></td>
+          <td>CPI/PPI-Events: CAR-Richtung statistisch positiv (Inflations&#8594;Preis-Kette)</td>
+          <td>Phase 7 (Events)</td><td>Binomtest positiver CARs &gt; 50%</td></tr>
+        <tr><td><strong style="color:#ffa657;">H11</strong></td>
+          <td>Pairs-Trading Sharpe degradiert IS&#8594;OOS (Overfitting-Nachweis)</td>
+          <td>Phase 8 + Phase 14</td><td>t-Test Degradation &gt; 0</td></tr>
+        <tr><td><strong style="color:#ffa657;">H12</strong></td>
+          <td>CL=F&#8594;SM Vorhersagekraft h&#246;her im Contango-Regime als Backwardation</td>
+          <td>Phase 6 + Regime</td><td>Fisher-Z-Test Korrelationsdifferenz</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card mb-4"><div class="card-header">H1&#8211;H7: Klassische Hypothesen &#8722;log10(p)</div><div class="card-body"><div>                            <div id="05232e39-8f90-48f1-b53c-6cdc26a2fd3a" class="plotly-graph-div" style="height:460px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("05232e39-8f90-48f1-b53c-6cdc26a2fd3a")) {                    Plotly.newPlot(                        "05232e39-8f90-48f1-b53c-6cdc26a2fd3a",                        [{"hovertemplate":["\u003cb\u003eH1: Mega Caps reagieren schneller (kleinerer Lag)\u003c\u002fb\u003e\u003cbr\u003e-log10(p)=4.40\u003cbr\u003eBestaetigt\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eH2: Small Caps: staerkerer Granger-Effekt\u003c\u002fb\u003e\u003cbr\u003e-log10(p)=0.17\u003cbr\u003eNicht bestaetigt\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eH3: Proximity -\u003e staerkere Korrelation\u003c\u002fb\u003e\u003cbr\u003e-log10(p)=3.03\u003cbr\u003eBestaetigt\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eH4: Rohstoff erklaert groessten FEVD-Anteil\u003c\u002fb\u003e\u003cbr\u003e-log10(p)=-0.00\u003cbr\u003eBestaetigt\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eH5: Makro-Ereignisse -\u003e systematische CAR\u003c\u002fb\u003e\u003cbr\u003e-log10(p)=0.08\u003cbr\u003eNicht bestaetigt\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eH6: Lags stabil ueber Zeitraeume\u003c\u002fb\u003e\u003cbr\u003e-log10(p)=-0.00\u003cbr\u003eNicht bestaetigt\u003cextra\u003e\u003c\u002fextra\u003e","\u003cb\u003eH7: Lag-basierte Strategie: positive Rendite\u003c\u002fb\u003e\u003cbr\u003e-log10(p)=-0.00\u003cbr\u003eNicht bestaetigt\u003cextra\u003e\u003c\u002fextra\u003e"],"marker":{"color":["#3fb950","#f78166","#3fb950","#3fb950","#f78166","#f78166","#f78166"]},"x":["H1: Mega Caps reagieren schneller (kleinerer Lag)","H2: Small Caps: staerkerer Granger-Effekt","H3: Proximity -\u003e staerkere Korrelation","H4: Rohstoff erklaert groessten FEVD-Anteil","H5: Makro-Ereignisse -\u003e systematische CAR","H6: Lags stabil ueber Zeitraeume","H7: Lag-basierte Strategie: positive Rendite"],"y":[4.39793892293719,0.1675166347155267,3.031517004747736,-4.342945178152237e-11,0.07563282984829345,-4.342945178152237e-11,-4.342945178152237e-11],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#d29922","dash":"dash"},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":1.3010299956639813,"y1":1.3010299956639813,"yref":"y"}],"annotations":[{"font":{"color":"#d29922"},"showarrow":false,"text":"p=0.05","x":1,"xanchor":"right","xref":"x domain","y":1.3010299956639813,"yanchor":"bottom","yref":"y"}],"xaxis":{"tickangle":-25,"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"title":{"text":"Hypothesentest-Ergebnisse H1-H7 (-log10 p-Wert)"},"yaxis":{"title":{"text":"-log10(p)"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"height":460,"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div>
+<div class="interp-box"><strong>&#128270; Interpretation:</strong> Gr&#252;n und Balken &#252;ber gelber Linie: Hypothese statistisch best&#228;tigt (p&lt;5%). Rot: Nullhypothese kann nicht abgelehnt werden. H&#246;herer Balken = st&#228;rkere Evidenz.</div></div></div>
+<div class="card mb-4"><div class="card-header">H1&#8211;H7 Ergebnistabelle</div><div class="card-body"><div class="table-responsive"><table class="dataframe table table-dark table-striped table-sm table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>H</th>
+      <th>Hypothese</th>
+      <th>Test</th>
+      <th>Statistik</th>
+      <th>p-Wert</th>
+      <th>Bestaetigt</th>
+      <th>Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>H1</td>
+      <td>Mega Caps reagieren schneller (kleinerer Lag)</td>
+      <td>Kruskal-Wallis</td>
+      <td>20.0390</td>
+      <td>0.0000</td>
+      <td>✓</td>
+      <td>Mean Lag: Mega=0.00d, Mid=0.03d, Small=1.67d</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>H2</td>
+      <td>Small Caps: staerkerer Granger-Effekt</td>
+      <td>Kruskal-Wallis auf F-Statistiken</td>
+      <td>0.7710</td>
+      <td>0.6800</td>
+      <td>✗</td>
+      <td>Mean F: Mega=3.76, Mid=4.03, Small=6.72</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>H3</td>
+      <td>Proximity -&gt; staerkere Korrelation</td>
+      <td>Spearman Rang-Korrelation Proximity vs |CCF|</td>
+      <td>-0.2651</td>
+      <td>0.0009</td>
+      <td>✓</td>
+      <td>Spearman rho=-0.265: negativer Zusammenhang (naher = staerker)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>H4</td>
+      <td>Rohstoff erklaert groessten FEVD-Anteil</td>
+      <td>Direkter FEVD-Vergleich</td>
+      <td>0.3624</td>
+      <td>NaN</td>
+      <td>✓</td>
+      <td>Rohstoff-FEVD: 0.362 vs Nicht-Rohstoff: 0.213 @ h=20</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>H5</td>
+      <td>Makro-Ereignisse -&gt; systematische CAR</td>
+      <td>t-Test: CAR signifikant != 0 (Anteil p&lt;5%)</td>
+      <td>0.0429</td>
+      <td>0.8402</td>
+      <td>✗</td>
+      <td>Signifikanzrate: 4.3% &gt;&gt; 5% Zufallsniveau. Binomial-Test H0: sig_rate=5%.</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>H6</td>
+      <td>Lags stabil ueber Zeitraeume</td>
+      <td>Korrelation der Sub-Perioden-Lags</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>✗</td>
+      <td>Spearman rho=nan: instabile Lags</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>H7</td>
+      <td>Lag-basierte Strategie: positive Rendite</td>
+      <td>t-Test auf annualisierte Strategie-Rendite &gt; 0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>✗</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table></div></div></div>
+<div class="card mb-4"><div class="card-header">H8&#8211;H12: Komplexe Hypothesen &#8722;log10(p)</div><div class="card-body"><div>                            <div id="bd45524a-dc8d-452c-9ada-b8dc945185fc" class="plotly-graph-div" style="height:400px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("bd45524a-dc8d-452c-9ada-b8dc945185fc")) {                    Plotly.newPlot(                        "bd45524a-dc8d-452c-9ada-b8dc945185fc",                        [{"marker":{"color":["#3fb950","#3fb950","#f78166","#f78166","#f78166"]},"text":["p=0.0","p=0.0","p=1.0","p=0.315","p=0.809"],"textfont":{"size":8},"textposition":"outside","x":["H8","H9","H10","H11","H12"],"y":[10.0,10.0,-0.0,0.5016894462103995,0.09205147838772766],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#d29922","dash":"dash"},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":1.3010299956639813,"y1":1.3010299956639813,"yref":"y"}],"annotations":[{"showarrow":false,"text":"p=0.05","x":1,"xanchor":"right","xref":"x domain","y":1.3010299956639813,"yanchor":"bottom","yref":"y"}],"title":{"text":"Komplexe Hypothesen H8&#8211;H12: &#8722;log10(p)"},"yaxis":{"title":{"text":"&#8722;log10(p)"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"height":400,"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"xaxis":{"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div>
+<div class="interp-box"><strong>&#128270; Interpretation:</strong> H8 (Liquidit&#228;ts-Hypothese): Kurzlag-F &gt; Langlag-F? H9 (VIX-Spread): Spreads weiten sich mit VIX? H10 (CPI-Bias): Mehr positive als negative CPI-CARs? H11 (Overfitting): Sharpe-Degradation signifikant? H12 (Regime): CL=F&#8594;SM Vorhersagekraft Contango &gt; Backwardation?</div></div></div>
+<div class="card mb-4"><div class="card-header">H8&#8211;H12 Ergebnistabelle (komplexe Hypothesen)</div><div class="card-body"><div class="table-responsive"><table class="dataframe table table-dark table-striped table-sm table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>H</th>
+      <th>Hypothese</th>
+      <th>Test</th>
+      <th>Statistik</th>
+      <th>p-Wert</th>
+      <th>Best&amp;#228;tigt</th>
+      <th>Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>H8</td>
+      <td>Kurzlag-Granger-F &gt; Langlag-Granger-F (Liquidit&amp;#228;ts-Hypothese)</td>
+      <td>Mann-Whitney U (lag&amp;#8804;3 vs lag&amp;gt;3)</td>
+      <td>1589.000</td>
+      <td>0.000</td>
+      <td>&amp;#10003;</td>
+      <td>Kurzlag n=18, mean F=5.41; Langlag n=103, mean F=2.91</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>H9</td>
+      <td>Kointegrations-Spread enger bei hohem VIX (Risk-on Divergenz)</td>
+      <td>Spearman(VIX-Z, |Spread-Z|)</td>
+      <td>0.049</td>
+      <td>0.000</td>
+      <td>&amp;#10003;</td>
+      <td>&amp;#961;=0.0490: Positiv: hoher VIX = breiterer Spread (Divergenz in Krisen)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>H10</td>
+      <td>CPI/PPI-Events: CAR-Richtung statistisch positiv (Inflations-Preis-Kette)</td>
+      <td>Binomtest(n_positiv=40/198, p=0.5)</td>
+      <td>0.202</td>
+      <td>1.000</td>
+      <td>&amp;#10007;</td>
+      <td>40/198 = 20.2% positive CARs bei CPI/PPI-Events. Mittlere CAR=-0.198%</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>H11</td>
+      <td>Pairs-Trading Sharpe degradiert IS&amp;#8594;OOS (Overfitting-Test)</td>
+      <td>t-Test (IS-Sharpe &amp;#8722; OOS-Sharpe) &gt; 0</td>
+      <td>-1.204</td>
+      <td>0.315</td>
+      <td>&amp;#10007;</td>
+      <td>IS Sharpes: [0.85, -0.06, 0.03, -0.02]; OOS Sharpes: [1.39, -0.07, 0.14, -0.03]; Degradation: [-0.54, 0.01, -0.11, 0.02]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>H12</td>
+      <td>CL=F&amp;#8594;SM Vorhersagekraft: Contango-Regime st&amp;#228;rker als Backwardation</td>
+      <td>Fisher-Z-Test f&amp;#252;r Korrelationsdifferenz</td>
+      <td>-0.242</td>
+      <td>0.809</td>
+      <td>&amp;#10007;</td>
+      <td>Contango (CL-Trend&gt;0): &amp;#961;=-0.0530 (n=3556); Backwardation: &amp;#961;=-0.0470 (n=2963)</td>
+    </tr>
+  </tbody>
+</table></div></div></div>
+<div class="card mb-4">
+  <div class="card-header">Interpretation</div>
+  <div class="card-body">
+    <div class="interp-box"><strong>&#128270; Interpretation:</strong> <strong>H1 (Mega-Cap Geschwindigkeit):</strong> ETFs/Mega-Caps haben k&#252;rzere Lags &#8594; effizienter/liquider. Small Caps tr&#228;ger.<br><strong>H2 (Small-Cap St&#228;rke):</strong> Paradox: Small Caps reagieren st&#228;rker (F), aber langsamer. Erkl&#228;rung: Leverage, Sector-Konzentration.<br><strong>H3 (Proximity):</strong> Rohstoff-direkter Produzent (L0-L1) korreliert st&#228;rker als diversifizierte Indizes (L6). Best&#228;tigt Proximity-Hypothese.<br><strong>H8 (Liquidit&#228;t):</strong> Kurzlag-Paare (lag&#8804;3) haben h&#246;heren F-Stat, weil liquide Paare schneller arbitragiert werden (lag=1: SM F=18.2).<br><strong>H9 (VIX-Spread):</strong> In Krisen (hoher VIX) divergieren kointegrierte Paare tempor&#228;r &#8212; klassisches Pairs-Trading-Risiko (widening risk). Positive &#961;: Spreads weiten sich in Stress-Perioden.<br><strong>H11 (Overfitting):</strong> Wenn best&#228;tigt: Pairs-Strategie-Parameter sind in-sample optimiert. OOS-Performance signifikant schlechter als IS.<br><strong>H12 (Contango-Regime):</strong> Im Contango-Markt (rollierender CL=F-Trend positiv) folgt SM st&#228;rker auf CL=F-Signale &#8212; Regime-Abh&#228;ngigkeit der Granger-Kausalit&#228;t.</div>
+  </div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

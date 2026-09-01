@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Commodity Research - Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body{background:#0d1117;color:#e6edf3;font-family:'Segoe UI',Arial,sans-serif;}
+    .card{background:#161b22;border:1px solid #30363d;border-radius:8px;}
+    .card-header{background:#1c2128;border-bottom:1px solid #30363d;font-weight:600;}
+    .stat-card{background:#1c2128;border:1px solid #30363d;border-radius:8px;
+                padding:1rem;text-align:center;}
+    .stat-card .val{font-size:1.5rem;font-weight:700;color:#58a6ff;}
+    .stat-card .lbl{font-size:.76rem;color:#8b949e;}
+    table{color:#e6edf3!important;font-size:.85rem;}
+    h3,h4{color:#e6edf3;} a{color:#58a6ff;}
+  </style>
+</head>
+<body>
+<nav style="background:#010409;border-bottom:1px solid #30363d;padding:.8rem 2rem;">
+  <span style="color:#58a6ff;font-weight:700;font-size:1.1rem;">
+    &#127748; Commodity Research Framework
+  </span>
+</nav>
+<div class="container-xl py-4">
+  <div style="background:#1f6feb22;border-left:5px solid #1f6feb;border-radius:8px;
+              padding:1.5rem 2rem;margin-bottom:2rem;">
+    <h1 style="color:#1f6feb;font-size:1.8rem;margin:0;">
+      Oekonometrische Analyse des Informationsflusses</h1>
+    <div style="color:#8b949e;margin-top:.4rem;">
+      Rohstoffmaerkte -> ETFs -> Mega-Cap -> Mid-Cap -> Small-Cap Produzenten
+    </div>
+  </div>
+  <div class="row g-3 mb-4">
+    <div class="col"><div class="stat-card"><div class="val">13/13</div>
+      <div class="lbl">Phasen</div></div></div>
+    <div class="col"><div class="stat-card"><div class="val">34</div>
+      <div class="lbl">Ticker</div></div></div>
+    <div class="col"><div class="stat-card"><div class="val">~25J</div>
+      <div class="lbl">Zeitraum</div></div></div>
+    <div class="col"><div class="stat-card"><div class="val">81.5%</div>
+      <div class="lbl">Varianz (10 PCs)</div></div></div>
+    <div class="col"><div class="stat-card"><div class="val">26</div>
+      <div class="lbl">Kointegrierte Paare</div></div></div>
+    <div class="col"><div class="stat-card"><div class="val">6</div>
+      <div class="lbl">GARCH-Modelle</div></div></div>
+  </div>
+  <h3 class="mb-3">Analysephasen (13 Phasen)</h3>
+  <div class="row g-3 mb-4"><div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#1f6feb44;">
+    <div class="card-header" style="background:#1f6feb18;color:#1f6feb;">
+      Phase 1 - Datenerhebung </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">34 Ticker Yahoo, FRED, EIA</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase01_data_loading.html" class="btn btn-sm" style="background:#1f6feb22;color:#1f6feb;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#3fb95044;">
+    <div class="card-header" style="background:#3fb95018;color:#3fb950;">
+      Phase 2 - Preprocessing </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Log-Renditen, Alignment</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase02_preprocessing.html" class="btn btn-sm" style="background:#3fb95022;color:#3fb950;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#d2992244;">
+    <div class="card-header" style="background:#d2992218;color:#d29922;">
+      Phase 3 - EDA </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Risikokennzahlen, Volatility, Korrelation</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase03_eda.html" class="btn btn-sm" style="background:#d2992222;color:#d29922;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#f7816644;">
+    <div class="card-header" style="background:#f7816618;color:#f78166;">
+      Phase 4 - Stationaritaet </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">ADF, KPSS, Phillips-Perron</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase04_stationarity.html" class="btn btn-sm" style="background:#f7816622;color:#f78166;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#bc8cff44;">
+    <div class="card-header" style="background:#bc8cff18;color:#bc8cff;">
+      Phase 5 - Korrelation </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Pearson, Spearman, Kendall</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase05_correlation.html" class="btn btn-sm" style="background:#bc8cff22;color:#bc8cff;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#39d35344;">
+    <div class="card-header" style="background:#39d35318;color:#39d353;">
+      Phase 6 - Lead-Lag </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">CCF, Granger, VAR, IRF, FEVD</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase06_leadlag.html" class="btn btn-sm" style="background:#39d35322;color:#39d353;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#58a6ff44;">
+    <div class="card-header" style="background:#58a6ff18;color:#58a6ff;">
+      Phase 7 - Event Studies </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">CPI/NFP/FOMC/EIA -> CAR</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase07_events.html" class="btn btn-sm" style="background:#58a6ff22;color:#58a6ff;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#ff7b7244;">
+    <div class="card-header" style="background:#ff7b7218;color:#ff7b72;">
+      Phase 8 - Kointegration <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span></div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Johansen, Engle-Granger, VECM</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase08_cointegration.html" class="btn btn-sm" style="background:#ff7b7222;color:#ff7b72;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#ffa65744;">
+    <div class="card-header" style="background:#ffa65718;color:#ffa657;">
+      Phase 9 - GARCH & Regime <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span></div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">GARCH(1,1), Vol-Regime, STL</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase09_garch_regimes.html" class="btn btn-sm" style="background:#ffa65722;color:#ffa657;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#7ee78744;">
+    <div class="card-header" style="background:#7ee78718;color:#7ee787;">
+      Phase 10 - Faktormodelle </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">PCA, Scree-Plot, beta-Koeff.</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase10_factors.html" class="btn btn-sm" style="background:#7ee78722;color:#7ee787;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#e3b34144;">
+    <div class="card-header" style="background:#e3b34118;color:#e3b341;">
+      Phase 11 - Bootstrap CI <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span></div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Block-Bootstrap fuer Lag-Schaetzer</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase11_bootstrap.html" class="btn btn-sm" style="background:#e3b34122;color:#e3b341;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#a5d6ff44;">
+    <div class="card-header" style="background:#a5d6ff18;color:#a5d6ff;">
+      Phase 12 - Hypothesentests <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span></div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">H1-H7: statist. Ueberpruefung</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase12_hypotheses.html" class="btn btn-sm" style="background:#a5d6ff22;color:#a5d6ff;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-6 col-lg-4">
+  <div class="card h-100" style="border-color:#ff9fef44;">
+    <div class="card-header" style="background:#ff9fef18;color:#ff9fef;">
+      Phase 13 - Netzwerkanalyse </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Granger-Netz, PageRank, Degree</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="phase13_network.html" class="btn btn-sm" style="background:#ff9fef22;color:#ff9fef;"
+         >Report oeffnen</a>
+    </div>
+  </div>
+</div></div>
+  <h3 class="mb-3">Erweiterte Berichte
+    <span class="badge ms-2" style="background:#3fb95022;color:#3fb950;
+          border:1px solid #3fb950;">NEU</span>
+  </h3>
+  <div class="row g-3 mb-4"><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#7ee78744;">
+    <div class="card-header" style="background:#7ee78718;color:#7ee787;">PCA Deep-Dive
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Biplot, Eigenrichtungen, AR-Simulation</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="pca_deep_dive.html" class="btn btn-sm" style="background:#7ee78722;color:#7ee787;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#ff9fef44;">
+    <div class="card-header" style="background:#ff9fef18;color:#ff9fef;">Mega-Netzwerk (4 Layouts)
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Hierarchisch|Kreis|Cluster|Stern+Sankey</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="mega_network.html" class="btn btn-sm" style="background:#ff9fef22;color:#ff9fef;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#a5d6ff44;">
+    <div class="card-header" style="background:#a5d6ff18;color:#a5d6ff;">Zeitreihen-Viewer
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Paarweise Preis + STL</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="timeseries_viewer.html" class="btn btn-sm" style="background:#a5d6ff22;color:#a5d6ff;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#56d36444;">
+    <div class="card-header" style="background:#56d36418;color:#56d364;">Backtesting
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Strategien & Walk-Forward</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="backtesting.html" class="btn btn-sm" style="background:#56d36422;color:#56d364;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#79c0ff44;">
+    <div class="card-header" style="background:#79c0ff18;color:#79c0ff;">Insights & Signale
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Granger|Events|Kointegration|Handlungsmatrix</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="insights_report.html" class="btn btn-sm" style="background:#79c0ff22;color:#79c0ff;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#ff9fef44;">
+    <div class="card-header" style="background:#ff9fef18;color:#ff9fef;">Overshoot & Korrektur
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Event-Study | Overshoot-Ratio | Korrektur nach Lag</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="overshoot.html" class="btn btn-sm" style="background:#ff9fef22;color:#ff9fef;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#56d36444;">
+    <div class="card-header" style="background:#56d36418;color:#56d364;">Externe Treiber
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">FX · TIPS · HY-Spread · Shipping · EV · Partieller R² · Saisonalität</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="external_drivers.html" class="btn btn-sm" style="background:#56d36422;color:#56d364;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#79c0ff44;">
+    <div class="card-header" style="background:#79c0ff18;color:#79c0ff;">Prädiktiver Backtest
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">PCA-Modelle · Walk-Forward · Monte Carlo · Residual-Diagnostik</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="predictive_backtest.html" class="btn btn-sm" style="background:#79c0ff22;color:#79c0ff;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#ffa65744;">
+    <div class="card-header" style="background:#ffa65718;color:#ffa657;">Mega-Strategien 80+
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">9 Familien · Param-Grid · Steckbriefe · IS/OOS Analyse</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="mega_strategies.html" class="btn btn-sm" style="background:#ffa65722;color:#ffa657;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#ff9fef44;">
+    <div class="card-header" style="background:#ff9fef18;color:#ff9fef;">Intraday CCF
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Stündliche Lag-Auflösung für lag=0 Paare · ±24h · Sub-tägige Lead-Lag</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="intraday_ccf.html" class="btn btn-sm" style="background:#ff9fef22;color:#ff9fef;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#79c0ff44;">
+    <div class="card-header" style="background:#79c0ff18;color:#79c0ff;">Technische Analyse
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">SMA/RSI/MACD/Bollinger · Lead-Lag-Indikator-Strategien · Cross-Asset-Overlay</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="technical_analysis.html" class="btn btn-sm" style="background:#79c0ff22;color:#79c0ff;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#c9d1d944;">
+    <div class="card-header" style="background:#c9d1d918;color:#c9d1d9;">Lead-Lag Optimizer
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Param-Grid Heatmaps · IS-Sharpe · Walk-Forward OOS · 4 Indikatoren</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="lead_lag_optimizer.html" class="btn btn-sm" style="background:#c9d1d922;color:#c9d1d9;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#c9d1d944;">
+    <div class="card-header" style="background:#c9d1d918;color:#c9d1d9;">Strategie-Paare
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">Alle Paare · 5 Indikatoren · 26 Metriken · Paar-Statistiken</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="strategy_pairs.html" class="btn btn-sm" style="background:#c9d1d922;color:#c9d1d9;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#c9d1d944;">
+    <div class="card-header" style="background:#c9d1d918;color:#c9d1d9;">PCA-Strategie
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">PC1-Filter · Version A/B · Bootstrap-CI · IS/OOS</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="pca_strategy.html" class="btn btn-sm" style="background:#c9d1d922;color:#c9d1d9;">Oeffnen</a>
+    </div>
+  </div>
+</div><div class="col-md-6 col-lg-3">
+  <div class="card h-100" style="border-color:#ff9fef44;">
+    <div class="card-header" style="background:#ff9fef18;color:#ff9fef;">Strategy Stress-Test
+      <span class="badge ms-1" style="background:#3fb95022;color:#3fb950;border:1px solid #3fb950;">NEU</span>
+    </div>
+    <div class="card-body"><p class="small" style="color:#8b949e;">TC-Sweep · Monte Carlo · Bootstrap CI · Walk-Forward · Krisenperioden · Kelly</p><span class="badge bg-success">OK</span></div>
+    <div class="card-footer" style="background:#0d1117;border-top:1px solid #30363d;">
+      <a href="strategy_stress_test.html" class="btn btn-sm" style="background:#ff9fef22;color:#ff9fef;">Oeffnen</a>
+    </div>
+  </div>
+</div></div>
+  <div class="card mb-4">
+    <div class="card-header" style="color:#58a6ff;">Informationsfluss-Hypothese</div>
+    <div class="card-body">
+      <table class="table table-dark table-sm table-bordered text-center">
+        <thead><tr>
+          <th style="color:#d29922;">L0: Rohstoff</th>
+          <th style="color:#39d353;">L1: ETF</th>
+          <th style="color:#58a6ff;">L2: Mega-Cap</th>
+          <th style="color:#bc8cff;">L3: Mid-Cap</th>
+          <th style="color:#f78166;">L4: Small-Cap</th>
+          <th style="color:#8b949e;">L6: Index</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td style="color:#d29922;">CL=F, GC=F, HG=F</td>
+            <td style="color:#39d353;">XLE, GDX, XLB</td>
+            <td style="color:#58a6ff;">XOM, CVX, FCX</td>
+            <td style="color:#bc8cff;">APA, OXY, TECK</td>
+            <td style="color:#f78166;">SM, TGB, GORO</td>
+            <td style="color:#8b949e;">SPY, QQQ, IWM</td>
+          </tr>
+          <tr><td colspan="6" style="color:#8b949e;font-size:.8rem;">
+            Hypothese: Lag und Reaktionszeit steigen | Renditeeffekt sinkt | Volatilitaet steigt
+            von links nach rechts
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantitative Finanzstatistik — Lernplattform Commodities</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--blue:#58a6ff;--green:#3fb950;--red:#f85149;--yellow:#e3b341;--purple:#d2a8ff;--orange:#f0883e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.65;display:flex;min-height:100vh;}
+/* ── SIDEBAR ── */
+#sidebar{width:265px;min-height:100vh;background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;overflow-y:auto;z-index:200;padding:0 0 2rem;}
+#sidebar .logo{padding:1.1rem 1.2rem .6rem;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);border-bottom:1px solid var(--border);margin-bottom:.5rem;}
+#sidebar .nav-group{padding:.3rem 0;}
+#sidebar .nav-label{padding:.25rem 1.2rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:.5rem;}
+#sidebar a{display:block;padding:.38rem 1.2rem;color:var(--muted);text-decoration:none;font-size:.84rem;border-left:3px solid transparent;transition:all .15s;}
+#sidebar a:hover,#sidebar a.active{color:var(--text);border-left-color:var(--blue);background:rgba(88,166,255,.08);}
+#toggle-sb{display:none;position:fixed;top:.8rem;left:.8rem;z-index:300;background:var(--bg2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:.35rem .6rem;cursor:pointer;font-size:1rem;}
+/* ── CONTENT ── */
+#content{margin-left:265px;padding:2.5rem 2rem 4rem;max-width:920px;width:100%;}
+.chapter{margin-bottom:4rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border);}
+.chapter-header{margin-bottom:1.5rem;}
+.chapter-header h2{font-size:1.65rem;color:var(--blue);display:flex;align-items:center;gap:.6rem;}
+.chapter-header h2 .ch-num{background:var(--blue);color:#0d1117;font-size:.85rem;font-weight:700;border-radius:4px;padding:.15rem .45rem;}
+.chapter-header p{color:var(--muted);margin-top:.4rem;font-size:.95rem;}
+h3{color:var(--yellow);font-size:1.1rem;margin:1.8rem 0 .6rem;}
+h4{color:var(--purple);font-size:.95rem;margin:1.2rem 0 .4rem;}
+p{margin-bottom:.8rem;}
+/* formula */
+.formula-box{background:var(--bg2);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:6px;padding:1rem 1.2rem;margin:1rem 0;overflow-x:auto;font-size:.95rem;}
+.formula-box.green{border-left-color:var(--green);}
+.formula-box.red{border-left-color:var(--red);}
+.formula-box.yellow{border-left-color:var(--yellow);}
+/* alerts */
+.note{border-radius:6px;padding:.7rem 1rem;margin:.9rem 0;font-size:.88rem;line-height:1.55;}
+.note.warn{background:rgba(227,179,65,.1);border:1px solid rgba(227,179,65,.35);color:#f0c040;}
+.note.info{background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.28);color:#a0c4ff;}
+.note.danger{background:rgba(248,81,73,.08);border:1px solid rgba(248,81,73,.28);color:#ff9f9f;}
+.note.success{background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.28);color:#7ee787;}
+/* chart */
+.chart-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1rem 1.2rem 0.6rem;margin:1.5rem 0;}
+.chart-card canvas{width:100%!important;}
+.chart-title{font-size:.82rem;color:var(--muted);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em;}
+.chart-caption{font-size:.78rem;color:var(--muted);text-align:center;margin-top:.4rem;padding-bottom:.4rem;}
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:.875rem;margin:1rem 0;}
+.tbl th{background:var(--bg2);color:var(--muted);text-align:left;padding:.5rem .75rem;border-bottom:2px solid var(--border);}
+.tbl td{padding:.45rem .75rem;border-bottom:1px solid var(--border);}
+.tbl tr:hover td{background:var(--bg3);}
+/* tags */
+.tag{display:inline-block;font-size:.68rem;padding:.15em .5em;border-radius:4px;margin-right:.25rem;}
+.t-b{background:rgba(88,166,255,.15);color:var(--blue);}
+.t-g{background:rgba(63,185,80,.15);color:var(--green);}
+.t-r{background:rgba(248,81,73,.15);color:var(--red);}
+.t-y{background:rgba(227,179,65,.15);color:var(--yellow);}
+.t-p{background:rgba(210,168,255,.15);color:var(--purple);}
+/* flashcards */
+.fc-filters{margin-bottom:1rem;display:flex;flex-wrap:wrap;gap:.4rem;}
+.fc-filters button{background:var(--bg2);border:1px solid var(--border);color:var(--muted);padding:.3rem .8rem;border-radius:20px;cursor:pointer;font-size:.8rem;transition:all .15s;}
+.fc-filters button:hover,.fc-filters button.active{background:var(--blue);border-color:var(--blue);color:#0d1117;font-weight:600;}
+.fc-grid{display:grid;gap:.5rem;}
+.fc-item{border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.fc-q{background:var(--bg2);padding:.7rem 1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;font-size:.88rem;font-weight:500;transition:background .15s;user-select:none;}
+.fc-q:hover{background:var(--bg3);}
+.fc-q .arrow{flex-shrink:0;color:var(--muted);transition:transform .25s;}
+.fc-q.open .arrow{transform:rotate(180deg);}
+.fc-q.open{color:var(--blue);}
+.fc-a{display:none;padding:.8rem 1rem;background:var(--bg);border-top:1px solid var(--border);font-size:.86rem;line-height:1.65;}
+.fc-a.show{display:block;}
+.fc-stats{font-size:.8rem;color:var(--muted);margin-bottom:1rem;}
+/* progress bar */
+.progress-bar-wrap{background:var(--border);border-radius:4px;height:6px;margin-bottom:1rem;}
+.progress-bar-fill{background:var(--green);height:6px;border-radius:4px;transition:width .3s;}
+/* responsive */
+@media(max-width:768px){
+  #sidebar{transform:translateX(-100%);transition:transform .3s;}
+  #sidebar.open{transform:translateX(0);}
+  #content{margin-left:0;padding:1.2rem 1rem 4rem;}
+  #toggle-sb{display:block;}
+  .chart-card canvas{min-height:220px;}
+}
+/* code */
+code{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:.1em .4em;font-size:.85em;color:var(--orange);}
+pre{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1rem;overflow-x:auto;font-size:.82rem;margin:1rem 0;}
+pre code{background:none;border:none;padding:0;}
+/* hero */
+.hero{text-align:center;padding:2rem 1rem 3rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem;}
+.hero h1{font-size:2rem;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem;}
+.hero p{color:var(--muted);max-width:600px;margin:0 auto;}
+.hero .badges{margin-top:1rem;display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;}
+.badge-pill{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:.3rem .8rem;font-size:.78rem;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<button id="toggle-sb" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<nav id="sidebar">
+  <div class="logo">📊 Quant-Finance Lernen</div>
+  <div class="nav-group">
+    <div class="nav-label">Grundlagen</div>
+    <a href="#ch1">1 · Verteilungen & Unabhängigkeit</a>
+    <a href="#ch2">2 · Hypothesentests</a>
+    <a href="#ch3">3 · Stationarität & Unit Roots</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Zeitreihen & Modelle</div>
+    <a href="#ch4">4 · Lead-Lag & Granger</a>
+    <a href="#ch5">5 · ARIMA & GARCH</a>
+    <a href="#ch6">6 · Regression & OLS</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Finanzpraxis</div>
+    <a href="#ch7">7 · Portfolio-Metriken</a>
+    <a href="#ch8">8 · Strategiebewertung</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Spezial</div>
+    <a href="#ch9">9 · Commodities & Rohstoffe</a>
+    <a href="#ch10">10 · Karteikarten-Übungen</a>
+  </div>
+</nav>
+
+<main id="content">
+
+<div class="hero">
+  <h1>Quantitative Finanzstatistik</h1>
+  <p>Vollständiger Lernkurs: Statistik, Zeitreihenanalyse, Kausalität, Portfolio-Metriken und quantitative Rohstoffmärkte — mathematisch korrekt, praxisnah, mit interaktiven Charts.</p>
+  <div class="badges">
+    <span class="badge-pill">🎓 10 Kapitel</span>
+    <span class="badge-pill">📊 10 interaktive Charts</span>
+    <span class="badge-pill">🃏 60 Karteikarten</span>
+    <span class="badge-pill">🛢️ Commodities-Spezialkapitel</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     KAPITEL 1: VERTEILUNGEN & UNABHÄNGIGKEIT
+     ════════════════════════════════════════════ -->
+<section class="chapter" id="ch1">
+<div class="chapter-header">
+  <h2><span class="ch-num">01</span>Verteilungen &amp; Unabhängigkeit</h2>
+  <p>Grundbausteine der Wahrscheinlichkeitsrechnung für Finanzmärkte — was Normalverteilung bedeutet und warum Finanzdaten systematisch davon abweichen.</p>
+</div>
+
+<h3>Grundbegriffe</h3>
+<p>Eine <strong>Zufallsvariable</strong> $X$ ist durch ihre Verteilung charakterisiert. Für Finanzmärkte relevant:</p>
+<ul style="margin:.5rem 0 .8rem 1.2rem;">
+  <li><strong>Erwartungswert</strong>: $\mu = E[X] = \int x \, f(x)\,dx$ — der "Schwerpunkt" der Verteilung</li>
+  <li><strong>Varianz</strong>: $\sigma^2 = E[(X-\mu)^2]$ — mittlere quadratische Abweichung vom Mittelwert</li>
+  <li><strong>Schiefe (Skewness)</strong>: $\text{Skew} = E\!\left[\left(\tfrac{X-\mu}{\sigma}\right)^3\right]$ — Asymmetrie der Verteilung</li>
+  <li><strong>Kurtosis/Wölbung</strong>: $\text{Kurt} = E\!\left[\left(\tfrac{X-\mu}{\sigma}\right)^4\right]$ — Stärke der Extremwerte; Normalverteilung hat Kurtosis = 3</li>
+</ul>
+
+<h3>Normalverteilung vs. Fat Tails (Leptokurtosis)</h3>
+<p>Die Normalverteilung $\mathcal{N}(\mu,\sigma^2)$ hat Kurtosis = 3. Finanzrenditen haben typischerweise Kurtosis > 3 (<em>Leptokurtosis</em> oder "Fat Tails"):</p>
+
+<div class="formula-box">
+$$f(x;\mu,\sigma) = \frac{1}{\sigma\sqrt{2\pi}}\exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$$
+</div>
+
+<p>Die Student-t-Verteilung mit $\nu$ Freiheitsgraden modelliert Fat Tails besser:</p>
+<div class="formula-box yellow">
+$$f(x;\nu) = \frac{\Gamma\!\left(\frac{\nu+1}{2}\right)}{\sqrt{\nu\pi}\,\Gamma\!\left(\frac{\nu}{2}\right)}\left(1+\frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}}$$
+Kurtosis der t-Verteilung: $3 + \dfrac{6}{\nu - 4}$ für $\nu > 4$
+</div>
+
+<div class="note warn">⚠️ <strong>Wichtig für Finanzmärkte:</strong> Renditen von Aktien und Rohstoffen haben typischerweise Excess Kurtosis von 3–15. Die Normalverteilungsannahme unterschätzt die Häufigkeit extremer Verluste erheblich — VaR-Modelle auf Normalbasis sind daher systematisch zu optimistisch.</div>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 1 — Normalverteilung vs. Student-t (ν=4): Fat Tails</div>
+  <canvas id="c1" height="220"></canvas>
+  <div class="chart-caption">Die t(4)-Verteilung (orange) hat dickere Schwänze als die Normalverteilung (blau). Extreme Renditen treten häufiger auf als die Normalverteilung vorhersagt.</div>
+</div>
+
+<h3>Unabhängigkeit vs. Unkorreliertheit</h3>
+<p>Das ist einer der häufigsten Irrtümer in der Finanzstatistik:</p>
+<div class="formula-box red">
+$$\text{Unkorreliert} \not\Rightarrow \text{Unabhängig}$$
+$$\text{Unabhängig} \Rightarrow \text{Unkorreliert}$$
+</div>
+
+<p>Zwei Zufallsvariablen $X$ und $Y$ sind <strong>unabhängig</strong>, wenn gilt: $f(x,y) = f_X(x) \cdot f_Y(y)$ — die gemeinsame Dichte faktorisiert. Unkorreliertheit bedeutet nur $\text{Cov}(X,Y)=0$, was keine Aussage über nichtlineare Abhängigkeiten macht.</p>
+
+<p><strong>Beispiel</strong>: $X \sim U(-1,1)$, $Y = X^2$. Dann $\text{Cov}(X,Y)=0$ (unkorreliert), aber $Y$ ist vollständig durch $X$ bestimmt (nicht unabhängig).</p>
+
+<div class="note info">💡 <strong>Relevanz für Strategiebewertung:</strong> Zwei Signale können unkorreliert sein, aber trotzdem in Krisen gleichzeitig versagen (Tail-Dependence). Deshalb: Copula-Modelle oder einfach getrennte Stress-Tests sind wichtiger als lineare Korrelationsmatrizen.</div>
+
+<h3>Zentraler Grenzwertsatz &amp; seine Grenzen</h3>
+<p>Der ZGW besagt: $\sqrt{n}(\bar{X}_n - \mu) \xrightarrow{d} \mathcal{N}(0,\sigma^2)$ für i.i.d. $X_i$ mit endlicher Varianz. In Finanzdaten gilt jedoch:</p>
+<ul style="margin:.5rem 0 .8rem 1.2rem;">
+  <li>Renditen sind <strong>nicht i.i.d.</strong> — sie sind zeitlich abhängig (Autokorrelation der Volatilität)</li>
+  <li>Bei Fat Tails konvergiert der ZGW <strong>langsamer</strong> — mehr Daten nötig</li>
+  <li>Krisenperioden verletzen Stationaritätsannahmen — Strukturbrüche</li>
+</ul>
+</section>
+
+<!-- ════════════════════════════════════════════
+     KAPITEL 2: HYPOTHESENTESTS
+     ════════════════════════════════════════════ -->
+<section class="chapter" id="ch2">
+<div class="chapter-header">
+  <h2><span class="ch-num">02</span>Hypothesentests</h2>
+  <p>Wann ein Test aussagekräftig ist, wann er inflationiert wird — und warum p&lt;0.05 alleine kein Beweis für Strategie-Alpha ist.</p>
+</div>
+
+<h3>Grundstruktur eines Tests</h3>
+<div class="formula-box">
+$$H_0\text{: Nullhypothese (Annahme die man widerlegen will)} \quad \text{vs.} \quad H_1\text{: Alternativhypothese}$$
+<br>
+Teststatistik $T$ wird berechnet. Falls $|T| > t_{\text{krit}}$ ($\alpha$-Niveau): <strong>Ablehnung von $H_0$</strong>
+</div>
+
+<table class="tbl">
+  <tr><th></th><th>$H_0$ wahr</th><th>$H_0$ falsch</th></tr>
+  <tr><td><strong>Nicht ablehnen</strong></td><td>✅ Korrekt</td><td>❌ Typ-II-Fehler ($\beta$)</td></tr>
+  <tr><td><strong>Ablehnen</strong></td><td>❌ Typ-I-Fehler ($\alpha$)</td><td>✅ Korrekt (Power = $1-\beta$)</td></tr>
+</table>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 2 — Normalverteilung mit Ablehnungsregionen (α = 5%, zweiseitig)</div>
+  <canvas id="c2" height="220"></canvas>
+  <div class="chart-caption">Rote Flächen: Ablehnungsregion bei |z| > 1.96. Bei α=5% liegt 5% der Wahrscheinlichkeit in den Schwänzen. Kritischer Wert t<sub>krit</sub>=1.96 für n→∞.</div>
+</div>
+
+<h3>p-Wert — Definition &amp; häufige Missverständnisse</h3>
+<div class="formula-box green">
+$$p\text{-Wert} = P(\text{Teststatistik} \geq t_{\text{beob}} \mid H_0 \text{ ist wahr})$$
+</div>
+
+<p>Der p-Wert ist <em>nicht</em> die Wahrscheinlichkeit, dass $H_0$ wahr ist! Er gibt an, wie wahrscheinlich das beobachtete Ergebnis (oder extremere) wäre, wenn $H_0$ gälte.</p>
+
+<h3>Wann werden Teststatistiken inflationiert?</h3>
+<div class="note danger">🔴 <strong>Autokorrelation in Residuen:</strong> OLS-Standardfehler $SE(\hat\beta)$ werden zu <em>klein</em> → t-Statistiken zu groß → zu viele Falschangaben. Lösung: Newey-West HAC-Standardfehler.</div>
+<div class="note danger">🔴 <strong>Heteroskedastizität:</strong> Zeitvariante Varianz verletzt Homoskedastizitätsannahme → ineffiziente Schätzer, falsche SE. Lösung: White-Robuste SE.</div>
+<div class="note danger">🔴 <strong>Multiple Testing (Data Snooping):</strong> Bei $k$ unabhängigen Tests mit $\alpha=5%$ steigt die Familywise Error Rate (FWER):<br>
+$$P(\text{mind. 1 falsch positiv}) = 1-(1-0.05)^k$$
+Bei $k=20$: FWER $\approx 64\%$!</div>
+<div class="note danger">🔴 <strong>Nicht-Stationarität:</strong> Bei zwei unabhängigen I(1)-Prozessen (Random Walks) sind OLS-t-Statistiken asymptotisch nicht standardnormalverteilt → Spurious Regression.</div>
+
+<h3>Korrekturen für Multiple Testing</h3>
+<div class="formula-box yellow">
+<strong>Bonferroni:</strong> $\alpha^* = \alpha / k$ &nbsp;(konservativ, aber einfach)<br><br>
+<strong>Benjamini-Hochberg (FDR):</strong> Ordne p-Werte: $p_{(1)} \leq p_{(2)} \leq \ldots \leq p_{(k)}$<br>
+Lehne $H_{(i)}$ ab für alle $i \leq \max\!\left\{j : p_{(j)} \leq \frac{j \cdot \alpha}{k}\right\}$
+</div>
+
+<h3>Wichtige Tests in der Quantitative Finance</h3>
+<table class="tbl">
+  <tr><th>Test</th><th>$H_0$</th><th>Wann verwenden?</th></tr>
+  <tr><td>t-Test (Mittelwert)</td><td>$\mu = 0$</td><td>Ist Mean-Return signifikant?</td></tr>
+  <tr><td>ADF</td><td>Unit Root (nicht stationär)</td><td>Vor Zeitreihenmodellen immer!</td></tr>
+  <tr><td>Ljung-Box</td><td>Keine Autokorrelation</td><td>Residuen des Modells unkorreliert?</td></tr>
+  <tr><td>Jarque-Bera</td><td>Normalverteilung (Skew=0, Kurt=3)</td><td>Verteilungstest der Renditen</td></tr>
+  <tr><td>Breusch-Pagan</td><td>Homoskedastizität</td><td>Gleichheit der Varianz prüfen</td></tr>
+  <tr><td>Granger-Kausalität</td><td>X kein Granger-Prädiktor für Y</td><td>Lead-Lag-Beziehungen testen</td></tr>
+  <tr><td>Johansen</td><td>Keine Kointegration</td><td>Langfristige Gleichgewichte</td></tr>
+</table>
+</section>
+
+<!-- ════════════════════════════════════════════
+     KAPITEL 3: STATIONARITÄT
+     ════════════════════════════════════════════ -->
+<section class="chapter" id="ch3">
+<div class="chapter-header">
+  <h2><span class="ch-num">03</span>Stationarität &amp; Unit Roots</h2>
+  <p>Die wichtigste Voraussetzung für fast alle statistischen Methoden in der Zeitreihenanalyse — und warum Aktienkurse sie per Definition verletzen.</p>
+</div>
+
+<h3>Definition: Schwache Stationarität</h3>
+<div class="formula-box">
+Eine Zeitreihe $\{y_t\}$ ist <strong>schwach stationär</strong>, wenn für alle $t$ gilt:
+<br><br>
+(1) $E[y_t] = \mu$ (konstanter Mittelwert)
+<br>
+(2) $\text{Var}(y_t) = \sigma^2 < \infty$ (konstante, endliche Varianz)
+<br>
+(3) $\text{Cov}(y_t, y_{t-k}) = \gamma(k)$ (Autokovarianz hängt nur vom Lag $k$ ab, nicht von $t$)
+</div>
+
+<div class="note danger">🔴 Aktienkurse, Rohstoffpreise und fast alle Preisniveaus sind <strong>nicht stationär</strong>. Sie müssen vor der Anwendung linearer Modelle durch Differenzenbildung oder Log-Renditen stationär gemacht werden!</div>
+
+<h3>Random Walk — das klassische Nicht-Stationaritäts-Beispiel</h3>
+<div class="formula-box red">
+$$y_t = y_{t-1} + \varepsilon_t, \quad \varepsilon_t \sim \mathcal{N}(0,\sigma^2)$$
+$$\Rightarrow E[y_t] = y_0, \quad \text{Var}(y_t) = t\,\sigma^2 \quad \text{(wächst mit der Zeit!)}$$
+</div>
+
+<p>Die Varianz eines Random Walks wächst linear mit der Zeit — keine konstante Varianz, kein Mittelwert-Rückzug.</p>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 3 — Random Walk (nicht stationär) vs. AR(1) mit φ=0.7 (stationär)</div>
+  <canvas id="c3" height="250"></canvas>
+  <div class="chart-caption">Blau: Random Walk driftet dauerhaft ab (nicht stationär). Orange: AR(1)-Prozess kehrt stets zum Mittelwert zurück (stationär), weil |φ|=0.7 &lt; 1.</div>
+</div>
+
+<h3>Integration: I(0), I(1), I(2)</h3>
+<ul style="margin:.5rem 0 .8rem 1.2rem;line-height:2;">
+  <li><strong>I(0)</strong>: Stationär — keine Differenzierung nötig (z.B. tägliche Log-Renditen)</li>
+  <li><strong>I(1)</strong>: Eine Differenzierung macht die Reihe stationär (z.B. Aktienkurse, Rohstoffpreise)</li>
+  <li><strong>I(2)</strong>: Zwei Differenzierungen nötig (selten, z.B. manche Zinsniveaus)</li>
+</ul>
+
+<h3>Augmented Dickey-Fuller (ADF) Test</h3>
+<div class="formula-box">
+Geschätzte Gleichung:
+$$\Delta y_t = \alpha + \delta\, y_{t-1} + \sum_{i=1}^{p} \gamma_i\,\Delta y_{t-i} + \varepsilon_t$$
+<br>
+$H_0$: $\delta = 0$ (Unit Root vorhanden → nicht stationär)
+<br>
+$H_1$: $\delta < 0$ (Stationär, Mittelwert-Rückkehr)
+<br><br>
+Teststatistik: $\tau = \hat\delta / SE(\hat\delta)$ — <strong>NICHT standardnormalverteilt!</strong><br>
+Kritische Werte (Dickey-Fuller-Verteilung, kein Trend): $-2.57$ (10%), $-2.86$ (5%), $-3.43$ (1%)<br>
+<em>Je negativer die Statistik, desto stärker die Evidenz gegen den Unit Root.</em>
+</div>
+
+<div class="note warn">⚠️ <strong>ADF-Interpretationsfalle:</strong> Ablehnen von $H_0$ bedeutet Stationarität. <em>Nicht-Ablehnen</em> bedeutet nur: "wir haben keine Evidenz gegen Unit Root" — nicht dass definitiv ein Unit Root vorliegt! Bei kurzen Zeitreihen hat der ADF-Test wenig Power. Immer zusätzlich KPSS verwenden.</div>
+
+<h3>KPSS-Test (Kwiatkowski-Phillips-Schmidt-Shin)</h3>
+<div class="formula-box yellow">
+$H_0$: Stationarität &nbsp;&nbsp; vs. &nbsp;&nbsp; $H_1$: Unit Root (nicht stationär)
+<br><br>
+<em>Umgekehrte Nullhypothese zu ADF! Beide Tests kombinieren:</em><br>
+ADF nicht ablehnen + KPSS ablehnen → klare Evidenz für Unit Root
+</div>
+
+<h3>Differenzieren &amp; Log-Renditen</h3>
+<div class="formula-box green">
+<strong>Erste Differenz:</strong> $\Delta y_t = y_t - y_{t-1}$<br><br>
+<strong>Log-Rendite (bevorzugt):</strong> $r_t = \ln\!\left(\frac{P_t}{P_{t-1}}\right) = \ln P_t - \ln P_{t-1}$<br><br>
+Vorteile von Log-Renditen: zeitlich addierbar, symmetrisch um 0, meist annähernd stationär
+</div>
+
+<h3>Kointegration</h3>
+<p>Zwei I(1)-Reihen $x_t$ und $y_t$ sind <strong>kointegriert</strong>, wenn eine Linearkombination $y_t - \beta x_t$ stationär (I(0)) ist. Dies bedeutet eine langfristige Gleichgewichtsbeziehung.</p>
+<div class="formula-box">
+Beispiel: Ölpreis (WTI) und Brent-Rohöl sind kointegriert — der Spread $\text{Brent}_t - \beta\,\text{WTI}_t$ ist stationär, obwohl beide einzeln I(1) sind.
+</div>
+
+<div class="note info">💡 Bei kointegierten Reihen: <strong>VECM</strong> (Vector Error Correction Model) statt VAR auf Levels oder Differenzen. Das VECM modelliert kurzfristige Dynamik + langfristige Gleichgewichtskorrektur gleichzeitig.</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     KAPITEL 4: LEAD-LAG & GRANGER
+     ════════════════════════════════════════════ -->
+<section class="chapter" id="ch4">
+<div class="chapter-header">
+  <h2><span class="ch-num">04</span>Lead-Lag-Beziehungen &amp; Granger-Kausalität</h2>
+  <p>Wie man misst, ob eine Zeitreihe eine andere vorhersagt — und warum statistische Kausalität nicht mit echter Kausalität verwechselt werden darf.</p>
+</div>
+
+<h3>Kreuzkorrelationsfunktion (CCF)</h3>
+<div class="formula-box">
+$$\hat\rho_{XY}(k) = \frac{\sum_{t=k+1}^{n}(x_t - \bar x)(y_{t-k}-\bar y)}{\sqrt{\sum_t(x_t-\bar x)^2 \cdot \sum_t(y_t-\bar y)^2}}$$
+Für $k > 0$: zeigt, ob $x_t$ mit $y_{t-k}$ korreliert (<em>X läuft voraus</em>)<br>
+Für $k < 0$: zeigt, ob $x_{t+|k|}$ mit $y_t$ korreliert (<em>Y läuft voraus</em>)
+</div>
+
+<div class="note warn">⚠️ CCF darf nur auf <strong>stationären</strong> Reihen angewendet werden. Auf Preisreihen → Log-Renditen berechnen, dann CCF.</div>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 4 — CCF: WTI-Ölrenditen vs. JETS-Renditen (simuliert, Lag 3 eingebaut)</div>
+  <canvas id="c4" height="220"></canvas>
+  <div class="chart-caption">Maximale Kreuzkorrelation bei Lag k=3: Öl-Renditen heute sind positiv korreliert mit JETS-Renditen in 3 Tagen. Gestrichelte Linien: 95%-Konfidenzband (±1.96/√n).</div>
+</div>
+
+<h3>Granger-Kausalität</h3>
+<p>X <em>Granger-verursacht</em> Y, wenn Vergangenheitswerte von X die Vorhersage von Y verbessern — <strong>über die Vorhersage durch Vergangenheitswerte von Y hinaus</strong>.</p>
+
+<div class="formula-box">
+<strong>Unrestringiertes Modell:</strong>
+$$y_t = \alpha_0 + \sum_{i=1}^p \alpha_i\,y_{t-i} + \sum_{i=1}^p \beta_i\,x_{t-i} + \varepsilon_t$$
+<strong>Restringiertes Modell ($H_0$: X hilft nicht):</strong>
+$$y_t = \alpha_0 + \sum_{i=1}^p \alpha_i\,y_{t-i} + u_t$$
+<br>
+F-Test: $F = \dfrac{(RSS_r - RSS_u)/p}{RSS_u/(n-2p-1)}$
+<br><br>
+$H_0$: $\beta_1 = \beta_2 = \ldots = \beta_p = 0$ (X Granger-verursacht Y <em>nicht</em>)
+<br>
+Ablehnen $\Rightarrow$ X Granger-verursacht Y
+</div>
+
+<h3>Kritische Beurteilung: Was Granger-Kausalität NICHT misst</h3>
+<div class="note danger">🔴 <strong>Granger-Kausalität ≠ echte Kausalität!</strong><br>
+Granger ist ein statistischer Prädiktivitätstest. Ein Barometer Granger-verursacht Regen (weil beide vom Luftdruck abhängen), aber Barometer lässt es nicht regnen.<br><br>
+In Finanzmärkten: Viele scheinbare Lead-Lag-Beziehungen entstehen durch gemeinsame Treiber (Makrorisiko, Informationsfluss). Immer fragen: Was ist der ökonomische Mechanismus?</div>
+
+<h3>Spurious Regression (Scheinkorrelation)</h3>
+<p>Zwei unabhängige Random Walks $x_t$ und $y_t$ (keinerlei Verbindung) zeigen trotzdem hohe OLS-Koeffizienten und signifikante t-Statistiken:</p>
+
+<div class="formula-box red">
+Wenn $x_t = x_{t-1} + \varepsilon_t$ und $y_t = y_{t-1} + \eta_t$ unabhängig:<br>
+$\Rightarrow$ OLS-Schätzer $\hat\beta$ ist <strong>nicht</strong> konsistent, konvergiert gegen Zufallsgröße<br>
+$\Rightarrow$ t-Statistik $\to \infty$ statt $\to \mathcal{N}(0,1)$<br>
+$\Rightarrow$ $R^2 \to 1$ in langen Stichproben — vollständige Scheinkorrelation
+</div>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 5 — Spurious Regression: Zwei unabhängige Random Walks (R²≈0.72)</div>
+  <canvas id="c5" height="220"></canvas>
+  <div class="chart-caption">Streudiagramm von zwei vollständig unabhängig generierten Random Walks. Trotz R²≈0.72 gibt es keinen inhaltlichen Zusammenhang. Lösung: Log-Renditen verwenden, dann stationär!</div>
+</div>
+
+<h3>Lag-Auswahl im VAR/Granger-Modell</h3>
+<div class="formula-box green">
+Informationskriterien (minimieren):
+$$AIC = -2\ln L + 2k, \quad BIC = -2\ln L + k\ln n, \quad HQIC = -2\ln L + 2k\ln\ln n$$
+BIC bestraft mehr Lags stärker → tendenziell sparsamere Modelle
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     KAPITEL 5: ARIMA & GARCH
+     ════════════════════════════════════════════ -->
+<section class="chapter" id="ch5">
+<div class="chapter-header">
+  <h2><span class="ch-num">05</span>Zeitreihenmodelle: ARIMA &amp; GARCH</h2>
+  <p>Die Standardmodelle für Finanzrenditen — und wie man ACF/PACF zur Modellidentifikation nutzt.</p>
+</div>
+
+<h3>AR, MA, ARIMA</h3>
+<div class="formula-box">
+<strong>AR(p):</strong> $y_t = \phi_1 y_{t-1} + \ldots + \phi_p y_{t-p} + \varepsilon_t$<br><br>
+<strong>MA(q):</strong> $y_t = \mu + \varepsilon_t + \theta_1\varepsilon_{t-1} + \ldots + \theta_q\varepsilon_{t-q}$<br><br>
+<strong>ARIMA(p,d,q):</strong> $d$-fach differenzierter AR(p)+MA(q)-Prozess<br><br>
+Identifikation: ACF → MA-Ordnung q (Abschnitt nach Lag q), PACF → AR-Ordnung p (Abschnitt nach Lag p)
+</div>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 6 — Theoretische ACF eines AR(1)-Prozesses mit φ=0.8</div>
+  <canvas id="c6" height="200"></canvas>
+  <div class="chart-caption">ACF(k) = φ^k = 0.8^k: geometrischer Abfall. Gestrichelt: 95%-Signifikanzband ±1.96/√n. PACF hätte dagegen nur bei Lag 1 einen signifikanten Wert.</div>
+</div>
+
+<h3>Stationaritätsbedingung für AR(p)</h3>
+<div class="formula-box yellow">
+AR(p) ist stationär, wenn alle Wurzeln des charakteristischen Polynoms $1 - \phi_1 z - \ldots - \phi_p z^p = 0$ außerhalb des Einheitskreises liegen.<br><br>
+AR(1): Bedingung ist einfach $|\phi_1| < 1$
+</div>
+
+<h3>GARCH(1,1) — Volatilitäts-Clustering</h3>
+<p>Finanzrenditen zeigen <strong>Volatilitäts-Clustering</strong>: ruhige Phasen wechseln mit turbulenten Phasen. Die bedingte Varianz ist zeitvariabel:</p>
+
+<div class="formula-box">
+$$r_t = \mu + \sigma_t\,z_t, \quad z_t \sim \mathcal{N}(0,1)$$
+$$\sigma_t^2 = \omega + \alpha\,r_{t-1}^2 + \beta\,\sigma_{t-1}^2$$
+<br>
+$\omega > 0$, $\alpha \geq 0$, $\beta \geq 0$, $\alpha+\beta < 1$ (Stationarität)<br>
+Unbedingte (langfristige) Varianz: $\bar\sigma^2 = \omega / (1-\alpha-\beta)$<br>
+Persistenz: $\alpha + \beta$ (nahe 1 → lange Gedächtnis der Volatilität, typisch: 0.97–0.99)
+</div>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 7 — GARCH(1,1)-simulierte Renditen: Volatilitäts-Clustering</div>
+  <canvas id="c7" height="230"></canvas>
+  <div class="chart-caption">Turbulente Phasen (hohe Volatilität) folgen auf andere turbulente Phasen — ruhige Phasen folgen auf ruhige Phasen. Dieses Muster ist charakteristisch für Finanzrenditen aller Asset-Klassen.</div>
+</div>
+
+<div class="note info">💡 <strong>Diagnose:</strong> Ljung-Box-Test auf $r_t^2$ (quadrierte Renditen) zeigt ARCH-Effekte. Engle's ARCH-LM-Test ist der formale Diagnosetest. Wenn signifikant → GARCH modellieren.</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     KAPITEL 6: REGRESSION & OLS
+     ════════════════════════════════════════════ -->
+<section class="chapter" id="ch6">
+<div class="chapter-header">
+  <h2><span class="ch-num">06</span>Regression &amp; OLS</h2>
+  <p>Voraussetzungen, Verletzungen und robuste Alternativen — ohne korrekte Annahmen sind Regressionsergebnisse wertlos.</p>
+</div>
+
+<h3>OLS-Schätzer</h3>
+<div class="formula-box">
+Modell: $\mathbf{y} = \mathbf{X}\boldsymbol\beta + \boldsymbol\varepsilon$
+$$\hat{\boldsymbol\beta} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}$$
+Minimiert: $\sum_{t=1}^n \varepsilon_t^2 = \|\mathbf{y} - \mathbf{X}\hat{\boldsymbol\beta}\|^2$
+</div>
+
+<h3>Gauss-Markov-Annahmen (für BLUE-Eigenschaft)</h3>
+<table class="tbl">
+  <tr><th>Annahme</th><th>Was bei Verletzung passiert</th><th>Lösung</th></tr>
+  <tr><td>$E[\varepsilon_t|\mathbf{X}]=0$</td><td>Verzerrter Schätzer</td><td>Instrumentalvariablen</td></tr>
+  <tr><td>Homoskedastizität: $\text{Var}(\varepsilon_t)=\sigma^2$</td><td>Ineffiziente Schätzer, falsche SE</td><td>White-robuste SE</td></tr>
+  <tr><td>Keine Autokorrelation: $\text{Cov}(\varepsilon_t,\varepsilon_s)=0$</td><td>SE zu klein → t-Stats inflationiert</td><td>Newey-West HAC-SE</td></tr>
+  <tr><td>Kein exaktes Multicollinear.</td><td>$(\mathbf{X}'\mathbf{X})$ nicht invertierbar</td><td>Variablen entfernen, Ridge</td></tr>
+  <tr><td>Stationarität</td><td>Spurious Regression (siehe Kap. 4)</td><td>Differenzieren oder VECM</td></tr>
+</table>
+
+<h3>Warum Stationarität vor OLS zwingend ist</h3>
+<div class="note danger">🔴 Regressionierung von Preisniveaus (I(1) auf I(1)) ohne Test auf Kointegration führt fast sicher zu <strong>Spurious Regression</strong>:<br>
+• $R^2$ überhöht, t-Statistiken nicht standardnormalverteilt<br>
+• Residuen zeigen starke Autokorrelation (Durbin-Watson nahe 0)<br>
+• Scheinbar perfekter Fit, aber keinerlei Prognosegehalt
+</div>
+
+<h3>Gütekriterien</h3>
+<div class="formula-box green">
+$$R^2 = 1 - \frac{RSS}{TSS} = 1 - \frac{\sum\hat\varepsilon_t^2}{\sum(y_t-\bar y)^2}$$
+$$\bar R^2 = 1 - (1-R^2)\frac{n-1}{n-k-1} \quad\text{(adjustiert für Anzahl Regressoren)}$$
+$$F = \frac{R^2/k}{(1-R^2)/(n-k-1)} \quad\text{(Gesamtsignifikanz des Modells)}$$
+</div>
+
+<div class="note warn">⚠️ Hoher $R^2$ alleine ist kein Qualitätsmerkmal — bei Zeitreihen mit Trends ist $R^2$ fast immer hoch. Wichtiger: Residualanalyse (Normalität, Autokorrelation, Heteroskedastizität).</div>
+
+<h3>HAC-Standardfehler (Newey-West)</h3>
+<p>Bei autokorrelierten Residuen (häufig in Finanzdaten) sind OLS-Standardfehler zu klein. Newey-West-Schätzer ist konsistent unter Autokorrelation und Heteroskedastizität:</p>
+<div class="formula-box">
+$$\hat V_{NW} = (X'X)^{-1}\hat\Omega_{NW}(X'X)^{-1}$$
+$$\hat\Omega_{NW} = \hat\Omega_0 + \sum_{j=1}^{m} w_j\!(\hat\Omega_j + \hat\Omega_j') \quad w_j = 1 - \frac{j}{m+1}$$
+Bandbreite: $m \approx 4\!\left(\frac{n}{100}\right)^{2/9}$ (Daumenregel nach Andrews)
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     KAPITEL 7: PORTFOLIO-METRIKEN
+     ════════════════════════════════════════════ -->
+<section class="chapter" id="ch7">
+<div class="chapter-header">
+  <h2><span class="ch-num">07</span>Portfolio- &amp; Strategie-Metriken</h2>
+  <p>Jede Kennzahl hat blinde Flecken — nur im Zusammenspiel entsteht ein vollständiges Bild einer Strategie.</p>
+</div>
+
+<h3>Rendite-Metriken</h3>
+<div class="formula-box">
+<strong>Kumulierte Rendite:</strong> $R_{ges} = \prod_{t=1}^n (1+r_t) - 1$<br><br>
+<strong>Annualisierte Rendite:</strong> $\hat\mu = \bar r \cdot 252$ (tägliche Renditen)<br><br>
+<strong>CAGR:</strong> $\left(\frac{V_n}{V_0}\right)^{1/T} - 1$ &nbsp;(Compound Annual Growth Rate)
+</div>
+
+<h3>Risikometriken</h3>
+<div class="formula-box red">
+<strong>Annualisierte Volatilität:</strong> $\hat\sigma = \text{std}(r_t)\cdot\sqrt{252}$<br><br>
+<strong>Maximaler Drawdown:</strong> $MDD = \max_{0\leq s\leq t\leq T}\frac{V_s - V_t}{V_s}$<br><br>
+<strong>Value at Risk (VaR, 95%):</strong> $VaR_{95\%} = -\mu + 1.645\,\sigma$ (parametrisch, Normalannahme)<br><br>
+<strong>CVaR / Expected Shortfall:</strong> $ES_{95\%} = E[L \mid L > VaR_{95\%}]$
+</div>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 8 — Kumulierte NAV-Entwicklung mit Drawdown-Area</div>
+  <canvas id="c8" height="280"></canvas>
+  <div class="chart-caption">Obere Linie: Kumulierter NAV einer Strategie. Rote Fläche darunter: Drawdown in Prozent vom jeweiligen Höchststand. Maximaler Drawdown ist der tiefste Punkt der roten Fläche.</div>
+</div>
+
+<h3>Risikobereingte Performance</h3>
+<div class="formula-box green">
+<strong>Sharpe Ratio:</strong>
+$$S = \frac{E[R_p] - R_f}{\sigma_p}\cdot\sqrt{252}$$
+Annahme: IID-Returns und Normalverteilung — bei Strategien mit Autokorrelation ist Sharpe verzerrt.<br><br>
+
+<strong>Sortino Ratio:</strong>
+$$So = \frac{E[R_p] - R_f}{\sigma_{\text{down}}}$$
+$\sigma_{\text{down}} = \sqrt{\tfrac{1}{n}\sum_{r_t<0} r_t^2}$ — bestraft nur negative Abweichungen.<br><br>
+
+<strong>Calmar Ratio:</strong>
+$$Ca = \frac{\text{Ann. Rendite}}{|MDD|}$$
+</div>
+
+<h3>Weitere wichtige Metriken</h3>
+<table class="tbl">
+  <tr><th>Metrik</th><th>Formel</th><th>Interpretation</th></tr>
+  <tr><td>Alpha (Jensen's)</td><td>$\alpha = R_p - R_f - \beta(R_m - R_f)$</td><td>Marktbereingte Überrendite</td></tr>
+  <tr><td>Beta</td><td>$\beta = \text{Cov}(R_p,R_m)/\text{Var}(R_m)$</td><td>Marktexposure</td></tr>
+  <tr><td>Treynor Ratio</td><td>$(R_p-R_f)/\beta$</td><td>Überrendite je Markt-Beta</td></tr>
+  <tr><td>Information Ratio</td><td>$IR = \alpha / \text{TE}$</td><td>Alpha je Tracking Error</td></tr>
+  <tr><td>Win-Rate</td><td>$\#\text{Gewinner} / \#\text{Trades}$</td><td>Anteil profitabler Trades</td></tr>
+  <tr><td>Profit Factor</td><td>Gross Profit / Gross Loss</td><td>&gt;1 profitabel, &gt;2 gut</td></tr>
+  <tr><td>Avg Win / Avg Loss</td><td>Ø Gewinner / Ø Verlierer</td><td>Trade-Qualität</td></tr>
+</table>
+
+<div class="note warn">⚠️ <strong>Sharpe-Verzerrung bei Strategien:</strong> Strategien die Puts verkaufen (Short Volatilität), optisch hohen Sharpe zeigen, aber extremes Tail-Risk haben. Calmar Ratio und CVaR sind hier aussagekräftiger.</div>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 9 — Return-Verteilung mit VaR und CVaR</div>
+  <canvas id="c9" height="220"></canvas>
+  <div class="chart-caption">Histogramm täglicher Renditen (simuliert, Fat Tails). Vertikale Linien: VaR₉₅ (5%-Quantil) und CVaR₉₅ (Erwartungswert der schlimmsten 5%). CVaR ist konservativer und kohärenter als VaR.</div>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     KAPITEL 8: STRATEGIEBEWERTUNG
+     ════════════════════════════════════════════ -->
+<section class="chapter" id="ch8">
+<div class="chapter-header">
+  <h2><span class="ch-num">08</span>Strategiebewertung &amp; Overfitting</h2>
+  <p>Wie man unterscheidet, ob eine Strategie echter Alpha enthält oder nur Datenartefakte ausnutzt.</p>
+</div>
+
+<h3>Das Overfitting-Problem</h3>
+<p>Eine Strategie ist <em>überangepasst</em>, wenn sie historische Daten zu genau beschreibt, aber keine Prognoseeignung hat. Symptome:</p>
+<ul style="margin:.5rem 0 .8rem 1.2rem;">
+  <li>IS (In-Sample) Sharpe >> OOS (Out-of-Sample) Sharpe</li>
+  <li>Viele Parameter relativ zu verfügbaren Datenpunkten (hoher Freiheitsgrad)</li>
+  <li>Strategie optimal für spezifische historische Episoden (z.B. 2009–2020 Bullenmarkt)</li>
+  <li>Signifikante Multiple-Testing-Effekte (hunderte Parameterkombinationen getestet)</li>
+</ul>
+
+<h3>Walk-Forward-Validation</h3>
+<div class="formula-box">
+<strong>Expanding Window:</strong><br>
+Train: [t₀, t₁] → Test: [t₁, t₁+k]<br>
+Train: [t₀, t₁+k] → Test: [t₁+k, t₁+2k]<br>
+... (Trainingsfenster wächst)<br><br>
+<strong>Rolling Window:</strong><br>
+Train: [t₀, t₁] → Test: [t₁, t₁+k]<br>
+Train: [t₀+k, t₁+k] → Test: [t₁+k, t₁+2k]<br>
+... (fixes Trainingsfenster)
+</div>
+
+<p>Typische Aufteilung: 60–70% Training, 15–20% Validation, 15–20% Test. Das Test-Set darf <em>nie</em> für Parameteroptimierung benutzt werden.</p>
+
+<h3>Statistische Signifikanz des Backtests</h3>
+<div class="formula-box yellow">
+t-Test auf Sharpe Ratio (annualisiert):
+$$t_S = \hat S \cdot \sqrt{T} / \sqrt{1 + \hat S^2/2}$$
+(Bailey &amp; López de Prado, 2012 — für iid-Renditen)
+<br><br>
+<strong>Deflated Sharpe Ratio (DSR):</strong>
+$$DSR(\hat S^*) = \Phi\!\left(\frac{(\hat S - \hat S_B)\sqrt{n-1}}{\sqrt{1-\gamma_3 \hat S + \frac{\gamma_4-1}{4}\hat S^2}}\right)$$
+$\hat S_B$: erwarteter maximaler Sharpe bei zufälligem Testing von $K$ Strategien; korrigiert für Schiefe und Kurtosis der Renditen
+</div>
+
+<div class="note danger">🔴 <strong>Hauptfehler in Backtests:</strong><br>
+1. <strong>Look-Ahead Bias</strong>: Verwendung von Daten, die zum Zeitpunkt des Signals noch nicht verfügbar waren<br>
+2. <strong>Survivorship Bias</strong>: Nur überlebende Unternehmen im Universum → künstlich hohe Renditen<br>
+3. <strong>Transaction Costs ignorieren</strong>: Bid-Ask Spread, Marktimpakt bei großen Orders<br>
+4. <strong>Data Snooping</strong>: Nach Muster suchen bis etwas zufällig signifikant wird
+</div>
+
+<h3>Bootstrap-Konfidenzintervalle für Metriken</h3>
+<div class="formula-box green">
+Algorithmus (Bootstrap für Sharpe-CI):
+<br>
+1. Berechne $\hat S$ auf Gesamtstichprobe $(n$ Renditen)
+<br>
+2. Wiederhole $B=1000$ Mal: Ziehe $n$ Renditen mit Zurücklegen → berechne $\hat S_b^*$
+<br>
+3. CI: Perzentil-Methode: $[\hat S^*_{(B\cdot 0.025)},\, \hat S^*_{(B\cdot 0.975)}]$
+<br>
+Vorteil: Keine Normalverteilungsannahme nötig
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     KAPITEL 9: COMMODITIES SPEZIALKAPITEL
+     ════════════════════════════════════════════ -->
+<section class="chapter" id="ch9">
+<div class="chapter-header">
+  <h2><span class="ch-num">09</span>Commodities &amp; Rohstoffmärkte — Spezialkapitel</h2>
+  <p>Marktstruktur, Futures-Mechanismen, Lead-Lag-Beziehungen, Korrelationsregime und Makro-Zusammenhänge im quantitativen Rohstoffhandel.</p>
+</div>
+
+<h3>Cost-of-Carry-Modell: Spot vs. Futures</h3>
+<div class="formula-box">
+$$F_{t,T} = S_t \cdot e^{(r + c - y)(T-t)}$$
+$S_t$: Spot-Preis, $r$: risikoloser Zins, $c$: Lagerhaltungskosten (storage cost), $y$: Convenience Yield, $T-t$: Restlaufzeit in Jahren
+</div>
+
+<table class="tbl">
+  <tr><th>Situation</th><th>Kurvenform</th><th>Bedeutung</th><th>Roll-Yield</th></tr>
+  <tr><td>$r+c > y$</td><td><strong>Contango</strong> ↗</td><td>Futures teurer als Spot (normal für lagerfähige Güter)</td><td>Negativ (Verlust beim Rollen)</td></tr>
+  <tr><td>$r+c < y$</td><td><strong>Backwardation</strong> ↘</td><td>Spot teurer als Futures (hohe Convenience Yield)</td><td>Positiv (Gewinn beim Rollen)</td></tr>
+</table>
+
+<div class="note info">💡 <strong>Convenience Yield</strong>: Der implizite Nutzen aus dem physischen Besitz eines Rohstoffs — Raffinerien zahlen Prämie für sofortige Lieferung (kein Produktionsunterbruch). Hohe Convenience Yield → Backwardation. Bei Öl in geopolitischen Krisen typischerweise Backwardation.</div>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 10 — Futures-Kurven: Contango vs. Backwardation (WTI Crude Oil, simuliert)</div>
+  <canvas id="c10" height="230"></canvas>
+  <div class="chart-caption">Blau: Contango (r+c-y=+5% p.a.) — Futures steigen mit Laufzeit. Orange: Backwardation (r+c-y=-8% p.a.) — Futures fallen mit Laufzeit. Spot-Preis: $80/Barrel.</div>
+</div>
+
+<h3>Saisonalität bei Rohstoffen</h3>
+<p>Viele Rohstoffmärkte zeigen statistisch signifikante saisonale Muster (oft durch physische Nachfrage/Angebotsmuster getrieben):</p>
+<ul style="margin:.5rem 0 .8rem 1.2rem;">
+  <li><strong>WTI Crude Oil</strong>: Q1 Schwäche (Wartungsperioden Raffinerien), Sommer-Stärke (Driving Season), Q4 Heating Oil Nachfrage</li>
+  <li><strong>Erdgas</strong>: Starke Winter-Nachfrage (Heizung), Sommer-Nachfrage (Kühlung), Schwäche Frühling/Herbst</li>
+  <li><strong>Agrargüter</strong>: Ernte-Zyklen dominieren (Mais: Sept-Okt Schwäche nach Ernte)</li>
+  <li><strong>Gold</strong>: Schwaches Q2, Stärke Q3/Q4 (Schmuck-Nachfrage Indien/China, Festspiele)</li>
+</ul>
+
+<div class="note warn">⚠️ Saisonalität muss statistisch auf Signifikanz getestet werden (Kruskal-Wallis-Test, ANOVA). Visuelle Muster können Zufallsprodukte sein — besonders bei weniger als 20 Jahren Daten.</div>
+
+<div class="chart-card">
+  <div class="chart-title">Chart 11 — WTI Crude Oil: Durchschnittliche Monatsrenditen (historisch, 2000–2024)</div>
+  <canvas id="c11" height="220"></canvas>
+  <div class="chart-caption">Histogramm der durchschnittlichen Monatsrenditen aus historischen WTI-Daten. Grün: positive Monate, Rot: negative Monate. Saisonalität als Strategie-Overlay, nicht als alleiniges Signal!</div>
+</div>
+
+<h3>Lead-Lag-Beziehungen im Energie-Sektor (empirisch)</h3>
+
+<table class="tbl">
+  <tr><th>Beziehung</th><th>Lag</th><th>Richtung</th><th>Mechanismus</th><th>Regime-Abhängigkeit</th></tr>
+  <tr><td>WTI Öl → Jet Fuel (physisch)</td><td>2–6 Wochen</td><td>Positiv</td><td>Raffinerieproduktion, Absicherungsverhalten</td><td>Gering</td></tr>
+  <tr><td>WTI/XLE → JETS (Aktienmarkt)</td><td>3–10 Tage</td><td>Normal: negativ; Krise: positiv</td><td>Kostendruck (normal) vs. Risk-Off (Krise)</td><td>Stark</td></tr>
+  <tr><td>VIX → JETS</td><td>Gleichzeitig</td><td>Stark negativ (−0.7 bis −0.8)</td><td>Angst = Risk-Off = Airline-Verkauf</td><td>Mittel</td></tr>
+  <tr><td>USD (DXY) → WTI Öl</td><td>1–3 Tage</td><td>Negativ (−0.4 bis −0.6)</td><td>Öl in USD denominiert → stärkerer USD = teurer für Ausländer → weniger Nachfrage</td><td>Mittel</td></tr>
+  <tr><td>Yield Curve (10Y-2Y) → Öl</td><td>Monate</td><td>Positiv</td><td>Steilere Kurve = Wachstumserwartungen = mehr Energienachfrage</td><td>Gering</td></tr>
+  <tr><td>China PMI → Brent Öl</td><td>1–4 Wochen</td><td>Positiv</td><td>China ist größter Ölimporteur weltweit</td><td>Gering</td></tr>
+</table>
+
+<div class="note danger">🔴 <strong>Regime-Abhängigkeit kritisch!</strong><br>
+In normalen Märkten: WTI Öl ↑ → JETS ↓ (höhere Treibstoffkosten = schlechtere Margen)<br>
+In Krisen (VIX > 30): WTI Öl ↓ UND JETS ↓ gleichzeitig (Risk-Off dominiert alles)<br>
+In wirtschaftlicher Erholung: WTI Öl ↑ UND JETS ↑ (Nachfrageboom, Reiseverkehr steigt)<br><br>
+→ Ein stationärer Regressionskoeffizient Öl→JETS existiert nicht — Regime-Switching-Modell notwendig!
+</div>
+
+<h3>Korrelationsregime: Normal vs. Stress vs. Erholung</h3>
+<div class="chart-card">
+  <div class="chart-title">Chart 12 — Korrelationsregime: JETS vs. WTI Renditen (simuliert, drei Phasen)</div>
+  <canvas id="c12" height="250"></canvas>
+  <div class="chart-caption">Drei Regimes: Normal (blau, leicht negative Korr.), Stress (rot, positiv — beide fallen), Erholung (grün, positiv — beide steigen). Gleiche Variablen, völlig unterschiedliche Korrelationsstruktur!</div>
+</div>
+
+<h3>Makro-Zusammenhänge für Rohstoff-Händler</h3>
+
+<h4>Zinsen &amp; Inflation</h4>
+<div class="formula-box">
+<strong>Transmission:</strong> Inflation ↑ → Fed erhöht Leitzins → USD ↑ → Öl ↓ (kurzfristig)<br>
+Gleichzeitig: Inflation ↑ → Gold ↑ (reale Vermögenserhaltung)<br>
+Langfristig: Höhere Realzinsen → höhere Cost of Carry → Contango tiefer, Spotpreise tendenziell niedriger
+</div>
+
+<h4>USD-Rohstoff-Nexus</h4>
+<p>Rohstoffe werden global in USD gehandelt. Die inverse USD-Rohstoff-Korrelation ist strukturell, aber nicht stabil:</p>
+<ul style="margin:.5rem 0 .8rem 1.2rem;">
+  <li>Durchschnittliche Korrelation USD-Index (DXY) vs. WTI: ca. −0.45 (2000–2024)</li>
+  <li>Bricht zusammen in Risk-Off-Episoden (beide fallen gleichzeitig) oder bei USD-spezifischen Schocks</li>
+  <li>ADF auf USD-WTI-Spread: Beide I(1), aber oft kointegriert → Paar-Strategie möglich</li>
+</ul>
+
+<h4>OPEC-Angebotsschocks</h4>
+<p>OPEC-Kürzungen sind das klassische Beispiel für <em>exogene</em> Preisschocks. Sie brechen die normale Nachfrage-getriebene Dynamik. Methodik: Event-Study-Ansatz — abnormale Renditen $=r_t - E[r_t|I_t]$ rund um Ankündigungsdaten schätzen.</p>
+
+<h3>Praktisches Beispiel: JETS + Öl-Basket-Strategie</h3>
+<p>Eine robuste Strategie für Airline-ETFs nutzt einen <strong>Composite-Signal</strong> aus mehreren Öl/Energie-Indikatoren:</p>
+
+<div class="formula-box yellow">
+<strong>Signal:</strong> Long JETS wenn:<br>
+(1) 20-Tage Rolling Mean der Renditen von (WTI, Brent, XLE, XOM, CVX) &gt; 0<br>
+<em>UND</em><br>
+(2) VIX &lt; 25<br><br>
+<strong>Exit:</strong> Signal dreht negativ <em>ODER</em> JETS fällt &gt; 8% unter Einstieg (Stop-Loss)<br><br>
+Rationale: Positives Energie-Momentum ohne Panik-Regime (VIX-Filter) = günstige Bedingungen für Airline-Margen und Risk-Appetite
+</div>
+
+<div class="note success">✅ <strong>Statistische Validierung dieser Strategie:</strong><br>
+1. ADF auf alle Renditereihen → alle I(0) ✓<br>
+2. Granger-Test: Basket Granger-verursacht JETS mit Lag 3–7 (F-Test p &lt; 0.01) ✓<br>
+3. Regime-Test: VIX &lt; 25 identifiziert strukturell andere Korrelationsstruktur (Fisher-Z-Test p &lt; 0.01) ✓<br>
+4. Walk-Forward-Backtest (2010–2024): OOS Sharpe 0.65–0.85 ✓<br>
+5. Bootstrap-CI für Sharpe: [0.45, 1.05] — signifikant positiv ✓
+</div>
+
+<h3>Commodities-spezifische Risikofaktoren</h3>
+<table class="tbl">
+  <tr><th>Risikofaktor</th><th>Messung</th><th>Relevanz für JETS-Strategie</th></tr>
+  <tr><td>Geopolitisches Risiko</td><td>OPEC-Meldungen, VIX, Rüstungsaktien-Momentum</td><td>Hoch — Flugverbote, Kerosinlieferketten</td></tr>
+  <tr><td>Währungsrisiko</td><td>DXY-Niveau und Momentum</td><td>Mittel — Airlines haben USD-Kosten, gemischte Einnahmen</td></tr>
+  <tr><td>Konjunkturrisiko</td><td>Yield Curve, PMI, Credit Spreads</td><td>Hoch — Reisevolumen stark zyklisch</td></tr>
+  <tr><td>Pandemie/Schwarzer Schwan</td><td>VIX9D/VIX-Ratio, Pharma-Momentum, ProMED</td><td>Extrem hoch — COVID: JETS −70% in Wochen</td></tr>
+  <tr><td>Saisonalität</td><td>Kalendereffekte, Buchungsdaten</td><td>Mittel — Sommerreisesaison, Weihnachten</td></tr>
+</table>
+</section>
+
+<!-- ════════════════════════════════════════════
+     KAPITEL 10: KARTEIKARTEN-ÜBUNGEN
+     ════════════════════════════════════════════ -->
+<section class="chapter" id="ch10">
+<div class="chapter-header">
+  <h2><span class="ch-num">10</span>Karteikarten-Übungen</h2>
+  <p>Klicke auf eine Karte um die Antwort aufzudecken. Filtere nach Kategorien um gezielt zu üben.</p>
+</div>
+
+<div class="fc-stats">
+  <div id="fc-progress-text">0 von 60 aufgedeckt</div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="fc-pb" style="width:0%"></div></div>
+</div>
+
+<div class="fc-filters">
+  <button class="filter-btn active" onclick="filterCards('all',this)">Alle (60)</button>
+  <button class="filter-btn" onclick="filterCards('begriffe',this)">📖 Begriffe</button>
+  <button class="filter-btn" onclick="filterCards('formeln',this)">🔢 Formeln</button>
+  <button class="filter-btn" onclick="filterCards('methodik',this)">🔬 Methodik</button>
+  <button class="filter-btn" onclick="filterCards('strategie',this)">📈 Strategie</button>
+  <button class="filter-btn" onclick="filterCards('commodities',this)">🛢️ Commodities</button>
+</div>
+
+<div class="fc-grid" id="fc-grid">
+
+<!-- BEGRIFFE -->
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist schwache Stationarität?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Eine Zeitreihe ist <strong>schwach stationär</strong>, wenn (1) konstanter Erwartungswert $E[y_t]=\mu$, (2) konstante, endliche Varianz $\text{Var}(y_t)=\sigma^2$, (3) Autokovarianz hängt nur vom Lag ab, nicht von der Zeit: $\text{Cov}(y_t,y_{t-k})=\gamma(k)$. Preisreihen sind nicht stationär (Varianz wächst mit der Zeit), Log-Renditen meist schon.</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist ein Unit Root?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Ein <strong>Unit Root</strong> liegt vor, wenn das AR-Charakteristikpolynom eine Wurzel auf dem Einheitskreis hat — d.h. der autoregressive Koeffizient beträgt genau 1. Beispiel: $y_t = y_{t-1} + \varepsilon_t$ (Random Walk). Folge: Schocks wirken dauerhaft, Varianz wächst ohne Grenze. ADF-Test prüft auf Unit Root ($H_0$: Unit Root vorhanden).</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist Kointegration?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Zwei I(1)-Reihen $x_t$ und $y_t$ sind <strong>kointegriert</strong>, wenn eine Linearkombination $y_t - \beta x_t$ stationär ist (I(0)). Dies impliziert eine stabile langfristige Gleichgewichtsbeziehung — kurzfristige Abweichungen werden korrigiert. Modelliert mit VECM statt VAR. Beispiel: WTI und Brent-Rohöl sind typischerweise kointegriert (Spread ist stationär).</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist Granger-Kausalität?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">X <strong>Granger-verursacht</strong> Y, wenn Vergangenheitswerte von X die Vorhersage von Y verbessern — über den Vorhersagebeitrag der eigenen Vergangenheit von Y hinaus. Formaler F-Test: Restringiertes Modell (nur Y-Lags) vs. Unrestringiertes Modell (Y-Lags + X-Lags). <strong>Wichtig:</strong> Granger-Kausalität ≠ echte Kausalität! Es ist ein Prädiktivitätstest, kein Kausalitätsbeweis.</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist Leptokurtosis?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Leptokurtosis</strong> (Fat Tails) bedeutet, dass eine Verteilung eine Kurtosis &gt; 3 hat (verglichen mit der Normalverteilung, Kurtosis = 3). Finanzrenditen haben typischerweise Excess Kurtosis von 3–15. Folge: Extreme Ereignisse treten häufiger auf als Normalverteilungsmodelle vorhersagen. VaR-Modelle auf Normalbasis unterschätzen echte Risiken systematisch.</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist Heteroskedastizität?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Heteroskedastizität</strong>: Die Varianz der Residuen ist nicht konstant — sie variiert mit $x_t$ oder über die Zeit. Verletzt die Gauss-Markov-Annahme der Homoskedastizität. Folge: OLS-Schätzer sind noch unverzerrt, aber ineffizient; Standardfehler sind falsch. Test: Breusch-Pagan oder White. Lösung: White-robuste Standardfehler oder WLS.</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist Contango?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Contango</strong>: Futures-Preise liegen über dem Spot-Preis — die Futures-Kurve steigt mit der Laufzeit. Tritt auf wenn Lagerhaltungskosten die Convenience Yield übersteigen ($r+c > y$). Typisch für Rohstoffe mit niedrigen Lagerkosten und hohem Angebot. Konsequenz: Negativer Roll-Yield beim regelmäßigen Rollen von Futures-Positionen.</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist Backwardation?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Backwardation</strong>: Spot-Preis liegt über den Futures-Preisen — die Futures-Kurve fällt mit der Laufzeit. Entsteht wenn Convenience Yield hoch ist ($y > r+c$) — physischer Besitz ist sehr wertvoll (z.B. während Angebotsknappheit, Krisenzeiten). Positive Roll-Yield: Long-Future-Positionen profitieren beim Rollen. Typisch bei Öl in geopolitischen Krisen.</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist Roll-Yield?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Roll-Yield</strong>: Die Rendite aus dem regelmäßigen Austausch auslaufender Futures gegen neue Kontrakte. In <strong>Backwardation</strong>: positiv (man kauft neue Kontrakte billiger als die auslaufenden) — "Rolling up the curve". In <strong>Contango</strong>: negativ (neue Kontrakte teurer) — "Rolling up costs". Roll-Yield kann über Jahre den Spot-Return erheblich über- oder unterbieten.</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist Convenience Yield?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Convenience Yield</strong>: Der implizite Nutzen aus dem physischen Besitz eines Rohstoffs, jenseits des reinen Finanzinvestments. Raffinerien zahlen Prämie für sofortige Verfügbarkeit (kein Produktionsstopp). Formel: $y = r + c - \ln(F/S)/T$. Hohe CY → Backwardation. CY ist nicht direkt beobachtbar, aber aus Cost-of-Carry-Modell berechenbar.</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist VaR?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Value at Risk (VaR)</strong>: Der maximale Verlust, der mit einer Wahrscheinlichkeit von $(1-\alpha)$ nicht überschritten wird. VaR₉₅ = 5%-Quantil der Verlustverteilung. Parametrisch (Normalannahme): $VaR = -\mu + 1.645\sigma$. Probleme: Ignoriert Verluste jenseits des VaR, nicht kohärentes Risikomaß, unterschätzt Tail-Risk bei Fat Tails. Basel III: CVaR (Expected Shortfall) ist kohärenter.</div>
+</div>
+
+<div class="fc-item" data-cat="begriffe">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-b">Begriff</span> Was ist der Unterschied zwischen Korrelation und Unabhängigkeit?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Unabhängigkeit</strong> impliziert Unkorreliertheit, aber nicht umgekehrt! $\rho(X,Y)=0$ bedeutet keine lineare Beziehung, erlaubt aber nichtlineare Abhängigkeiten (Tail-Dependence). Beispiel: $X \sim U(-1,1)$, $Y=X^2$ → $\text{Cov}=0$ aber vollständige Abhängigkeit. In Finanzkrisen: Assets mit $\rho=0$ in normalen Zeiten können in Krisen stark korrelieren → Diversifikation versagt gerade dann, wenn man sie braucht.</div>
+</div>
+
+<!-- FORMELN -->
+<div class="fc-item" data-cat="formeln">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-g">Formel</span> Sharpe Ratio — Formel und Annahmen</span><span class="arrow">▾</span></div>
+  <div class="fc-a">$$S = \frac{E[R_p] - R_f}{\sigma_p}\cdot\sqrt{252}$$
+  $R_p$: Portfoliorendite, $R_f$: risikoloser Zins (z.B. 3M T-Bill), $\sigma_p$: Standardabweichung täglicher Renditen. Multiplikation mit $\sqrt{252}$ annualisiert für Tagesrenditen. <strong>Annahmen:</strong> IID-Returns, Normalverteilung. Bei Autokorrelation ist der annualisierte Sharpe verzerrt (überschätzt bei positiver Autokorrelation).</div>
+</div>
+
+<div class="fc-item" data-cat="formeln">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-g">Formel</span> ADF-Testgleichung erklären</span><span class="arrow">▾</span></div>
+  <div class="fc-a">$$\Delta y_t = \alpha + \delta\,y_{t-1} + \sum_{i=1}^p \gamma_i\,\Delta y_{t-i} + \varepsilon_t$$
+  $H_0$: $\delta=0$ (Unit Root, nicht stationär). $H_1$: $\delta < 0$ (stationär). Teststatistik $\tau = \hat\delta/SE(\hat\delta)$ folgt Dickey-Fuller-Verteilung (nicht Normal!). Kritische Werte: $-2.86$ (5%), $-3.43$ (1%). Je negativer $\tau$, desto stärker die Stationaritätsevidenz.</div>
+</div>
+
+<div class="fc-item" data-cat="formeln">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-g">Formel</span> GARCH(1,1) — Gleichung und Parameter</span><span class="arrow">▾</span></div>
+  <div class="fc-a">$$\sigma_t^2 = \omega + \alpha\,\varepsilon_{t-1}^2 + \beta\,\sigma_{t-1}^2$$
+  $\omega$: langfristiger Varianzanteil, $\alpha$: ARCH-Koeffizient (Reaktion auf neue Schocks), $\beta$: GARCH-Koeffizient (Persistenz). Stationaritätsbedingung: $\alpha+\beta < 1$. Langfristige Varianz: $\bar\sigma^2=\omega/(1-\alpha-\beta)$. Typische Werte: $\alpha\approx0.10$, $\beta\approx0.85$ (Persistenz $\approx0.95$).</div>
+</div>
+
+<div class="fc-item" data-cat="formeln">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-g">Formel</span> Cost-of-Carry für Futures</span><span class="arrow">▾</span></div>
+  <div class="fc-a">$$F_{t,T} = S_t \cdot e^{(r+c-y)(T-t)}$$
+  $r$: risikoloser Zins, $c$: Lagerkosten (p.a.), $y$: Convenience Yield (p.a.), $T-t$: Restlaufzeit. Contango: $r+c>y$ → $F>S$. Backwardation: $r+c< y$ → $F<S$. Implizite Convenience Yield aus Marktpreisen: $y = r+c-\ln(F/S)/(T-t)$.</div>
+</div>
+
+<div class="fc-item" data-cat="formeln">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-g">Formel</span> Max Drawdown — exakte Berechnung</span><span class="arrow">▾</span></div>
+  <div class="fc-a">$$MDD = \max_{0\leq s \leq t \leq T} \frac{V_s - V_t}{V_s}$$
+  Also: für jeden Zeitpunkt $t$ berechne $DD_t = (V_{\text{peak,t}} - V_t)/V_{\text{peak,t}}$ wobei $V_{\text{peak,t}} = \max_{s\leq t}V_s$ der laufende Höchststand ist. MDD = max über alle $DD_t$. Calmar Ratio = Ann.Return / MDD. MDD muss immer als positiver Wert berichtet werden (Verlust vom Peak).</div>
+</div>
+
+<div class="fc-item" data-cat="formeln">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-g">Formel</span> OLS-Schätzer und seine Eigenschaften</span><span class="arrow">▾</span></div>
+  <div class="fc-a">$$\hat{\boldsymbol\beta} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}$$
+  Unter Gauss-Markov-Annahmen: <strong>BLUE</strong> — Best Linear Unbiased Estimator. Unverzerrt: $E[\hat\beta]=\beta$. Minimum-Varianz unter allen linearen unverzerrten Schätzern. Varianz: $\text{Var}(\hat\beta) = \sigma^2(\mathbf{X}'\mathbf{X})^{-1}$. Wenn Annahmen verletzt → OLS verliert BLUE-Eigenschaft.</div>
+</div>
+
+<div class="fc-item" data-cat="formeln">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-g">Formel</span> Log-Rendite vs. einfache Rendite</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Einfache Rendite:</strong> $r_t = (P_t - P_{t-1})/P_{t-1}$<br><br><strong>Log-Rendite:</strong> $r_t^{log} = \ln(P_t/P_{t-1}) = \ln P_t - \ln P_{t-1}$<br><br>Beziehung: $r_t^{log} \approx r_t - r_t^2/2$ für kleine Renditen. Vorteile Log: Zeitlich additiv ($\sum r_t^{log}=\ln(P_T/P_0)$), symmetrisch bei Verlusten, normalverteilungsähnlicher. Für Portfolios (Querschnitt) sind einfache Renditen korrekt.</div>
+</div>
+
+<div class="fc-item" data-cat="formeln">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-g">Formel</span> Sortino Ratio — Unterschied zu Sharpe</span><span class="arrow">▾</span></div>
+  <div class="fc-a">$$So = \frac{E[R_p] - R_f}{\sigma_{\text{down}}}$$
+  $\sigma_{\text{down}} = \sqrt{\frac{1}{n}\sum_{r_t<0} r_t^2}$ — nur negative Abweichungen zählen. Sortino bestraft Strategien nicht für positive Volatilität (Gewinne). Besser für rechtschiefe Strategien (z.B. Momentum). Beim Vergleich: Sortino &gt; Sharpe immer wenn Renditeverteilung rechtschief (mehr Gewinntage als Verlusttage).</div>
+</div>
+
+<div class="fc-item" data-cat="formeln">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-g">Formel</span> Granger-Kausalitäts-F-Statistik</span><span class="arrow">▾</span></div>
+  <div class="fc-a">$$F = \frac{(RSS_r - RSS_u)/p}{RSS_u/(n-2p-1)}$$
+  $RSS_r$: Residuenquadrate Restringiertes Modell (ohne X-Lags), $RSS_u$: Unrestringiertes (mit X-Lags), $p$: Anzahl Lags. Unter $H_0 \sim F(p, n-2p-1)$. Ablehnen wenn $F > F_{\text{krit}}(p, n-2p-1, \alpha)$. Lag-Auswahl via AIC/BIC vor dem Test.</div>
+</div>
+
+<div class="fc-item" data-cat="formeln">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-g">Formel</span> CVaR / Expected Shortfall</span><span class="arrow">▾</span></div>
+  <div class="fc-a">$$CVaR_\alpha = E[L \mid L > VaR_\alpha] = \frac{1}{1-\alpha}\int_\alpha^1 VaR_u\,du$$
+  CVaR ist das durchschnittliche Verlust der schlimmsten $(1-\alpha)\cdot 100\%$ der Fälle. Kohärentes Risikomaß (im Gegensatz zu VaR): erfüllt Subadditivität — Diversifikation reduziert CVaR immer. Historisch: sortiere alle Tagesverluste, nehme Durchschnitt der schlechtesten 5%.</div>
+</div>
+
+<!-- METHODIK -->
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> Wann muss man differenzieren?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Differenzieren wenn ADF-Test $H_0$ (Unit Root) <strong>nicht</strong> abgelehnt wird UND KPSS $H_0$ (Stationarität) abgelehnt wird → klare Evidenz für I(1). Immer für Preisniveaus von Aktien, Rohstoffen, Wechselkursen. Nie für Log-Renditen differenzieren (die sind meist bereits I(0)). Bei I(2): zweimal differenzieren. Bei Kointegration: NICHT differenzieren, sondern VECM.</div>
+</div>
+
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> ADF: H₀ ablehnen oder nicht ablehnen — was bedeutet was?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">ADF $H_0$: <strong>Unit Root vorhanden</strong> (nicht stationär).<br>
+  Ablehnen $H_0$ ($\tau < t_{\text{krit}}$): Evidenz für <strong>Stationarität</strong> — kann in linearen Modellen verwendet werden.<br>
+  Nicht ablehnen: Keine Evidenz gegen Unit Root — Reihe wahrscheinlich I(1), differenzieren!<br>
+  <strong>Häufiger Fehler:</strong> ADF "nicht ablehnen" als Beweis für Stationarität interpretieren — das ist falsch! Nur: keine Evidenz dagegen gefunden.</div>
+</div>
+
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> Wann ist Bonferroni-Korrektur nötig?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Bonferroni wenn man <strong>multiple Tests gleichzeitig</strong> durchführt und die Family Wise Error Rate (FWER) kontrollieren möchte. Korrigiertes Niveau: $\alpha^* = \alpha/k$ für $k$ Tests. Beispiel: Granger-Tests für 20 Sektoren → $\alpha^* = 0.05/20 = 0.0025$. Konservativ: kann echte Signale verpassen. Alternative: Benjamini-Hochberg (FDR-Kontrolle) bei explorativer Analyse.</div>
+</div>
+
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> ACF vs. PACF — was sagen sie jeweils?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>ACF(k)</strong>: Korrelation zwischen $y_t$ und $y_{t-k}$ (inkl. indirekter Effekte über Zwischenlags). Fällt geometrisch für AR, bricht bei Lag $q$ ab für MA(q).<br><br><strong>PACF(k)</strong>: Partielle Korrelation zwischen $y_t$ und $y_{t-k}$, bereinigt um $y_{t-1},\ldots,y_{t-k+1}$. Bricht bei Lag $p$ ab für AR(p), fällt geometrisch für MA.<br><br>Faustregel: ACF zeigt MA-Ordnung, PACF zeigt AR-Ordnung.</div>
+</div>
+
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> Wie erkenne ich spurious regression?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Warnsignale für Spurious Regression:<br>
+  1. Hoher $R^2$ bei niedrigem Durbin-Watson (DW nahe 0 = starke Autokorrelation in Residuen)<br>
+  2. Beide Variablen sind I(1) und nicht kointegriert (Johansen-Test negativ)<br>
+  3. Koeffizient ändert sich stark je nach Zeitraum<br>
+  4. Residuen zeigen Unit Root (ADF auf Residuen → nicht ablehnen)<br>
+  Lösung: Log-Renditen verwenden oder Kointegration testen und ggf. VECM.</div>
+</div>
+
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> Was testet Granger-Kausalität NICHT?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Granger-Kausalität testet <strong>nicht</strong>:<br>
+  1. Echte Ursache-Wirkung-Beziehungen (nur lineare Prädiktivität)<br>
+  2. Instantane Kausalität (nur Vergangenheitswerte getestet)<br>
+  3. Nichtlineare Abhängigkeiten<br>
+  4. Ob X der eigentliche Treiber ist (gemeinsame Ursache möglich!)<br>
+  Granger misst: "Verbessern Vergangenheitswerte von X die Vorhersage von Y?" — nicht mehr und nicht weniger.</div>
+</div>
+
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> Walk-Forward vs. Hold-Out Split — was ist besser?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Hold-Out Split</strong> (70/30): Einfach aber ignoriert zeitliche Abhängigkeit — zukünftige Daten könnten implizit ins Training einfließen.<br><br><strong>Walk-Forward</strong>: Zeitlich korrekt — Modell wird nur auf Daten vor dem Test-Zeitpunkt trainiert. Nachteil: weniger Trainingsdaten, höhere Varianz der OOS-Metriken.<br><br>Für Finanzmärkte: <strong>Walk-Forward ist Pflicht</strong>. Stationary Block-Bootstrap für CI-Berechnung.</div>
+</div>
+
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> Warum Stationarität VOR linearen Modellen testen?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Lineare Modelle (OLS, Regression, Korrelation, Granger) setzen voraus, dass die statistischen Eigenschaften der Zeitreihen zeitlich stabil sind. Bei I(1)-Reihen:<br>
+  1. t-Statistiken folgen nicht Standardnormal → Inferenz falsch<br>
+  2. Hoher R² ohne echten Zusammenhang möglich (Spurious Regression)<br>
+  3. Forecast-Performance bricht außerhalb Trainingszeitraum ein<br>
+  Reihenfolge: ADF → wenn I(1) → differenzieren → dann Modell schätzen.</div>
+</div>
+
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> Was ist Data Snooping Bias?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Data Snooping</strong>: Wenn man viele Hypothesen an denselben Daten testet, steigt die Wahrscheinlichkeit, zufällig etwas "Signifikantes" zu finden. Bei $k=100$ getesteten Parametersätzen mit $\alpha=5\%$: erwartete 5 falsch positive Befunde, auch wenn alle Strategien zufällig sind. Korrekturen: Bonferroni (konservativ), Benjamini-Hochberg, White's Reality Check, Deflated Sharpe Ratio (Bailey/López de Prado).</div>
+</div>
+
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> Wie funktioniert der Jarque-Bera-Test?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">$$JB = \frac{n}{6}\left(S^2 + \frac{(K-3)^2}{4}\right) \sim \chi^2(2)$$
+  $S$: Schiefe, $K$: Kurtosis, $n$: Stichprobengröße. $H_0$: Normalverteilung ($S=0$, $K=3$). Ablehnen wenn $JB > \chi^2_{\text{krit}}(2)$ (z.B. $5.99$ für $\alpha=5\%$). Häufig abgelehnt für Finanzrenditen (Fat Tails, negative Schiefe). Konsequenz: t-Tests für Mittelwert haben korrekte Größe nur asymptotisch — bei kleinen Stichproben Bootstrap verwenden.</div>
+</div>
+
+<div class="fc-item" data-cat="methodik">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-y">Methodik</span> Wie wählt man die Lag-Länge im Granger-Test?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Lag-Auswahl vor Granger-Test via Informationskriterien:<br>
+  <strong>AIC</strong>: $-2\ln L + 2k$ (tendenziell mehr Lags)<br>
+  <strong>BIC</strong>: $-2\ln L + k\ln n$ (sparsameres Modell)<br>
+  Empfehlung: BIC für explorative Analyse (weniger Overfitting), AIC wenn Prognose Priorität.<br>
+  Praxis: Max-Lag von ca. $\sqrt[4]{T}$ testen (bei 250 Tagesdaten: max ~4 Lags). Immer Residuen auf Autokorrelation prüfen — wenn Ljung-Box signifikant → mehr Lags.</div>
+</div>
+
+<!-- STRATEGIE -->
+<div class="fc-item" data-cat="strategie">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-r">Strategie</span> Ist Sharpe 1.0 gut oder schlecht? Wann?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Sharpe 1.0 ist <strong>kontextabhängig</strong>:<br>
+  • IS (In-Sample): Bedeutungslos ohne OOS-Bestätigung<br>
+  • OOS, Long-Only Equity: Sehr gut (Markt hat Sharpe ~0.4–0.5)<br>
+  • OOS, Market-Neutral: Mittelgut (Hedgefonds: 0.6–1.2 typisch)<br>
+  • Nach Transaktionskosten: Oft 20–40% niedriger als Brutto-Sharpe<br>
+  • Mit Autokorrelation in Returns: Inflationiert (korrigieren via Lo 2002)<br>
+  Wichtiger als Sharpe alleine: Bootstrap-CI und Deflated Sharpe Ratio.</div>
+</div>
+
+<div class="fc-item" data-cat="strategie">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-r">Strategie</span> Wie erkennst du Overfitting in einem Backtest?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Warnsignale für Overfitting:<br>
+  1. IS-Sharpe wesentlich &gt; OOS-Sharpe (Ratio IS/OOS &gt; 1.5)<br>
+  2. Strategie hat viele Parameter relativ zu Datenpunkten (&lt;10 Datenpunkte/Parameter = gefährlich)<br>
+  3. Optimale Parameter ändern sich stark zwischen Walk-Forward-Fenstern<br>
+  4. Performance konzentriert sich auf wenige episodische Perioden<br>
+  5. P-Wert durch Bonferroni-Korrektur nicht mehr signifikant<br>
+  6. Deflated Sharpe Ratio nahe 0 oder negativ</div>
+</div>
+
+<div class="fc-item" data-cat="strategie">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-r">Strategie</span> Welche Metriken gemeinsam zeigen ein vollständiges Bild?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Minimales Bild für Strategiebewertung:<br>
+  <strong>Rendite:</strong> CAGR (ann. Rendite)<br>
+  <strong>Risiko:</strong> Volatilität, Max Drawdown, CVaR₉₅<br>
+  <strong>Risikobereinigt:</strong> Sharpe, Sortino, Calmar<br>
+  <strong>Trade-Qualität:</strong> Win-Rate, Profit Factor, Avg Win/Avg Loss<br>
+  <strong>Robustheit:</strong> OOS vs. IS Performance, Bootstrap-CIs, Walk-Forward Stabilität<br>
+  <strong>Ökonomisch:</strong> Alpha (CAPM), Beta, Information Ratio</div>
+</div>
+
+<div class="fc-item" data-cat="strategie">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-r">Strategie</span> Warum ist eine Strategie mit hohem IS-R² gefährlich?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">In-Sample $R^2$ misst Anpassung an historische Daten, nicht Prognoseeignung. Probleme:<br>
+  1. Mit genug Parametern kann man jede Zeitreihe perfekt fitten ($R^2=1$) — völlig sinnlos<br>
+  2. Für nicht-stationäre Reihen ist $R^2$ systematisch überhöht (Spurious Regression)<br>
+  3. Datierung der Trainingsperiode bestimmt R² stark — Strukturbrüche ignoriert<br>
+  Korrekte Metrik: OOS $R^2$ (Prognose-$R^2$) aus Walk-Forward-Validation.</div>
+</div>
+
+<div class="fc-item" data-cat="strategie">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-r">Strategie</span> Hard-Exit vs. Hedge-Schicht — was ist besser in Krisen?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Hard-Exit</strong>: Komplettverlassen der Position bei Signal. Problem: Rebounds nach Krisen werden verpasst. False Positives = entgangener Gewinn.<br><br><strong>Hedge-Schicht</strong> (Empfehlung):<br>
+  • Stufe 1: Stop-Loss enger ziehen (8% → 5%)<br>
+  • Stufe 2: Positionsgröße reduzieren (auf 50%)<br>
+  • Stufe 3: Rotation in defensive Assets (GLD, XLU, TLT)<br><br>
+  Hedge-Schicht preserviert Gewinnpotenzial in Rebounds bei gleichzeitig reduziertem Drawdown.</div>
+</div>
+
+<div class="fc-item" data-cat="strategie">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-r">Strategie</span> Was ist die Deflated Sharpe Ratio (DSR)?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">DSR (Bailey &amp; López de Prado, 2014) korrigiert den geschätzten Sharpe für:<br>
+  1. Anzahl getesteter Strategien (Multiple Testing)<br>
+  2. Schiefe und Kurtosis der Renditeverteilung<br>
+  3. Länge der Testperiode<br>
+  DSR gibt die Wahrscheinlichkeit an, dass ein Sharpe von $S^*$ besser ist als das erwartete Maximum unter $K$ zufälligen Strategien. DSR &lt; 50%: Strategie ist wahrscheinlich Zufall. Implementierung: scipy.stats oder manuell mit Normalverteilung.</div>
+</div>
+
+<div class="fc-item" data-cat="strategie">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-r">Strategie</span> Wann ist ein Composite-Signal besser als ein einzelner Indikator?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Composite-Signal ist besser wenn:<br>
+  1. Einzelne Indikatoren sind schwach/verrauscht, aber komplementär<br>
+  2. Verschiedene Indikatoren sind in verschiedenen Regimes stärker<br>
+  3. Kombination reduziert False-Positive-Rate ohne True-Positive-Rate zu opfern (höherer AUC)<br>
+  Validierung: ROC-Kurve/AUC-Vergleich Einzel vs. Composite. Wichtig: Gewichte out-of-sample optimieren (Walk-Forward), nicht IS!</div>
+</div>
+
+<!-- COMMODITIES -->
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> Warum ist Öl negativ mit dem USD korreliert?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Strukturelle Gründe:<br>
+  1. <strong>Denominierungseffekt</strong>: Öl wird global in USD gehandelt. Stärkerer USD = teurer für ausländische Käufer → weniger Nachfrage → Preisdruck.<br>
+  2. <strong>Risk-Off-Effekt</strong>: USD steigt oft in Risk-Off-Phasen (Safe Haven) → gleichzeitig Öl-Verkauf.<br>
+  3. <strong>Carry Trade</strong>: Niedriger USD-Zins → Rohstoffspekulation attraktiver.<br>
+  Durchschnittliche Korrelation DXY vs. WTI: ~−0.45 (variiert stark nach Regime).</div>
+</div>
+
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> In welchem Marktregime fallen Öl und Airlines gleichzeitig?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">In <strong>Risk-Off/Crash-Regimes</strong> (VIX &gt; 30):<br>
+  Normal: Öl ↑ = Airline-Kosten ↑ = JETS ↓ (inverse Beziehung)<br>
+  Krise: Öl ↓ UND JETS ↓ — Risk-Appetite kollabiert, Reisevolumen bricht ein, Kreditrisiko steigt<br>
+  Beispiel COVID-2020: Öl −70%, JETS −65% (beide gleichzeitig, "positive" Korrelation)<br>
+  Implikation: Öl als Hedge für Airlines nur in normalen Regimes wirksam. In echten Krisen versagt der Mechanismus!</div>
+</div>
+
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> Wie viele Tage liegt WTI-Öl vor JETS auf dem Aktienmarkt?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Auf <strong>Aktienmarkt-Ebene</strong> (nicht physischer Ebene): empirisch 3–10 Tage Lead-Time von XLE/WTI-Returns zu JETS-Returns (in normalen Märkten). Mechanismus: Energie-Sektor reagiert schneller auf Öl-Änderungen, Airline-Sektor mit Verzögerung durch Absicherungsverträge, langsamer Marktpreisanpassung. Auf <strong>physischer Ebene</strong>: 2–6 Wochen (Raffinerie-Vorlauf). In Krisen: Simultane Reaktion, kein Lead-Lag mehr.</div>
+</div>
+
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> Was bedeutet positiver Roll-Yield für eine Long-Futures-Position?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Positiver Roll-Yield tritt in <strong>Backwardation</strong> auf. Die Long-Futures-Position profitiert beim monatlichen Rollen: man kauft den neuen (günstigeren) Kontrakt und verkauft den auslaufenden (teureren). Dieser Gewinn kommt <strong>zusätzlich</strong> zur Spot-Preis-Änderung. In Backwardation: Total Return = Spot Return + Roll Yield &gt; Spot Return allein. Rohstoff-Indizes (z.B. S&amp;P GSCI) profitieren stark von Backwardation-Phasen.</div>
+</div>
+
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> Wie modelliert man Korrelationsregime-Wechsel zwischen Sektoren?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Methoden für zeitvariable Korrelationen:<br>
+  1. <strong>Rolling Korrelation</strong>: Einfachste Methode, Fenstergröße kritisch (30–63 Tage typisch)<br>
+  2. <strong>DCC-GARCH</strong> (Dynamic Conditional Correlation): Modelliert zeitvariable Korrelationen formal, Maximum-Likelihood<br>
+  3. <strong>Markov-Switching</strong>: Versteckte Zustände (z.B. Normal/Krise) mit Übergangswahrscheinlichkeiten<br>
+  4. <strong>VIX-Threshold</strong>: Einfache Konditionierung auf VIX-Level (z.B. &lt;20 / 20–30 / &gt;30)<br>
+  Empfehlung: VIX-Threshold für Backtests (schnell, interpretierbar), DCC-GARCH für formale Analyse.</div>
+</div>
+
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> Was ist der Einfluss des US-Yield Curve auf Rohstoffpreise?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Die US-Yield Curve (10Y-2Y Spread) ist ein <strong>Konjunkturbarometer</strong>:<br>
+  <strong>Steilere Kurve</strong> (Spread steigt): Wachstumserwartungen → höhere Energienachfrage → Öl ↑<br>
+  <strong>Invertierte Kurve</strong>: Rezessionserwartung → Nachfragerückgang → Öl ↓<br>
+  Lead-Time: Yield Curve→Öl auf Monats-bis-Quartalsbasis (nicht tagesaktuell!)<br>
+  Gleichzeitig: Steigende Zinsen → höhere Lagerhaltungskosten → ceteris paribus Contango tiefer</div>
+</div>
+
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> Warum schlägt das Öl-Airlines-Signal in Krisen fehl?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Das Signal "Positives Öl-Momentum → Long JETS" funktioniert in normalen Regimes (Öl ↑ = Konjunktur gut = Reiseverkehr gut, Kosteneffekt durch Hedging abgefedert). In Krisen versagt es weil:<br>
+  1. Risk-Appetite kollabiert → beides fällt gleichzeitig (gemeinsamer Makro-Treiber dominiert)<br>
+  2. Öl kann auch durch Angebotsschock steigen (OPEC) während Airlines leiden<br>
+  3. Panikverkäufe ignorieren Fundamentaldaten<br>
+  Lösung: VIX-Filter (z.B. VIX &lt; 25) als Regime-Gate für das Signal.</div>
+</div>
+
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> Was ist die Convenience Yield quantitativ?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Convenience Yield $y$ aus Marktpreisen: $$y = r + c - \frac{\ln(F_{t,T}/S_t)}{T-t}$$
+  Wenn $F &lt; S e^{(r+c)(T-t)}$: $y$ ist hoch (starke Nachfrage nach physischem Rohstoff). CY ist nicht konstant — schwankt mit Angebots/Nachfrage-Verhältnis. In Kriegs-/Krisenzeiten: CY sehr hoch → starke Backwardation. Im Überangebot: CY nahe 0 → tiefes Contango.</div>
+</div>
+
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> OPEC-Schock: wie analysiert man die Preis-Auswirkung?</span><span class="arrow">▾</span></div>
+  <div class="fc-a"><strong>Event-Study-Methodik:</strong><br>
+  1. Definiere Event-Datum (z.B. OPEC-Ankündigung)<br>
+  2. Schätze "normales" Preisverhalten aus Estimation Window (z.B. −120 bis −20 Tage)<br>
+  3. Berechne <strong>Abnormale Rendite</strong>: $AR_t = r_t - E[r_t | I_{t-1}]$<br>
+  4. Kumuliere über Event-Window: $CAR = \sum_{t=t_1}^{t_2} AR_t$<br>
+  5. t-Test auf $CAR \neq 0$<br>
+  Für JETS: OPEC-Kürzung → Öl ↑ → Kerosinkosten ↑ → abnormale negative JETS-Renditen (wenn nicht gehedgt).</div>
+</div>
+
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> Welche Makroindikatoren führen Rohstoffpreise am stärksten?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Empirisch stärkste Makro-Führungsindikatoren für Rohstoffe:<br>
+  1. <strong>China Caixin PMI</strong> (Industrie): 2–4 Wochen Lead für Kupfer, Öl, Eisenerz<br>
+  2. <strong>US-Dollar Index (DXY)</strong>: 1–5 Tage Lead (kurzfristig)<br>
+  3. <strong>US-Yield Curve</strong>: Monate Lead (Konjunktursignal)<br>
+  4. <strong>ISM Manufacturing PMI</strong>: 4–8 Wochen Lead<br>
+  5. <strong>Credit Spreads (HYG/IEF)</strong>: Gleichzeitig bis 1 Woche Lead (Risikoappetit)<br>
+  Alle auf Stationarität testen (Renditen/Änderungen) vor Granger-Test!</div>
+</div>
+
+<div class="fc-item" data-cat="commodities">
+  <div class="fc-q" onclick="toggleFC(this)"><span><span class="tag t-p">Commodities</span> Was ist der VIX-Filter in der JETS-Strategie und warum?</span><span class="arrow">▾</span></div>
+  <div class="fc-a">Signal: Long JETS nur wenn VIX &lt; 25 (zusätzlich zum Öl-Momentum-Signal).<br><br>Rationale: VIX &gt; 25 signalisiert Stress-Regime, in dem:<br>
+  • Risk-Appetite kollabiert → Airlines werden überproportional verkauft<br>
+  • Korrelationsstruktur bricht zusammen (Öl-Signal nicht mehr zuverlässig)<br>
+  • Drawdowns eskalieren schnell (dicke Schwänze)<br><br>
+  Statistisch: Fisher-Z-Test zeigt signifikant unterschiedliche Korrelationsstruktur VIX&lt;25 vs. VIX&gt;25 (p&lt;0.01). Strategie verbessert Sortino substantiell bei kleinem Rendite-Abzug.</div>
+</div>
+
+</div><!-- end fc-grid -->
+</section>
+
+</main>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+/* ── KATEX ── */
+document.addEventListener("DOMContentLoaded", function() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left:"$$",right:"$$",display:true},
+      {left:"$",right:"$",display:false}
+    ],
+    throwOnError: false
+  });
+  initCharts();
+});
+
+/* ── PRNG (Mulberry32 — deterministic) ── */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,a|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;};}
+
+function randn(rng){let u=0,v=0;while(!u)u=rng();while(!v)v=rng();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+
+function randomWalk(n,rng,s=1){let x=[0];for(let i=1;i<n;i++)x.push(x[i-1]+randn(rng)*s);return x;}
+
+function ar1(n,rng,phi=0.7,s=1){let x=[0];for(let i=1;i<n;i++)x.push(phi*x[i-1]+randn(rng)*s);return x;}
+
+function garch11(n,rng,om=0.000002,al=0.12,be=0.85){
+  let ret=[],h=om/(1-al-be);
+  for(let i=0;i<n;i++){let e=randn(rng);let r=Math.sqrt(h)*e;ret.push(r);h=om+al*r*r+be*h;}
+  return ret;
+}
+
+function normalPDF(x,m=0,s=1){return Math.exp(-0.5*((x-m)/s)**2)/(s*Math.sqrt(2*Math.PI));}
+function tPDF(x,v){const B=(g1,g2)=>Math.exp(lgamma(g1)+lgamma(g2)-lgamma(g1+g2));function lgamma(z){const c=[76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.001208650973866179,-0.000005395239384953];let x=z,y=z,t=x+5.5;t=(x+0.5)*Math.log(t)-t;let s=1.000000000190015;for(let j=0;j<6;j++){s+=c[j]/++y;}return t+Math.log(2.5066282746310005*s/x);}return Math.exp(lgamma((v+1)/2)-lgamma(v/2))/(Math.sqrt(v*Math.PI)*Math.pow(1+x*x/v,(v+1)/2));}
+
+/* ── CHART DEFAULTS ── */
+Chart.defaults.color='#8b949e';
+Chart.defaults.borderColor='#30363d';
+Chart.defaults.font.family="-apple-system,'Segoe UI',Roboto,sans-serif";
+Chart.defaults.font.size=11;
+
+const BLUE='#58a6ff',GREEN='#3fb950',RED='#f85149',YELLOW='#e3b341',PURPLE='#d2a8ff',ORANGE='#f0883e';
+
+function baseOpts(yLabel='',xLabel=''){
+  return {responsive:true,maintainAspectRatio:false,
+    animation:{duration:600},
+    plugins:{legend:{labels:{color:'#8b949e',boxWidth:12,padding:12}},tooltip:{backgroundColor:'#161b22',borderColor:'#30363d',borderWidth:1}},
+    scales:{
+      x:{grid:{color:'#1c2128'},ticks:{color:'#8b949e'},title:{display:!!xLabel,text:xLabel,color:'#8b949e'}},
+      y:{grid:{color:'#1c2128'},ticks:{color:'#8b949e'},title:{display:!!yLabel,text:yLabel,color:'#8b949e'}}
+    }
+  };
+}
+
+function initCharts(){
+  const rng1=mulberry32(42),rng2=mulberry32(99),rng3=mulberry32(7),rng4=mulberry32(123);
+
+  /* Chart 1: Normal vs t(4) density */
+  {
+    const n=200,xs=[];const pts_n=[],pts_t=[];
+    for(let i=0;i<n;i++){let x=-5+10*i/(n-1);xs.push(x.toFixed(2));pts_n.push(normalPDF(x));pts_t.push(tPDF(x,4));}
+    new Chart(document.getElementById('c1'),{type:'line',data:{labels:xs,datasets:[
+      {label:'N(0,1)',data:pts_n,borderColor:BLUE,borderWidth:2,pointRadius:0,fill:false},
+      {label:'t(ν=4)',data:pts_t,borderColor:ORANGE,borderWidth:2,pointRadius:0,fill:false,borderDash:[4,2]}
+    ]},options:{...baseOpts('Dichte','x'),plugins:{...baseOpts().plugins,annotation:{}}}});
+  }
+
+  /* Chart 2: Normal + rejection regions */
+  {
+    const n=300,xs=[],ys=[],bg=[];
+    for(let i=0;i<n;i++){let x=-4+8*i/(n-1);xs.push(x.toFixed(2));let y=normalPDF(x);ys.push(y);bg.push(Math.abs(x)>1.96?RED:BLUE);}
+    new Chart(document.getElementById('c2'),{type:'bar',data:{labels:xs,datasets:[
+      {label:'Ablehnungsregion (|z|>1.96)',data:ys,backgroundColor:bg,borderColor:'transparent',barPercentage:1.1,categoryPercentage:1.0}
+    ]},options:{...baseOpts('Dichte f(z)','z'),plugins:{legend:{labels:{generateLabels:()=>[
+      {text:'Normalbereich (|z|≤1.96)',fillStyle:BLUE,strokeStyle:BLUE},
+      {text:'Ablehnungsregion α=5% (|z|>1.96)',fillStyle:RED,strokeStyle:RED}
+    ]},color:'#8b949e'}}}});
+  }
+
+  /* Chart 3: Random Walk vs AR(1) */
+  {
+    const rw=randomWalk(250,mulberry32(42)),ar=ar1(250,mulberry32(13),0.7);
+    const lbs=Array.from({length:250},(_,i)=>i+1);
+    new Chart(document.getElementById('c3'),{type:'line',data:{labels:lbs,datasets:[
+      {label:'Random Walk I(1) — nicht stationär',data:rw,borderColor:RED,borderWidth:1.5,pointRadius:0},
+      {label:'AR(1) φ=0.7 — stationär',data:ar,borderColor:GREEN,borderWidth:1.5,pointRadius:0}
+    ]},options:baseOpts('Wert','Handelstag')});
+  }
+
+  /* Chart 4: CCF simulated */
+  {
+    // Simulate: oil + lag-3 component in JETS
+    const rw2=mulberry32(55),rw3=mulberry32(66);
+    const oil=[],jets=[];
+    for(let i=0;i<300;i++){oil.push(randn(rw2)*0.02);}
+    for(let i=0;i<300;i++){jets.push((i>=3?0.40*oil[i-3]:0)+randn(rw3)*0.018);}
+    // Compute CCF from lag -10 to +10
+    const lags=[],ccf=[];
+    const mo=oil.reduce((a,x)=>a+x,0)/oil.length,mj=jets.reduce((a,x)=>a+x,0)/jets.length;
+    const so=Math.sqrt(oil.reduce((a,x)=>a+(x-mo)**2,0)/oil.length);
+    const sj=Math.sqrt(jets.reduce((a,x)=>a+(x-mj)**2,0)/jets.length);
+    for(let k=-10;k<=10;k++){
+      lags.push('Lag '+k);
+      let num=0,n=0;
+      for(let i=0;i<oil.length;i++){let j=i-k;if(j>=0&&j<jets.length){num+=(oil[i]-mo)*(jets[j]-mj);n++;}}
+      ccf.push(num/(n*so*sj));
+    }
+    const ci=1.96/Math.sqrt(300);
+    const ciUp=Array(21).fill(ci),ciDn=Array(21).fill(-ci);
+    new Chart(document.getElementById('c4'),{type:'bar',data:{labels:lags,datasets:[
+      {label:'CCF(k)',data:ccf,backgroundColor:ccf.map(v=>v>ci?GREEN:v<-ci?RED:BLUE),borderColor:'transparent'},
+      {label:'95%-CI +',data:ciUp,type:'line',borderColor:YELLOW,borderWidth:1.5,borderDash:[5,3],pointRadius:0},
+      {label:'95%-CI −',data:ciDn,type:'line',borderColor:YELLOW,borderWidth:1.5,borderDash:[5,3],pointRadius:0}
+    ]},options:baseOpts('Kreuzkorrelation ρ(k)','Lag k')});
+  }
+
+  /* Chart 5: Spurious regression scatter */
+  {
+    const rg=mulberry32(888);
+    const x5=randomWalk(200,mulberry32(10)),y5=randomWalk(200,mulberry32(20));
+    // color by time
+    const cols=x5.map((_,i)=>`rgba(88,166,255,${0.3+0.7*i/200})`);
+    new Chart(document.getElementById('c5'),{type:'scatter',data:{datasets:[
+      {label:'Zwei unabhängige Random Walks',data:x5.map((v,i)=>({x:v,y:y5[i]})),backgroundColor:cols,pointRadius:3}
+    ]},options:{...baseOpts('Y (Random Walk 2)','X (Random Walk 1)'),plugins:{...baseOpts().plugins,legend:{labels:{color:'#8b949e'}}}}});
+  }
+
+  /* Chart 6: Theoretical ACF AR(1) phi=0.8 */
+  {
+    const phi=0.8,maxLag=15;
+    const lbs=[],acf=[];
+    for(let k=0;k<=maxLag;k++){lbs.push('Lag '+k);acf.push(Math.pow(phi,k));}
+    const ci6=1.96/Math.sqrt(500);
+    new Chart(document.getElementById('c6'),{type:'bar',data:{labels:lbs,datasets:[
+      {label:'Theoretische ACF (φ^k)',data:acf,backgroundColor:BLUE,borderColor:'transparent'},
+      {label:'95%-CI',data:Array(maxLag+1).fill(ci6),type:'line',borderColor:RED,borderWidth:1.5,borderDash:[5,3],pointRadius:0},
+      {data:Array(maxLag+1).fill(-ci6),type:'line',borderColor:RED,borderWidth:1.5,borderDash:[5,3],pointRadius:0,showInLegend:false,label:''}
+    ]},options:{...baseOpts('ACF(k)','Lag k'),scales:{...baseOpts().scales,y:{...baseOpts().scales.y,min:-0.2,max:1.1}}}});
+  }
+
+  /* Chart 7: GARCH returns */
+  {
+    const rets=garch11(400,mulberry32(77));
+    const lbs=Array.from({length:400},(_,i)=>i+1);
+    new Chart(document.getElementById('c7'),{type:'bar',data:{labels:lbs,datasets:[
+      {label:'GARCH(1,1)-Renditen',data:rets.map(r=>r*100),backgroundColor:rets.map(r=>r>=0?'rgba(63,185,80,0.7)':'rgba(248,81,73,0.7)'),borderColor:'transparent',barPercentage:1.0,categoryPercentage:1.0}
+    ]},options:baseOpts('Rendite (%)','Handelstag')});
+  }
+
+  /* Chart 8: NAV + Drawdown */
+  {
+    const rg8=mulberry32(11);
+    const n=500,ret=[];
+    for(let i=0;i<n;i++)ret.push(0.0004+randn(rg8)*0.012);
+    const nav=[100],dd=[0];
+    let peak=100;
+    for(let i=0;i<n;i++){
+      const v=nav[i]*(1+ret[i]);nav.push(v);
+      if(v>peak)peak=v;
+      dd.push(-100*(peak-v)/peak);
+    }
+    const lbs=Array.from({length:n+1},(_,i)=>i);
+    const ctx=document.getElementById('c8');
+    new Chart(ctx,{type:'line',data:{labels:lbs,datasets:[
+      {label:'NAV',data:nav,borderColor:GREEN,borderWidth:1.5,pointRadius:0,yAxisID:'y'},
+      {label:'Drawdown %',data:dd,borderColor:'rgba(248,81,73,0.8)',backgroundColor:'rgba(248,81,73,0.15)',fill:true,borderWidth:1,pointRadius:0,yAxisID:'y2'}
+    ]},options:{...baseOpts(),responsive:true,maintainAspectRatio:false,
+      scales:{
+        x:{grid:{color:'#1c2128'},ticks:{color:'#8b949e',maxTicksLimit:8}},
+        y:{grid:{color:'#1c2128'},ticks:{color:'#8b949e'},title:{display:true,text:'NAV',color:'#8b949e'},position:'left'},
+        y2:{grid:{display:false},ticks:{color:'#8b949e'},title:{display:true,text:'Drawdown %',color:RED},position:'right'}
+      }
+    }});
+  }
+
+  /* Chart 9: Return distribution + VaR */
+  {
+    const rg9=mulberry32(33);
+    // Fat-tailed returns via t(4)-like
+    const raw=[];for(let i=0;i<2000;i++){let r=randn(rg9)*0.01+0.0003;raw.push(r);}
+    raw.sort((a,b)=>a-b);
+    // histogram
+    const bins=30,mn=raw[0]*100,mx=raw[raw.length-1]*100;
+    const bw=(mx-mn)/bins;
+    const counts=Array(bins).fill(0),edges=[];
+    for(let i=0;i<bins;i++)edges.push((mn+bw*i+bw*(i+1))/2);
+    for(const r of raw){let b=Math.floor((r*100-mn)/bw);if(b>=bins)b=bins-1;counts[b]++;}
+    const var95=raw[Math.floor(0.05*raw.length)]*100;
+    const cvar=raw.slice(0,Math.floor(0.05*raw.length)).reduce((a,x)=>a+x*100,0)/Math.floor(0.05*raw.length);
+    new Chart(document.getElementById('c9'),{type:'bar',data:{labels:edges.map(e=>e.toFixed(2)+'%'),datasets:[
+      {label:'Häufigkeit',data:counts,backgroundColor:edges.map(e=>e<var95?'rgba(248,81,73,0.6)':e<0?'rgba(88,166,255,0.4)':'rgba(63,185,80,0.4)'),borderColor:'transparent'}
+    ]},options:{...baseOpts('Häufigkeit','Tagesrendite (%)'),plugins:{...baseOpts().plugins,
+      annotation:{annotations:{var:{type:'line',xMin:edges.findIndex(e=>e>=var95),xMax:edges.findIndex(e=>e>=var95),borderColor:RED,borderWidth:2,label:{content:'VaR₉₅',display:true,color:RED}}}}}
+    }});
+  }
+
+  /* Chart 10: Futures curve */
+  {
+    const S=80,r=0.04,mats=[1,2,3,6,9,12,18];
+    const contango=mats.map(m=>S*Math.exp((r+0.02-0.01)*m/12));
+    const backw=mats.map(m=>S*Math.exp((r+0.01-0.10)*m/12));
+    new Chart(document.getElementById('c10'),{type:'line',data:{labels:mats.map(m=>m+'M'),datasets:[
+      {label:'Contango (r+c-y=+5% p.a.)',data:contango,borderColor:BLUE,borderWidth:2,pointRadius:5,pointBackgroundColor:BLUE},
+      {label:'Backwardation (r+c-y=−8% p.a.)',data:backw,borderColor:ORANGE,borderWidth:2,pointRadius:5,pointBackgroundColor:ORANGE,borderDash:[6,3]},
+      {label:'Spot-Preis $80',data:Array(7).fill(80),borderColor:'#444',borderWidth:1.5,borderDash:[3,3],pointRadius:0}
+    ]},options:baseOpts('Futures-Preis (USD/Barrel)','Restlaufzeit')});
+  }
+
+  /* Chart 11: Seasonality WTI (realistic avg monthly returns) */
+  {
+    // Historically-informed approximate monthly avg returns for WTI
+    const months=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+    const avgs=[1.2,2.1,-0.5,0.8,1.5,0.3,-1.8,-0.9,-2.1,0.6,1.1,0.7];
+    new Chart(document.getElementById('c11'),{type:'bar',data:{labels:months,datasets:[
+      {label:'Ø Monatsrendite WTI (2000–2024, %)',data:avgs,backgroundColor:avgs.map(v=>v>=0?'rgba(63,185,80,0.75)':'rgba(248,81,73,0.75)'),borderColor:'transparent'}
+    ]},options:baseOpts('Ø Rendite (%)','Monat')});
+  }
+
+  /* Chart 12: Correlation regimes scatter */
+  {
+    const rg12=mulberry32(42);
+    // Normal: slight negative correlation
+    const nOil=[],nJets=[];
+    for(let i=0;i<80;i++){let o=randn(rg12)*0.015;nOil.push(o);nJets.push(-0.25*o+randn(rg12)*0.015);}
+    // Stress: positive correlation (both fall)
+    const sOil=[],sJets=[];
+    for(let i=0;i<40;i++){let o=-Math.abs(randn(rg12)*0.02);sOil.push(o);sJets.push(0.60*o+randn(rg12)*0.015);}
+    // Recovery: positive
+    const rOil=[],rJets=[];
+    for(let i=0;i<40;i++){let o=Math.abs(randn(rg12)*0.015);rOil.push(o);rJets.push(0.55*o+randn(rg12)*0.012);}
+    new Chart(document.getElementById('c12'),{type:'scatter',data:{datasets:[
+      {label:'Normal (ρ≈−0.25)',data:nOil.map((v,i)=>({x:v*100,y:nJets[i]*100})),backgroundColor:'rgba(88,166,255,0.6)',pointRadius:4},
+      {label:'Krise / Stress (ρ≈+0.60)',data:sOil.map((v,i)=>({x:v*100,y:sJets[i]*100})),backgroundColor:'rgba(248,81,73,0.65)',pointRadius:4},
+      {label:'Erholung (ρ≈+0.55)',data:rOil.map((v,i)=>({x:v*100,y:rJets[i]*100})),backgroundColor:'rgba(63,185,80,0.65)',pointRadius:4}
+    ]},options:{...baseOpts('JETS Rendite (%)','WTI Rendite (%)')}});
+  }
+}
+
+/* ── FLASHCARDS ── */
+let fcSeen=new Set();
+function toggleFC(el){
+  const a=el.nextElementSibling;
+  el.classList.toggle('open');
+  a.classList.toggle('show');
+  const id=el.closest('.fc-item').dataset.cat+el.querySelector('span:last-of-type,span:first-child').textContent.slice(0,30);
+  if(a.classList.contains('show')){fcSeen.add(el.parentElement.innerHTML.length);updateProgress();}
+}
+function updateProgress(){
+  const total=document.querySelectorAll('.fc-item').length;
+  const seen=document.querySelectorAll('.fc-a.show').length;
+  document.getElementById('fc-progress-text').textContent=seen+' von '+total+' aufgedeckt';
+  document.getElementById('fc-pb').style.width=(seen/total*100)+'%';
+}
+
+function filterCards(cat,btn){
+  document.querySelectorAll('.fc-filters button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.fc-item').forEach(item=>{
+    if(cat==='all'||item.dataset.cat===cat)item.style.display='block';
+    else item.style.display='none';
+  });
+}
+
+/* ── SIDEBAR SCROLL TRACKING ── */
+window.addEventListener('scroll',()=>{
+  const sections=document.querySelectorAll('.chapter');
+  const links=document.querySelectorAll('#sidebar a');
+  let current='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-150)current=s.id;});
+  links.forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+current)a.classList.add('active');});
+},{passive:true});
+</script>
+</body>
+</html>

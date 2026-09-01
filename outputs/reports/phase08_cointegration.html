@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Phase 8 - Kointegration</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script>
+    MathJax = {
+      tex: { inlineMath:[['$','$'],['\\(','\\)']] },
+      options: { skipHtmlTags:['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { background:#0d1117; color:#e6edf3; font-family:'Segoe UI',Arial,sans-serif; }
+    mjx-container, mjx-container * { color:#e6edf3 !important; fill:#e6edf3 !important; }
+    mjx-container svg path { fill:#e6edf3 !important; }
+    .MathJax { color:#e6edf3 !important; }
+    .ph-header { background:#ff7b7222; border-left:5px solid #ff7b72;
+                  padding:1.5rem 2rem; border-radius:8px; margin-bottom:2rem; }
+    .ph-header h1 { color:#ff7b72; font-size:1.8rem; margin:0; }
+    .ph-header .sub { color:#8b949e; font-size:.95rem; margin-top:.4rem; }
+    .card { background:#161b22; border:1px solid #30363d; border-radius:8px; }
+    .card-header { background:#ff7b7218; border-bottom:1px solid #30363d;
+                    color:#ff7b72; font-weight:600; font-size:.95rem; }
+    .card-body { padding:1rem 1.25rem; }
+    table { color:#e6edf3 !important; font-size:.78rem; }
+    .table-dark { --bs-table-bg:#161b22; --bs-table-striped-bg:#1c2128;
+                   --bs-table-hover-bg:#21262d; }
+    .formula-box { background:#1c2128; border:1px solid #30363d; border-radius:6px;
+                    padding:1rem 1.5rem; margin:.5rem 0 1rem;
+                    font-size:1.05rem; color:#e6edf3 !important; }
+    .formula-box * { color:#e6edf3 !important; }
+    .interp-box { background:#0e3a1a; border-left:4px solid #3fb950;
+                   padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                   color:#e6edf3; margin-bottom:1rem; }
+    .warn-box  { background:#3a1e0e; border-left:4px solid #d29922;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .info-box  { background:#0e2a3a; border-left:4px solid #58a6ff;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .stat-card { background:#1c2128; border:1px solid #30363d; border-radius:8px;
+                  padding:1rem; text-align:center; }
+    .stat-card .val { font-size:1.6rem; font-weight:700; color:#ff7b72; }
+    .stat-card .lbl { font-size:.78rem; color:#8b949e; }
+    .badge-ph { background:#ff7b7233; color:#ff7b72; border:1px solid #ff7b7255;
+                 padding:.25rem .7rem; border-radius:12px; font-size:.8rem; }
+    .table-responsive { max-height:380px; overflow-y:auto; }
+    iframe { border:none; width:100%; border-radius:6px; }
+    h2,h3,h4 { color:#e6edf3; }
+    a { color:#ff7b72; } a:hover { color:#ff7b72cc; }
+    .breadcrumb-item.active { color:#8b949e; }
+    .slbl { font-size:.7rem; text-transform:uppercase; letter-spacing:.08em;
+             color:#8b949e; margin-bottom:.4rem; }
+  </style>
+</head>
+<body>
+<nav class="navbar" style="background:#010409;border-bottom:1px solid #30363d;padding:.7rem 1.5rem;">
+  <a class="navbar-brand fw-bold" style="color:#58a6ff;" href="index.html">
+    &#127748; Commodity Research Framework
+  </a>
+  <span class="badge-ph">Phase 8</span>
+</nav>
+<div class="container-xl py-4">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+      <li class="breadcrumb-item active">Phase 8 - Kointegration</li>
+    </ol>
+  </nav>
+  
+<div class="ph-header"><h1>Phase 8 - Kointegrationsanalyse</h1>
+  <div class="sub">Johansen (multivariat), Engle-Granger (paarweise), VECM-Implikationen</div>
+</div>
+<div class="row g-3 mb-4"><div class="col"><div class="stat-card"><div class="val">4</div><div class="lbl">Johansen Kointegrationsvektoren</div></div></div><div class="col"><div class="stat-card"><div class="val">29</div><div class="lbl">Kointegr. Paare (95%)</div></div></div><div class="col"><div class="stat-card"><div class="val">136</div><div class="lbl">Getestete Paare</div></div></div><div class="col"><div class="stat-card"><div class="val">21.3%</div><div class="lbl">Kointegr.-Rate</div></div></div></div>
+<div class="card mb-4">
+  <div class="card-header">Was bedeutet Kointegration?</div>
+  <div class="card-body">
+    <div class="formula-box"><div class="slbl">Kointegrationsgleichung: beide I(1), aber Linearkombination z_t stationaer -> gemeinsamer Trend</div>$$y_t = \alpha + \beta x_t + z_t, \quad z_t \sim I(0)$$</div>
+    <div class="info-box"><strong>&#8505; Info:</strong> Zwei I(1)-Zeitreihen sind kointegriert, wenn eine Linearkombination stationaer ist. Das impliziert einen gemeinsamen langfristigen Gleichgewichtspfad. Kurzfristige Abweichungen werden durch Error-Correction (VECM) korrigiert.</div>
+    <div class="formula-box"><div class="slbl">VECM: alpha_y ist Anpassungsgeschwindigkeit (wie schnell kehrt y zum Gleichgewicht zurueck?)</div>$$\Delta y_t = \alpha_y(y_{{t-1}}-\beta x_{{t-1}}) + \sum_{{i=1}}^{{p-1}}\Gamma_i\Delta Z_{{t-i}} + \varepsilon_t$$</div>
+    <div class="interp-box"><strong>&#128270; Interpretation:</strong> Negatives alpha: System kehrt nach Abweichung zum Gleichgewicht zurueck. Kointegration Rohstoff und Produzent -> Pairs-Trading-Moeglichkeit! Spread-Ausweitung ueber 2 Sigma: Long Underperformer, Short Outperformer.</div>
+  </div>
+</div>
+<div class="card mb-4"><div class="card-header">Johansen Trace-Test: Anzahl Kointegrationsvektoren</div><div class="card-body"><div>                            <div id="ffd7e195-7088-4f7f-91e4-1090fa2b94ec" class="plotly-graph-div" style="height:420px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("ffd7e195-7088-4f7f-91e4-1090fa2b94ec")) {                    Plotly.newPlot(                        "ffd7e195-7088-4f7f-91e4-1090fa2b94ec",                        [{"marker":{"color":"#58a6ff"},"name":"Trace-Statistik","x":["r\u003c=0","r\u003c=1","r\u003c=2","r\u003c=3","r\u003c=4","r\u003c=5","r\u003c=6","r\u003c=7","r\u003c=8"],"y":[299.625,198.969,149.479,101.147,66.819,39.412,20.452,10.102,0.193],"type":"bar"},{"line":{"color":"#f78166","dash":"dash","width":2},"mode":"lines+markers","name":"Kritisch 95%","x":["r\u003c=0","r\u003c=1","r\u003c=2","r\u003c=3","r\u003c=4","r\u003c=5","r\u003c=6","r\u003c=7","r\u003c=8"],"y":[197.377,159.529,125.618,95.754,69.819,47.854,29.796,15.494,3.842],"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"Johansen Trace-Test"},"yaxis":{"title":{"text":"Trace-Statistik"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"xaxis":{"title":{"text":"Nullhypothese"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"height":420,"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div>
+<div class="interp-box"><strong>&#128270; Interpretation:</strong> Balken ueber roter Linie: H0 (r<=k) wird abgelehnt. Anzahl Ablehnungen = Anzahl Kointegrationsvektoren im System.</div></div></div>
+<div class="card mb-4"><div class="card-header">Engle-Granger: Signifikante Kointegrations-Paare</div><div class="card-body"><div>                            <div id="6c3b6529-494c-4b68-9876-7c896ac8c60c" class="plotly-graph-div" style="height:480px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("6c3b6529-494c-4b68-9876-7c896ac8c60c")) {                    Plotly.newPlot(                        "6c3b6529-494c-4b68-9876-7c896ac8c60c",                        [{"hovertemplate":"%{x}\u003cbr\u003e-log10(p)=%{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#3fb950"},"x":["ZW=F -- ZS=F","CL=F -- ZS=F","CL=F -- ZW=F","ZC=F -- ZS=F","CL=F -- NG=F","CL=F -- BZ=F","ZC=F -- ZW=F","CL=F -- ZC=F","BZ=F -- ZC=F","BZ=F -- ZS=F","NG=F -- ZW=F","ZW=F -- FCX","BZ=F -- ZW=F","ZS=F -- FCX","CL=F -- FCX","CL=F -- SM","BZ=F -- NG=F","NG=F -- APA","SI=F -- HG=F","ZW=F -- TECK","CL=F -- TECK","NG=F -- ZS=F","CL=F -- CVX","CL=F -- XOM","ZS=F -- SM","ZW=F -- NEM","NG=F -- ZC=F","CL=F -- SI=F","ZW=F -- SM"],"y":[3.4122889227603066,3.37571780100651,3.3018993673436565,2.6445484607162495,2.5858626210797055,2.581036152745521,2.5630426534514106,2.5332806134910038,2.4979827715028975,2.362010209220045,2.282163124196443,2.186285601449714,2.1119890821344915,1.6014524025303227,1.5330582728003814,1.4810782767071349,1.4740098482468245,1.471096147576658,1.4660119903520463,1.4571994604454264,1.4209026723026685,1.4188471068944286,1.394285637284994,1.362850633525869,1.3608622806330177,1.3538512382904808,1.3417691243822987,1.3062466768392502,1.3013080322447315],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#d29922","dash":"dash"},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":1.3010299956639813,"y1":1.3010299956639813,"yref":"y"}],"annotations":[{"font":{"color":"#d29922"},"showarrow":false,"text":"p=0.05","x":1,"xanchor":"right","xref":"x domain","y":1.3010299956639813,"yanchor":"bottom","yref":"y"}],"xaxis":{"tickangle":-45,"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"title":{"text":"Kointegrationsstaerke: signifikante Paare (-log10 p)"},"yaxis":{"title":{"text":"-log10(p-Wert)"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"height":480,"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div>
+<div class="interp-box"><strong>&#128270; Interpretation:</strong> Hoehere Balken = niedrigerer p-Wert = staerkere Evidenz. Rohstoff-Futures untereinander (CL=F vs BZ=F) und Mega-Caps mit Sektor-ETF typisch stark.</div></div></div>
+<div class="card mb-4"><div class="card-header">Johansen Ergebnisse</div><div class="card-body"><div class="table-responsive"><table class="dataframe table table-dark table-striped table-sm table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>r_null</th>
+      <th>trace_stat</th>
+      <th>crit_90</th>
+      <th>crit_95</th>
+      <th>crit_99</th>
+      <th>reject_r_null_95</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>299.625</td>
+      <td>190.871</td>
+      <td>197.377</td>
+      <td>210.037</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>198.969</td>
+      <td>153.634</td>
+      <td>159.529</td>
+      <td>171.090</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>149.479</td>
+      <td>120.367</td>
+      <td>125.618</td>
+      <td>135.982</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>101.147</td>
+      <td>91.109</td>
+      <td>95.754</td>
+      <td>104.964</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>66.819</td>
+      <td>65.820</td>
+      <td>69.819</td>
+      <td>77.820</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>39.412</td>
+      <td>44.493</td>
+      <td>47.854</td>
+      <td>54.682</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>20.452</td>
+      <td>27.067</td>
+      <td>29.796</td>
+      <td>35.463</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>10.102</td>
+      <td>13.429</td>
+      <td>15.494</td>
+      <td>19.935</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>0.193</td>
+      <td>2.706</td>
+      <td>3.842</td>
+      <td>6.635</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table></div></div></div>
+<div class="card mb-4"><div class="card-header">Engle-Granger Paarweise</div><div class="card-body"><div class="table-responsive"><table class="dataframe table table-dark table-striped table-sm table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>asset1</th>
+      <th>asset2</th>
+      <th>EG_stat</th>
+      <th>pvalue</th>
+      <th>cointegrated_95</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CL=F</td>
+      <td>BZ=F</td>
+      <td>-4.2932</td>
+      <td>0.0026</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CL=F</td>
+      <td>NG=F</td>
+      <td>-4.2963</td>
+      <td>0.0026</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CL=F</td>
+      <td>GC=F</td>
+      <td>-3.2039</td>
+      <td>0.0693</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CL=F</td>
+      <td>SI=F</td>
+      <td>-3.3405</td>
+      <td>0.0494</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CL=F</td>
+      <td>HG=F</td>
+      <td>-3.2696</td>
+      <td>0.0590</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CL=F</td>
+      <td>ZC=F</td>
+      <td>-4.2624</td>
+      <td>0.0029</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CL=F</td>
+      <td>ZW=F</td>
+      <td>-4.7307</td>
+      <td>0.0005</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CL=F</td>
+      <td>ZS=F</td>
+      <td>-4.7729</td>
+      <td>0.0004</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CL=F</td>
+      <td>XOM</td>
+      <td>-3.3909</td>
+      <td>0.0434</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CL=F</td>
+      <td>CVX</td>
+      <td>-3.4185</td>
+      <td>0.0403</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>CL=F</td>
+      <td>FCX</td>
+      <td>-3.5364</td>
+      <td>0.0293</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>CL=F</td>
+      <td>NEM</td>
+      <td>-3.2392</td>
+      <td>0.0636</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>CL=F</td>
+      <td>APA</td>
+      <td>-2.8934</td>
+      <td>0.1378</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>CL=F</td>
+      <td>OXY</td>
+      <td>-2.8163</td>
+      <td>0.1606</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>CL=F</td>
+      <td>TECK</td>
+      <td>-3.4416</td>
+      <td>0.0379</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>CL=F</td>
+      <td>SM</td>
+      <td>-3.4929</td>
+      <td>0.0330</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>BZ=F</td>
+      <td>NG=F</td>
+      <td>-3.4869</td>
+      <td>0.0336</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>BZ=F</td>
+      <td>GC=F</td>
+      <td>-3.1333</td>
+      <td>0.0818</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>BZ=F</td>
+      <td>SI=F</td>
+      <td>-3.2082</td>
+      <td>0.0686</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>BZ=F</td>
+      <td>HG=F</td>
+      <td>-2.6895</td>
+      <td>0.2034</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>BZ=F</td>
+      <td>ZC=F</td>
+      <td>-4.2394</td>
+      <td>0.0032</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>BZ=F</td>
+      <td>ZW=F</td>
+      <td>-3.9776</td>
+      <td>0.0077</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>BZ=F</td>
+      <td>ZS=F</td>
+      <td>-4.1495</td>
+      <td>0.0043</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>BZ=F</td>
+      <td>XOM</td>
+      <td>-3.0421</td>
+      <td>0.1005</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>BZ=F</td>
+      <td>CVX</td>
+      <td>-3.0822</td>
+      <td>0.0919</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>BZ=F</td>
+      <td>FCX</td>
+      <td>-2.9565</td>
+      <td>0.1209</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>BZ=F</td>
+      <td>NEM</td>
+      <td>-3.1259</td>
+      <td>0.0832</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>BZ=F</td>
+      <td>APA</td>
+      <td>-2.6113</td>
+      <td>0.2323</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>BZ=F</td>
+      <td>OXY</td>
+      <td>-2.4613</td>
+      <td>0.2964</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>BZ=F</td>
+      <td>TECK</td>
+      <td>-2.8646</td>
+      <td>0.1460</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>BZ=F</td>
+      <td>SM</td>
+      <td>-2.9835</td>
+      <td>0.1142</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>NG=F</td>
+      <td>GC=F</td>
+      <td>-3.0362</td>
+      <td>0.1019</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>NG=F</td>
+      <td>SI=F</td>
+      <td>-3.0558</td>
+      <td>0.0975</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>NG=F</td>
+      <td>HG=F</td>
+      <td>-3.0513</td>
+      <td>0.0985</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>NG=F</td>
+      <td>ZC=F</td>
+      <td>-3.3723</td>
+      <td>0.0455</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>NG=F</td>
+      <td>ZW=F</td>
+      <td>-4.0956</td>
+      <td>0.0052</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>NG=F</td>
+      <td>ZS=F</td>
+      <td>-3.4398</td>
+      <td>0.0381</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>NG=F</td>
+      <td>XOM</td>
+      <td>-3.1247</td>
+      <td>0.0835</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>NG=F</td>
+      <td>CVX</td>
+      <td>-3.1412</td>
+      <td>0.0803</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>NG=F</td>
+      <td>FCX</td>
+      <td>-3.1819</td>
+      <td>0.0730</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>NG=F</td>
+      <td>NEM</td>
+      <td>-3.0852</td>
+      <td>0.0913</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>NG=F</td>
+      <td>APA</td>
+      <td>-3.4845</td>
+      <td>0.0338</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>NG=F</td>
+      <td>OXY</td>
+      <td>-3.1226</td>
+      <td>0.0838</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>NG=F</td>
+      <td>TECK</td>
+      <td>-3.0784</td>
+      <td>0.0927</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>NG=F</td>
+      <td>SM</td>
+      <td>-3.3019</td>
+      <td>0.0545</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>GC=F</td>
+      <td>SI=F</td>
+      <td>-2.2116</td>
+      <td>0.4184</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>GC=F</td>
+      <td>HG=F</td>
+      <td>-3.1210</td>
+      <td>0.0842</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>GC=F</td>
+      <td>ZC=F</td>
+      <td>-0.3187</td>
+      <td>0.9750</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>GC=F</td>
+      <td>ZW=F</td>
+      <td>-0.2402</td>
+      <td>0.9785</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>GC=F</td>
+      <td>ZS=F</td>
+      <td>-0.2846</td>
+      <td>0.9766</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>GC=F</td>
+      <td>XOM</td>
+      <td>-2.5278</td>
+      <td>0.2669</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>GC=F</td>
+      <td>CVX</td>
+      <td>-2.2019</td>
+      <td>0.4234</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>GC=F</td>
+      <td>FCX</td>
+      <td>-2.0656</td>
+      <td>0.4944</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>GC=F</td>
+      <td>NEM</td>
+      <td>-2.5525</td>
+      <td>0.2564</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>GC=F</td>
+      <td>APA</td>
+      <td>-0.7483</td>
+      <td>0.9412</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>GC=F</td>
+      <td>OXY</td>
+      <td>-0.1704</td>
+      <td>0.9811</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>GC=F</td>
+      <td>TECK</td>
+      <td>-2.3136</td>
+      <td>0.3668</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>GC=F</td>
+      <td>SM</td>
+      <td>-0.1269</td>
+      <td>0.9825</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>SI=F</td>
+      <td>HG=F</td>
+      <td>-3.4801</td>
+      <td>0.0342</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>SI=F</td>
+      <td>ZC=F</td>
+      <td>-1.3851</td>
+      <td>0.8026</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table></div></div></div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

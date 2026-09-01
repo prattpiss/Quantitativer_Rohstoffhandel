@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.plot.ly/plotly-4.0.0.min.js"></script>
+  <script>
+    MathJax = {
+      tex: { inlineMath:[['$','$'],['\\(','\\)']] },
+      options: { skipHtmlTags:['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { background:#0d1117; color:#e6edf3; font-family:'Segoe UI',Arial,sans-serif; }
+    mjx-container, mjx-container * { color:#e6edf3 !important; fill:#e6edf3 !important; }
+    mjx-container svg path { fill:#e6edf3 !important; }
+    .ph-header { background:#d2a8ff22; border-left:5px solid #d2a8ff;
+                  padding:1.5rem 2rem; border-radius:8px; margin-bottom:2rem; }
+    .ph-header h1 { color:#d2a8ff; font-size:1.8rem; margin:0; }
+    .ph-header .sub { color:#8b949e; font-size:.95rem; margin-top:.4rem; }
+    .card { background:#161b22; border:1px solid #30363d; border-radius:8px; }
+    .card-header { background:#d2a8ff18; border-bottom:1px solid #30363d;
+                    color:#d2a8ff; font-weight:600; font-size:.95rem; }
+    .card-body { padding:1rem 1.25rem; }
+    table { color:#e6edf3 !important; font-size:.78rem; }
+    .table-dark { --bs-table-bg:#161b22; --bs-table-striped-bg:#1c2128;
+                   --bs-table-hover-bg:#21262d; }
+    .formula-box { background:#1c2128; border:1px solid #30363d; border-radius:6px;
+                    padding:1rem 1.5rem; margin:.5rem 0 1rem;
+                    font-size:1.05rem; color:#e6edf3 !important; }
+    .formula-box * { color:#e6edf3 !important; }
+    .interp-box { background:#0e3a1a; border-left:4px solid #3fb950;
+                   padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                   color:#e6edf3; margin-bottom:1rem; }
+    .warn-box  { background:#3a1e0e; border-left:4px solid #d29922;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .info-box  { background:#0e2a3a; border-left:4px solid #58a6ff;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .hypo-box  { background:#241a3a; border-left:4px solid #bc8cff;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .stat-card { background:#1c2128; border:1px solid #30363d; border-radius:8px;
+                  padding:1rem; text-align:center; height:100%; }
+    .stat-card .val { font-size:1.5rem; font-weight:700; color:#d2a8ff; }
+    .stat-card .lbl { font-size:.75rem; color:#8b949e; }
+    .badge-ph { background:#d2a8ff33; color:#d2a8ff; border:1px solid #d2a8ff55;
+                 padding:.25rem .7rem; border-radius:12px; font-size:.8rem; }
+    .table-responsive { max-height:420px; overflow-y:auto; }
+    h2,h3,h4 { color:#e6edf3; }
+    a { color:#d2a8ff; } a:hover { color:#d2a8ffcc; }
+    .breadcrumb-item.active { color:#8b949e; }
+    .slbl { font-size:.7rem; text-transform:uppercase; letter-spacing:.08em;
+             color:#8b949e; margin-bottom:.4rem; }
+    .accordion-item { background:#161b22; border:1px solid #30363d; }
+    .accordion-button { background:#1c2128; color:#e6edf3; font-weight:600; }
+    .accordion-button:not(.collapsed) { background:#d2a8ff22; color:#d2a8ff; }
+    .accordion-button::after { filter:invert(1); }
+    .accordion-body { background:#161b22; color:#e6edf3; }
+    .nav-tabs .nav-link { color:#8b949e; }
+    .nav-tabs .nav-link.active { background:#161b22; color:#d2a8ff;
+                                  border-color:#30363d #30363d #161b22; }
+  </style>
+</head>
+<body>
+<nav class="navbar" style="background:#010409;border-bottom:1px solid #30363d;padding:.7rem 1.5rem;">
+  <a class="navbar-brand fw-bold" style="color:#58a6ff;" href="index.html">
+    &#9992; Commodity &amp; Airline Research — Strategy Lab
+  </a>
+  <span class="badge-ph">Phase 24</span>
+</nav>
+<div class="container-xl py-4">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+      <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
+  </nav>
+  <div class="ph-header"><h1>Strategy Lab — Commodity &amp; Airline Research</h1><div class="sub">Sektor-Rotation · Pandemie- und Kriegsrisiko · Flash-Crash-Optimierung &nbsp;|&nbsp; Stand: 2026-09-01</div></div><div class="row g-3 mb-4"><div class="col"><div class="stat-card"><div class="val">2015-04-30 – 2026-09-01</div><div class="lbl">Untersuchungszeitraum</div></div></div><div class="col"><div class="stat-card"><div class="val">2856</div><div class="lbl">Handelstage</div></div></div><div class="col"><div class="stat-card"><div class="val">0.55</div><div class="lbl">Baseline Sharpe</div></div></div><div class="col"><div class="stat-card"><div class="val">7.96%</div><div class="lbl">Ann. Return</div></div></div><div class="col"><div class="stat-card"><div class="val">-34.51%</div><div class="lbl">Max Drawdown</div></div></div><div class="col"><div class="stat-card"><div class="val">145</div><div class="lbl">Trades</div></div></div></div><div class="info-box"><strong>&#8505; Was &amp; Warum:</strong> Alle Reports bauen auf derselben validierten Baseline auf: Long JETS, wenn das 20-Tage-Mittel des Energie-Basket-Returns negativ ist und der VIX unter 25 liegt, abgesichert mit einem 8-%-Stop-Loss. Die Herleitung und die Abweichung zur ursprünglichen Dokumentation stehen in Report 00.</div><div class="row g-4 mb-4">
+<div class="col-md-6">
+  <a href="r00_baseline_reproduction.html" style="text-decoration:none;">
+    <div class="card h-100" style="border-left:4px solid #58a6ff;">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <h5 style="color:#58a6ff;margin:0;">Baseline-Reproduktion &amp; Diagnose</h5>
+          <span class="badge" style="background:#58a6ff33;color:#58a6ff;">
+            Report 00</span>
+        </div>
+        <p class="small" style="color:#8b949e;">Wörtliche Umsetzung der dokumentierten JETS-Strategie, Abgleich mit den Sollkennzahlen, Ursachenanalyse der Abweichung und Festlegung der validierten Arbeits-Baseline.</p>
+        <div><span class="badge rounded-pill me-1 mb-1" style="background:#58a6ff22;color:#58a6ff;border:1px solid #58a6ff55;font-weight:500;">ADF/KPSS</span><span class="badge rounded-pill me-1 mb-1" style="background:#58a6ff22;color:#58a6ff;border:1px solid #58a6ff55;font-weight:500;">Block-Bootstrap</span><span class="badge rounded-pill me-1 mb-1" style="background:#58a6ff22;color:#58a6ff;border:1px solid #58a6ff55;font-weight:500;">Parameter-Sensitivität</span><span class="badge rounded-pill me-1 mb-1" style="background:#58a6ff22;color:#58a6ff;border:1px solid #58a6ff55;font-weight:500;">Lag-Korrelation</span></div>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="col-md-6">
+  <a href="r41_sector_rotation_deep.html" style="text-decoration:none;">
+    <div class="card h-100" style="border-left:4px solid #7ee787;">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <h5 style="color:#7ee787;margin:0;">Sektor-Rotation Deep Dive</h5>
+          <span class="badge" style="background:#7ee78733;color:#7ee787;">
+            Report 41</span>
+        </div>
+        <p class="small" style="color:#8b949e;">Welche Sektoren führen JETS, wie verändert sich die Korrelationsstruktur in Krisen, und lohnt sich ein Rotations-Overlay?</p>
+        <div><span class="badge rounded-pill me-1 mb-1" style="background:#7ee78722;color:#7ee787;border:1px solid #7ee78755;font-weight:500;">Granger + Bonferroni/BH</span><span class="badge rounded-pill me-1 mb-1" style="background:#7ee78722;color:#7ee787;border:1px solid #7ee78755;font-weight:500;">DCC-Approximation</span><span class="badge rounded-pill me-1 mb-1" style="background:#7ee78722;color:#7ee787;border:1px solid #7ee78755;font-weight:500;">PCA (SVD)</span><span class="badge rounded-pill me-1 mb-1" style="background:#7ee78722;color:#7ee787;border:1px solid #7ee78755;font-weight:500;">Regime-Korrelation</span><span class="badge rounded-pill me-1 mb-1" style="background:#7ee78722;color:#7ee787;border:1px solid #7ee78755;font-weight:500;">Materials-Split</span></div>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="col-md-6">
+  <a href="r42_pandemic_war_monitor.html" style="text-decoration:none;">
+    <div class="card h-100" style="border-left:4px solid #ffa657;">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <h5 style="color:#ffa657;margin:0;">Pandemie- &amp; Kriegs-Frühwarnsystem</h5>
+          <span class="badge" style="background:#ffa65733;color:#ffa657;">
+            Report 42</span>
+        </div>
+        <p class="small" style="color:#8b949e;">Marktbasierte Proxy-Indizes für Pandemie- und Konfliktrisiko, validiert an historischen Ereignissen, integriert als abgestufte Hedge-Schicht.</p>
+        <div><span class="badge rounded-pill me-1 mb-1" style="background:#ffa65722;color:#ffa657;border:1px solid #ffa65755;font-weight:500;">ROC / Precision-Recall</span><span class="badge rounded-pill me-1 mb-1" style="background:#ffa65722;color:#ffa657;border:1px solid #ffa65755;font-weight:500;">Youden-Index</span><span class="badge rounded-pill me-1 mb-1" style="background:#ffa65722;color:#ffa657;border:1px solid #ffa65755;font-weight:500;">CUSUM</span><span class="badge rounded-pill me-1 mb-1" style="background:#ffa65722;color:#ffa657;border:1px solid #ffa65755;font-weight:500;">Extremwerttheorie</span><span class="badge rounded-pill me-1 mb-1" style="background:#ffa65722;color:#ffa657;border:1px solid #ffa65755;font-weight:500;">Kosten-Nutzen</span></div>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="col-md-6">
+  <a href="r43_flash_crash_optimization.html" style="text-decoration:none;">
+    <div class="card h-100" style="border-left:4px solid #ff7b72;">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <h5 style="color:#ff7b72;margin:0;">Flash-Crash-Optimierung</h5>
+          <span class="badge" style="background:#ff7b7233;color:#ff7b72;">
+            Report 43</span>
+        </div>
+        <p class="small" style="color:#8b949e;">Walk-Forward-Optimierung der CSI-Schwelle und -Gewichte, stetige Positionsgrößensteuerung sowie Synergieprüfung von CSI, CPI und geopolitischem Risiko.</p>
+        <div><span class="badge rounded-pill me-1 mb-1" style="background:#ff7b7222;color:#ff7b72;border:1px solid #ff7b7255;font-weight:500;">Walk-Forward</span><span class="badge rounded-pill me-1 mb-1" style="background:#ff7b7222;color:#ff7b72;border:1px solid #ff7b7255;font-weight:500;">Simplex-Zufallssuche</span><span class="badge rounded-pill me-1 mb-1" style="background:#ff7b7222;color:#ff7b72;border:1px solid #ff7b7255;font-weight:500;">Kaplan-Meier</span><span class="badge rounded-pill me-1 mb-1" style="background:#ff7b7222;color:#ff7b72;border:1px solid #ff7b7255;font-weight:500;">Positionsgrößen-Skalierung</span></div>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="col-md-6">
+  <a href="r44_structures_grid.html" style="text-decoration:none;">
+    <div class="card h-100" style="border-left:4px solid #d2a8ff;">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <h5 style="color:#d2a8ff;margin:0;">Strukturvarianten, Kombinationen &amp; Parameter-Grid</h5>
+          <span class="badge" style="background:#d2a8ff33;color:#d2a8ff;">
+            Report 44</span>
+        </div>
+        <p class="small" style="color:#8b949e;">Korrelationsabhängigkeit, Long/Short, Pair und Spread, die 16 Signalkombinationen samt adaptiver Umschaltung sowie ein vollständiges Kreuzprodukt aus Stop-Logik, Sizing und Transaktionskosten — je getrennt für IS, OOS und IS+OOS.</p>
+        <div><span class="badge rounded-pill me-1 mb-1" style="background:#d2a8ff22;color:#d2a8ff;border:1px solid #d2a8ff55;font-weight:500;">IS / OOS / IS+OOS</span><span class="badge rounded-pill me-1 mb-1" style="background:#d2a8ff22;color:#d2a8ff;border:1px solid #d2a8ff55;font-weight:500;">1 152 Simulationen</span><span class="badge rounded-pill me-1 mb-1" style="background:#d2a8ff22;color:#d2a8ff;border:1px solid #d2a8ff55;font-weight:500;">Pair &amp; Spread</span><span class="badge rounded-pill me-1 mb-1" style="background:#d2a8ff22;color:#d2a8ff;border:1px solid #d2a8ff55;font-weight:500;">Adaptive Umschaltung</span><span class="badge rounded-pill me-1 mb-1" style="background:#d2a8ff22;color:#d2a8ff;border:1px solid #d2a8ff55;font-weight:500;">Kostenkurve</span><span class="badge rounded-pill me-1 mb-1" style="background:#d2a8ff22;color:#d2a8ff;border:1px solid #d2a8ff55;font-weight:500;">Data-Snooping-Schranke</span></div>
+      </div>
+    </div>
+  </a>
+</div></div><div class="card mb-4"><div class="card-header">Methodische Leitplanken</div><div class="card-body">
+<ul class="small">
+  <li><strong>Stationarität zuerst:</strong> Vor jedem linearen Modell werden ADF und KPSS
+      berichtet — mit Teststatistik, p-Wert, kritischem Wert und Schlussfolgerung.</li>
+  <li><strong>Mehrfachtests:</strong> Jede Testfamilie wird Bonferroni- bzw. FDR-korrigiert;
+      die korrigierte Schranke steht jeweils im Abschnitt.</li>
+  <li><strong>Konfidenzintervalle:</strong> Performance-Kennzahlen erhalten stationäre
+      Block-Bootstrap-Intervalle (N = 1000, Blocklänge 21 Tage); Vergleiche zweier
+      Strategien nutzen einen gepaarten Bootstrap auf der Sharpe-Differenz.</li>
+  <li><strong>Look-Ahead-Freiheit:</strong> Alle Standardisierungen und Perzentilränge sind
+      rollierend; Signale wirken frühestens auf die Rendite des Folgetages.</li>
+  <li><strong>Reproduzierbarkeit:</strong> Fester Zufallskeim (42), lokaler Datencache unter
+      <code>data_cache/</code>, Neuaufbau über <code>python build_all.py</code>.</li>
+</ul>
+</div></div><div class="warn-box"><strong>&#9888; Unsicherheit / Vorbehalt:</strong> Die gemeinsame Datengrundlage beginnt mit der JETS-Auflegung im April 2015. Alle Aussagen beruhen auf gut zehn Jahren Historie mit einer einstelligen Zahl echter Krisenereignisse — Punktschätzer sind daher durchgängig mit breiten Konfidenzintervallen zu lesen.</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

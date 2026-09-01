@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Phase 13 - Netzwerkanalyse</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script>
+    MathJax = {
+      tex: { inlineMath:[['$','$'],['\\(','\\)']] },
+      options: { skipHtmlTags:['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { background:#0d1117; color:#e6edf3; font-family:'Segoe UI',Arial,sans-serif; }
+    mjx-container, mjx-container * { color:#e6edf3 !important; fill:#e6edf3 !important; }
+    mjx-container svg path { fill:#e6edf3 !important; }
+    .MathJax { color:#e6edf3 !important; }
+    .ph-header { background:#ff9fef22; border-left:5px solid #ff9fef;
+                  padding:1.5rem 2rem; border-radius:8px; margin-bottom:2rem; }
+    .ph-header h1 { color:#ff9fef; font-size:1.8rem; margin:0; }
+    .ph-header .sub { color:#8b949e; font-size:.95rem; margin-top:.4rem; }
+    .card { background:#161b22; border:1px solid #30363d; border-radius:8px; }
+    .card-header { background:#ff9fef18; border-bottom:1px solid #30363d;
+                    color:#ff9fef; font-weight:600; font-size:.95rem; }
+    .card-body { padding:1rem 1.25rem; }
+    table { color:#e6edf3 !important; font-size:.78rem; }
+    .table-dark { --bs-table-bg:#161b22; --bs-table-striped-bg:#1c2128;
+                   --bs-table-hover-bg:#21262d; }
+    .formula-box { background:#1c2128; border:1px solid #30363d; border-radius:6px;
+                    padding:1rem 1.5rem; margin:.5rem 0 1rem;
+                    font-size:1.05rem; color:#e6edf3 !important; }
+    .formula-box * { color:#e6edf3 !important; }
+    .interp-box { background:#0e3a1a; border-left:4px solid #3fb950;
+                   padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                   color:#e6edf3; margin-bottom:1rem; }
+    .warn-box  { background:#3a1e0e; border-left:4px solid #d29922;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .info-box  { background:#0e2a3a; border-left:4px solid #58a6ff;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .stat-card { background:#1c2128; border:1px solid #30363d; border-radius:8px;
+                  padding:1rem; text-align:center; }
+    .stat-card .val { font-size:1.6rem; font-weight:700; color:#ff9fef; }
+    .stat-card .lbl { font-size:.78rem; color:#8b949e; }
+    .badge-ph { background:#ff9fef33; color:#ff9fef; border:1px solid #ff9fef55;
+                 padding:.25rem .7rem; border-radius:12px; font-size:.8rem; }
+    .table-responsive { max-height:380px; overflow-y:auto; }
+    iframe { border:none; width:100%; border-radius:6px; }
+    h2,h3,h4 { color:#e6edf3; }
+    a { color:#ff9fef; } a:hover { color:#ff9fefcc; }
+    .breadcrumb-item.active { color:#8b949e; }
+    .slbl { font-size:.7rem; text-transform:uppercase; letter-spacing:.08em;
+             color:#8b949e; margin-bottom:.4rem; }
+  </style>
+</head>
+<body>
+<nav class="navbar" style="background:#010409;border-bottom:1px solid #30363d;padding:.7rem 1.5rem;">
+  <a class="navbar-brand fw-bold" style="color:#58a6ff;" href="index.html">
+    &#127748; Commodity Research Framework
+  </a>
+  <span class="badge-ph">Phase 13</span>
+</nav>
+<div class="container-xl py-4">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+      <li class="breadcrumb-item active">Phase 13 - Netzwerkanalyse</li>
+    </ol>
+  </nav>
+  
+<div class="ph-header"><h1>Phase 13 - Netzwerkanalyse: Informationsfluss</h1>
+  <div class="sub">Gerichtetes Granger-Netzwerk, PageRank, Betweenness Centrality</div>
+</div>
+<div class="card mb-4">
+  <div class="card-header">&#128269; Wie liest man das Netzwerkdiagramm?</div>
+  <div class="card-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <h5 style="color:#58a6ff;">Knoten (Nodes)</h5>
+        <ul style="color:#e6edf3;font-size:.9rem;">
+          <li><strong>Groesse</strong> = PageRank: groessere Knoten sind wichtiger/zentraler</li>
+          <li><strong>Farbe</strong> = Sektor (Gelb=Energie, Lila=Metall, Gruen=Agrar, Blau=Markt)</li>
+          <li><strong>Position</strong> = hierarchisches Layout nach Proximity Level (oben=Rohstoff)</li>
+        </ul>
+        <h5 style="color:#3fb950;" class="mt-3">Kanten (Edges)</h5>
+        <ul style="color:#e6edf3;font-size:.9rem;">
+          <li><strong>Pfeilrichtung</strong> = A->B: A Granger-verursacht B (A fuehrt B zeitlich)</li>
+          <li><strong>Dicke</strong> = Staerke der Granger-Kausalitaet (F-Statistik)</li>
+          <li><strong>Farbe</strong> = p-Wert (dunkelgruen=hoch signifikant)</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h5 style="color:#d29922;">Metriken erklaert</h5>
+        <table class="table table-dark table-sm">
+          <thead><tr><th>Metrik</th><th>Bedeutung</th></tr></thead>
+          <tbody>
+            <tr><td>PageRank hoch</td><td>Empfaengt Infos von vielen wichtigen Quellen</td></tr>
+            <tr><td>Out-Degree hoch</td><td>Informations-Sender (Rohstoff-Futures)</td></tr>
+            <tr><td>In-Degree hoch</td><td>Informations-Empfaenger (Small Caps)</td></tr>
+            <tr><td>Betweenness</td><td>Liegt auf vielen kuerzesten Infopfaden</td></tr>
+          </tbody>
+        </table>
+        <div class="warn-box"><strong>&#9888; Hinweis:</strong> Granger-Kausalitaet != echte Kausalitaet. X hilft Y vorherzusagen (praediktive Vorlaeuferschaft). Kein kausaler Mechanismus bewiesen!</div>
+      </div>
+    </div>
+    <div class="formula-box"><div class="slbl">Netzwerk: Knoten=Assets, Kante=signifikante Granger-Beziehung (5%-Niveau)</div>$$G=(V,E), \quad E=\{(i\to j): p_{{Granger}}(i\to j)<0{,}05\}$$</div>
+    <div class="formula-box"><div class="slbl">PageRank: iterativer Algorithmus - wichtige Sender geben Empfaengern Bedeutung</div>$$\text{{PR}}(v)=\frac{{1-d}}{{N}}+d\sum_{{u\in\text{{In}}(v)}}\frac{{\text{{PR}}(u)}}{{\text{{out}}(u)}},\quad d=0{,}85$$</div>
+  </div>
+</div>
+<div class="row g-3 mb-4"><div class="col"><div class="stat-card"><div class="val">34</div><div class="lbl">Knoten</div></div></div><div class="col"><div class="stat-card"><div class="val">17</div><div class="lbl">Gerichtete Kanten</div></div></div><div class="col"><div class="stat-card"><div class="val">1,5%</div><div class="lbl">Netzwerkdichte</div></div></div><div class="col"><div class="stat-card"><div class="val">DAG (gerichtet, azyklisch)</div><div class="lbl">Typ</div></div></div><div class="col"><div class="stat-card"><div class="val">Granger + PageRank</div><div class="lbl">Algorithmus</div></div></div></div>
+<div class="card mb-4"><div class="card-header">PageRank-Ranking: Wichtigste Knoten (Farbe=Sektor)</div><div class="card-body"><div>                            <div id="1d14f2d6-7b63-4fd6-a5a0-f88560bb444c" class="plotly-graph-div" style="height:560px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("1d14f2d6-7b63-4fd6-a5a0-f88560bb444c")) {                    Plotly.newPlot(                        "1d14f2d6-7b63-4fd6-a5a0-f88560bb444c",                        [{"hovertemplate":"%{y}: PageRank=%{x:.4f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#3fb950","#8b949e","#8b949e","#8b949e","#8b949e","#8b949e","#bc8cff","#8b949e","#bc8cff","#3fb950","#d29922","#3fb950","#d29922","#bc8cff","#d29922","#8b949e","#8b949e","#bc8cff","#bc8cff","#d29922","#bc8cff","#bc8cff","#ffa657","#ffa657","#bc8cff","#d29922","#58a6ff","#bc8cff","#d29922","#bc8cff","#d29922","#d29922","#bc8cff","#d29922"]},"orientation":"h","x":[0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0286943933823529,0.0294073919542875,0.0295004399773474,0.0295441765522382,0.0296181283242895,0.029633282123477,0.0296402430149737,0.029830219912105,0.0298561846533958,0.0299036172768689,0.0299347256857702,0.0299564399711913,0.0300157923513424,0.0300996618537562,0.0301206369294609,0.0303554592160577,0.0304885477654261,0.0342903649380113],"y":["ZS=F","^VIX","IJH","MGC","QQQ","SPY","GC=F","IWM","SI=F","ZC=F","NG=F","ZW=F","BZ=F","HG=F","CL=F","DX-Y.NYB","^TNX","SIL","GDX","XLE","FCX","XLB","IYT","JETS","NEM","OXY","XLI","TGB","XOM","GORO","APA","CVX","TECK","SM"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"PageRank"},"xaxis":{"title":{"text":"PageRank"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"height":560,"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"yaxis":{"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div>
+<div class="interp-box"><strong>&#128270; Interpretation:</strong> Small-Cap-Produzenten (SM Energy) haben hoechsten PageRank: empfangen Informationen von vielen Quellen. Rohstoff-Futures haben niedrigen PageRank: sie sind Sender, nicht Empfaenger.</div></div></div>
+<div class="card mb-4"><div class="card-header">In-Degree vs Out-Degree (Groesse=PageRank, Farbe=Sektor)</div><div class="card-body"><div>                            <div id="3b3fcf7b-6699-4813-bfdf-397a3aacc1b9" class="plotly-graph-div" style="height:420px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("3b3fcf7b-6699-4813-bfdf-397a3aacc1b9")) {                    Plotly.newPlot(                        "3b3fcf7b-6699-4813-bfdf-397a3aacc1b9",                        [{"hovertemplate":"\u003cb\u003e%{text}\u003c\u002fb\u003e\u003cbr\u003eIn: %{x:.2f}\u003cbr\u003eOut: %{y:.2f}\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#d29922","#bc8cff","#d29922","#d29922","#bc8cff","#d29922","#bc8cff","#58a6ff","#d29922","#bc8cff","#ffa657","#ffa657","#bc8cff","#bc8cff","#d29922","#bc8cff","#bc8cff","#d29922","#d29922","#bc8cff","#bc8cff","#d29922","#3fb950","#3fb950","#3fb950","#bc8cff","#8b949e","#8b949e","#8b949e","#8b949e","#8b949e","#8b949e","#8b949e","#8b949e"],"line":{"color":"#30363d","width":1},"size":[40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0,40.0]},"mode":"markers+text","text":["SM","TECK","CVX","APA","GORO","XOM","TGB","XLI","OXY","NEM","JETS","IYT","XLB","FCX","XLE","GDX","SIL","CL=F","BZ=F","HG=F","SI=F","NG=F","ZW=F","ZC=F","ZS=F","GC=F","SPY","QQQ","IWM","IJH","MGC","^VIX","DX-Y.NYB","^TNX"],"textfont":{"color":"#e6edf3","size":8},"textposition":"top center","x":[18.1685,5.8251,5.393,4.6306,4.5625,4.2902,4.0975,4.027,3.926,3.772,3.6877,3.0709,3.0483,2.9991,2.759,2.617,2.3149,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"y":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,79.1893,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"title":{"text":"In-Degree vs Out-Degree"},"xaxis":{"title":{"text":"In-Degree"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"yaxis":{"title":{"text":"Out-Degree"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"height":420,"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div>
+<div class="interp-box"><strong>&#128270; Interpretation:</strong> Links oben: reine Empfaenger (hoher In, kein Out). Rechts unten: reine Sender (Rohstoffe). Diagonale: bidirektionale Beziehungen. DAG-Struktur: keine zirkulaeren Pfade gefunden.</div></div></div>
+<div class="card mb-4"><div class="card-header">Interaktives Netzwerk</div><div class="card-body"><iframe src="../figures/network_information_flow_network.html" height="700"></iframe></div></div>
+<div class="card mb-4">
+  <div class="card-header">Informationsfluss-Interpretation</div>
+  <div class="card-body">
+    <div class="interp-box"><strong>&#128270; Interpretation:</strong> Ebene 0 (Rohstoffe): CL=F, GC=F senden Granger-Kanten zu ETFs und Produzenten.<br>Ebene 1 (ETFs): XLE empfaengt von Rohstoffen, sendet an Mega-Caps.<br>Ebene 2-4 (Produzenten): Mega-Caps reagieren schneller als Small-Caps.<br>DAG-Eigenschaft: keine zirkulaeren Pfade -> klare Informationsrichtung.<br>Trading-Implikation: Rohstoff-Signal -> mit Lag 1-3 Tage Produzenten-Signal erwartet.</div>
+  </div>
+</div>
+<div class="card mb-4"><div class="card-header">Netzwerk-Metriken Tabelle</div><div class="card-body"><div class="table-responsive"><table class="dataframe table table-dark table-striped table-sm table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>sector</th>
+      <th>cap_tier</th>
+      <th>proximity_level</th>
+      <th>in_degree</th>
+      <th>out_degree</th>
+      <th>net_flow</th>
+      <th>betweenness</th>
+      <th>pagerank</th>
+    </tr>
+    <tr>
+      <th>ticker</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SM</th>
+      <td>SM Energy</td>
+      <td>Energy</td>
+      <td>small</td>
+      <td>1</td>
+      <td>18.1685</td>
+      <td>0.0000</td>
+      <td>-18.1685</td>
+      <td>0.0</td>
+      <td>0.0343</td>
+    </tr>
+    <tr>
+      <th>TECK</th>
+      <td>Teck Resources</td>
+      <td>Metals</td>
+      <td>mid</td>
+      <td>1</td>
+      <td>5.8251</td>
+      <td>0.0000</td>
+      <td>-5.8251</td>
+      <td>0.0</td>
+      <td>0.0305</td>
+    </tr>
+    <tr>
+      <th>CVX</th>
+      <td>Chevron</td>
+      <td>Energy</td>
+      <td>mega</td>
+      <td>1</td>
+      <td>5.3930</td>
+      <td>0.0000</td>
+      <td>-5.3930</td>
+      <td>0.0</td>
+      <td>0.0304</td>
+    </tr>
+    <tr>
+      <th>APA</th>
+      <td>APA Corp</td>
+      <td>Energy</td>
+      <td>mid</td>
+      <td>1</td>
+      <td>4.6306</td>
+      <td>0.0000</td>
+      <td>-4.6306</td>
+      <td>0.0</td>
+      <td>0.0301</td>
+    </tr>
+    <tr>
+      <th>GORO</th>
+      <td>Gold Resource Corp</td>
+      <td>Metals</td>
+      <td>small</td>
+      <td>1</td>
+      <td>4.5625</td>
+      <td>0.0000</td>
+      <td>-4.5625</td>
+      <td>0.0</td>
+      <td>0.0301</td>
+    </tr>
+    <tr>
+      <th>XOM</th>
+      <td>Exxon Mobil</td>
+      <td>Energy</td>
+      <td>mega</td>
+      <td>1</td>
+      <td>4.2902</td>
+      <td>0.0000</td>
+      <td>-4.2902</td>
+      <td>0.0</td>
+      <td>0.0300</td>
+    </tr>
+    <tr>
+      <th>TGB</th>
+      <td>Taseko Mines</td>
+      <td>Metals</td>
+      <td>small</td>
+      <td>1</td>
+      <td>4.0975</td>
+      <td>0.0000</td>
+      <td>-4.0975</td>
+      <td>0.0</td>
+      <td>0.0300</td>
+    </tr>
+    <tr>
+      <th>XLI</th>
+      <td>Industrial Select Sector SPDR</td>
+      <td>Industrials</td>
+      <td>NaN</td>
+      <td>4</td>
+      <td>4.0270</td>
+      <td>0.0000</td>
+      <td>-4.0270</td>
+      <td>0.0</td>
+      <td>0.0299</td>
+    </tr>
+    <tr>
+      <th>OXY</th>
+      <td>Occidental Petroleum</td>
+      <td>Energy</td>
+      <td>mid</td>
+      <td>1</td>
+      <td>3.9260</td>
+      <td>0.0000</td>
+      <td>-3.9260</td>
+      <td>0.0</td>
+      <td>0.0299</td>
+    </tr>
+    <tr>
+      <th>NEM</th>
+      <td>Newmont</td>
+      <td>Metals</td>
+      <td>mega</td>
+      <td>1</td>
+      <td>3.7720</td>
+      <td>0.0000</td>
+      <td>-3.7720</td>
+      <td>0.0</td>
+      <td>0.0299</td>
+    </tr>
+    <tr>
+      <th>JETS</th>
+      <td>US Global Jets ETF</td>
+      <td>Aviation</td>
+      <td>NaN</td>
+      <td>5</td>
+      <td>3.6877</td>
+      <td>0.0000</td>
+      <td>-3.6877</td>
+      <td>0.0</td>
+      <td>0.0298</td>
+    </tr>
+    <tr>
+      <th>IYT</th>
+      <td>iShares Transportation Average ETF</td>
+      <td>Transportation</td>
+      <td>NaN</td>
+      <td>4</td>
+      <td>3.0709</td>
+      <td>0.0000</td>
+      <td>-3.0709</td>
+      <td>0.0</td>
+      <td>0.0296</td>
+    </tr>
+    <tr>
+      <th>XLB</th>
+      <td>Materials Select Sector SPDR</td>
+      <td>Materials</td>
+      <td>NaN</td>
+      <td>2</td>
+      <td>3.0483</td>
+      <td>0.0000</td>
+      <td>-3.0483</td>
+      <td>0.0</td>
+      <td>0.0296</td>
+    </tr>
+    <tr>
+      <th>FCX</th>
+      <td>Freeport-McMoRan</td>
+      <td>Metals</td>
+      <td>mega</td>
+      <td>1</td>
+      <td>2.9991</td>
+      <td>0.0000</td>
+      <td>-2.9991</td>
+      <td>0.0</td>
+      <td>0.0296</td>
+    </tr>
+    <tr>
+      <th>XLE</th>
+      <td>Energy Select Sector SPDR</td>
+      <td>Energy</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2.7590</td>
+      <td>0.0000</td>
+      <td>-2.7590</td>
+      <td>0.0</td>
+      <td>0.0295</td>
+    </tr>
+    <tr>
+      <th>GDX</th>
+      <td>VanEck Gold Miners ETF</td>
+      <td>Metals</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2.6170</td>
+      <td>0.0000</td>
+      <td>-2.6170</td>
+      <td>0.0</td>
+      <td>0.0295</td>
+    </tr>
+    <tr>
+      <th>SIL</th>
+      <td>Global X Silver Miners ETF</td>
+      <td>Metals</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>2.3149</td>
+      <td>0.0000</td>
+      <td>-2.3149</td>
+      <td>0.0</td>
+      <td>0.0294</td>
+    </tr>
+    <tr>
+      <th>CL=F</th>
+      <td>WTI Crude Oil</td>
+      <td>Energy</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0.0000</td>
+      <td>79.1893</td>
+      <td>79.1893</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>BZ=F</th>
+      <td>Brent Crude Oil</td>
+      <td>Energy</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>HG=F</th>
+      <td>Copper</td>
+      <td>Metals</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>SI=F</th>
+      <td>Silver</td>
+      <td>Metals</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>NG=F</th>
+      <td>Natural Gas</td>
+      <td>Energy</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>ZW=F</th>
+      <td>Wheat</td>
+      <td>Agriculture</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>ZC=F</th>
+      <td>Corn</td>
+      <td>Agriculture</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>ZS=F</th>
+      <td>Soybeans</td>
+      <td>Agriculture</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>GC=F</th>
+      <td>Gold</td>
+      <td>Metals</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>SPY</th>
+      <td>S&amp;P 500 ETF</td>
+      <td>Broad Market</td>
+      <td>mega</td>
+      <td>6</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>QQQ</th>
+      <td>NASDAQ-100 ETF</td>
+      <td>Tech</td>
+      <td>mega</td>
+      <td>6</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>IWM</th>
+      <td>Russell 2000 ETF</td>
+      <td>Broad Market</td>
+      <td>small</td>
+      <td>6</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>IJH</th>
+      <td>S&amp;P 400 Mid Cap ETF</td>
+      <td>Broad Market</td>
+      <td>mid</td>
+      <td>6</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>MGC</th>
+      <td>Vanguard Mega Cap ETF</td>
+      <td>Broad Market</td>
+      <td>mega</td>
+      <td>6</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>^VIX</th>
+      <td>CBOE Volatility Index</td>
+      <td>Volatility</td>
+      <td>NaN</td>
+      <td>-1</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>DX-Y.NYB</th>
+      <td>US Dollar Index</td>
+      <td>FX</td>
+      <td>NaN</td>
+      <td>-1</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>^TNX</th>
+      <td>10-Year Treasury Yield</td>
+      <td>Rates</td>
+      <td>NaN</td>
+      <td>-1</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0287</td>
+    </tr>
+  </tbody>
+</table></div></div></div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

@@ -1,0 +1,23 @@
+.env
+data_cache/
+logs/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+.vscode/
+*.ipynb_checkpoints/
+
+# Python virtual environment (huge, not needed in repo)
+.venv/
+
+# Old backup copies of outputs (790 MB, regeneratable)
+Backup/
+
+# OS
+.DS_Store
+Thumbs.db
+

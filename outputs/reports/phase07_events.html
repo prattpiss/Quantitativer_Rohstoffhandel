@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Phase 7 - Event Studies</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script>
+    MathJax = {
+      tex: { inlineMath:[['$','$'],['\\(','\\)']] },
+      options: { skipHtmlTags:['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { background:#0d1117; color:#e6edf3; font-family:'Segoe UI',Arial,sans-serif; }
+    mjx-container, mjx-container * { color:#e6edf3 !important; fill:#e6edf3 !important; }
+    mjx-container svg path { fill:#e6edf3 !important; }
+    .MathJax { color:#e6edf3 !important; }
+    .ph-header { background:#58a6ff22; border-left:5px solid #58a6ff;
+                  padding:1.5rem 2rem; border-radius:8px; margin-bottom:2rem; }
+    .ph-header h1 { color:#58a6ff; font-size:1.8rem; margin:0; }
+    .ph-header .sub { color:#8b949e; font-size:.95rem; margin-top:.4rem; }
+    .card { background:#161b22; border:1px solid #30363d; border-radius:8px; }
+    .card-header { background:#58a6ff18; border-bottom:1px solid #30363d;
+                    color:#58a6ff; font-weight:600; font-size:.95rem; }
+    .card-body { padding:1rem 1.25rem; }
+    table { color:#e6edf3 !important; font-size:.78rem; }
+    .table-dark { --bs-table-bg:#161b22; --bs-table-striped-bg:#1c2128;
+                   --bs-table-hover-bg:#21262d; }
+    .formula-box { background:#1c2128; border:1px solid #30363d; border-radius:6px;
+                    padding:1rem 1.5rem; margin:.5rem 0 1rem;
+                    font-size:1.05rem; color:#e6edf3 !important; }
+    .formula-box * { color:#e6edf3 !important; }
+    .interp-box { background:#0e3a1a; border-left:4px solid #3fb950;
+                   padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                   color:#e6edf3; margin-bottom:1rem; }
+    .warn-box  { background:#3a1e0e; border-left:4px solid #d29922;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .info-box  { background:#0e2a3a; border-left:4px solid #58a6ff;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .stat-card { background:#1c2128; border:1px solid #30363d; border-radius:8px;
+                  padding:1rem; text-align:center; }
+    .stat-card .val { font-size:1.6rem; font-weight:700; color:#58a6ff; }
+    .stat-card .lbl { font-size:.78rem; color:#8b949e; }
+    .badge-ph { background:#58a6ff33; color:#58a6ff; border:1px solid #58a6ff55;
+                 padding:.25rem .7rem; border-radius:12px; font-size:.8rem; }
+    .table-responsive { max-height:380px; overflow-y:auto; }
+    iframe { border:none; width:100%; border-radius:6px; }
+    h2,h3,h4 { color:#e6edf3; }
+    a { color:#58a6ff; } a:hover { color:#58a6ffcc; }
+    .breadcrumb-item.active { color:#8b949e; }
+    .slbl { font-size:.7rem; text-transform:uppercase; letter-spacing:.08em;
+             color:#8b949e; margin-bottom:.4rem; }
+  </style>
+</head>
+<body>
+<nav class="navbar" style="background:#010409;border-bottom:1px solid #30363d;padding:.7rem 1.5rem;">
+  <a class="navbar-brand fw-bold" style="color:#58a6ff;" href="index.html">
+    &#127748; Commodity Research Framework
+  </a>
+  <span class="badge-ph">Phase 7</span>
+</nav>
+<div class="container-xl py-4">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+      <li class="breadcrumb-item active">Phase 7 - Event Studies</li>
+    </ol>
+  </nav>
+  
+<div class="ph-header"><h1>Phase 7 - Event Studies</h1>
+  <div class="sub">CAR-Analyse: CPI, PPI, NFP, FOMC, EIA-Oel, EIA-Gas, WASDE, PMI</div>
+</div>
+<div class="row g-3 mb-4"><div class="col"><div class="stat-card"><div class="val">792</div><div class="lbl">Kombinationen</div></div></div><div class="col"><div class="stat-card"><div class="val">34</div><div class="lbl">Signifikant p<5%</div></div></div><div class="col"><div class="stat-card"><div class="val">4.3%</div><div class="lbl">Signifikanzquote</div></div></div><div class="col"><div class="stat-card"><div class="val">1, 3, 5 Tage</div><div class="lbl">Fenster</div></div></div><div class="col"><div class="stat-card"><div class="val">120 Tage</div><div class="lbl">Schaetzzeitraum</div></div></div></div>
+<div class="card mb-4"><div class="card-header">Methodik</div><div class="card-body"><div class="formula-box">$$\text{{AR}}_{{i,t}}=R_{{i,t}}-(\hat{{\alpha}}_i+\hat{{\beta}}_i R_{{m,t}}) \qquad \text{{CAR}}_i(t_1,t_2)=\sum_{{t=t_1}}^{{t_2}}\text{{AR}}_{{i,t}}$$</div><div class="formula-box"><div class="slbl">Cohen's d: Effektstaerke. Median-Schaetzer gilt fuer symmetrische Verteilung (Fat Tails -> Median < Mean).</div>$$d=\frac{{\bar{{CAR}}}}{{\sigma_{{CAR}}}} \quad \text{{Median CAR}} \approx 0{,}94\cdot\bar{{CAR}}\text{{ (symmetr.)}}$$</div><div class="info-box"><strong>&#8505; Info:</strong> Effektstaerke d>0.5: bedeutsam. d>0.8: gross. Pre-event CAR=0: kein Antizipationseffekt. Fenster 1d: unmittelbare Reaktion. 5d: kumulierter Drift nach Ereignis.</div></div></div>
+<div class="card mb-4"><div class="card-header">CAR nach Ereignis: alle Fensterlangen (1d, 3d, 5d) im Vergleich</div><div class="card-body"><div>                            <div id="b08a6f7f-f9a7-459b-9c04-28c27a2eb7bc" class="plotly-graph-div" style="height:400px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("b08a6f7f-f9a7-459b-9c04-28c27a2eb7bc")) {                    Plotly.newPlot(                        "b08a6f7f-f9a7-459b-9c04-28c27a2eb7bc",                        [{"hovertemplate":"%{x} (%{fullData.name}): CAR=%{y:.3f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#636EFA"},"name":"1-Tage","x":["CPI","EIA_GAS","EIA_OIL","FOMC","ISM_PMI","NFP","PPI","WASDE"],"y":[-0.14588484848484848,-0.07034242424242425,-0.07034242424242425,-0.19245151515151515,0.08817878787878788,0.2393909090909091,-0.14588484848484848,-0.16884848484848486],"type":"bar"},{"hovertemplate":"%{x} (%{fullData.name}): CAR=%{y:.3f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#EF553B"},"name":"3-Tage","x":["CPI","EIA_GAS","EIA_OIL","FOMC","ISM_PMI","NFP","PPI","WASDE"],"y":[-0.21295757575757576,0.045981818181818186,0.045981818181818186,-0.4719060606060606,0.1564,0.15852121212121215,-0.21295757575757576,-0.1228121212121212],"type":"bar"},{"hovertemplate":"%{x} (%{fullData.name}): CAR=%{y:.3f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#00CC96"},"name":"5-Tage","x":["CPI","EIA_GAS","EIA_OIL","FOMC","ISM_PMI","NFP","PPI","WASDE"],"y":[-0.2341272727272727,-0.09738787878787879,-0.09738787878787879,-0.6421848484848485,0.14264545454545455,0.20646060606060607,-0.2341272727272727,-0.11334242424242424],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#8b949e","width":0.8},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":0,"y1":0,"yref":"y"}],"title":{"text":"CAR nach Ereignis: alle Fenster (1d\u002f3d\u002f5d)"},"barmode":"group","yaxis":{"title":{"text":"CAR (%)"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"height":400,"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"xaxis":{"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div>
+<div class="interp-box"><strong>&#128270; Interpretation:</strong> Drei Balken je Ereignis: 1d-Reaktion (blau), 3d-Drift (orange), 5d-Drift (gruen). NFP (Arbeitsmarkt): groesste Reaktion bei Zins (TNX) und Small-Cap-Produzenten. CPI/PPI sehr aehnlich -> beide messen Inflation.</div></div></div>
+<div class="card mb-4"><div class="card-header">CAR je Ereignistyp (aggregiert ueber Assets)</div><div class="card-body"><div>                            <div id="095180d8-1ff1-4fe1-a1dc-332912771b4f" class="plotly-graph-div" style="height:420px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("095180d8-1ff1-4fe1-a1dc-332912771b4f")) {                    Plotly.newPlot(                        "095180d8-1ff1-4fe1-a1dc-332912771b4f",                        [{"error_y":{"array":[4.337787878787879,3.470081818181818,2.9309454545454545,2.9309454545454545,2.892809090909091,2.892809090909091,3.1642696969696966,3.6061878787878787],"color":"#8b949e","thickness":1.5,"type":"data","visible":true},"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003eCAR: %{y:.2f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#f78166","#f78166","#f78166","#f78166","#f78166","#f78166","#3fb950","#3fb950"]},"showlegend":false,"x":["FOMC","WASDE","PPI","CPI","EIA_OIL","EIA_GAS","ISM_PMI","NFP"],"y":[-0.19245151515151515,-0.16884848484848486,-0.14588484848484848,-0.14588484848484848,-0.07034242424242425,-0.07034242424242425,0.08817878787878788,0.2393909090909091],"type":"bar","xaxis":"x","yaxis":"y"},{"error_y":{"array":[5.707930303030303,4.281515151515151,4.281515151515151,5.035945454545454,4.065545454545455,4.065545454545455,4.392130303030303,4.35149696969697],"color":"#8b949e","thickness":1.5,"type":"data","visible":true},"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003eCAR: %{y:.2f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#f78166","#f78166","#f78166","#f78166","#3fb950","#3fb950","#3fb950","#3fb950"]},"showlegend":false,"x":["FOMC","CPI","PPI","WASDE","EIA_OIL","EIA_GAS","ISM_PMI","NFP"],"y":[-0.4719060606060606,-0.21295757575757576,-0.21295757575757576,-0.1228121212121212,0.045981818181818186,0.045981818181818186,0.1564,0.15852121212121215],"type":"bar","xaxis":"x2","yaxis":"y2"},{"error_y":{"array":[6.854569696969698,4.987412121212121,4.987412121212121,6.206684848484848,5.101893939393939,5.101893939393939,5.604312121212121,5.105187878787879],"color":"#8b949e","thickness":1.5,"type":"data","visible":true},"hovertemplate":"\u003cb\u003e%{x}\u003c\u002fb\u003e\u003cbr\u003eCAR: %{y:.2f}%\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":["#f78166","#f78166","#f78166","#f78166","#f78166","#f78166","#3fb950","#3fb950"]},"showlegend":false,"x":["FOMC","CPI","PPI","WASDE","EIA_OIL","EIA_GAS","ISM_PMI","NFP"],"y":[-0.6421848484848485,-0.2341272727272727,-0.2341272727272727,-0.11334242424242424,-0.09738787878787879,-0.09738787878787879,0.14264545454545455,0.20646060606060607],"type":"bar","xaxis":"x3","yaxis":"y3"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,0.2888888888888889],"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"CAR (%)"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"xaxis2":{"anchor":"y2","domain":[0.35555555555555557,0.6444444444444445]},"yaxis2":{"anchor":"x2","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis3":{"anchor":"y3","domain":[0.7111111111111111,1.0]},"yaxis3":{"anchor":"x3","domain":[0.0,1.0],"matches":"y","showticklabels":false},"annotations":[{"font":{"size":16},"showarrow":false,"text":"1-Tage Fenster","x":0.14444444444444446,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"3-Tage Fenster","x":0.5,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"5-Tage Fenster","x":0.8555555555555556,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"}],"shapes":[{"line":{"color":"#8b949e","width":0.8},"type":"line","x0":0,"x1":1,"xref":"x domain","y0":0,"y1":0,"yref":"y"},{"line":{"color":"#8b949e","width":0.8},"type":"line","x0":0,"x1":1,"xref":"x2 domain","y0":0,"y1":0,"yref":"y2"},{"line":{"color":"#8b949e","width":0.8},"type":"line","x0":0,"x1":1,"xref":"x3 domain","y0":0,"y1":0,"yref":"y3"}],"title":{"text":"Mittlere Kumulierte Abnormale Rendite (CAR) nach Ereignis & Fensterlaenge"},"height":420,"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div></div></div>
+<div class="card mb-4">
+  <div class="card-header">Heatmaps: Signifikante Reaktionen (p&lt;5%) fuer 1-Tage, 3-Tage, 5-Tage</div>
+  <div class="card-body">
+    <div class="info-box"><strong>&#8505; Info:</strong> Farbe = CAR%-Wert (gruen=positiv, rot=negativ) nur wo p<5%. Grau = kein signifikanter Effekt. Zelle zeigt Groesse und Richtung der Reaktion.</div>
+    <div>                            <div id="3de106eb-02b8-4b7b-8593-48d7a96e6cff" class="plotly-graph-div" style="height:360px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("3de106eb-02b8-4b7b-8593-48d7a96e6cff")) {                    Plotly.newPlot(                        "3de106eb-02b8-4b7b-8593-48d7a96e6cff",                        [{"colorbar":{"title":{"text":"CAR (%)"}},"colorscale":[[0.0,"rgb(165,0,38)"],[0.1,"rgb(215,48,39)"],[0.2,"rgb(244,109,67)"],[0.3,"rgb(253,174,97)"],[0.4,"rgb(254,224,139)"],[0.5,"rgb(255,255,191)"],[0.6,"rgb(217,239,139)"],[0.7,"rgb(166,217,106)"],[0.8,"rgb(102,189,99)"],[0.9,"rgb(26,152,80)"],[1.0,"rgb(0,104,55)"]],"customdata":[["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","CPI x XLB: CAR=-0.15%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","CPI x ZS=F: CAR=-0.43%","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","EIA_GAS x ^VIX: CAR=-0.76%"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","EIA_OIL x ^VIX: CAR=-0.76%"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","ISM_PMI x GC=F: CAR=0.23%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","ISM_PMI x OXY: CAR=0.45%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","NFP x FCX: CAR=0.55%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","NFP x XOM: CAR=0.35%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","PPI x XLB: CAR=-0.15%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","PPI x ZS=F: CAR=-0.43%","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"]],"hovertemplate":"%{customdata}\u003cextra\u003e\u003c\u002fextra\u003e","x":["APA","BZ=F","CL=F","CVX","DX-Y.NYB","FCX","GC=F","GDX","GORO","HG=F","IJH","IWM","IYT","JETS","MGC","NEM","NG=F","OXY","QQQ","SI=F","SIL","SM","TECK","TGB","XLB","XLE","XLI","XOM","ZC=F","ZS=F","ZW=F","^TNX","^VIX"],"y":["CPI","EIA_GAS","EIA_OIL","FOMC","ISM_PMI","NFP","PPI","WASDE"],"z":[[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-0.1544,null,null,null,null,-0.4285,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-0.7575000000000001],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-0.7575000000000001],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,0.2336,null,null,null,null,null,null,null,null,null,null,0.4459,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,0.5539,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0.3549,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-0.1544,null,null,null,null,-0.4285,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]],"zmid":0,"type":"heatmap"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"tickangle":-45,"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"title":{"text":"Signifikante CAR-Reaktionen (1-Tage, p\u003c5%): Ereignis x Asset"},"height":360,"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"yaxis":{"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div><div>                            <div id="5dfd67e8-3db9-47e3-8277-6c89e45ce607" class="plotly-graph-div" style="height:360px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("5dfd67e8-3db9-47e3-8277-6c89e45ce607")) {                    Plotly.newPlot(                        "5dfd67e8-3db9-47e3-8277-6c89e45ce607",                        [{"colorbar":{"title":{"text":"CAR (%)"}},"colorscale":[[0.0,"rgb(165,0,38)"],[0.1,"rgb(215,48,39)"],[0.2,"rgb(244,109,67)"],[0.3,"rgb(253,174,97)"],[0.4,"rgb(254,224,139)"],[0.5,"rgb(255,255,191)"],[0.6,"rgb(217,239,139)"],[0.7,"rgb(166,217,106)"],[0.8,"rgb(102,189,99)"],[0.9,"rgb(26,152,80)"],[1.0,"rgb(0,104,55)"]],"customdata":[["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","CPI x TGB: CAR=-1.05%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","CPI x ZS=F: CAR=-0.48%","CPI x ZW=F: CAR=0.59%","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","FOMC x HG=F: CAR=-1.16%","FOMC x IJH: CAR=-0.36%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","FOMC x QQQ: CAR=0.39%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","FOMC x XLB: CAR=-0.51%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","ISM_PMI x GC=F: CAR=0.40%","ISM_PMI x GDX: CAR=0.73%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","NFP x FCX: CAR=0.67%","NFP x GC=F: CAR=0.33%","NFP x GDX: CAR=0.69%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","NFP x ^TNX: CAR=0.85%","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","PPI x TGB: CAR=-1.05%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","PPI x ZS=F: CAR=-0.48%","PPI x ZW=F: CAR=0.59%","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"]],"hovertemplate":"%{customdata}\u003cextra\u003e\u003c\u002fextra\u003e","x":["APA","BZ=F","CL=F","CVX","DX-Y.NYB","FCX","GC=F","GDX","GORO","HG=F","IJH","IWM","IYT","JETS","MGC","NEM","NG=F","OXY","QQQ","SI=F","SIL","SM","TECK","TGB","XLB","XLE","XLI","XOM","ZC=F","ZS=F","ZW=F","^TNX","^VIX"],"y":["CPI","EIA_GAS","EIA_OIL","FOMC","ISM_PMI","NFP","PPI","WASDE"],"z":[[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-1.0474,null,null,null,null,null,-0.4818,0.5884999999999999,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,-1.1577,-0.359,null,null,null,null,null,null,null,0.3898,null,null,null,null,null,-0.5138,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,0.3987,0.7322000000000001,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,0.6668000000000001,0.3255,0.6939,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0.8508,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-1.0474,null,null,null,null,null,-0.4818,0.5884999999999999,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]],"zmid":0,"type":"heatmap"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"tickangle":-45,"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"title":{"text":"Signifikante CAR-Reaktionen (3-Tage, p\u003c5%): Ereignis x Asset"},"height":360,"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"yaxis":{"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div><div>                            <div id="3e09e69d-b926-41d7-b3cb-ec80dbd1ac28" class="plotly-graph-div" style="height:360px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("3e09e69d-b926-41d7-b3cb-ec80dbd1ac28")) {                    Plotly.newPlot(                        "3e09e69d-b926-41d7-b3cb-ec80dbd1ac28",                        [{"colorbar":{"title":{"text":"CAR (%)"}},"colorscale":[[0.0,"rgb(165,0,38)"],[0.1,"rgb(215,48,39)"],[0.2,"rgb(244,109,67)"],[0.3,"rgb(253,174,97)"],[0.4,"rgb(254,224,139)"],[0.5,"rgb(255,255,191)"],[0.6,"rgb(217,239,139)"],[0.7,"rgb(166,217,106)"],[0.8,"rgb(102,189,99)"],[0.9,"rgb(26,152,80)"],[1.0,"rgb(0,104,55)"]],"customdata":[["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","CPI x ZW=F: CAR=0.77%","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","FOMC x IJH: CAR=-0.49%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","FOMC x QQQ: CAR=0.40%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","FOMC x ^VIX: CAR=-4.20%"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","ISM_PMI x NG=F: CAR=-1.17%","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","NFP x ^TNX: CAR=1.25%","NFP x ^VIX: CAR=-1.55%"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","PPI x ZW=F: CAR=0.77%","nicht signifikant","nicht signifikant"],["nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant","nicht signifikant"]],"hovertemplate":"%{customdata}\u003cextra\u003e\u003c\u002fextra\u003e","x":["APA","BZ=F","CL=F","CVX","DX-Y.NYB","FCX","GC=F","GDX","GORO","HG=F","IJH","IWM","IYT","JETS","MGC","NEM","NG=F","OXY","QQQ","SI=F","SIL","SM","TECK","TGB","XLB","XLE","XLI","XOM","ZC=F","ZS=F","ZW=F","^TNX","^VIX"],"y":["CPI","EIA_GAS","EIA_OIL","FOMC","ISM_PMI","NFP","PPI","WASDE"],"z":[[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0.7667,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,-0.48929999999999996,null,null,null,null,null,null,null,0.4041,null,null,null,null,null,null,null,null,null,null,null,null,null,-4.197900000000001],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,-1.1651,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,1.2479,-1.5499],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0.7667,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]],"zmid":0,"type":"heatmap"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"tickangle":-45,"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"title":{"text":"Signifikante CAR-Reaktionen (5-Tage, p\u003c5%): Ereignis x Asset"},"height":360,"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"yaxis":{"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div>
+  </div>
+</div>
+<div class="card mb-4"><div class="card-header">Signifikante Ergebnisse – Tabelle (Median, Effektstaerke, Richtung)</div><div class="card-body"><div class="table-responsive"><table class="dataframe table table-dark table-striped table-sm table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ereignis</th>
+      <th>Asset</th>
+      <th>Fenster(d)</th>
+      <th>N</th>
+      <th>Mean CAR%</th>
+      <th>Std CAR%</th>
+      <th>Median CAR% (est.)</th>
+      <th>t-Stat</th>
+      <th>p-Wert</th>
+      <th>Effektgr. d</th>
+      <th>Dir</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>494</th>
+      <td>NFP</td>
+      <td>^TNX</td>
+      <td>5</td>
+      <td>200</td>
+      <td>1.248</td>
+      <td>6.142</td>
+      <td>1.173</td>
+      <td>2.866</td>
+      <td>0.0046</td>
+      <td>0.203</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>703</th>
+      <td>ISM_PMI</td>
+      <td>GC=F</td>
+      <td>3</td>
+      <td>200</td>
+      <td>0.399</td>
+      <td>2.075</td>
+      <td>0.375</td>
+      <td>2.710</td>
+      <td>0.0073</td>
+      <td>0.192</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>519</th>
+      <td>CPI</td>
+      <td>ZS=F</td>
+      <td>1</td>
+      <td>200</td>
+      <td>-0.428</td>
+      <td>2.343</td>
+      <td>-0.403</td>
+      <td>-2.580</td>
+      <td>0.0106</td>
+      <td>-0.183</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>618</th>
+      <td>PPI</td>
+      <td>ZS=F</td>
+      <td>1</td>
+      <td>200</td>
+      <td>-0.428</td>
+      <td>2.343</td>
+      <td>-0.403</td>
+      <td>-2.580</td>
+      <td>0.0106</td>
+      <td>-0.183</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>450</th>
+      <td>NFP</td>
+      <td>FCX</td>
+      <td>1</td>
+      <td>200</td>
+      <td>0.554</td>
+      <td>3.159</td>
+      <td>0.521</td>
+      <td>2.473</td>
+      <td>0.0142</td>
+      <td>0.175</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>525</th>
+      <td>CPI</td>
+      <td>XLB</td>
+      <td>1</td>
+      <td>200</td>
+      <td>-0.154</td>
+      <td>0.902</td>
+      <td>-0.145</td>
+      <td>-2.415</td>
+      <td>0.0167</td>
+      <td>-0.171</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>624</th>
+      <td>PPI</td>
+      <td>XLB</td>
+      <td>1</td>
+      <td>200</td>
+      <td>-0.154</td>
+      <td>0.902</td>
+      <td>-0.145</td>
+      <td>-2.415</td>
+      <td>0.0167</td>
+      <td>-0.171</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>444</th>
+      <td>NFP</td>
+      <td>XOM</td>
+      <td>1</td>
+      <td>200</td>
+      <td>0.355</td>
+      <td>2.140</td>
+      <td>0.334</td>
+      <td>2.339</td>
+      <td>0.0203</td>
+      <td>0.166</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>FOMC</td>
+      <td>QQQ</td>
+      <td>3</td>
+      <td>54</td>
+      <td>0.390</td>
+      <td>1.186</td>
+      <td>0.366</td>
+      <td>2.392</td>
+      <td>0.0203</td>
+      <td>0.329</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>702</th>
+      <td>ISM_PMI</td>
+      <td>GC=F</td>
+      <td>1</td>
+      <td>200</td>
+      <td>0.234</td>
+      <td>1.428</td>
+      <td>0.220</td>
+      <td>2.307</td>
+      <td>0.0221</td>
+      <td>0.164</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>493</th>
+      <td>NFP</td>
+      <td>^TNX</td>
+      <td>3</td>
+      <td>200</td>
+      <td>0.851</td>
+      <td>5.295</td>
+      <td>0.800</td>
+      <td>2.267</td>
+      <td>0.0245</td>
+      <td>0.161</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>406</th>
+      <td>NFP</td>
+      <td>GC=F</td>
+      <td>3</td>
+      <td>200</td>
+      <td>0.326</td>
+      <td>2.072</td>
+      <td>0.306</td>
+      <td>2.216</td>
+      <td>0.0278</td>
+      <td>0.157</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>518</th>
+      <td>CPI</td>
+      <td>ZW=F</td>
+      <td>5</td>
+      <td>200</td>
+      <td>0.767</td>
+      <td>4.945</td>
+      <td>0.721</td>
+      <td>2.187</td>
+      <td>0.0299</td>
+      <td>0.155</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>617</th>
+      <td>PPI</td>
+      <td>ZW=F</td>
+      <td>5</td>
+      <td>200</td>
+      <td>0.767</td>
+      <td>4.945</td>
+      <td>0.721</td>
+      <td>2.187</td>
+      <td>0.0299</td>
+      <td>0.155</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>FOMC</td>
+      <td>IJH</td>
+      <td>5</td>
+      <td>54</td>
+      <td>-0.489</td>
+      <td>1.605</td>
+      <td>-0.460</td>
+      <td>-2.219</td>
+      <td>0.0308</td>
+      <td>-0.305</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>FOMC</td>
+      <td>^VIX</td>
+      <td>5</td>
+      <td>54</td>
+      <td>-4.198</td>
+      <td>13.980</td>
+      <td>-3.946</td>
+      <td>-2.186</td>
+      <td>0.0332</td>
+      <td>-0.300</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>730</th>
+      <td>ISM_PMI</td>
+      <td>GDX</td>
+      <td>3</td>
+      <td>200</td>
+      <td>0.732</td>
+      <td>4.837</td>
+      <td>0.688</td>
+      <td>2.135</td>
+      <td>0.0340</td>
+      <td>0.151</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>520</th>
+      <td>CPI</td>
+      <td>ZS=F</td>
+      <td>3</td>
+      <td>200</td>
+      <td>-0.482</td>
+      <td>3.247</td>
+      <td>-0.453</td>
+      <td>-2.094</td>
+      <td>0.0376</td>
+      <td>-0.148</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>619</th>
+      <td>PPI</td>
+      <td>ZS=F</td>
+      <td>3</td>
+      <td>200</td>
+      <td>-0.482</td>
+      <td>3.247</td>
+      <td>-0.453</td>
+      <td>-2.094</td>
+      <td>0.0376</td>
+      <td>-0.148</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>288</th>
+      <td>EIA_OIL</td>
+      <td>^VIX</td>
+      <td>1</td>
+      <td>200</td>
+      <td>-0.758</td>
+      <td>5.120</td>
+      <td>-0.712</td>
+      <td>-2.087</td>
+      <td>0.0382</td>
+      <td>-0.148</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>387</th>
+      <td>EIA_GAS</td>
+      <td>^VIX</td>
+      <td>1</td>
+      <td>200</td>
+      <td>-0.758</td>
+      <td>5.120</td>
+      <td>-0.712</td>
+      <td>-2.087</td>
+      <td>0.0382</td>
+      <td>-0.148</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>488</th>
+      <td>NFP</td>
+      <td>^VIX</td>
+      <td>5</td>
+      <td>200</td>
+      <td>-1.550</td>
+      <td>10.483</td>
+      <td>-1.457</td>
+      <td>-2.086</td>
+      <td>0.0383</td>
+      <td>-0.148</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>701</th>
+      <td>ISM_PMI</td>
+      <td>NG=F</td>
+      <td>5</td>
+      <td>200</td>
+      <td>-1.165</td>
+      <td>7.902</td>
+      <td>-1.095</td>
+      <td>-2.080</td>
+      <td>0.0388</td>
+      <td>-0.147</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>FOMC</td>
+      <td>XLB</td>
+      <td>3</td>
+      <td>54</td>
+      <td>-0.514</td>
+      <td>1.777</td>
+      <td>-0.483</td>
+      <td>-2.105</td>
+      <td>0.0401</td>
+      <td>-0.289</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>667</th>
+      <td>PPI</td>
+      <td>TGB</td>
+      <td>3</td>
+      <td>200</td>
+      <td>-1.047</td>
+      <td>7.250</td>
+      <td>-0.985</td>
+      <td>-2.038</td>
+      <td>0.0429</td>
+      <td>-0.144</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>568</th>
+      <td>CPI</td>
+      <td>TGB</td>
+      <td>3</td>
+      <td>200</td>
+      <td>-1.047</td>
+      <td>7.250</td>
+      <td>-0.985</td>
+      <td>-2.038</td>
+      <td>0.0429</td>
+      <td>-0.144</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>FOMC</td>
+      <td>IJH</td>
+      <td>3</td>
+      <td>54</td>
+      <td>-0.359</td>
+      <td>1.262</td>
+      <td>-0.337</td>
+      <td>-2.071</td>
+      <td>0.0433</td>
+      <td>-0.284</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>756</th>
+      <td>ISM_PMI</td>
+      <td>OXY</td>
+      <td>1</td>
+      <td>200</td>
+      <td>0.446</td>
+      <td>3.123</td>
+      <td>0.419</td>
+      <td>2.014</td>
+      <td>0.0453</td>
+      <td>0.143</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>433</th>
+      <td>NFP</td>
+      <td>GDX</td>
+      <td>3</td>
+      <td>200</td>
+      <td>0.694</td>
+      <td>4.895</td>
+      <td>0.652</td>
+      <td>2.000</td>
+      <td>0.0469</td>
+      <td>0.142</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>FOMC</td>
+      <td>HG=F</td>
+      <td>3</td>
+      <td>54</td>
+      <td>-1.158</td>
+      <td>4.153</td>
+      <td>-1.088</td>
+      <td>-2.029</td>
+      <td>0.0475</td>
+      <td>-0.279</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>616</th>
+      <td>PPI</td>
+      <td>ZW=F</td>
+      <td>3</td>
+      <td>200</td>
+      <td>0.588</td>
+      <td>4.164</td>
+      <td>0.553</td>
+      <td>1.994</td>
+      <td>0.0476</td>
+      <td>0.141</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>517</th>
+      <td>CPI</td>
+      <td>ZW=F</td>
+      <td>3</td>
+      <td>200</td>
+      <td>0.588</td>
+      <td>4.164</td>
+      <td>0.553</td>
+      <td>1.994</td>
+      <td>0.0476</td>
+      <td>0.141</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>FOMC</td>
+      <td>QQQ</td>
+      <td>5</td>
+      <td>54</td>
+      <td>0.404</td>
+      <td>1.457</td>
+      <td>0.380</td>
+      <td>2.019</td>
+      <td>0.0486</td>
+      <td>0.277</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <th>451</th>
+      <td>NFP</td>
+      <td>FCX</td>
+      <td>3</td>
+      <td>200</td>
+      <td>0.667</td>
+      <td>4.749</td>
+      <td>0.627</td>
+      <td>1.981</td>
+      <td>0.0490</td>
+      <td>0.140</td>
+      <td>+</td>
+    </tr>
+  </tbody>
+</table></div></div></div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

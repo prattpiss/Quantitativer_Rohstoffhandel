@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Intraday CCF</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script>
+    MathJax = {
+      tex: { inlineMath:[['$','$'],['\\(','\\)']] },
+      options: { skipHtmlTags:['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { background:#0d1117; color:#e6edf3; font-family:'Segoe UI',Arial,sans-serif; }
+    mjx-container, mjx-container * { color:#e6edf3 !important; fill:#e6edf3 !important; }
+    mjx-container svg path { fill:#e6edf3 !important; }
+    .MathJax { color:#e6edf3 !important; }
+    .ph-header { background:#58a6ff22; border-left:5px solid #58a6ff;
+                  padding:1.5rem 2rem; border-radius:8px; margin-bottom:2rem; }
+    .ph-header h1 { color:#58a6ff; font-size:1.8rem; margin:0; }
+    .ph-header .sub { color:#8b949e; font-size:.95rem; margin-top:.4rem; }
+    .card { background:#161b22; border:1px solid #30363d; border-radius:8px; }
+    .card-header { background:#58a6ff18; border-bottom:1px solid #30363d;
+                    color:#58a6ff; font-weight:600; font-size:.95rem; }
+    .card-body { padding:1rem 1.25rem; }
+    table { color:#e6edf3 !important; font-size:.78rem; }
+    .table-dark { --bs-table-bg:#161b22; --bs-table-striped-bg:#1c2128;
+                   --bs-table-hover-bg:#21262d; }
+    .formula-box { background:#1c2128; border:1px solid #30363d; border-radius:6px;
+                    padding:1rem 1.5rem; margin:.5rem 0 1rem;
+                    font-size:1.05rem; color:#e6edf3 !important; }
+    .formula-box * { color:#e6edf3 !important; }
+    .interp-box { background:#0e3a1a; border-left:4px solid #3fb950;
+                   padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                   color:#e6edf3; margin-bottom:1rem; }
+    .warn-box  { background:#3a1e0e; border-left:4px solid #d29922;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .info-box  { background:#0e2a3a; border-left:4px solid #58a6ff;
+                  padding:.8rem 1.2rem; border-radius:0 6px 6px 0;
+                  color:#e6edf3; margin-bottom:1rem; }
+    .stat-card { background:#1c2128; border:1px solid #30363d; border-radius:8px;
+                  padding:1rem; text-align:center; }
+    .stat-card .val { font-size:1.6rem; font-weight:700; color:#58a6ff; }
+    .stat-card .lbl { font-size:.78rem; color:#8b949e; }
+    .badge-ph { background:#58a6ff33; color:#58a6ff; border:1px solid #58a6ff55;
+                 padding:.25rem .7rem; border-radius:12px; font-size:.8rem; }
+    .table-responsive { max-height:380px; overflow-y:auto; }
+    iframe { border:none; width:100%; border-radius:6px; }
+    h2,h3,h4 { color:#e6edf3; }
+    a { color:#58a6ff; } a:hover { color:#58a6ffcc; }
+    .breadcrumb-item.active { color:#8b949e; }
+    .slbl { font-size:.7rem; text-transform:uppercase; letter-spacing:.08em;
+             color:#8b949e; margin-bottom:.4rem; }
+  </style>
+</head>
+<body>
+<nav class="navbar" style="background:#010409;border-bottom:1px solid #30363d;padding:.7rem 1.5rem;">
+  <a class="navbar-brand fw-bold" style="color:#58a6ff;" href="index.html">
+    &#127748; Commodity Research Framework
+  </a>
+  <span class="badge-ph">Phase 18</span>
+</nav>
+<div class="container-xl py-4">
+  <nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+      <li class="breadcrumb-item active">Intraday CCF</li>
+    </ol>
+  </nav>
+  
+<div class="ph-header">
+  <h1>Intraday CCF: Stündliche Lag-Auflösung</h1>
+  <div class="sub">Für daily lag=0 Paare: Stundendaten (max 730 Tage) &middot; ±24h &middot; Sub-tägliger Lead-Lag</div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header"><strong>Motivation: Warum Intraday-CCF?</strong></div>
+  <div class="card-body">
+    <p class="small">
+      Bei täglicher Auflösung zeigen viele Paare optimalen Lag = 0 (gleichzeitig). Das bedeutet <em>nicht</em>
+      zwingend, dass keine Lead-Lag-Beziehung existiert — es könnte ein <strong>sub-tägiger Zeitversatz</strong>
+      (z.B. 30 Minuten oder 2 Stunden) vorliegen, der im Tagesdurchschnitt verschwimmt.
+    </p>
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table table-dark table-sm table-bordered">
+          <thead><tr><th>Befund</th><th>Interpretation</th><th>Konsequenz</th></tr></thead>
+          <tbody>
+            <tr><td>Opt. Lag = 0h</td><td>Wirklich synchron auf Stundenebene</td><td>Kein handelbarer Lead-Lag → nur simultane Exposure-Hedges</td></tr>
+            <tr><td>Opt. Lag ≠ 0h</td><td>Sub-tägiger Lead-Lag gefunden</td><td>Intraday-Strategie möglich: Futures führen, ETF folgt</td></tr>
+            <tr><td>|Opt. Lag| > 6h</td><td>Handelszeit-Differenz (US vs. London)</td><td>Market-Microstructure: Öffnungszeiten-Effekt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <p class="small text-muted">
+          Typische Hypothesen für Commodity/ETF-Paare:<br>
+          • <strong>GC=F → GDX</strong>: Futures (24h) führen ETF (US-Handelstag) → 1-4h Lag erwartet<br>
+          • <strong>CL=F → XLE</strong>: Ähnlich — WTI Futures führen Energie-ETF<br>
+          • <strong>SI=F → SIL</strong>: Silber-Futures vs. Silber-Miner-ETF<br>
+          Minuten-Daten (yfinance 1m, max 7 Tage): für noch feinere Auflösung.
+        </p>
+      </div>
+    </div>
+    <div class="info-box"><strong>&#8505; Info:</strong> Download-Log: GC=F: 13756 Stunden-Kerzen OK | GDX: 5082 Stunden-Kerzen OK | SIL: 5082 Stunden-Kerzen OK | SI=F: 13755 Stunden-Kerzen OK | BZ=F: 13601 Stunden-Kerzen OK | XLE: 5082 Stunden-Kerzen OK | CL=F: 13515 Stunden-Kerzen OK | NEM: 5082 Stunden-Kerzen OK | APA: 5082 Stunden-Kerzen OK | SM: 5082 Stunden-Kerzen OK</div>
+    <div class="info-box"><strong>&#8505; Info:</strong> Ergebnis: 0 Paare wirklich synchron (Lag=0h), 0 Paare mit sub-tägigem Lead-Lag ≥1h.</div>
+  </div>
+</div>
+
+<div class="card mb-4"><div class="card-header">Intraday CCF: Alle Paare gleichzeitig (±24h)</div><div class="card-body"><div>                            <div id="9d6a67a5-c67a-460a-a61c-ff570744decc" class="plotly-graph-div" style="height:540px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("9d6a67a5-c67a-460a-a61c-ff570744decc")) {                    Plotly.newPlot(                        "9d6a67a5-c67a-460a-a61c-ff570744decc",                        [],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#8b949e","dash":"dash","width":0},"type":"rect","x0":-24,"x1":24,"xref":"x domain","y0":-0.08944271909999159,"y1":0.08944271909999159,"yref":"y","fillcolor":"rgba(139,148,158,0.1)"}],"title":{"text":"Intraday CCF (st\u00fcndlich): \u00b124h \u2014 Alle Paare"},"xaxis":{"title":{"text":"Lag (Stunden, negativ = A1 verz\u00f6gert A2)"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"yaxis":{"title":{"text":"Kreuzkorrelation"},"gridcolor":"#21262d","linecolor":"#30363d","zerolinecolor":"#30363d"},"height":540,"font":{"color":"#e6edf3","family":"'Segoe UI',Arial,sans-serif","size":12},"margin":{"l":60,"r":20,"t":50,"b":60},"legend":{"bgcolor":"#1c2128","bordercolor":"#30363d","borderwidth":1},"paper_bgcolor":"#161b22","plot_bgcolor":"#0d1117"},                        {"displayModeBar": true, "responsive": true}                    )                };            </script>        </div>
+<div class="interp-box"><strong>&#128270; Interpretation:</strong> Negativer Lag = A1 verzögert A2 (A2 führt). Positiver Lag = A1 führt A2. Grauer Bereich = 95%-Signifikanzband. Peaks außerhalb: statistisch signifikanter Lead-Lag. Grüne Markierung = optimaler Lag. Blaue Markierung = Lag 0.</div></div></div>
+
+
+
+<div class="card mb-4">
+  <div class="card-header"><strong>Zusammenfassung: Hourly Lead-Lag-Tabelle</strong></div>
+  <div class="card-body">
+    <p class="small text-muted">
+      Δ Peak vs. Lag0 = Wie viel zusätzliche CCF-Stärke beim optimalen Lag gegenüber Lag=0.
+      Hoher Δ = klarer sub-tägiger Lead-Lag. Tiefer Δ = wirklich synchron.
+    </p>
+    <p class='text-muted'>Keine Ergebnisse.</p>
+  </div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>
