@@ -1162,8 +1162,20 @@ Rationale: Positives Energie-Momentum ohne Panik-Regime (VIX-Filter) = günstige
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
+/* ── CHART CANVAS WRAPPER FIX (Chart.js grows without position:relative container) ── */
 /* ── KATEX ── */
 document.addEventListener("DOMContentLoaded", function() {
+  // Wrap each canvas in a fixed-height position:relative div before Chart.js touches them
+  document.querySelectorAll('.chart-card canvas').forEach(c => {
+    const h = c.getAttribute('height') || 220;
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'position:relative;height:' + h + 'px';
+    c.parentNode.insertBefore(wrapper, c);
+    wrapper.appendChild(c);
+    c.removeAttribute('height');
+    c.removeAttribute('width');
+  });
+
   renderMathInElement(document.body, {
     delimiters: [
       {left:"$$",right:"$$",display:true},
