@@ -90,6 +90,38 @@ pre code{background:none;border:none;padding:0;}
 .hero p{color:var(--muted);max-width:600px;margin:0 auto;}
 .hero .badges{margin-top:1rem;display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;}
 .badge-pill{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:.3rem .8rem;font-size:.78rem;color:var(--muted);}
+/* ── FLASHCARD APP ── */
+.fc-topic-bar,.fc-mode-bar{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem;}
+.fc-tbtn,.fc-mbtn{background:var(--bg2);border:1px solid var(--border);color:var(--muted);padding:.35rem .85rem;border-radius:20px;cursor:pointer;font-size:.82rem;transition:all .15s;}
+.fc-tbtn:hover,.fc-mbtn:hover{border-color:var(--blue);color:var(--text);}
+.fc-tbtn.active{background:var(--blue);border-color:var(--blue);color:#0d1117;font-weight:700;}
+.fc-mbtn.active{background:var(--purple);border-color:var(--purple);color:#0d1117;font-weight:700;}
+.fc-pbar-wrap{background:var(--border);border-radius:4px;height:7px;margin:.4rem 0;}
+.fc-pbar-fill{background:var(--green);height:7px;border-radius:4px;width:0%;transition:width .35s;}
+#fc-counter{display:flex;justify-content:space-between;font-size:.83rem;color:var(--muted);margin-bottom:.2rem;}
+.fc-stage{perspective:1200px;margin:1rem 0;}
+.fc-card{min-height:230px;cursor:pointer;}
+.fc-card-inner{position:relative;min-height:230px;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);}
+.fc-card.flipped .fc-card-inner{transform:rotateY(180deg);}
+.fc-card-front,.fc-card-back{position:absolute;left:0;right:0;top:0;min-height:230px;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.8rem;display:flex;flex-direction:column;justify-content:center;}
+.fc-card-back{transform:rotateY(180deg);border-color:var(--green);background:var(--bg3);}
+.fc-cat-badge{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:.6rem;}
+.fc-question{font-size:1.05rem;font-weight:600;line-height:1.55;color:var(--text);}
+.fc-hint{margin-top:auto;padding-top:.8rem;font-size:.78rem;color:var(--muted);text-align:center;}
+.fc-answer{font-size:.875rem;line-height:1.72;color:var(--text);overflow-y:auto;max-height:300px;}
+.fc-controls{display:flex;gap:.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;}
+.fc-nav-btn{background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:.45rem 1.1rem;border-radius:6px;cursor:pointer;font-size:.88rem;transition:all .15s;}
+.fc-nav-btn:hover{border-color:var(--blue);}
+.fc-flip-btn{background:var(--blue);border:none;color:#0d1117;padding:.45rem 1.5rem;border-radius:6px;cursor:pointer;font-size:.88rem;font-weight:700;min-width:120px;transition:opacity .15s;}
+.fc-flip-btn:hover{opacity:.85;}
+.fc-rating{display:flex;gap:1rem;justify-content:center;margin-top:.8rem;}
+.fc-rate-btn{padding:.45rem 1.4rem;border-radius:6px;cursor:pointer;font-size:.88rem;font-weight:600;transition:all .15s;}
+.fc-rate-good{background:rgba(63,185,80,.15);color:var(--green);border:1px solid var(--green);}
+.fc-rate-good:hover{background:var(--green);color:#0d1117;}
+.fc-rate-bad{background:rgba(248,81,73,.15);color:var(--red);border:1px solid var(--red);}
+.fc-rate-bad:hover{background:var(--red);color:#fff;}
+.fc-kbd-hint{text-align:center;font-size:.73rem;color:#555;margin-top:1rem;}
+kbd{background:var(--bg2);border:1px solid var(--border);border-radius:3px;padding:.1em .4em;font-size:.75em;font-family:monospace;}
 </style>
 </head>
 <body>
@@ -770,24 +802,52 @@ Rationale: Positives Energie-Momentum ohne Panik-Regime (VIX-Filter) = günstige
 <section class="chapter" id="ch10">
 <div class="chapter-header">
   <h2><span class="ch-num">10</span>Karteikarten-Übungen</h2>
-  <p>Klicke auf eine Karte um die Antwort aufzudecken. Filtere nach Kategorien um gezielt zu üben.</p>
+  <p>Wähle Thema und Modus — Karten aufdecken, bewerten, wiederholen. Tastatursteuerung verfügbar.</p>
 </div>
-
-<div class="fc-stats">
-  <div id="fc-progress-text">0 von 60 aufgedeckt</div>
-  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="fc-pb" style="width:0%"></div></div>
+<div id="fc-app">
+  <div class="fc-topic-bar">
+    <button class="fc-tbtn active" data-cat="all">📚 Alle</button>
+    <button class="fc-tbtn" data-cat="begriffe">📖 Begriffe</button>
+    <button class="fc-tbtn" data-cat="formeln">🔢 Formeln</button>
+    <button class="fc-tbtn" data-cat="methodik">🔬 Methodik</button>
+    <button class="fc-tbtn" data-cat="strategie">📈 Strategie</button>
+    <button class="fc-tbtn" data-cat="commodities">🛢️ Commodities</button>
+  </div>
+  <div class="fc-mode-bar">
+    <button class="fc-mbtn active" id="btn-seq" onclick="setFCMode('seq',this)">↕ Sequenziell</button>
+    <button class="fc-mbtn" id="btn-rnd" onclick="setFCMode('rnd',this)">🔀 Zufällig</button>
+    <button class="fc-mbtn" id="btn-review" onclick="setFCMode('review',this)">🔁 Wiederholen</button>
+  </div>
+  <div>
+    <div id="fc-counter"><span>Karte 1 / 0</span><span>✓ 0 gewusst · ✗ 0 wiederholen</span></div>
+    <div class="fc-pbar-wrap"><div class="fc-pbar-fill" id="fc-pbar"></div></div>
+  </div>
+  <div class="fc-stage">
+    <div class="fc-card" id="fc-card" onclick="fcFlip()">
+      <div class="fc-card-inner">
+        <div class="fc-card-front">
+          <div class="fc-cat-badge" id="fc-badge">—</div>
+          <div class="fc-question" id="fc-q">Lade Karten…</div>
+          <div class="fc-hint">Klicken oder <kbd>Space</kbd> zum Aufdecken</div>
+        </div>
+        <div class="fc-card-back">
+          <div class="fc-answer" id="fc-a"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fc-controls">
+    <button class="fc-nav-btn" onclick="fcPrev()">← Zurück</button>
+    <button class="fc-flip-btn" id="fc-flip-btn" onclick="fcFlip()">Aufdecken</button>
+    <button class="fc-nav-btn" onclick="fcNext()">Weiter →</button>
+  </div>
+  <div class="fc-rating" id="fc-rating" style="display:none">
+    <button class="fc-rate-btn fc-rate-good" onclick="fcRate(true)">✓ Gewusst</button>
+    <button class="fc-rate-btn fc-rate-bad" onclick="fcRate(false)">✗ Wiederholen</button>
+  </div>
+  <div class="fc-kbd-hint"><kbd>Space</kbd> aufdecken &nbsp;·&nbsp; <kbd>→</kbd> weiter &nbsp;·&nbsp; <kbd>←</kbd> zurück &nbsp;·&nbsp; <kbd>1</kbd> gewusst &nbsp;·&nbsp; <kbd>2</kbd> wiederholen</div>
 </div>
-
-<div class="fc-filters">
-  <button class="filter-btn active" onclick="filterCards('all',this)">Alle (60)</button>
-  <button class="filter-btn" onclick="filterCards('begriffe',this)">📖 Begriffe</button>
-  <button class="filter-btn" onclick="filterCards('formeln',this)">🔢 Formeln</button>
-  <button class="filter-btn" onclick="filterCards('methodik',this)">🔬 Methodik</button>
-  <button class="filter-btn" onclick="filterCards('strategie',this)">📈 Strategie</button>
-  <button class="filter-btn" onclick="filterCards('commodities',this)">🛢️ Commodities</button>
-</div>
-
-<div class="fc-grid" id="fc-grid">
+</section>
 
 <!-- BEGRIFFE -->
 <div class="fc-item" data-cat="begriffe">
@@ -1150,10 +1210,6 @@ Rationale: Positives Energie-Momentum ohne Panik-Regime (VIX-Filter) = günstige
   • Korrelationsstruktur bricht zusammen (Öl-Signal nicht mehr zuverlässig)<br>
   • Drawdowns eskalieren schnell (dicke Schwänze)<br><br>
   Statistisch: Fisher-Z-Test zeigt signifikant unterschiedliche Korrelationsstruktur VIX&lt;25 vs. VIX&gt;25 (p&lt;0.01). Strategie verbessert Sortino substantiell bei kleinem Rendite-Abzug.</div>
-</div>
-
-</div><!-- end fc-grid -->
-</section>
 
 </main>
 
@@ -1407,30 +1463,134 @@ function initCharts(){
   }
 }
 
-/* ── FLASHCARDS ── */
-let fcSeen=new Set();
-function toggleFC(el){
-  const a=el.nextElementSibling;
-  el.classList.toggle('open');
-  a.classList.toggle('show');
-  const id=el.closest('.fc-item').dataset.cat+el.querySelector('span:last-of-type,span:first-child').textContent.slice(0,30);
-  if(a.classList.contains('show')){fcSeen.add(el.parentElement.innerHTML.length);updateProgress();}
-}
-function updateProgress(){
-  const total=document.querySelectorAll('.fc-item').length;
-  const seen=document.querySelectorAll('.fc-a.show').length;
-  document.getElementById('fc-progress-text').textContent=seen+' von '+total+' aufgedeckt';
-  document.getElementById('fc-pb').style.width=(seen/total*100)+'%';
+/* ── FLASHCARD APP ── */
+const FCARDS=[
+  {c:'begriffe',q:'Was ist schwache Stationarität?',a:'(1) Konstanter Erwartungswert E[y<sub>t</sub>]=μ<br>(2) Konstante, endliche Varianz Var(y<sub>t</sub>)=σ²<br>(3) Autokovarianz Cov(y<sub>t</sub>,y<sub>t−k</sub>)=γ(k) hängt nur vom Lag k ab<br><br>Preisniveaus verletzen Stationarität (Varianz wächst mit Zeit). Log-Renditen sind meist stationär.'},
+  {c:'begriffe',q:'Was ist ein Unit Root?',a:'AR-Koeffizient ρ=1: y<sub>t</sub>=y<sub>t−1</sub>+ε<sub>t</sub> (Random Walk). Schocks wirken dauerhaft, Varianz wächst ohne Grenze. ADF-Test prüft H₀: Unit Root vorhanden. I(1)-Prozess: eine Differenzierung macht ihn stationär.'},
+  {c:'begriffe',q:'Was ist Kointegration?',a:'Zwei I(1)-Reihen sind kointegriert, wenn y<sub>t</sub>−β·x<sub>t</sub> stationär (I(0)) ist — stabile langfristige Gleichgewichtsbeziehung. Modell: VECM statt VAR. Beispiel: WTI und Brent-Rohöl (Spread ist stationär trotz I(1)-Niveaus).'},
+  {c:'begriffe',q:'Was ist Granger-Kausalität?',a:'X Granger-verursacht Y, wenn Vergangenheitswerte von X die Vorhersage von Y verbessern — über den Beitrag der eigenen Vergangenheit von Y hinaus. F-Test auf Lags von X im unrestringierten Modell.<br><br>⚠️ Granger ≠ echte Kausalität! Nur ein Prädiktivitätstest.'},
+  {c:'begriffe',q:'Was ist Leptokurtosis (Fat Tails)?',a:'Kurtosis &gt; 3 (Normalverteilung = 3). Finanzrenditen: typisch Excess Kurtosis 3–15. Bedeutung: Extreme Verluste treten viel häufiger auf als die Normalverteilung vorhersagt → parametrisches VaR unterschätzt echtes Risiko systematisch.'},
+  {c:'begriffe',q:'Was ist Heteroskedastizität?',a:'Varianz der Residuen ist nicht konstant — variiert mit x<sub>t</sub> oder über Zeit. Folge: OLS-Schätzer unverzerrt, aber Standardfehler falsch (meist zu klein) → t-Statistiken inflationiert. Test: Breusch-Pagan, White. Lösung: White-robuste SE oder WLS.'},
+  {c:'begriffe',q:'Was ist Contango?',a:'Futures-Preis F &gt; Spot-Preis S — Kurve steigt mit Laufzeit. F=S·e^{(r+c−y)T} mit r+c &gt; y. Lagerhaltungskosten überwiegen Convenience Yield. Folge: Negativer Roll-Yield beim Rollen. Typisch bei hohem Angebot und niedrigem Lageraufwand.'},
+  {c:'begriffe',q:'Was ist Backwardation?',a:'Spot-Preis S &gt; Futures-Preis F — Kurve fällt mit Laufzeit. Entsteht wenn Convenience Yield hoch (y &gt; r+c). Physischer Besitz sehr wertvoll (Knappheit, Krisen). Folge: Positiver Roll-Yield. Typisch für Öl in geopolitischen Krisen.'},
+  {c:'begriffe',q:'Was ist Roll-Yield?',a:'Rendite aus dem Rollen auslaufender Futures in neue Kontrakte.<br><strong>Backwardation:</strong> positiv — neue Kontrakte günstiger als auslaufende<br><strong>Contango:</strong> negativ — neue teurer<br>Kann über Jahre den Spot-Return erheblich über- oder unterbieten (wichtig für Rohstoff-Indizes wie S&amp;P GSCI).'},
+  {c:'begriffe',q:'Was ist Convenience Yield?',a:'Impliziter Nutzen aus physischem Besitz eines Rohstoffs (Raffinerien zahlen Prämie für sofortige Lieferung). Berechnung: y = r+c − ln(F/S)/T. Hohe CY → Backwardation. Nicht direkt beobachtbar — aus Cost-of-Carry abgeleitet.'},
+  {c:'begriffe',q:'Was ist VaR (Value at Risk)?',a:'Maximaler Verlust, der mit Wahrscheinlichkeit (1−α) nicht überschritten wird. VaR₉₅ = 5%-Quantil der Verlustverteilung. Parametrisch: VaR = −μ + 1.645·σ. Probleme: Ignoriert Verluste jenseits VaR, nicht kohärentes Risikomaß, unterschätzt Fat Tails. CVaR ist kohärenter.'},
+  {c:'begriffe',q:'Korrelation vs. Unabhängigkeit — was ist der Unterschied?',a:'Unabhängigkeit → Unkorreliertheit, aber NICHT umgekehrt! Beispiel: X~U(−1,1), Y=X² → Cov=0 (unkorreliert), aber Y vollständig von X abhängig.<br><br>Krisenproblem: Assets mit ρ≈0 in normalen Zeiten können in Krisen stark korrelieren (Tail-Dependence) → Diversifikation versagt genau dann.'},
+  {c:'formeln',q:'Sharpe Ratio — Formel und Annahmen',a:'S = (E[R<sub>p</sub>] − R<sub>f</sub>) / σ<sub>p</sub> · √252<br><br>Annualisierung ×√252 für Tagesrenditen. Annahmen: IID-Returns, Normalverteilung. Bei positiver Autokorrelation: Sharpe überschätzt (Lo 2002 Korrektur). Bei Fat Tails: Sortino/Calmar besser.'},
+  {c:'formeln',q:'ADF-Testgleichung erklären',a:'Δy<sub>t</sub> = α + δ·y<sub>t−1</sub> + Σγ<sub>i</sub>·Δy<sub>t−i</sub> + ε<sub>t</sub><br><br>H₀: δ=0 (Unit Root) | H₁: δ&lt;0 (stationär)<br>τ = δ̂/SE(δ̂) — Dickey-Fuller-Verteilung, NICHT Normal!<br>Kritisch: −2.86 (5%), −3.43 (1%). Je negativer τ → stärker Stationaritätsevidenz.'},
+  {c:'formeln',q:'GARCH(1,1) — Gleichung und Parameter',a:'σ²<sub>t</sub> = ω + α·ε²<sub>t−1</sub> + β·σ²<sub>t−1</sub><br><br>ω&gt;0: Langfristiger Anteil | α: Reaktion auf neue Schocks | β: Persistenz<br>Stationarität: α+β &lt; 1 | Langfristvar.: ω/(1−α−β)<br>Typisch: α≈0.10, β≈0.85 (Persistenz≈0.95)'},
+  {c:'formeln',q:'Cost-of-Carry für Futures',a:'F<sub>t,T</sub> = S<sub>t</sub> · e^{(r+c−y)(T−t)}<br><br>r: risikoloser Zins, c: Lagerkosten p.a., y: Convenience Yield, T−t: Restlaufzeit<br>Contango: r+c &gt; y → F &gt; S | Backwardation: y &gt; r+c → F &lt; S<br>Implizite CY: y = r+c − ln(F/S)/(T−t)'},
+  {c:'formeln',q:'Max Drawdown — exakte Berechnung',a:'MDD = max<sub>s≤t</sub> (V<sub>s</sub>−V<sub>t</sub>)/V<sub>s</sub><br><br>Algorithmus: V<sub>peak,t</sub> = max(V<sub>0</sub>,...,V<sub>t</sub>), DD<sub>t</sub> = (V<sub>peak</sub>−V<sub>t</sub>)/V<sub>peak</sub>, MDD = max(DD<sub>t</sub>)<br>Calmar Ratio = Ann.Return / |MDD|'},
+  {c:'formeln',q:'OLS-Schätzer und seine Eigenschaften',a:'β̂ = (X\'X)⁻¹X\'y — minimiert Σε²<br><br>Unter Gauss-Markov: BLUE (Best Linear Unbiased Estimator).<br>Unverzerrt: E[β̂]=β | Var(β̂)=σ²(X\'X)⁻¹<br>Bei Nicht-Stationarität: Spurious Regression!'},
+  {c:'formeln',q:'Log-Rendite vs. einfache Rendite',a:'Einfach: r<sub>t</sub> = (P<sub>t</sub>−P<sub>t−1</sub>)/P<sub>t−1</sub><br>Log: r<sup>log</sup><sub>t</sub> = ln(P<sub>t</sub>/P<sub>t−1</sub>) = ln(1+r<sub>t</sub>)<br><br>Vorteile Log: zeitlich additiv, symmetrisch bei Verlusten. Portfolio-Querschnitt: einfache Renditen korrekt.'},
+  {c:'formeln',q:'Sortino Ratio — Unterschied zu Sharpe',a:'So = (E[R<sub>p</sub>] − R<sub>f</sub>) / σ<sub>down</sub><br><br>σ<sub>down</sub> = √(1/n · Σ<sub>r&lt;0</sub> r²) — nur negative Abweichungen!<br>Sortino bestraft positive Volatilität nicht. Besser für rechtschiefe Strategien. So &gt; S wenn Verteilung rechtschief.'},
+  {c:'formeln',q:'Granger-Kausalitäts-F-Statistik',a:'F = [(RSS<sub>r</sub>−RSS<sub>u</sub>)/p] / [RSS<sub>u</sub>/(n−2p−1)]<br><br>RSS<sub>r</sub>: ohne X-Lags | RSS<sub>u</sub>: mit X-Lags | p: Lags<br>Unter H₀ ~ F(p, n−2p−1). Lag-Auswahl via AIC/BIC vor dem Test!'},
+  {c:'formeln',q:'CVaR / Expected Shortfall',a:'CVaR<sub>α</sub> = E[L | L &gt; VaR<sub>α</sub>] = Ø der schlimmsten (1−α)·100% Verluste<br><br>Historisch: sortiere Tagesverluste, nimm Ø der schlechtesten 5%.<br>CVaR ist <strong>kohärentes</strong> Risikomaß (VaR nicht): Subadditivität gilt → Diversifikation reduziert CVaR immer. Basel III schreibt CVaR vor.'},
+  {c:'methodik',q:'Wann muss man differenzieren?',a:'Wenn ADF H₀ (Unit Root) nicht abgelehnt wird UND KPSS H₀ (Stationarität) abgelehnt wird → I(1).<br>Immer für: Preisniveaus von Aktien, Rohstoffen, FX.<br>Nie für: Log-Renditen (bereits I(0)).<br>Bei Kointegration: NICHT differenzieren → VECM!'},
+  {c:'methodik',q:'ADF: H₀ ablehnen oder nicht — was bedeutet was?',a:'H₀: Unit Root (nicht stationär). Ablehnen (τ &lt; t<sub>krit</sub>) → Evidenz für Stationarität ✓<br>Nicht ablehnen → keine Evidenz gegen Unit Root → wahrscheinlich I(1), differenzieren!<br><br>⚠️ Fehler: "Nicht ablehnen" als Beweis für Stationarität — das ist falsch!'},
+  {c:'methodik',q:'Wann ist Bonferroni-Korrektur nötig?',a:'Bei multiplen Tests wenn FWER kontrolliert werden soll. α* = α/k für k Tests. Beispiel: 20 Granger-Tests → α*=0.0025.<br><br>Alternative: Benjamini-Hochberg (FDR-Kontrolle) — weniger konservativ, erlaubt mehr echte Befunde.'},
+  {c:'methodik',q:'ACF vs. PACF — was sagen sie jeweils?',a:'ACF(k): Korrelation y<sub>t</sub> und y<sub>t−k</sub> inklusive indirekter Effekte. Fällt geometrisch für AR, bricht ab bei Lag q für MA(q).<br><br>PACF(k): Partielle Korrelation bereinigt um Zwischenlags. Bricht ab bei Lag p für AR(p), fällt geometrisch für MA.<br>Regel: ACF → MA-Ordnung, PACF → AR-Ordnung.'},
+  {c:'methodik',q:'Wie erkenne ich spurious regression?',a:'1. Hoher R² bei niedrigem Durbin-Watson (DW≈0)<br>2. Beide Variablen I(1), nicht kointegriert (Johansen negativ)<br>3. Koeffizient ändert sich stark je nach Zeitraum<br>4. ADF auf Residuen → nicht ablehnen<br><br>Lösung: Log-Renditen oder Kointegration testen → VECM.'},
+  {c:'methodik',q:'Was testet Granger-Kausalität NICHT?',a:'Granger testet NICHT:<br>• Echte Ursache-Wirkung-Beziehungen<br>• Instantane Kausalität (nur Vergangenheit)<br>• Nichtlineare Abhängigkeiten<br>• Ob X echter Treiber ist (gemeinsame Ursache möglich!)<br><br>Granger misst nur lineare Prädiktivität aus der Vergangenheit.'},
+  {c:'methodik',q:'Walk-Forward vs. Hold-Out Split',a:'Hold-Out (70/30): Einfach, ignoriert zeitliche Abhängigkeit.<br><br>Walk-Forward: Zeitlich korrekt — Modell nur auf Vergangenheitsdaten trainiert. Kein Datenpunkt aus der Zukunft im Training.<br><br>→ Für Finanzmärkte: Walk-Forward ist Pflicht!'},
+  {c:'methodik',q:'Warum Stationarität VOR linearen Modellen prüfen?',a:'Bei I(1)-Reihen:<br>1. t-Statistiken folgen nicht Standardnormal → Inferenz falsch<br>2. Hoher R² ohne echten Zusammenhang möglich (Spurious Regression)<br>3. Forecast-Performance bricht außerhalb Training ein<br><br>Reihenfolge: ADF → wenn I(1) → differenzieren → dann Modell.'},
+  {c:'methodik',q:'Was ist Data Snooping Bias?',a:'Viele Hypothesen an denselben Daten → erhöhte Wahrscheinlichkeit zufällig "Signifikantes" zu finden. Bei k=100 Tests mit α=5%: ~5 falsch positive, auch wenn alle Strategien zufällig sind.<br>Korrekturen: Bonferroni, Benjamini-Hochberg, Deflated Sharpe Ratio.'},
+  {c:'methodik',q:'Wie funktioniert der Jarque-Bera-Test?',a:'JB = (n/6)·[S² + (K−3)²/4] ~ χ²(2)<br>H₀: Normalverteilung (S=0, K=3). Ablehnen wenn JB &gt; 5.99 (α=5%).<br><br>Häufig für Finanzrenditen abgelehnt (Fat Tails, neg. Schiefe). Bei kleinen Stichproben: Bootstrap-t-Test verwenden.'},
+  {c:'methodik',q:'Lag-Auswahl im Granger-Test',a:'AIC = −2·lnL + 2k (mehr Lags) | BIC = −2·lnL + k·ln(n) (sparsamer)<br><br>Praxis: Max-Lag ≈ ⁴√T (250 Tage → max ~4 Lags). Residuen auf Autokorrelation prüfen (Ljung-Box) — wenn signifikant → mehr Lags nötig.'},
+  {c:'strategie',q:'Ist Sharpe 1.0 gut oder schlecht?',a:'Kontextabhängig:<br>• IS (In-Sample): Bedeutungslos ohne OOS-Bestätigung<br>• OOS Long-Only: Sehr gut (Markt Sharpe ~0.4–0.5)<br>• OOS Market-Neutral: Mittelgut (Hedgefonds: 0.6–1.2)<br>• Nach Transaktionskosten: 20–40% niedriger<br>Wichtiger: Bootstrap-CI und Deflated Sharpe Ratio!'},
+  {c:'strategie',q:'Wie erkennst du Overfitting im Backtest?',a:'1. IS-Sharpe &gt;&gt; OOS-Sharpe (Ratio &gt;1.5)<br>2. Viele Parameter, wenig Datenpunkte (&lt;10 pro Parameter)<br>3. Optimale Parameter ändern sich stark zwischen Walk-Forward-Fenstern<br>4. Performance konzentriert auf wenige Episoden<br>5. Deflated Sharpe Ratio nahe 0 oder negativ'},
+  {c:'strategie',q:'Minimales Metrik-Set für Strategiebewertung',a:'Rendite: CAGR<br>Risiko: Volatilität, Max Drawdown, CVaR₉₅<br>Risikobereinigt: Sharpe, Sortino, Calmar<br>Trade-Qualität: Win-Rate, Profit Factor, Avg Win/Loss<br>Robustheit: OOS vs IS, Bootstrap-CIs, Walk-Forward Stabilität<br>Ökonomisch: Alpha, Beta, Information Ratio'},
+  {c:'strategie',q:'Warum ist hohes IS-R² gefährlich?',a:'1. Mit genug Parametern: jede Reihe perfekt fittbar (R²=1) — bedeutungslos<br>2. Bei I(1)-Reihen: R² systematisch überhöht (Spurious Regression)<br>3. Datierung der Trainingsperiode bestimmt R² stark<br><br>Korrekte Metrik: OOS-R² (Prognose-R²) aus Walk-Forward.'},
+  {c:'strategie',q:'Hard-Exit vs. Hedge-Schicht in Krisen',a:'Hard-Exit: Komplettes Verlassen bei Signal. Problem: Rebounds verpasst, False Positives kosten Rendite.<br><br>Hedge-Schicht (empfohlen):<br>• Stop-Loss enger (8% → 5%)<br>• Positionsgröße reduzieren (→ 50%)<br>• Rotation: GLD, XLU, TLT<br>Preserviert Gewinnpotenzial bei reduziertem Drawdown.'},
+  {c:'strategie',q:'Was ist die Deflated Sharpe Ratio (DSR)?',a:'Korrigiert Sharpe für: (1) Anzahl getesteter Strategien, (2) Schiefe &amp; Kurtosis der Renditeverteilung, (3) Länge der Testperiode.<br><br>DSR gibt Wahrscheinlichkeit, dass Sharpe S* besser ist als Expected Maximum unter K zufälligen Strategien. DSR &lt; 50%: Strategie wahrscheinlich Zufall.'},
+  {c:'strategie',q:'Wann ist ein Composite-Signal besser?',a:'Besser wenn:<br>1. Einzelne Indikatoren schwach aber komplementär<br>2. Verschiedene Indikatoren in verschiedenen Regimes stärker<br>3. Kombination reduziert False-Positive-Rate (höherer AUC)<br><br>Wichtig: Gewichte OOS optimieren (Walk-Forward), nicht IS!'},
+  {c:'commodities',q:'Warum ist Öl negativ mit dem USD korreliert?',a:'1. Denominierungseffekt: Öl in USD — stärkerer Dollar = teurer für Ausländer → weniger Nachfrage → Preisdruck<br>2. Risk-Off: USD steigt als Safe Haven → gleichzeitig Öl-Selling<br>3. Carry Trade: niedriger USD-Zins → Rohstoffspekulation attraktiver<br>Ø Korrelation DXY vs. WTI: ~−0.45, regimeabhängig!'},
+  {c:'commodities',q:'Wann fallen Öl und Airlines gleichzeitig?',a:'In Risk-Off/Crash-Regimes (VIX &gt; 30):<br><strong>Normal:</strong> Öl↑ = Kosten↑ = JETS↓ (invers)<br><strong>Krise:</strong> Öl↓ UND JETS↓ — Risk-Appetite kollabiert, Risk-Off dominiert<br>Beispiel COVID 2020: Öl −70%, JETS −65% gleichzeitig → Öl-Hedge versagt in echten Krisen!'},
+  {c:'commodities',q:'Wie viele Tage führt WTI vor JETS (Aktienmarkt)?',a:'Aktienmarkt: empirisch 3–10 Tage Lead von XLE/WTI zu JETS (normale Märkte). Mechanismus: Energie-Sektor reagiert schneller, Airlines langsamer (Hedging, Marktpreisanpassung).<br>Physische Ebene: 2–6 Wochen (Raffinerie-Vorlauf).<br>In Krisen: simultane Reaktion, kein Lead-Lag mehr!'},
+  {c:'commodities',q:'Was bedeutet positiver Roll-Yield für Long-Futures?',a:'Backwardation: F &lt; S → neue Kontrakte günstiger als auslaufende ("Rolling down the curve").<br>Total Return = Spot Return + Roll Yield &gt; Spot Return allein.<br>In Contango: Negativer Roll-Yield trotz gleichbleibendem Spot-Preis. Rohstoff-Indizes (GSCI) profitieren stark von Backwardation.'},
+  {c:'commodities',q:'Wie modelliert man Korrelationsregime-Wechsel?',a:'1. Rolling Korrelation (30–63 Tage) — einfach, visuell<br>2. DCC-GARCH — formal, Maximum-Likelihood<br>3. Markov-Switching — latente Regime mit Übergangswahrscheinlichkeiten<br>4. VIX-Threshold (&lt;20 / 20–30 / &gt;30) — einfach, interpretierbar<br>Empfehlung: VIX-Threshold für Backtests, DCC-GARCH für formale Analyse.'},
+  {c:'commodities',q:'Wie beeinflusst die US-Yield Curve Rohstoffpreise?',a:'Steilere Kurve: Wachstumserwartungen → höhere Energienachfrage → Öl↑<br>Invertierte Kurve: Rezessionserwartung → Nachfragerückgang → Öl↓<br>Lead-Time: Monate bis Quartale (kein Tages-Signal!)<br>Gleichzeitig: Steigende Zinsen → höhere Lagerkosten → ceteris paribus tieferes Contango.'},
+  {c:'commodities',q:'Warum schlägt das Öl-Airlines-Signal in Krisen fehl?',a:'Signal: Positives Öl-Momentum → Long JETS. Funktioniert wenn Öl↑ = Konjunktur gut.<br>Versagt weil in Krisen:<br>1. Risk-Appetite kollabiert → beides fällt (Makro-Treiber dominiert)<br>2. OPEC-Schock: Öl↑ während Airlines leiden<br>3. Panikverkäufe ignorieren Fundamentaldaten<br>Lösung: VIX-Filter als Regime-Gate.'},
+  {c:'commodities',q:'Convenience Yield quantitativ berechnen',a:'Implizite CY: y = r + c − ln(F<sub>t,T</sub>/S<sub>t</sub>) / (T−t)<br><br>Wenn F &lt; S·e^{(r+c)(T−t)}: CY hoch (starke Nachfrage nach physischem Rohstoff). In Krisenzeiten sehr hoch → starke Backwardation. Im Überangebot: CY nahe 0 → tiefes Contango.'},
+  {c:'commodities',q:'OPEC-Schock analysieren: Event-Study-Methodik',a:'1. Event-Datum definieren (Ankündigung)<br>2. Normales Verhalten schätzen: Estimation Window (−120 bis −20 Tage)<br>3. Abnormale Rendite: AR<sub>t</sub> = r<sub>t</sub> − E[r<sub>t</sub>|I<sub>t−1</sub>]<br>4. Kumulieren: CAR = Σ AR<sub>t</sub> über Event-Window<br>5. t-Test auf CAR ≠ 0<br>JETS: OPEC-Kürzung → Öl↑ → Kerosinkosten↑ → negative abnormale JETS-Renditen.'},
+  {c:'commodities',q:'Welche Makroindikatoren führen Rohstoffpreise am stärksten?',a:'1. China Caixin PMI: 2–4 Wochen Lead für Kupfer, Öl, Eisenerz<br>2. DXY (USD): 1–5 Tage Lead<br>3. US-Yield Curve: Monate Lead<br>4. ISM Manufacturing PMI: 4–8 Wochen Lead<br>5. Credit Spreads (HYG/IEF): gleichzeitig bis 1 Woche<br>Alle auf Stationarität prüfen vor Granger-Test!'},
+  {c:'commodities',q:'Was ist der VIX-Filter in der JETS-Strategie?',a:'Signal: Long JETS nur wenn VIX &lt; 25 (zusätzlich zum Öl-Basket-Momentum).<br>Rationale: VIX &gt; 25 = Stress-Regime → Risk-Appetite kollabiert, Korrelationsstruktur bricht zusammen, Drawdowns eskalieren schnell.<br>Statistisch: Fisher-Z-Test zeigt sign. unterschiedliche Korrelationsstruktur (p&lt;0.01). Verbessert Sortino bei kleinem Rendite-Abzug.'}
+];
+
+const fc={cat:'all',mode:'seq',deck:[],idx:0,known:new Set(),review:new Set(),flipped:false};
+
+function buildFCDeck(){
+  let pool=FCARDS.filter(c=>fc.cat==='all'||c.c===fc.cat);
+  if(fc.mode==='rnd') pool=[...pool].sort(()=>Math.random()-.5);
+  else if(fc.mode==='review'){
+    pool=FCARDS.filter((_,i)=>fc.review.has(i));
+    if(!pool.length){alert('Keine Karten zum Wiederholen!\nMarkiere erst Karten mit ✗ Wiederholen.');return;}
+  }
+  fc.deck=pool; fc.idx=0; fcShow();
 }
 
-function filterCards(cat,btn){
-  document.querySelectorAll('.fc-filters button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.fc-item').forEach(item=>{
-    if(cat==='all'||item.dataset.cat===cat)item.style.display='block';
-    else item.style.display='none';
-  });
+function fcShow(){
+  if(!fc.deck.length) return;
+  const card=fc.deck[fc.idx];
+  document.getElementById('fc-q').innerHTML=card.q;
+  document.getElementById('fc-a').innerHTML=card.a;
+  const labels={begriffe:'Begriff',formeln:'Formel',methodik:'Methodik',strategie:'Strategie',commodities:'Commodities'};
+  document.getElementById('fc-badge').textContent=labels[card.c]||card.c;
+  const total=fc.deck.length;
+  document.getElementById('fc-counter').innerHTML=
+    '<span>Karte '+(fc.idx+1)+' / '+total+'</span>'+
+    '<span>✓ '+fc.known.size+' gewusst &nbsp;·&nbsp; ✗ '+fc.review.size+' wiederholen</span>';
+  document.getElementById('fc-pbar').style.width=((fc.idx+1)/total*100)+'%';
+  document.getElementById('fc-card').classList.remove('flipped');
+  document.getElementById('fc-flip-btn').textContent='Aufdecken';
+  document.getElementById('fc-rating').style.display='none';
+  fc.flipped=false;
 }
+
+function fcFlip(){
+  fc.flipped=!fc.flipped;
+  document.getElementById('fc-card').classList.toggle('flipped',fc.flipped);
+  document.getElementById('fc-flip-btn').textContent=fc.flipped?'Zuklappen':'Aufdecken';
+  document.getElementById('fc-rating').style.display=fc.flipped?'flex':'none';
+}
+
+function fcNext(){fc.idx=(fc.idx+1)%fc.deck.length;fcShow();}
+function fcPrev(){fc.idx=(fc.idx-1+fc.deck.length)%fc.deck.length;fcShow();}
+
+function fcRate(good){
+  const gi=FCARDS.indexOf(fc.deck[fc.idx]);
+  if(gi>=0){if(good){fc.known.add(gi);fc.review.delete(gi);}else{fc.review.add(gi);fc.known.delete(gi);}}
+  fcNext();
+}
+
+function setFCMode(mode,btn){
+  fc.mode=mode;
+  document.querySelectorAll('.fc-mbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  buildFCDeck();
+}
+
+document.querySelectorAll('.fc-tbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.fc-tbtn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    fc.cat=btn.dataset.cat;
+    buildFCDeck();
+  });
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+  if(e.key===' '||e.key==='Enter'){e.preventDefault();fcFlip();}
+  else if(e.key==='ArrowRight') fcNext();
+  else if(e.key==='ArrowLeft') fcPrev();
+  else if(e.key==='1') fcRate(true);
+  else if(e.key==='2') fcRate(false);
+});
+
+if(document.readyState!=='loading') buildFCDeck();
+else document.addEventListener('DOMContentLoaded',buildFCDeck);
 
 /* ── SIDEBAR SCROLL TRACKING ── */
 window.addEventListener('scroll',()=>{
