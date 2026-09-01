@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Klassische Mechanik TP1 – Vollständige Lernkarten</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+  <style>
+    :root {
+      --bg:#0d1117; --bg2:#161b22; --bg3:#1c2128; --border:#30363d;
+      --text:#e6edf3; --muted:#8b949e;
+      --blue:#58a6ff; --green:#3fb950; --red:#f85149;
+      --yellow:#e3b341; --purple:#d2a8ff; --orange:#f0883e;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:-apple-system,"Segoe UI",sans-serif;line-height:1.6;display:flex;}
+
+    /* ── SIDEBAR ── */
+    #sidebar{width:268px;min-height:100vh;background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;overflow-y:auto;z-index:30;padding:0 0 2rem;}
+    .logo{padding:.9rem 1.1rem .8rem;border-bottom:1px solid var(--border);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700;}
+    .nav-group{padding:.35rem 0;}
+    .nav-label{padding:.25rem 1.1rem;color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.4rem;}
+    .nav-link{display:block;text-decoration:none;color:var(--muted);font-size:.82rem;padding:.4rem 1.1rem .4rem 1.35rem;border-left:3px solid transparent;transition:.15s;}
+    .nav-link:hover,.nav-link.active{background:rgba(88,166,255,.08);border-left-color:var(--blue);color:var(--text);}
+
+    /* ── CONTENT ── */
+    #content{margin-left:268px;padding:2rem 1.8rem 5rem;max-width:1060px;width:100%;}
+    .hero{text-align:center;padding:1.8rem 1rem 2.5rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem;}
+    .hero h1{font-size:clamp(1.8rem,3.5vw,2.7rem);background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.03em;}
+    .hero p{color:var(--muted);margin:.7rem auto 0;max-width:740px;font-size:.97rem;}
+    .badges{margin-top:1.1rem;display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;}
+    .badge{background:var(--bg2);border:1px solid var(--border);border-radius:999px;padding:.35rem .75rem;font-size:.77rem;color:var(--muted);}
+
+    /* ── CHAPTER ── */
+    .chapter{margin-bottom:3.5rem;border-bottom:1px solid var(--border);padding-bottom:2.5rem;}
+    .ch-header h2{font-size:1.55rem;color:var(--blue);display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;}
+    .ch-num{background:var(--blue);color:#0d1117;font-size:.78rem;font-weight:700;border-radius:5px;padding:.18rem .45rem;white-space:nowrap;}
+    .ch-header p{color:var(--muted);font-size:.93rem;}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.7rem;margin:1.1rem 0 1.6rem;}
+    .stat{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem;}
+    .stat strong{display:block;font-size:1.2rem;color:var(--text);margin-bottom:.15rem;}
+    .stat span{color:var(--muted);font-size:.78rem;}
+
+    /* ── FLASHCARD SECTION ── */
+    .fc-section{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.1rem 1.2rem;}
+    .fc-section h3{font-size:1.1rem;color:var(--yellow);margin-bottom:1rem;}
+    .filter-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem;}
+    .chip{background:var(--bg3);color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:.38rem .8rem;font-size:.8rem;cursor:pointer;transition:.15s;}
+    .chip:hover,.chip.active{background:var(--blue);border-color:var(--blue);color:#0d1117;font-weight:700;}
+    .chip.ex.active{background:var(--orange);border-color:var(--orange);color:#0d1117;}
+    .chip.proof.active{background:var(--purple);border-color:var(--purple);color:#0d1117;}
+    .counter-row{display:flex;justify-content:space-between;font-size:.81rem;color:var(--muted);margin-bottom:.5rem;}
+    .pbar-wrap{width:100%;height:8px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:.9rem;}
+    .pbar{height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:999px;transition:width .25s;}
+
+    /* ── FLIP CARD ── */
+    .stage{perspective:1400px;margin-bottom:1rem;}
+    .fc-card{position:relative;min-height:310px;cursor:pointer;user-select:none;}
+    .fc-inner{position:relative;width:100%;min-height:310px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1);}
+    .fc-card.flipped .fc-inner{transform:rotateY(180deg);}
+    .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--border);border-radius:12px;background:var(--bg3);padding:1.1rem 1.3rem 1rem;display:flex;flex-direction:column;}
+    .face.back{transform:rotateY(180deg);border-color:var(--green);background:rgba(63,185,80,.07);}
+    .fc-badge-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.65rem;}
+    .fc-badge{font-size:.67rem;text-transform:uppercase;letter-spacing:.07em;border-radius:4px;padding:.15rem .45rem;font-weight:600;}
+    .badge-ch{background:rgba(88,166,255,.15);color:var(--blue);}
+    .badge-ex{background:rgba(240,136,62,.18);color:var(--orange);}
+    .badge-proof{background:rgba(210,168,255,.18);color:var(--purple);}
+    .badge-def{background:rgba(63,185,80,.15);color:var(--green);}
+    .badge-calc{background:rgba(227,179,65,.15);color:var(--yellow);}
+    .fc-q{font-size:1.02rem;font-weight:600;line-height:1.6;color:var(--text);flex:1;}
+    .fc-ref{margin-top:auto;padding-top:.7rem;font-size:.73rem;color:var(--muted);border-top:1px solid var(--border);}
+    .fc-hint{text-align:center;font-size:.73rem;color:var(--muted);padding-top:.5rem;}
+    .fc-a{font-size:.93rem;line-height:1.75;color:var(--text);flex:1;overflow-y:auto;max-height:340px;}
+    .fc-a .step{margin:.5rem 0;padding:.5rem .8rem;background:rgba(88,166,255,.06);border-radius:6px;border-left:3px solid var(--blue);}
+    .fc-a .result{margin:.5rem 0;padding:.5rem .8rem;background:rgba(63,185,80,.07);border-radius:6px;border-left:3px solid var(--green);}
+    .fc-a .warn{margin:.4rem 0;padding:.4rem .8rem;background:rgba(227,179,65,.07);border-radius:6px;border-left:3px solid var(--yellow);}
+
+    /* ── BUTTONS ── */
+    .btn-row{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem;}
+    .btn{border-radius:8px;cursor:pointer;font-size:.88rem;padding:.55rem 1.05rem;border:1px solid var(--border);background:var(--bg3);color:var(--text);transition:.15s;}
+    .btn:hover{border-color:var(--blue);}
+    .btn.primary{background:var(--blue);border-color:var(--blue);color:#0d1117;font-weight:700;}
+    .btn.good{background:rgba(63,185,80,.14);border-color:var(--green);color:var(--green);}
+    .btn.bad{background:rgba(248,81,73,.12);border-color:var(--red);color:var(--red);}
+    .btn.shuffle{background:rgba(210,168,255,.12);border-color:var(--purple);color:var(--purple);}
+    .kbd-hint{text-align:center;font-size:.72rem;color:#444;margin-top:.65rem;}
+    kbd{background:var(--bg2);border:1px solid var(--border);border-radius:3px;padding:.1em .4em;font-size:.73em;}
+
+    @media(max-width:820px){
+      #sidebar{position:static;width:100%;min-height:unset;}
+      #content{margin-left:0;padding:1.2rem .9rem 3rem;}
+    }
+  </style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div class="logo">Klassische Mechanik TP1</div>
+  <div class="nav-group" style="padding:.6rem 1.1rem .2rem">
+    <a href="index.html" style="display:block;font-size:.78rem;color:var(--muted);text-decoration:none;padding:.3rem 0;border-left:3px solid transparent;padding-left:.5rem" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">← Quant-Finance App</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Kapitel 1–2</div>
+    <a class="nav-link" href="#ch1">1 · Motivation &amp; Vorschau</a>
+    <a class="nav-link" href="#ch2">2 · Raum, Zeit &amp; Bahnkurve</a>
+    <a class="nav-link" href="#ch3">3 · Newtons Gesetze</a>
+    <a class="nav-link" href="#ch4">4 · Erhaltungssätze</a>
+    <a class="nav-link" href="#ch5">5 · Inertialsysteme &amp; Galilei</a>
+    <a class="nav-link" href="#ch6">6 · Beschleunigte Bezugssysteme</a>
+    <a class="nav-link" href="#ch7">7 · Kleine Schwingungen</a>
+    <a class="nav-link" href="#ch8">8 · Zweikörperproblem &amp; Kepler</a>
+    <a class="nav-link" href="#ch9">9 · Weitere Kräfte</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Kapitel 3</div>
+    <a class="nav-link" href="#ch10">10 · Zwangsbedingungen</a>
+    <a class="nav-link" href="#ch11">11 · Lagrange-Gleichungen</a>
+    <a class="nav-link" href="#ch12">12 · Variationsprinzip &amp; Noether</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Kapitel 4–6</div>
+    <a class="nav-link" href="#ch13">13 · Starre Körper</a>
+    <a class="nav-link" href="#ch14">14 · Hamilton-Mechanik</a>
+    <a class="nav-link" href="#ch15">15 · Stabilität &amp; Chaos</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Übungen</div>
+    <a class="nav-link" href="#ch16">16 · Übungsblätter 1–5</a>
+  </div>
+</nav>
+
+<main id="content">
+<div class="hero">
+  <h1>Klassische Mechanik – Vollständige Lernkarten</h1>
+  <p>Alle Definitionen, Sätze, Beweise und Übungsaufgaben aus Skript und Übungsblättern 1–5, mit Rechenwegen, Herkunftsangaben und vollständiger Mathematik.</p>
+  <div class="badges">
+    <span class="badge">16 Abschnitte</span>
+    <span class="badge">160+ Karten</span>
+    <span class="badge">Übungsaufgaben markiert</span>
+    <span class="badge">Vollständige Rechenwege</span>
+    <span class="badge">Beweise mit Schritten</span>
+  </div>
+</div>
+</main>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  VOLLSTÄNDIGE KARTENDATENBANK
+// ═══════════════════════════════════════════════════════════════════
+const chapters = [
+{
+  id:'ch1', title:'Motivation & Vorschau', num:'01',
+  desc:'Die Rolle der klassischen Mechanik in der Physik, Theorienbildung, Theorienentwicklung und Theorienanalyse.',
+  stats:[{v:'8',l:'Karten'},{v:'3',l:'Formulierungen'},{v:'Skript S.1–3',l:'Quelle'}],
+  cards:[
+    {q:'Was sind die drei Aufgaben der Theoretischen Physik?',badges:['def','ch'],ref:'Skript Kap. 1, S. 2',
+     a:`<div class="step"><strong>i) Theorienbildung:</strong> Formulierung von Postulaten (Axiomen) – einem minimalen Satz falsifizierbarer Erfahrungstatsachen, aus denen Vorhersagen folgen. Beispiele: Newton-Gleichungen, Maxwell-Gleichungen, Schrödinger-Gleichung.</div>
+<div class="step"><strong>ii) Theorienentwicklung:</strong> Äquivalente Neuformulierungen, die für bestimmte Problemklassen besonders geeignet sind. Beispiele: Lagrange-Formulierung (Zwangsbedingungen), Hamilton-Formulierung (Erhaltungsgrößen), Pfadintegral.</div>
+<div class="step"><strong>iii) Theorienanalyse:</strong> Lösung der Grundgleichungen unter speziellen Bedingungen – numerisch oder analytisch. Dies macht den Großteil der Theoriearbeit aus.</div>`},
+    {q:'Was ist ein Postulat in der Physik und warum ist es wichtig?',badges:['def'],ref:'Skript Kap. 1, S. 2',
+     a:`Ein Postulat ist ein minimaler Satz von Erfahrungstatsachen, die <strong>nicht beweisbar</strong>, aber <strong>falsifizierbar</strong> sind.<br><br>
+Wichtig: Aus diesen Grundaussagen lassen sich alle Phänomene eines Theoriebereichs ableiten. Durch Experimente wird nicht das Postulat "falsch", sondern sein Gültigkeitsbereich wird geschärft (z. B. Newton → QM für sehr kleine Längen).`},
+    {q:'Welche Regime erweitern die KM, und welche Größenskalen sind relevant?',badges:['ch'],ref:'Skript Kap. 1, S. 1',
+     a:`<div class="step">Quantenmechanik (TP II): $l \\approx 10^{-10}\\,\\text{m}$ (Atomradius) — sehr kleine Längen</div>
+<div class="step">Elektrodynamik / Relativitätstheorie (TP III): $v \\leq 3 \\cdot 10^8\\,\\text{m/s}$ — sehr hohe Geschwindigkeiten</div>
+<div class="step">Statistische Physik (TP IV): $N \\approx 10^{23}$ — sehr viele Teilchen</div>
+<div class="result">Die klassische Mechanik beschreibt $l \\approx 1\\,\\text{m}$, $v \\approx 50\\,\\text{km/h}$, $N \\approx 1$.</div>`},
+    {q:'Welche drei Formulierungen der klassischen Mechanik gibt es und welche Stärken haben sie?',badges:['def'],ref:'Skript Kap. 1, S. 2',
+     a:`<div class="step"><strong>Newton:</strong> Vektorielle Kräfte. Geeignet für numerische Simulation.</div>
+<div class="step"><strong>Lagrange:</strong> Skalare Funktion $L=T-U$. Geeignet für Zwangsbedingungen, Feldtheorie, Wirkungsprinzip.</div>
+<div class="step"><strong>Hamilton:</strong> Phasenraum $(q,p)$. Geeignet für Erhaltungsgrößen, Chaos, Quantenmechanik.</div>
+Alle drei sind äquivalent – sie ergeben dieselben Bewegungsgleichungen.`},
+    {q:'Was unterscheidet den euklidischen Raum $E^3$ vom Vektorraum $\\mathbb{R}^3$?',badges:['def'],ref:'Skript Kap. 2.1, S. 4',
+     a:`Im euklidischen Raum $E^3$ ist <strong>kein Punkt ausgezeichnet</strong>. Im Vektorraum $\\mathbb{R}^3$ dagegen ist der Nullvektor $\\vec{0}$ ausgezeichnet (neutrales Element).<br><br>
+Physikalisch messbar sind nur <em>Abstände</em>, nicht absolute Positionen. Durch willkürliche Wahl eines Ursprungs wird $E^3$ durch $\\mathbb{R}^3$ beschrieben.`},
+    {q:'Was besagt die Summenkonvention?',badges:['def'],ref:'Skript §2.1, S. 5',
+     a:`Über <strong>doppelt vorkommende Indizes</strong> in einem Produkt wird summiert:
+$$a_\\alpha b_\\alpha \\equiv \\sum_{\\alpha=1}^3 a_\\alpha b_\\alpha = a_1 b_1 + a_2 b_2 + a_3 b_3$$
+Beispiel: $\\vec{x}\\cdot\\vec{y} = x_\\alpha y_\\alpha$, $|\\vec{x}|^2 = x_\\alpha x_\\alpha$.`},
+    {q:'Welche Standardliteratur empfiehlt das Skript?',badges:['ch'],ref:'Skript Kap. 1, S. 3',
+     a:`Scheck (mathematisch sauber) · Nolting (klar) · Goldstein (Klassiker) · Kuypers (Aufgaben) · Landau/Lifshitz · Arnold (anspruchsvoll)`},
+    {q:'Warum ist die klassische Mechanik trotz modernerer Theorien noch relevant?',badges:['ch'],ref:'Skript Kap. 1, S. 1',
+     a:`<strong>Anwendungen:</strong> Ingenieurwesen, Bauwesen, Astronomie, Vielteilchendynamik, Chaostheorie.<br>
+<strong>Formale Grundlage:</strong> Jede Formulierung hat sich als Basis einer modernen Erweiterung erwiesen. Hamilton-Mechanik → Quantenmechanik, Wirkungsprinzip → Quantenfeldtheorie.`}
+  ]
+},
+{
+  id:'ch2', title:'Raum, Zeit & Bahnkurve', num:'02',
+  desc:'Postulate über Raum und Zeit, Bezugssystem, Koordinatensysteme, Bahnkurve, Geschwindigkeit, Beschleunigung.',
+  stats:[{v:'12',l:'Karten'},{v:'3',l:'Koordinatensysteme'},{v:'Skript §2.1',l:'Quelle'}],
+  cards:[
+    {q:'Formuliere die vier Beobachtungen über Raum und Zeit aus dem Skript.',badges:['def'],ref:'Skript §2.1, S. 4–6',
+     a:`<div class="step"><strong>Beob. I (Raum):</strong> Der Raum ist dreidimensional, homogen (kein Punkt ausgezeichnet) und isotrop (keine Richtung ausgezeichnet).</div>
+<div class="step"><strong>Beob. II (Messung):</strong> Messbar sind nur Abstände; der Abstand zweier Punkte hängt nicht vom Ursprung ab.</div>
+<div class="step"><strong>Beob. III (Zeit):</strong> Die Zeit ist absolut — alle Uhren gehen gleich schnell, unabhängig vom Bewegungszustand.</div>
+<div class="step"><strong>Beob. IV (Zeitpunkt):</strong> Kein Zeitpunkt ist ausgezeichnet; messbar sind nur zeitliche Differenzen.</div>`},
+    {q:'Definiere die Bahnkurve $\\gamma$ eines Punktteilchens.',badges:['def'],ref:'Skript §2.1, S. 7',
+     a:`$$\\gamma: I \\to \\mathbb{R}^3, \\quad t \\mapsto \\vec{r}(t), \\quad I = [t_1, t_2] \\subset \\mathbb{R}$$
+Daraus folgen Geschwindigkeit und Beschleunigung:
+$$\\vec{v}(t) = \\dot{\\vec{r}}(t) = \\frac{d\\vec{r}}{dt}, \\quad \\vec{a}(t) = \\ddot{\\vec{r}}(t) = \\frac{d^2\\vec{r}}{dt^2}$$`},
+    {q:'Berechne die Geschwindigkeit in Polarkoordinaten $(\\varrho,\\varphi)$ in der $z=0$-Ebene.',badges:['calc'],ref:'Skript §2.1, S. 7',
+     a:`<div class="step">$\\vec{r}(t) = \\varrho(t)\\,\\hat{e}_\\varrho(\\varphi(t))$; Zeitableitungen der Basisvektoren: $\\dot{\\hat{e}}_\\varrho = \\dot{\\varphi}\\hat{e}_\\varphi$, $\\dot{\\hat{e}}_\\varphi = -\\dot{\\varphi}\\hat{e}_\\varrho$</div>
+<div class="step">$\\dot{\\vec{r}} = \\dot{\\varrho}\\hat{e}_\\varrho + \\varrho\\dot{\\hat{e}}_\\varrho = \\dot{\\varrho}\\hat{e}_\\varrho + \\varrho\\dot{\\varphi}\\hat{e}_\\varphi$</div>
+<div class="result">$$\\vec{v} = \\dot{\\varrho}\\,\\hat{e}_\\varrho + \\varrho\\dot{\\varphi}\\,\\hat{e}_\\varphi$$</div>`},
+    {q:'Berechne die Beschleunigung in Polarkoordinaten.',badges:['calc'],ref:'Skript §2.1, S. 8',
+     a:`<div class="step">Ableite $\\vec{v} = \\dot{\\varrho}\\hat{e}_\\varrho + \\varrho\\dot{\\varphi}\\hat{e}_\\varphi$ nach $t$:</div>
+<div class="step">$\\vec{a} = \\ddot{\\varrho}\\hat{e}_\\varrho + \\dot{\\varrho}\\dot{\\varphi}\\hat{e}_\\varphi + \\dot{\\varrho}\\dot{\\varphi}\\hat{e}_\\varphi + \\varrho\\ddot{\\varphi}\\hat{e}_\\varphi + \\varrho\\dot{\\varphi}\\dot{\\hat{e}}_\\varphi$<br>mit $\\dot{\\hat{e}}_\\varphi = -\\dot{\\varphi}\\hat{e}_\\varrho$:</div>
+<div class="result">$$\\vec{a} = (\\ddot{\\varrho} - \\varrho\\dot{\\varphi}^2)\\hat{e}_\\varrho + (\\varrho\\ddot{\\varphi} + 2\\dot{\\varrho}\\dot{\\varphi})\\hat{e}_\\varphi$$
+$-\\varrho\\dot{\\varphi}^2$: Zentripetalbeschleunigung · $2\\dot{\\varrho}\\dot{\\varphi}$: Coriolis-Term</div>`},
+    {q:'Wie lauten die Polarkoordinaten-Basisvektoren in kartesischen Koordinaten?',badges:['def'],ref:'Skript §2.1, S. 5',
+     a:`$$\\hat{e}_\\varrho = \\cos\\varphi\\,\\hat{e}_x + \\sin\\varphi\\,\\hat{e}_y$$
+$$\\hat{e}_\\varphi = -\\sin\\varphi\\,\\hat{e}_x + \\cos\\varphi\\,\\hat{e}_y$$
+Diese Vektoren sind <strong>ortsabhängig</strong> (über $\\varphi$), im Gegensatz zu kartesischen Basisvektoren.`},
+    {q:'Wie lauten die Kugelkoordinaten-Basisvektoren und der Ortsvektor?',badges:['def'],ref:'Skript §2.1, S. 5',
+     a:`$$\\hat{e}_r = \\sin\\theta\\cos\\varphi\\,\\hat{e}_1 + \\sin\\theta\\sin\\varphi\\,\\hat{e}_2 + \\cos\\theta\\,\\hat{e}_3$$
+$$\\hat{e}_\\theta = \\cos\\theta\\cos\\varphi\\,\\hat{e}_1 + \\cos\\theta\\sin\\varphi\\,\\hat{e}_2 - \\sin\\theta\\,\\hat{e}_3$$
+$$\\hat{e}_\\varphi = -\\sin\\varphi\\,\\hat{e}_1 + \\cos\\varphi\\,\\hat{e}_2, \\quad \\vec{r} = r\\,\\hat{e}_r$$`},
+    {q:'Was ist das Levi-Civita-Symbol und wie ist das Kreuzprodukt damit definiert?',badges:['def'],ref:'Skript §2.1, S. 6',
+     a:`$$\\varepsilon_{ijk} = \\begin{cases}+1 & (ijk) \\text{ gerade Permutation von }(123)\\\\ -1 & \\text{ungerade Permutation}\\\\ 0 & \\text{zwei gleiche Indizes}\\end{cases}$$
+Kreuzprodukt: $[\\vec{A}\\times\\vec{B}]_i = \\varepsilon_{ijk}A_j B_k$ (Summenkonvention!)`},
+    {q:'[ÜB 1.1] Bahnkurve auf dem Zylinder: Gib $\\vec{r}(t)$ in kartesischen Koordinaten an. Berechne $\\vec{v}$ und $\\vec{a}$ in Zylinderkoordinaten.',badges:['ex','calc'],ref:'Übung Blatt 1, Aufg. 1',
+     a:`<div class="step">$\\vec{r}(t) = R\\cos(\\omega t)\\hat{e}_1 + R\\sin(\\omega t)\\hat{e}_2 + vt\\hat{e}_3$<br>(Zylinderoberfläche: $\\varrho=R$, $\\varphi=\\omega t$, $z=vt$)</div>
+<div class="result">In Zylinderkoordinaten:<br>$\\vec{v} = R\\omega\\hat{e}_\\varphi + v\\hat{e}_z$<br>$\\vec{a} = -R\\omega^2\\hat{e}_\\varrho$ (Zentripetalbeschleunigung nach innen)</div>`},
+    {q:'[ÜB 1.2a] Differentiale $d\\hat{e}_r$, $d\\hat{e}_\\theta$, $d\\hat{e}_\\varphi$ in Kugelkoordinaten.',badges:['ex','calc'],ref:'Übung Blatt 1, Aufg. 2a',
+     a:`<div class="step">Leite kartesische Darstellungen nach $r,\\theta,\\varphi$ ab ($d\\hat{e}_1=d\\hat{e}_2=d\\hat{e}_3=0$):</div>
+<div class="result">$$d\\hat{e}_r = d\\theta\\,\\hat{e}_\\theta + \\sin\\theta\\,d\\varphi\\,\\hat{e}_\\varphi$$
+$$d\\hat{e}_\\theta = -d\\theta\\,\\hat{e}_r + \\cos\\theta\\,d\\varphi\\,\\hat{e}_\\varphi$$
+$$d\\hat{e}_\\varphi = -\\sin\\theta\\,d\\varphi\\,\\hat{e}_r - \\cos\\theta\\,d\\varphi\\,\\hat{e}_\\theta$$</div>`},
+    {q:'[ÜB 1.2b/c] Teilchen $r(t)=\\alpha t^2$, $\\theta=\\beta$, $\\varphi=\\gamma t$. Berechne $\\vec{v}$ in Kugelkoordinaten.',badges:['ex','calc'],ref:'Übung Blatt 1, Aufg. 2b/c',
+     a:`<div class="step">Allgemeine Geschwindigkeit: $\\vec{v} = \\dot{r}\\hat{e}_r + r\\dot{\\theta}\\hat{e}_\\theta + r\\sin\\theta\\,\\dot{\\varphi}\\hat{e}_\\varphi$</div>
+<div class="step">Einsetzen: $\\dot{r}=2\\alpha t$, $\\dot{\\theta}=0$, $\\dot{\\varphi}=\\gamma$, $r=\\alpha t^2$, $\\theta=\\beta$:</div>
+<div class="result">$$\\vec{v} = 2\\alpha t\\,\\hat{e}_r + \\alpha\\gamma t^2\\sin\\beta\\,\\hat{e}_\\varphi$$</div>`},
+    {q:'[ÜB 1.3a] Beweise: $\\sum_i\\varepsilon_{ijk}\\varepsilon_{imn} = \\delta_{jm}\\delta_{kn} - \\delta_{jn}\\delta_{km}$.',badges:['ex','proof'],ref:'Übung Blatt 1, Aufg. 3a',
+     a:`<div class="step">Nutze $\\varepsilon_{ijk}\\varepsilon_{lmn} = \\det(\\delta_{il},\\delta_{im},\\delta_{in};\\delta_{jl},\\delta_{jm},\\delta_{jn};\\delta_{kl},\\delta_{km},\\delta_{kn})$ und setze $l=i$, summiere über $i$:</div>
+<div class="step">Die $3\\times 3$-Determinante liefert (nach Entwicklung nach der ersten Zeile mit $\\sum_i\\delta_{ii}=3$, $\\sum_i\\delta_{ij}=\\delta_{ij}$):
+$$= 3(\\delta_{jm}\\delta_{kn}-\\delta_{jn}\\delta_{km}) - \\delta_{jm}\\delta_{kn} + \\delta_{jn}\\delta_{km} - \\delta_{jm}\\delta_{kn} + \\delta_{jn}\\delta_{km}$$
+$$= (3-1-1)(\\delta_{jm}\\delta_{kn}-\\delta_{jn}\\delta_{km}) = \\delta_{jm}\\delta_{kn} - \\delta_{jn}\\delta_{km}$$</div>
+<div class="result">$\\sum_i\\varepsilon_{ijk}\\varepsilon_{imn} = \\delta_{jm}\\delta_{kn} - \\delta_{jn}\\delta_{km}$ ✓</div>`},
+    {q:'[ÜB 1.3b] Beweise: $\\vec{A}\\times(\\vec{B}\\times\\vec{C}) = (\\vec{A}\\cdot\\vec{C})\\vec{B} - (\\vec{A}\\cdot\\vec{B})\\vec{C}$ (BAC-CAB).',badges:['ex','proof'],ref:'Übung Blatt 1, Aufg. 3b',
+     a:`<div class="step">$[\\vec{A}\\times(\\vec{B}\\times\\vec{C})]_i = \\varepsilon_{ijk}A_j[\\vec{B}\\times\\vec{C}]_k = \\varepsilon_{ijk}A_j\\varepsilon_{klm}B_lC_m$</div>
+<div class="step">$\\varepsilon_{ijk}\\varepsilon_{klm} = \\delta_{il}\\delta_{jm} - \\delta_{im}\\delta_{jl}$, also:
+$= A_j B_i C_j - A_j B_j C_i = (\\vec{A}\\cdot\\vec{C})B_i - (\\vec{A}\\cdot\\vec{B})C_i$</div>
+<div class="result">$\\vec{A}\\times(\\vec{B}\\times\\vec{C}) = (\\vec{A}\\cdot\\vec{C})\\vec{B} - (\\vec{A}\\cdot\\vec{B})\\vec{C}$ ✓</div>`}
+  ]
+},
+{
+  id:'ch3', title:"Newtons Gesetze", num:'03',
+  desc:"Die drei Newton'schen Gesetze, Masse, Kraft, zentrale Paarkräfte, Superpositionsprinzip.",
+  stats:[{v:'10',l:'Karten'},{v:'3',l:'Gesetze'},{v:'Skript §2.2',l:'Quelle'}],
+  cards:[
+    {q:"Formuliere Newtons drei Gesetze – wörtlich und modern.",badges:['def'],ref:'Skript §2.2, S. 8–10',
+     a:`<div class="step"><strong>Lex Prima (LI) – Trägheitsgesetz:</strong> Jeder Körper verharrt in Ruhe oder gleichförmiger Bewegung, wenn keine Kraft wirkt. → definiert das Inertialsystem.</div>
+<div class="step"><strong>Lex Secunda (LII) – Kraftgesetz:</strong> Änderung der Bewegung $\\propto$ Kraft: $\\frac{d\\vec{p}}{dt} = \\vec{F}$, d.h. $m\\ddot{\\vec{r}} = \\vec{F}$</div>
+<div class="step"><strong>Lex Tertia (LIII) – Actio = Reactio:</strong> $\\vec{F}_{ij} = -\\vec{F}_{ji}$</div>
+<div class="warn">LI ist nicht aus LII ableitbar; es postuliert die Existenz von Inertialsystemen unabhängig.</div>`},
+    {q:'Was ist eine zentrale Paarkraft? Gib die allgemeine Form an.',badges:['def'],ref:'Skript §2.2.2, S. 9',
+     a:`$$\\vec{F}_{ij} = f(|\\vec{r}_i-\\vec{r}_j|)\\,\\frac{\\vec{r}_i-\\vec{r}_j}{|\\vec{r}_i-\\vec{r}_j|}$$
+(i) Nur von relativer Position abhängig (Homogenität des Raums)<br>
+(ii) Wirkt entlang der Verbindungslinie (Zentralkraft)<br>
+(iii) Stärke hängt nur vom Abstand ab (Isotropie)<br>
+$f < 0$: attraktiv; $f > 0$: repulsiv.`},
+    {q:'Wie lautet die Gravitationskraft zwischen zwei Massen $m_1, m_2$?',badges:['def'],ref:'Skript §2.2.2, Gl. (5)',
+     a:`$$\\vec{F}_{12} = -Gm_1 m_2\\,\\frac{\\vec{r}_1-\\vec{r}_2}{|\\vec{r}_1-\\vec{r}_2|^3}, \\quad G = 6.67\\times 10^{-11}\\frac{\\text{N m}^2}{\\text{kg}^2}$$
+$\\vec{F}_{21} = -\\vec{F}_{12}$ (LIII). Betrag: $F = Gm_1m_2/r^2$ (Newton'sches Gravitationsgesetz).`},
+    {q:'Beweis: Warum bewirken innere Kräfte keine Änderung des Gesamtimpulses?',badges:['proof'],ref:'Skript §2.3, Gl. (9)',
+     a:`<div class="step">$\\dot{\\vec{P}} = \\sum_i m_i\\ddot{\\vec{r}}_i = \\sum_{i,j,i\\neq j}\\vec{F}_{ij} + \\vec{F}_e$</div>
+<div class="step">Den inneren Term schreibe als: $\\frac{1}{2}\\sum_{i\\neq j}(\\vec{F}_{ij}+\\vec{F}_{ji})$</div>
+<div class="step">Mit LIII: $\\vec{F}_{ij}+\\vec{F}_{ji} = 0$</div>
+<div class="result">$\\dot{\\vec{P}} = \\vec{F}_e$ — Nur äußere Kräfte ändern den Gesamtimpuls.</div>`},
+    {q:'Was ist der Schwerpunkt und der Schwerpunktsatz?',badges:['def'],ref:'Skript §2.3, S. 13',
+     a:`$$\\vec{R} = \\frac{1}{M}\\sum_i m_i\\vec{r}_i, \\quad M = \\sum_i m_i$$
+<div class="result"><strong>Schwerpunktsatz:</strong> $M\\ddot{\\vec{R}} = \\vec{F}_e$<br>
+Das N-Teilchen-System verhält sich wie ein "Superteilchen" der Masse $M$ im äußeren Kraftfeld.</div>`},
+    {q:'Was sind die Freiheitsgrade in der Newton-Mechanik?',badges:['def'],ref:'Skript §2.3, S. 12',
+     a:`Für $N$ Punktteilchen im $\\mathbb{R}^3$: $f = 3N$ Freiheitsgrade → $3N$ DGLn 2. Ordnung.<br>
+Zur eindeutigen Lösung werden $6N$ Anfangsbedingungen benötigt: $\\vec{r}_i(0)$ und $\\dot{\\vec{r}}_i(0)$ für alle $i$.`},
+    {q:'Was ist das schwache Äquivalenzprinzip?',badges:['def'],ref:'Skript §2.4.2, S. 28',
+     a:`<strong>Träge Masse $m$:</strong> Widerstand gegen Beschleunigung ($m\\ddot{\\vec{r}} = \\vec{F}$).<br>
+<strong>Schwere Masse $m_s$:</strong> Kopplung ans Gravitationsfeld ($\\vec{F}_g = -m_s g\\hat{e}_r$).<br>
+<div class="result"><strong>Schwaches Äquivalenzprinzip:</strong> $m = m_s$ experimentell bis auf $10^{-13}$ bestätigt. Konsequenz: Im frei fallenden Fahrstuhl – lokale Schwerelosigkeit.</div>`},
+    {q:'Was ist das Superpositionsprinzip für Kräfte?',badges:['def'],ref:'Skript §2.2.2, S. 10',
+     a:`Kräfte addieren sich vektoriell: $\\vec{F}_{\\text{ges}} = \\sum_j \\vec{F}_j$<br>
+Dies gilt für Gravitationskräfte und elektromagnetische Kräfte. Erlaubt die separate Berechnung und anschließende Addition aller Teilkräfte.`},
+    {q:'Wie lautet die Bewegungsgleichung für N wechselwirkende Teilchen?',badges:['def'],ref:'Skript §2.2.2, S. 10',
+     a:`$$m_i\\ddot{\\vec{r}}_i = \\sum_{j\\neq i}\\vec{F}_{ij} + \\vec{F}_{e,i}, \\quad i = 1,\\ldots,N$$
+$\\vec{F}_{ij}$: innere Kräfte (Wechselwirkung zwischen Teilchen $i$ und $j$)<br>
+$\\vec{F}_{e,i}$: äußere Kräfte auf Teilchen $i$`},
+    {q:'Was ist $1\\,\\text{N}$ (Newton)?',badges:['def'],ref:'Skript §2.2.2',
+     a:`$1\\,\\text{N} = 1\\,\\text{kg}\\cdot\\text{m}/\\text{s}^2$<br>Die Kraft, die eine Masse von 1 kg mit $1\\,\\text{m/s}^2$ beschleunigt (aus $F=ma$).`}
+  ]
+},
+{
+  id:'ch4', title:'Erhaltungssätze', num:'04',
+  desc:'Impuls-, Drehimpuls- und Energieerhaltung, konservative Kräfte, Virialsatz, Arbeit.',
+  stats:[{v:'14',l:'Karten'},{v:'3',l:'Erhaltungen'},{v:'Skript §2.3',l:'Quelle'}],
+  cards:[
+    {q:'Unter welchen Bedingungen ist der Gesamtimpuls eines N-Teilchen-Systems erhalten?',badges:['def'],ref:'Skript §2.3',
+     a:`$\\vec{F}_e = 0$ (keine äußeren Kräfte) $\\Rightarrow \\dot{\\vec{P}} = 0 \\Rightarrow \\vec{P} = \\text{const.}$<br>
+Innere Kräfte (zentrale Paarkräfte) heben sich durch LIII auf.`},
+    {q:'Definiere Drehimpuls und Drehmoment eines Punktteilchens bzgl. $\\vec{r}_0$.',badges:['def'],ref:'Skript §2.3, Gl. (11–12)',
+     a:`$$\\vec{l} = (\\vec{r}-\\vec{r}_0)\\times\\vec{p}, \\quad \\vec{N} = (\\vec{r}-\\vec{r}_0)\\times\\vec{F}$$
+Beziehung: $\\dot{\\vec{l}} = \\vec{N}$ (analog zu $\\dot{\\vec{p}} = \\vec{F}$)`},
+    {q:'Beweise $\\dot{\\vec{l}} = \\vec{N}$.',badges:['proof'],ref:'Skript §2.3, Gl. (16)',
+     a:`<div class="step">$\\dot{\\vec{l}} = \\frac{d}{dt}[(\\vec{r}-\\vec{r}_0)\\times\\vec{p}] = \\dot{\\vec{r}}\\times\\vec{p} + (\\vec{r}-\\vec{r}_0)\\times\\dot{\\vec{p}}$</div>
+<div class="step">$\\dot{\\vec{r}}\\times\\vec{p} = m\\dot{\\vec{r}}\\times\\dot{\\vec{r}} = \\vec{0}$</div>
+<div class="step">$\\dot{\\vec{p}} = \\vec{F}$ (Newton LII)</div>
+<div class="result">$\\dot{\\vec{l}} = (\\vec{r}-\\vec{r}_0)\\times\\vec{F} = \\vec{N}$ ✓</div>`},
+    {q:'Wann ist der Drehimpuls beim N-Teilchensystem mit zentralen Paarkräften erhalten?',badges:['def','proof'],ref:'Skript §2.3, Gl. (17–18)',
+     a:`<div class="step">Berechne $\\dot{\\vec{L}}$. Innere Paarkraftbeiträge: $\\frac{1}{2}\\sum_{i\\neq j}(\\vec{r}_i-\\vec{r}_j)\\times\\vec{F}_{ij}$</div>
+<div class="step">Mit Zentralkraft: $\\vec{F}_{ij} \\parallel (\\vec{r}_i-\\vec{r}_j)$<br>$(\\vec{r}_i-\\vec{r}_j)\\times\\vec{F}_{ij} = 0$</div>
+<div class="result">$\\vec{N}_e = 0 \\Rightarrow \\dot{\\vec{L}} = 0 \\Rightarrow \\vec{L} = \\text{const.}$</div>`},
+    {q:'Was ist Arbeit und wie hängt sie mit kinetischer Energie zusammen?',badges:['def'],ref:'Skript §2.3, Gl. (19)',
+     a:`$$W = \\int_\\gamma d\\vec{r}\\cdot\\vec{F}$$
+Arbeit-Energie-Theorem (aus LII): $W = T(t_2)-T(t_1)$, $T = \\frac{1}{2}m\\dot{\\vec{r}}^2$<br>
+Die Arbeit ist die Änderung der kinetischen Energie.`},
+    {q:'Was ist ein konservatives Kraftfeld? Drei äquivalente Bedingungen.',badges:['def'],ref:'Skript §2.3, Gl. (21)',
+     a:`(i) Es existiert ein Potential: $\\vec{F} = -\\nabla U(\\vec{r})$<br>
+(ii) Das Wegintegral ist <strong>wegunabhängig</strong><br>
+(iii) $\\oint_\\gamma \\vec{F}\\cdot d\\vec{r} = 0$ für alle geschlossenen Wege $\\gamma$<br>
+(iv) $\\nabla\\times\\vec{F} = 0$ (Stokes-Theorem)`,},
+    {q:'Beweise den Energieerhaltungssatz für konservative Kräfte.',badges:['proof'],ref:'Skript §2.3, S. 19',
+     a:`<div class="step">$\\frac{d}{dt}E = \\frac{d}{dt}(T+U) = m\\dot{\\vec{r}}\\cdot\\ddot{\\vec{r}} + \\nabla U\\cdot\\dot{\\vec{r}}$</div>
+<div class="step">$= \\dot{\\vec{r}}\\cdot(m\\ddot{\\vec{r}} + \\nabla U) = \\dot{\\vec{r}}\\cdot(\\vec{F}-\\vec{F}) = 0$</div>
+<div class="result">$E = T + U = \\text{const.}$ ✓</div>`},
+    {q:'Was besagt der Virialsatz? Beweise ihn für homogene Potentiale.',badges:['def','proof'],ref:'Skript §2.3, S. 22',
+     a:`Für ein gebundenes System mit homogenem Potential $U(\\alpha\\vec{r}) = \\alpha^n U(\\vec{r})$:
+$$\\overline{T} = \\frac{n}{2}\\overline{U}$$
+<div class="step">Beweis: $\\frac{d}{dt}\\sum_i\\vec{r}_i\\cdot\\vec{p}_i = 2T + \\sum_i\\vec{r}_i\\cdot\\vec{F}_i$<br>Zeitmittel einer Zeitableitung = 0 (gebundene Bewegung).<br>Eulersche Homogenität: $\\sum_i\\vec{r}_i\\cdot\\nabla_i U = nU$.</div>
+<div class="result">HO ($n=2$): $\\overline{T}=\\overline{U}=E/2$. Gravitation ($n=-1$): $2\\overline{T}=-\\overline{U}$, $E=-\\overline{T}<0$.</div>`},
+    {q:'Lorentzkraft: Warum ändert sie nicht die kinetische Energie?',badges:['def','proof'],ref:'Skript §2.7, S. 51',
+     a:`$$\\vec{F}_L = \\frac{q}{c}\\dot{\\vec{r}}\\times\\vec{B}$$
+<div class="step">$\\frac{d}{dt}T = m\\ddot{\\vec{r}}\\cdot\\dot{\\vec{r}} = \\frac{q}{c}(\\dot{\\vec{r}}\\times\\vec{B})\\cdot\\dot{\\vec{r}} = 0$<br>weil $\\dot{\\vec{r}}\\times\\vec{B} \\perp \\dot{\\vec{r}}$.</div>
+<div class="result">Lorentzkraft ändert Richtung, nicht Betrag der Geschwindigkeit → Zyklotronbewegung.</div>`},
+    {q:'[ÜB 2.1e] Welche Arbeit verrichtet $\\vec{F} = -2ay\\hat{e}_y$ entlang dem Viertelkreis $(x,y)=(r\\cos\\theta,r\\sin\\theta)$, $\\theta\\in[0,\\pi/2]$?',badges:['ex','calc'],ref:'Übung Blatt 2, Aufg. 1e',
+     a:`<div class="step">$dy = r\\cos\\theta\\,d\\theta$, $F_y = -2ar\\sin\\theta$</div>
+<div class="step">$W = \\int_0^{\\pi/2}(-2ar\\sin\\theta)(r\\cos\\theta)d\\theta = -2ar^2\\int_0^{\\pi/2}\\sin\\theta\\cos\\theta\\,d\\theta$<br>$= -2ar^2\\cdot\\frac{1}{2}[-\\cos(2\\theta)/2]... = -2ar^2\\cdot\\frac{1}{2}$</div>
+<div class="result">$W = -ar^2$<br>(Alternativ: $U = ay^2$, $W = -(U(0,r)-U(r,0)) = -(ar^2-0) = -ar^2$.)</div>`},
+    {q:'[ÜB 2.2] Wann erreicht ein Teilchen mit Potential $V(x) = -\\beta x^\\alpha$ den Ursprung in endlicher Zeit?',badges:['ex','calc'],ref:'Übung Blatt 2, Aufg. 2',
+     a:`<div class="step">Energieerhaltung ($E=0$): $\\dot{x} = -\\sqrt{\\frac{2\\beta}{m}}x^{\\alpha/2}$ (Richtung −x)</div>
+<div class="step">Separation: $T = \\sqrt{\\frac{m}{2\\beta}}\\int_0^{x_0}x^{-\\alpha/2}dx$<br>
+Integral konvergiert $\\Leftrightarrow$ $-\\alpha/2 > -1$ $\\Leftrightarrow$ $\\alpha < 2$.</div>
+<div class="result"><strong>Endliche Zeit genau für $0 < \\alpha < 2$.</strong></div>`},
+    {q:'[ÜB 2.3a] Zentralkraft $\\vec{F} = f(|\\vec{r}-\\vec{r}_0|)(\\vec{r}-\\vec{r}_0)$: Ist Drehimpuls bzgl. $\\vec{r}_0$ erhalten?',badges:['ex','proof'],ref:'Übung Blatt 2, Aufg. 3a',
+     a:`<div class="step">$\\vec{N} = (\\vec{r}-\\vec{r}_0)\\times\\vec{F} = (\\vec{r}-\\vec{r}_0)\\times f(...)\\cdot(\\vec{r}-\\vec{r}_0) = f(...)\\cdot\\underbrace{(\\vec{r}-\\vec{r}_0)\\times(\\vec{r}-\\vec{r}_0)}_{=\\vec{0}}$</div>
+<div class="result">$\\vec{N} = \\vec{0} \\Rightarrow \\dot{\\vec{l}} = 0$: <strong>Drehimpuls ist erhalten.</strong></div>`},
+    {q:'[ÜB 2.3b] Kraft $\\vec{F} = \\hat{e}_z\\times(\\vec{r}-\\vec{r}_0)$: Ist Drehimpuls erhalten?',badges:['ex','proof'],ref:'Übung Blatt 2, Aufg. 3b',
+     a:`<div class="step">$\\vec{N} = (\\vec{r}-\\vec{r}_0)\\times[\\hat{e}_z\\times(\\vec{r}-\\vec{r}_0)]$</div>
+<div class="step">BAC-CAB: $= \\hat{e}_z|\\vec{r}-\\vec{r}_0|^2 - (\\vec{r}-\\vec{r}_0)[(\\vec{r}-\\vec{r}_0)\\cdot\\hat{e}_z]$</div>
+<div class="result">$\\vec{N} \\neq \\vec{0}$ (i.A.), also <strong>Drehimpuls nicht erhalten.</strong></div>`}
+  ]
+},
+{
+  id:'ch5', title:'Inertialsysteme & Galilei-Transformationen', num:'05',
+  desc:'Definition von Inertialsystemen, allgemeine Galilei-Transformation, Forminvarianz, Galilei-Gruppe.',
+  stats:[{v:'9',l:'Karten'},{v:'10',l:'Parameter'},{v:'Skript §2.4.1',l:'Quelle'}],
+  cards:[
+    {q:'Wie lautet die allgemeine Galilei-Transformation?',badges:['def'],ref:'Skript §2.4.1, Gl. (28)',
+     a:`$$t' = t - t_0, \\quad x'_a = \\sum_b R_{ab}x_b - v_a t - c_a$$
+10 Parameter: 1 Zeittranslation $t_0$ · 3 Raumtranslationen $c_a$ · 3 Galilei-Boosts $v_a$ · 3 Drehungsparameter ($R$)`},
+    {q:'Was bedeutet Forminvarianz (Kovarianz) der Newton-Gleichungen?',badges:['def'],ref:'Skript §2.4.1, S. 25',
+     a:`Die Newton-Gleichung $m\\ddot{x}_a = F_a$ hat in jedem Inertialsystem <strong>dieselbe Form</strong>. Nur Zahlenwerte ändern sich, nicht die Struktur der Gleichung. → <strong>Galileisches Relativitätsprinzip</strong>`},
+    {q:'Beweis: Warum gilt $R^TR = 1$ für Drehmatrizen?',badges:['proof'],ref:'Skript §2.4.1, Gl. (26–27)',
+     a:`<div class="step">Drehungen erhalten Skalarprodukte: $\\langle R\\vec{x},R\\vec{y}\\rangle = \\langle\\vec{x},\\vec{y}\\rangle$</div>
+<div class="step">$(R\\vec{x})^T(R\\vec{y}) = \\vec{x}^T R^TR \\vec{y} \\overset{!}{=} \\vec{x}^T\\vec{y}$ für alle $\\vec{x},\\vec{y}$</div>
+<div class="result">$R^TR = \\mathbf{1}$ ✓</div>`},
+    {q:'Was ist der Unterschied zwischen aktiver und passiver Transformation?',badges:['def'],ref:'Skript §2.4.1, S. 26',
+     a:`<strong>Passiv:</strong> Das Koordinatensystem wird transformiert, die Bahnkurve bleibt fest.<br>
+<strong>Aktiv:</strong> Die Bahnkurve wird transformiert, das Koordinatensystem bleibt fest.<br>
+In der Mechanik ist die passive Sichtweise natürlicher.`},
+    {q:'[ÜB 3.3a] Rotierte Einheitsvektoren: $\\hat{e}'_x$ und $\\hat{e}'_y$ durch $\\hat{e}_x, \\hat{e}_y$ ausdrücken (passive Rotation um $\\omega$).',badges:['ex'],ref:'Übung Blatt 3, Aufg. 3a',
+     a:`<div class="result">$$\\hat{e}'_x = \\cos\\omega\\,\\hat{e}_x + \\sin\\omega\\,\\hat{e}_y$$
+$$\\hat{e}'_y = -\\sin\\omega\\,\\hat{e}_x + \\cos\\omega\\,\\hat{e}_y$$</div>`},
+    {q:'[ÜB 3.3b] Koordinatentransformation $x',y'$ aus $x,y$ bei Rotation um $\\omega$.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 3b',
+     a:`<div class="step">$x' = \\hat{e}'_x\\cdot\\vec{r} = \\cos\\omega\\,x + \\sin\\omega\\,y$<br>
+$y' = \\hat{e}'_y\\cdot\\vec{r} = -\\sin\\omega\\,x + \\cos\\omega\\,y$</div>
+<div class="result">$$\\begin{pmatrix}x'\\\\y'\\end{pmatrix} = \\begin{pmatrix}\\cos\\omega & \\sin\\omega\\\\-\\sin\\omega & \\cos\\omega\\end{pmatrix}\\begin{pmatrix}x\\\\y\\end{pmatrix} = R^T\\vec{r}$$</div>`},
+    {q:'[ÜB 3.3c] Ableitungsoperatoren $\\partial/\\partial x'$ und $\\partial/\\partial y'$ in Abhängigkeit der alten Ableitungen.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 3c',
+     a:`<div class="step">Kettenregel: $\\frac{\\partial}{\\partial x'} = \\frac{\\partial x}{\\partial x'}\\frac{\\partial}{\\partial x} + \\frac{\\partial y}{\\partial x'}\\frac{\\partial}{\\partial y}$<br>
+Aus Umkehrtransformation $x = \\cos\\omega\\,x' - \\sin\\omega\\,y'$: $\\frac{\\partial x}{\\partial x'} = \\cos\\omega$, $\\frac{\\partial y}{\\partial x'} = \\sin\\omega$.</div>
+<div class="result">$\\partial/\\partial x' = \\cos\\omega\\,\\partial/\\partial x + \\sin\\omega\\,\\partial/\\partial y$<br>
+$\\partial/\\partial y' = -\\sin\\omega\\,\\partial/\\partial x + \\cos\\omega\\,\\partial/\\partial y$</div>`},
+    {q:'[ÜB 3.4a] Beweise $R^TR = I$ aus $\\|Rx\\| = \\|x\\|$.',badges:['ex','proof'],ref:'Übung Blatt 3, Aufg. 4a',
+     a:`<div class="step">$\\|Rx\\|^2 = x^T R^TR x = \\|x\\|^2 = x^Tx$ für alle $x$.</div>
+<div class="step">Wähle $x = e_i$: $(R^TR)_{ii} = 1$.<br>
+Wähle $x = e_i+e_j$ ($i\\neq j$): $(R^TR)_{ij} = 0$.</div>
+<div class="result">$R^TR = I$ ✓</div>`},
+    {q:'[ÜB 3.4b] Zeige: $\\langle Ry,Rx\\rangle = \\langle y,x\\rangle$ wenn $R^TR = I$.',badges:['ex','proof'],ref:'Übung Blatt 3, Aufg. 4b',
+     a:`$(Ry)^T(Rx) = y^T R^T R x = y^T I x = y^T x = \\langle y,x\\rangle$ ✓`}
+  ]
+},
+{
+  id:'ch6', title:'Beschleunigte Bezugssysteme & Scheinkräfte', num:'06',
+  desc:'Allgemein beschleunigte Bezugssysteme, Scheinkräfte, Corioliskraft, Foucaultsches Pendel.',
+  stats:[{v:'8',l:'Karten'},{v:'4',l:'Scheinkräfte'},{v:'Skript §2.4.2',l:'Quelle'}],
+  cards:[
+    {q:'Wie lautet die Bewegungsgleichung im allgemein beschleunigten Bezugssystem?',badges:['def'],ref:'Skript §2.4.2, Gl. (35)',
+     a:`$$m\\ddot{\\vec{r}}' = \\vec{F}' + \\vec{F}'_s$$
+$$\\vec{F}'_s = \\underbrace{-m\\ddot{\\vec{d}}}_{(a)\\text{ Beschl.}} \\underbrace{-m\\vec{\\omega}\\times(\\vec{\\omega}\\times\\vec{r}')}_{(b)\\text{ Zentrifugal}} \\underbrace{-2m\\vec{\\omega}\\times\\dot{\\vec{r}}'}_{(c)\\text{ Coriolis}} \\underbrace{-m\\dot{\\vec{\\omega}}\\times\\vec{r}'}_{(d)\\text{ tangential}}$$`},
+    {q:'Was ist eine Scheinkraft / Trägheitskraft?',badges:['def'],ref:'Skript §2.4.2, S. 28',
+     a:`Eine Scheinkraft tritt nur in <strong>nicht-inertialen</strong> Bezugssystemen auf. In einem geeigneten Inertialsystem verschwindet sie.<br>
+<div class="warn">Scheinkräfte und eingeprägte Kräfte sind (ohne Bezugssystemwechsel) nicht unterscheidbar → Äquivalenzprinzip.</div>`},
+    {q:'Was ist die Corioliskraft auf der Nordhalbkugel?',badges:['def'],ref:'Skript §2.4.2, S. 32',
+     a:`$$\\vec{F}_C = -2m\\vec{\\omega}\\times\\dot{\\vec{r}}'$$
+Auf der Nordhalbkugel ($\\cos\\theta > 0$): Ablenkung von sich vorwärtsbewegenden Objekten <strong>nach rechts</strong>.<br>
+→ Meteorologische Tiefs auf der Nordhalbkugel drehen sich <strong>gegen den Uhrzeigersinn</strong>.`},
+    {q:'Wie lautet die Bewegungsgleichung auf der Erdoberfläche bis $O(\\omega)$?',badges:['def'],ref:'Skript §2.4.2, Gl. (36)',
+     a:`$$m\\ddot{\\vec{r}}' \\approx \\vec{F}' - mg\\hat{e}'_3 - 2m\\vec{\\omega}\\times\\dot{\\vec{r}}'$$
+Zentrifugal- und tangentiale Kräfte sind $O(\\omega^2)$ und vernachlässigbar (Erde: $\\omega = 7.3\\times 10^{-5}\\,\\text{s}^{-1}$).`},
+    {q:'Foucaultsches Pendel: Was wird beobachtet und warum?',badges:['calc'],ref:'Skript §2.4.2, S. 33',
+     a:`<div class="step">Ohne Coriolis: Ebenes Pendel mit $\\omega_0 = \\sqrt{g/l}$.</div>
+<div class="step">Mit Coriolis: $z = x'_1+ix'_2$ erfüllt $\\ddot{z}+2i\\alpha\\dot{z}+\\omega_0^2 z=0$, $\\alpha = \\omega\\cos\\theta$.</div>
+<div class="step">Lösung: $z(t) = e^{-i\\alpha t}[C_+e^{i\\omega_0't}+C_-e^{-i\\omega_0't}]$, $\\omega_0' \\approx \\omega_0$.</div>
+<div class="result">Die Schwingungsebene dreht sich mit $\\alpha = \\omega\\cos\\theta$.<br>Am Nordpol: einmal täglich ($\\ approx 24\\,\\text{h}$).</div>`},
+    {q:'Herleitung: $\\dot{\\tilde{\\vec{r}}} = \\vec{\\omega}\\times\\tilde{\\vec{r}}$ für einen rotierenden Punkt.',badges:['proof'],ref:'Skript §2.4.2, Gl. (33)',
+     a:`<div class="step">Wenn $|\\tilde{\\vec{r}}| = \\text{const.}$ und $\\tilde{\\vec{r}}$ mit $\\vec{\\omega}$ rotiert:</div>
+<div class="step">Richtung: $d\\tilde{\\vec{r}} \\perp \\vec{\\omega}$ und $d\\tilde{\\vec{r}} \\perp \\tilde{\\vec{r}}$</div>
+<div class="step">Betrag: $|d\\tilde{\\vec{r}}| = |\\tilde{\\vec{r}}|\\sin\\alpha\\,\\omega\\,dt$ (Polarkoordinaten)</div>
+<div class="result">$d\\tilde{\\vec{r}} = \\vec{\\omega}\\times\\tilde{\\vec{r}}\\,dt \\Rightarrow \\dot{\\tilde{\\vec{r}}} = \\vec{\\omega}\\times\\tilde{\\vec{r}}$ ✓</div>`},
+    {q:'[ÜB 4.3] Welche Kraft spürt Anna beim radialen Laufen auf dem Karussell?',badges:['ex'],ref:'Übung Blatt 4, Aufg. 3',
+     a:`Anna bewegt sich radial nach außen: $\\dot{\\vec{r}}' = \\dot{r}'\\hat{e}'_r$<br>
+Corioliskraft: $\\vec{F}_C = -2m\\vec{\\omega}\\times\\dot{\\vec{r}}' = -2m\\omega\\hat{e}'_z\\times\\dot{r}'\\hat{e}'_r = -2m\\omega\\dot{r}'\\hat{e}'_\\varphi$<br>
+<div class="result">Ablenkung <strong>senkrecht</strong> zur Bewegungsrichtung (in $\\hat{e}'_\\varphi$). Bernd am Rand (in Drehrichtung): Coriolis nach innen.</div>`},
+    {q:'[ÜB 4.1b] Was sieht Bernd auf dem Bahnsteig, wenn Anna im Zug einen Ball fallen lässt?',badges:['ex'],ref:'Übung Blatt 4, Aufg. 1b',
+     a:`Anna: Ball fällt senkrecht (Trajektorie gerade nach unten — Inertialsystem Zug).<br>
+<div class="result">Bernd: Der Ball hat beim Loslassen die Horizontalgeschwindigkeit des Zuges → parabolische Bahnkurve.</div>`}
+  ]
+},
+{
+  id:'ch7', title:'Kleine Schwingungen', num:'07',
+  desc:'Linearisierung, Stabilitätskriterium, Normalmoden, gekoppelte Oszillatoren, Molekülschwingungen.',
+  stats:[{v:'10',l:'Karten'},{v:'4',l:'Schritte'},{v:'Skript §2.5',l:'Quelle'}],
+  cards:[
+    {q:'Rezept: Wie löst man Probleme kleiner Schwingungen?',badges:['def'],ref:'Skript §2.5, S. 39',
+     a:`<div class="step">1. Gleichgewichtslagen: $\\nabla V(\\vec{r}_0) = 0$, Stabilitätsprüfung $V''(\\vec{r}_0) > 0$</div>
+<div class="step">2. Taylor bis 2. Ordnung: $V(\\vec{r}_0+\\vec{u}) = \\frac{1}{2}A_{ij}u_iu_j$<br>
+Stabilitätsmatrix: $A_{ij} = \\frac{1}{m_i}\\partial_i\\partial_j V(\\vec{r}_0)$</div>
+<div class="step">3. Eigenwertproblem: $A\\vec{z} = \\omega^2\\vec{z}$ → Eigenfrequenzen $\\omega_a$, Eigenvektoren $\\vec{z}_a$</div>
+<div class="step">4. Allg. Lösung: $\\vec{u}(t) = \\text{Re}\\sum_a v_a\\vec{z}_a e^{i\\omega_a t}$</div>`},
+    {q:'Was ist die linearisierte Bewegungsgleichung? Was bedeutet Stabilität?',badges:['def'],ref:'Skript §2.5, Gl. (44)',
+     a:`$$\\ddot{\\vec{u}} = -A\\vec{u}$$
+<strong>Stabil ($\\omega^2_a > 0$):</strong> $\\vec{u}(t) = C\\cos(\\omega_a t+\\varphi)$ — beschränkte Schwingung.<br>
+<strong>Instabil ($\\omega^2_a < 0$):</strong> $\\vec{u}(t) \\sim e^{|\\omega_a|t}$ — exponentielles Anwachsen.`},
+    {q:'Zwei gekoppelte Pendel ($k_1=k_2=k_f$, Koppelfeder $k$): Eigenfrequenzen berechnen.',badges:['calc'],ref:'Skript §2.5, Gl. (46)',
+     a:`<div class="step">$V = \\frac{k_f}{2}(u_1^2+u_2^2) + \\frac{k}{2}(u_1-u_2)^2$</div>
+<div class="step">$A = \\frac{1}{m}\\begin{pmatrix}k_f+k & -k\\\\ -k & k_f+k\\end{pmatrix}$</div>
+<div class="step">$\\det(\\omega^2 - A) = 0 \\Rightarrow \\omega^2_{1,2} = \\frac{k_f}{m}$ und $\\frac{k_f+2k}{m}$</div>
+<div class="result">$\\omega_- = \\sqrt{k_f/m}$ (In-Phase), $\\omega_+ = \\sqrt{(k_f+2k)/m}$ (Gegen-Phase)</div>`},
+    {q:'Was sind Normalmoden und Normalkoordinaten?',badges:['def'],ref:'Skript §2.5, S. 40',
+     a:`Die Eigenvektoren $\\vec{z}_a$ der Stabilitätsmatrix $A$ sind die <strong>Normalmoden</strong>. In Normalkoordinaten zerfällt die Bewegungsgleichung in entkoppelte harmonische Oszillatoren.<br>
+Zwei gekoppelte Pendel: $\\vec{z}_- = \\frac{1}{\\sqrt{2}}\\begin{pmatrix}1\\\\1\\end{pmatrix}$ (in Phase), $\\vec{z}_+ = \\frac{1}{\\sqrt{2}}\\begin{pmatrix}1\\\\-1\\end{pmatrix}$ (Gegenphase).`},
+    {q:'Getriebener harmonischer Oszillator: Partikuläre Lösung und Resonanz.',badges:['def','calc'],ref:'Skript §2.7, S. 49',
+     a:`Gleichung: $m\\ddot{x} = -m\\omega_0^2 x + A\\cos(\\omega_e t)$<br>
+<div class="step">FT: $\\tilde{x}(\\omega) = \\frac{A\\pi[\\delta(\\omega+\\omega_e)+\\delta(\\omega-\\omega_e)]}{m(\\omega_0^2-\\omega^2)}$</div>
+<div class="result">$$x_p(t) = \\frac{A\\cos(\\omega_e t)}{m(\\omega_0^2-\\omega_e^2)}$$
+<strong>Resonanz bei $\\omega_e \\to \\omega_0$</strong>: Amplitude divergiert!</div>`},
+    {q:'[ÜB 4.4] Kipp-Spielzeug: Potential, Stabilitätsbedingung, Frequenz.',badges:['ex','calc'],ref:'Übung Blatt 4, Aufg. 4',
+     a:`<div class="step">Zwei Massen $m$ an Armen der Länge $l$, Winkel $\\pm\\alpha$, Zapfenabstand $d$.<br>
+$V(\\theta) = mg[d\\cos\\theta - 2l\\cos\\theta\\cos\\alpha] = mg(d-2l\\cos\\alpha)\\cos\\theta$</div>
+<div class="step">Gleichgewicht $\\theta=0$: $V'(0)=0$ ✓; $V''(0) = -mg(d-2l\\cos\\alpha) > 0 \\Leftrightarrow d < 2l\\cos\\alpha$</div>
+<div class="step">$T = ms^2\\dot{\\theta}^2$, $s = \\sqrt{d^2+l^2+2dl\\cos\\alpha}$</div>
+<div class="result">Frequenz: $\\omega = \\sqrt{\\frac{g(2l\\cos\\alpha-d)}{s^2}}$</div>`},
+    {q:'[ÜB 5.1a] Lineares Molekül: Potential aufstellen.',badges:['ex'],ref:'Übung Blatt 5, Aufg. 1a',
+     a:`Drei Atome mit Abstand $a$. Gleichgewicht: $x_2^{eq}-x_1^{eq}=x_3^{eq}-x_2^{eq}=a$.<br>
+Auslenkungen $u_i = x_i - x_i^{eq}$:
+$$V(u_1,u_2,u_3) = \\frac{k}{2}(u_2-u_1)^2 + \\frac{k}{2}(u_3-u_2)^2$$`},
+    {q:'[ÜB 5.1b] Stabilitätsmatrix für das lineare Molekül.',badges:['ex','calc'],ref:'Übung Blatt 5, Aufg. 1b',
+     a:`<div class="step">$\\partial^2 V/\\partial u_1^2 = k$, $\\partial^2 V/\\partial u_2^2 = 2k$, $\\partial^2 V/\\partial u_3^2 = k$<br>
+$\\partial^2 V/\\partial u_1\\partial u_2 = -k$, $\\partial^2 V/\\partial u_2\\partial u_3 = -k$, Rest 0</div>
+<div class="result">$$A = \\frac{k}{m}\\begin{pmatrix}1 & -1 & 0 \\\\ -1 & 2 & -1 \\\\ 0 & -1 & 1\\end{pmatrix}$$</div>`},
+    {q:'[ÜB 5.1c] Eigenfrequenzen des linearen Moleküls.',badges:['ex','calc'],ref:'Übung Blatt 5, Aufg. 1c',
+     a:`<div class="step">$\\det(\\omega^2\\mathbf{1} - A) = 0$; charakteristisches Polynom: $\\omega^2(\\omega^2-k/m)(\\omega^2-3k/m)=0$</div>
+<div class="result">$\\omega_1 = 0$ (Translation), $\\omega_2 = \\sqrt{k/m}$ (asym. Streckung), $\\omega_3 = \\sqrt{3k/m}$ (sym. Streckung)</div>`},
+    {q:'[ÜB 2.1a/b Quiz] Kann sich ein Objekt ohne Kraft bewegen? Kann es beschleunigen ohne Geschwindigkeitsänderung?',badges:['ex'],ref:'Übung Blatt 2, Aufg. 1a/b',
+     a:`<div class="step"><strong>a) Ja</strong> — Nach LI bewegt sich ein Körper ohne Kraft mit konstanter Geschwindigkeit. Keine Kraft nötig um die Bewegung aufrechtzuerhalten.</div>
+<div class="step"><strong>b) Ja</strong> — Kreisbewegung mit $|\vec{v}|=\text{const.}$ hat Zentripetalbeschleunigung $\\perp$ Geschwindigkeit.</div>`}
+  ]
+},
+{
+  id:'ch8', title:'Zweikörperproblem & Kepler', num:'08',
+  desc:'Reduktion auf Schwerpunkt und Relativproblem, effektives Potential, Keplersche Gesetze, Bahnen.',
+  stats:[{v:'10',l:'Karten'},{v:'3',l:'Kepler-Gesetze'},{v:'Skript §2.6',l:'Quelle'}],
+  cards:[
+    {q:'Herleitung: Trennung des Zweikörperproblems in Schwerpunkt + Relativbewegung.',badges:['proof'],ref:'Skript §2.6, Gl. (47)',
+     a:`<div class="step">Summe und Differenz der Bewegungsgleichungen:<br>
+$m_1\\ddot{\\vec{r}}_1 = \\vec{F}_{12}$, $m_2\\ddot{\\vec{r}}_2 = -\\vec{F}_{12}$</div>
+<div class="step">$\\vec{R} = \\frac{m_1\\vec{r}_1+m_2\\vec{r}_2}{M}$: $M\\ddot{\\vec{R}} = 0$<br>
+$\\vec{r} = \\vec{r}_1-\\vec{r}_2$: $\\mu\\ddot{\\vec{r}} = \\hat{e}_r F(r)$</div>
+<div class="result">Reduzierte Masse $\\mu = \\frac{m_1m_2}{m_1+m_2}$. Effektives Einkörperproblem.</div>`},
+    {q:'Was ist das effektive Potential?',badges:['def'],ref:'Skript §2.6, Gl. (51)',
+     a:`Aus Drehimpulserhaltung $l = \\mu r^2\\dot{\\varphi} = \\text{const.}$:
+$$E_1 = \\frac{\\mu}{2}\\dot{r}^2 + \\underbrace{\\frac{l^2}{2\\mu r^2} + U(r)}_{U_{eff}(r)}$$
+Das Zentrifugalglied $l^2/(2\\mu r^2)$ wirkt als effektive Abstoßung.`},
+    {q:'Kepler-Problem $U=-k/r$: Bahngleichung herleiten.',badges:['proof','calc'],ref:'Skript §2.6, Gl. (55)',
+     a:`<div class="step">$\\dot{\\varphi} = l/(\\mu r^2)$, $\\dot{r} = \\sqrt{\\frac{2}{\\mu}(E_1-U_{eff})}$</div>
+<div class="step">$dr/d\\varphi = \\dot{r}/\\dot{\\varphi}$; Substitution $u=1/r$: $r=1/u$, $\\dot{r}=-\\frac{l}{\\mu}u'$</div>
+<div class="step">Binet-Gleichung: $u'' + u = \\frac{k\\mu}{l^2}$; Lösung: $u = \\frac{k\\mu}{l^2}(1+\\varepsilon\\cos\\varphi)$</div>
+<div class="result">$$r(\\varphi) = \\frac{p}{1+\\varepsilon\\cos\\varphi}, \\quad p = \\frac{l^2}{k\\mu}, \\quad \\varepsilon = \\sqrt{1+\\frac{2l^2E_1}{\\mu k^2}}$$</div>`},
+    {q:'Welche Kegelschnitte ergeben sich für verschiedene Energien?',badges:['def'],ref:'Skript §2.6, S. 46',
+     a:`$\\varepsilon < 1$ ($E < 0$): <strong>Ellipse</strong> — gebundene Bahn<br>
+$\\varepsilon = 1$ ($E = 0$): <strong>Parabel</strong> — Grenzfall<br>
+$\\varepsilon > 1$ ($E > 0$): <strong>Hyperbel</strong> — ungebunden`},
+    {q:'Formuliere die drei Keplerschen Gesetze.',badges:['def'],ref:'Skript §2.6, S. 47–48',
+     a:`<div class="step"><strong>1. Gesetz:</strong> Planetenbahnen sind Ellipsen mit der Sonne in einem Brennpunkt.</div>
+<div class="step"><strong>2. Gesetz (Flächensatz):</strong> $\\frac{dA}{dt} = \\frac{l}{2\\mu} = \\text{const.}$ — gleiche Flächen in gleichen Zeiten.</div>
+<div class="step"><strong>3. Gesetz:</strong> $T^2/a^3 = 4\\pi^2\\mu/k \\approx 4\\pi^2/(GM_\\odot)$ — universell für alle Planeten.</div>`},
+    {q:'Beweis des 2. Keplerschen Gesetzes (Flächensatz).',badges:['proof'],ref:'Skript §2.6, S. 48',
+     a:`<div class="step">Überstrichene Fläche im Zeitintervall $dt$: $dA = \\frac{1}{2}|\\vec{r}\\times(\\vec{r}+\\dot{\\vec{r}}dt)| = \\frac{dt}{2}|\\vec{r}\\times\\dot{\\vec{r}}|$</div>
+<div class="result">$$\\frac{dA}{dt} = \\frac{1}{2}|\\vec{r}\\times\\dot{\\vec{r}}| = \\frac{l}{2\\mu} = \\text{const.}$$
+Folgt direkt aus der Drehimpulserhaltung $l = \\mu|\\vec{r}\\times\\dot{\\vec{r}}| = \\text{const.}$ ✓</div>`},
+    {q:'Beweis des 3. Keplerschen Gesetzes.',badges:['proof','calc'],ref:'Skript §2.6, S. 48',
+     a:`<div class="step">Fläche der Ellipse: $A_{tot} = \\pi ab$; Flächensatz: $A_{tot} = Tl/(2\\mu)$<br>Umlaufzeit: $T = 2\\pi ab\\mu/l$</div>
+<div class="step">Ellipsengeometrie: $p = b^2/a$, $p = l^2/(k\\mu)$ → $b^2 = l^2a/(k\\mu)$</div>
+<div class="step">$T^2 = \\frac{4\\pi^2 a^2 b^2\\mu^2}{l^2} = \\frac{4\\pi^2 a^3\\mu}{k}$</div>
+<div class="result">$$\\frac{T^2}{a^3} = \\frac{4\\pi^2\\mu}{k} \\approx \\frac{4\\pi^2}{GM_\\odot}$$ ✓</div>`},
+    {q:'Virialsatz im Kepler-Problem: Berechne $\\overline{T}$ und $\\overline{U}$ für eine Ellipsenbahn.',badges:['calc'],ref:'Skript §2.3, S. 22',
+     a:`<div class="step">$U = -k/r$: homogen vom Grad $n = -1$.</div>
+<div class="step">Virialsatz: $\\overline{T} = \\frac{n}{2}\\overline{U} = -\\frac{1}{2}\\overline{U}$</div>
+<div class="step">$E = \\overline{T}+\\overline{U} = -\\frac{1}{2}\\overline{U}+\\overline{U} = \\frac{1}{2}\\overline{U}$</div>
+<div class="result">$\\overline{U} = 2E < 0$, $\\overline{T} = -E > 0$.<br>Gebundene Zustände haben $E < 0$.</div>`},
+    {q:'Was ist der Perihelabstand $r_p$ und Aphelabstand $r_a$ einer Ellipse?',badges:['def'],ref:'Skript §2.6, S. 46',
+     a:`Aus $r(\\varphi) = p/(1+\\varepsilon\\cos\\varphi)$:<br>
+$r_p = p/(1+\\varepsilon)$ (Perihelion, $\\varphi=0$)<br>
+$r_a = p/(1-\\varepsilon)$ (Aphelion, $\\varphi=\\pi$)<br>
+Große Halbachse: $a = \\frac{r_p+r_a}{2} = \\frac{p}{1-\\varepsilon^2}$`},
+    {q:'[ÜB 1.4a/b] Annas Kugel-Bahnkurve: Bewegungsgleichungen und Lösung im Anna-System.',badges:['ex','calc'],ref:'Übung Blatt 1, Aufg. 4a/b',
+     a:`<div class="step">Im Anna-System (Inertialsystem der Straßenbahn): Nur Erdbeschleunigung nach unten.<br>
+$m\\ddot{r}^A_x = 0$, $m\\ddot{r}^A_y = 0$, $m\\ddot{r}^A_z = -mg$</div>
+<div class="result">$r^A_x(t) = v^A_{0,x}t$, $r^A_y(t) = 0$, $r^A_z(t) = v^A_{0,z}t - \\frac{1}{2}gt^2$<br>Parabolische Bahnkurve.</div>`}
+  ]
+},
+{
+  id:'ch9', title:'Weitere Kräfte', num:'09',
+  desc:'Reibungskräfte, Lorentzkraft, Zyklotronbewegung, zeitabhängige Kräfte.',
+  stats:[{v:'5',l:'Karten'},{v:'3',l:'Krafttypen'},{v:'Skript §2.7',l:'Quelle'}],
+  cards:[
+    {q:'Klassifiziere die wichtigsten Kraftarten in der klassischen Mechanik.',badges:['def'],ref:'Skript §2.7, S. 48–51',
+     a:`<div class="step"><strong>Zeitabhängige Kräfte $\\vec{F}(\\vec{r},t)$:</strong> Getriebene Systeme (erzwungener Oszillator). Energie nicht erhalten.</div>
+<div class="step"><strong>Reibung:</strong> $\\vec{F}_R = -f\\dot{\\vec{r}}$, $f>0$ — dissipativ, $dE/dt = -f\\dot{\\vec{r}}^2 < 0$</div>
+<div class="step"><strong>Lorentzkraft:</strong> $\\vec{F}_L = \\frac{q}{c}\\dot{\\vec{r}}\\times\\vec{B}$ — geschwindigkeitsabhängig, nicht konservativ, ändert keine Energie</div>
+<div class="step"><strong>Zwangskräfte:</strong> Durch geometrische Beschränkungen — werden durch Lagrange-Formalismus elegant behandelt.</div>`},
+    {q:'Zyklotronfrequenz: Herleitung.',badges:['calc'],ref:'Skript §2.7, S. 51',
+     a:`<div class="step">Homogenes Feld $\\vec{B} = B\\hat{e}_z$; Kreisbahn $r=\\text{const.}$, $\\dot{\\varphi}=\\omega$:</div>
+<div class="step">Radialgleichung: $-m r\\omega^2 = \\frac{qB}{c}r\\omega$</div>
+<div class="result">$$\\omega = -\\frac{qB}{mc}$$ (Zyklotronfrequenz, Vorzeichen hängt von Ladungsvorzeichen ab)</div>`},
+    {q:'Wann ist die Energie bei zeitabhängigen Potentialen nicht erhalten?',badges:['def'],ref:'Skript §2.7, S. 50',
+     a:`Für $U(\\vec{r},t)$ mit expliziter Zeitabhängigkeit: $\\frac{d}{dt}E = \\frac{\\partial U}{\\partial t} \\neq 0$<br>
+Die partielle Zeitableitung des Potentials "pumpt" Energie in das System (z.B. getriebener Oszillator).`},
+    {q:'[ÜB 2.4b] Berechne $\\nabla\\times\\vec{F}$ für $\\vec{F} = qv_0(1-x^2/a^2)\\hat{y}$.',badges:['ex','calc'],ref:'Übung Blatt 2, Aufg. 4b',
+     a:`<div class="step">$F_x = F_z = 0$, $F_y = qv_0(1-x^2/a^2)$</div>
+<div class="step">$(\\nabla\\times\\vec{F})_z = \\partial_x F_y - \\partial_y F_x = \\partial_x[qv_0(1-x^2/a^2)] = -\\frac{2qv_0 x}{a^2}$</div>
+<div class="result">$\\nabla\\times\\vec{F} = -\\frac{2qv_0 x}{a^2}\\hat{e}_z \\neq 0$ → <strong>nicht konservativ</strong></div>`},
+    {q:'[ÜB 2.4c] Verifiziere via Stokes: $\\oint \\vec{F}\\cdot d\\vec{r} = \\iint(\\nabla\\times\\vec{F})\\cdot d\\vec{A}$.',badges:['ex','calc'],ref:'Übung Blatt 2, Aufg. 4c',
+     a:`<div class="step">Fläche $S$: $x\\in[-a/2,0]$, $y\\in[0,b]$. Flächennormale $+\\hat{e}_z$.</div>
+<div class="step">$\\iint_S (\\nabla\\times\\vec{F})_z\\,dA = \\int_0^b dy\\int_{-a/2}^0\\frac{-2qv_0 x}{a^2}dx$<br>
+$= \\frac{-2qv_0}{a^2}\\cdot b\\cdot\\frac{x^2}{2}\\bigg|_{-a/2}^0 = \\frac{-2qv_0}{a^2}\\cdot b\\cdot(-\\frac{a^2}{8}) = \\frac{qv_0 b}{4}$</div>
+<div class="result">Stimmt mit dem direkten Kurvenintegral $\\frac{1}{4}qv_0 b$ überein. ✓</div>`}
+  ]
+},
+{
+  id:'ch10', title:'Zwangsbedingungen & generalisierte Koordinaten', num:'10',
+  desc:'Holonome und nicht-holonome Zwangsbedingungen, generalisierte Koordinaten, Konfigurationsraum.',
+  stats:[{v:'10',l:'Karten'},{v:'4',l:'Typen'},{v:'Skript §3.1–3.2',l:'Quelle'}],
+  cards:[
+    {q:'Was sind holonome-skleronome Zwangsbedingungen? Beispiele.',badges:['def'],ref:'Skript §3.2, S. 53',
+     a:`$g_j(\\{\\vec{r}_i\\}) = 0$ (keine Zeitabhängigkeit, nur Ortsbeschränkung).<br>
+Beispiele: Kugeloberfläche $x^2+y^2+z^2=R^2$; ebenes Pendel $x^2+y^2=l^2$ + $z=z_0$; Hantel $(\\vec{r}_1-\\vec{r}_2)^2=l^2$`},
+    {q:'Was sind holonome-rheonome Zwangsbedingungen? Beispiele.',badges:['def'],ref:'Skript §3.2, S. 54',
+     a:`$g_j(\\{\\vec{r}_i\\},t) = 0$ (explizit zeitabhängig).<br>
+Beispiele: Pendel im fahrenden Zug $z - v_0 t = 0$; schiefe Ebene mit veränderlicher Neigung.`},
+    {q:'Was sind nicht-holonome Zwangsbedingungen?',badges:['def'],ref:'Skript §3.2, S. 54',
+     a:`Nicht-holonome Zwangsbedingungen können nicht als Gleichungen $g = 0$ geschrieben werden. Sie sind Ungleichungen oder geschwindigkeitsabhängig.<br>
+Beispiele: Billardkugel auf Tisch $z \\geq 0$; rollendes Rad (Rollbedingung involviert $\\dot{\\vec{r}}$, ist aber nicht integrierbar).`},
+    {q:'Wie viele generalisierte Koordinaten gibt es?',badges:['def'],ref:'Skript §3.2, S. 55',
+     a:`$$S = 3N - p$$
+$N$ = Anzahl Teilchen, $p$ = Anzahl holonomer Zwangsbedingungen.<br>
+Beispiele: Pendel ($N=1$, $p=2$): $S=1$ ($\\varphi$); Doppelpendel ($N=2$, $p=4$): $S=2$ ($\\theta_1$, $\\theta_2$).`},
+    {q:'Was ist der Konfigurationsraum?',badges:['def'],ref:'Skript §3.2, S. 55',
+     a:`Der Konfigurationsraum ist der $S$-dimensionale Raum der unabhängigen generalisierten Koordinaten $q_1,\\ldots,q_S$. Die Bahnkurve $\gamma$ ist eine Kurve im Konfigurationsraum.<br>
+Im Gegensatz: <strong>Zustandsraum (Phasenraum)</strong> = $2S$-dimensional.`},
+    {q:'Was ist die geometrische Eigenschaft von $\\nabla g_j$ bzgl. Konfigurationsraum?',badges:['proof'],ref:'Skript §3.2, S. 58',
+     a:`$\\nabla g_j \\perp$ Konfigurationsraum: $\\frac{\\partial g_j}{\\partial q_k} = \\sum_n \\frac{\\partial g_j}{\\partial x_n}\\frac{\\partial x_n}{\\partial q_k} = 0$ für alle $k$.<br>
+Denn im Konfigurationsraum gilt $g_j = 0$, also $\\frac{\\partial g_j}{\\partial q_k}=0$.<br>
+<strong>Zwangskräfte wirken senkrecht zum Konfigurationsraum</strong> (leisten keine Arbeit).`},
+    {q:'D\'Alembert-Prinzip: Warum leisten Zwangskräfte keine Arbeit?',badges:['proof'],ref:'Skript §3.4, Gl. (69)',
+     a:`<div class="step">$\\sum_n Z_n \\frac{\\partial x_n}{\\partial q_k} = 0$ für alle $k$ (Zwangsbedingungen senkrecht zum Konf.-raum)</div>
+<div class="step">Multipliziere mit $\\delta q_k$, summiere über $k$: $\\sum_n Z_n \\delta x_n = \\vec{Z}\\cdot\\delta\\vec{x} = 0$</div>
+<div class="result">Die Zwangskraft leistet keine virtuelle Arbeit.</div>`},
+    {q:'Lagrange-Gleichung 1. Art: Formulierung.',badges:['def'],ref:'Skript §3.3, Gl. (59)',
+     a:`$$m_n\\ddot{x}_n = F_n + \\sum_{j=1}^p \\lambda_j(t)\\frac{\\partial g_j}{\\partial x_n}, \\quad g_j(\\{x_n\\},t) = 0$$
+$3N+p$ Gleichungen für $3N+p$ Unbekannte $(\\{x_n\\}, \\{\\lambda_j\\})$.<br>
+Zwangskraft: $Z_n = \\sum_j\\lambda_j\\frac{\\partial g_j}{\\partial x_n}$`},
+    {q:'Berechne die Zwangskraft beim ebenen Pendel (Lagrange 1. Art).',badges:['calc'],ref:'Skript §3.3, S. 62',
+     a:`<div class="step">$g_1 = r-l=0$; Radialgleichung: $m(\\ddot{r}-r\\dot{\\varphi}^2) = F_r + \\lambda_1$<br>
+Mit $r=l$, $\\dot{r}=\\ddot{r}=0$; Winkelgleichung: $ml\\ddot{\\varphi} = -mg\\sin\\varphi$</div>
+<div class="result">$Z_r = \\lambda_1 = -ml\\dot{\\varphi}^2 - mg\\cos\\varphi$ (Fadenspannung = Zentrifugal + Schwerkraft-Radialkomponente)</div>`},
+    {q:'[ÜB 3.2] Anna und Bernd auf dem Eis: Warum dreht Anna sich schneller?',badges:['ex'],ref:'Übung Blatt 3, Aufg. 2a',
+     a:`Das Seil von Bernd wickelt sich auf (wird kürzer). Die Seilkraft wirkt senkrecht zur Bewegung → kein Drehmoment → <strong>Drehimpulserhaltung</strong>: $l = m v r = \\text{const.}$<br>
+<div class="result">$v_f = v_i\\frac{r_i}{r_f} = 10\\,\\text{km/h}\\cdot\\frac{10}{1} = 100\\,\\text{km/h}$</div>`}
+  ]
+},
+{
+  id:'ch11', title:'Lagrange-Gleichungen & Anwendungen', num:'11',
+  desc:'Lagrange-Gleichungen 2. Art, Lagrangefunktion, Rezept, Beispiele: Pendel, Atwood, rotierende Schleife.',
+  stats:[{v:'12',l:'Karten'},{v:'4',l:'Schritte'},{v:'Skript §3.4',l:'Quelle'}],
+  cards:[
+    {q:'Formuliere die Lagrange-Gleichungen 2. Art.',badges:['def'],ref:'Skript §3.4, Gl. (68)',
+     a:`$$\\boxed{\\frac{d}{dt}\\frac{\\partial L}{\\partial \\dot{q}_k} - \\frac{\\partial L}{\\partial q_k} = 0}, \\quad k=1,\\ldots,S$$
+$L(q,\\dot{q},t) = T(q,\\dot{q},t) - U(q,t)$<br>
+$S$ Gleichungen für $S$ Freiheitsgrade — Zwangskräfte eliminiert!`},
+    {q:'Herleitung der ELG: Wie entfallen die Zwangskräfte?',badges:['proof'],ref:'Skript §3.4, Gl. (61–62)',
+     a:`<div class="step">Mult. LG 1. Art mit $\\partial x_n/\\partial q_k$, summiere über $n$:<br>
+$\\sum_n m_n\\ddot{x}_n\\frac{\\partial x_n}{\\partial q_k} = Q_k + \\sum_j\\lambda_j\\sum_n\\frac{\\partial g_j}{\\partial x_n}\\frac{\\partial x_n}{\\partial q_k}$</div>
+<div class="step">Der Zwangskraftterm verschwindet (D'Alembert).</div>
+<div class="step">Kinetische Energie: $\\sum_n m_n\\ddot{x}_n\\frac{\\partial x_n}{\\partial q_k} = \\frac{d}{dt}\\frac{\\partial T}{\\partial\\dot{q}_k} - \\frac{\\partial T}{\\partial q_k}$ (Umformungslemma)</div>
+<div class="result">$\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot{q}_k} - \\frac{\\partial L}{\\partial q_k} = 0$ ✓</div>`},
+    {q:'4-Schritte-Rezept für Lagrange-Gleichungen 2. Art.',badges:['def'],ref:'Skript §3.4, S. 68',
+     a:`<div class="step">1. Generalisierte Koordinaten $q_1,\\ldots,q_S$ wählen</div>
+<div class="step">2. $T(q,\\dot{q})$ und $U(q)$ ausdrücken</div>
+<div class="step">3. $L = T-U$; Euler-Lagrange-Gleichungen ableiten</div>
+<div class="step">4. Lösen (ggf. numerisch)</div>`},
+    {q:'Lagrange-Gleichung für die Atwoodsche Fallmaschine.',badges:['calc'],ref:'Skript §3.4, S. 68',
+     a:`<div class="step">$q = x_1$ (Auslenkung Masse 1), $x_2 = l-q$ (Fadenlänge konstant)</div>
+<div class="step">$T = \\frac{m_1+m_2}{2}\\dot{q}^2$, $U = -m_1 g q - m_2 g(l-q) = (m_2-m_1)gq + C$</div>
+<div class="step">ELG: $(m_1+m_2)\\ddot{q} = (m_1-m_2)g$</div>
+<div class="result">$$\\ddot{x}_1 = \\frac{m_1-m_2}{m_1+m_2}g$$</div>`},
+    {q:'Rotierende Schleife: Lagrange-Gleichung und Gleichgewichtslagen.',badges:['calc'],ref:'Skript §3.4, S. 69',
+     a:`<div class="step">Koordinate $\\theta$; $T = \\frac{m}{2}R^2(\\dot{\\theta}^2+\\omega^2\\sin^2\\theta)$, $U = mgR\\cos\\theta$</div>
+<div class="step">ELG: $R\\ddot{\\theta} = R\\omega^2\\sin\\theta\\cos\\theta + g\\sin\\theta$</div>
+<div class="step">GGW: $\\theta_0 = 0$, $\\pi$ und $\\cos\\theta_0 = -g/(R\\omega^2)$ (wenn $|g/(R\\omega^2)| \\leq 1$)</div>
+<div class="result">$\\theta_0 = \\pi$ instabil; $\\theta_0 = 0$ instabil für $\\omega > \\sqrt{g/R}$; nichttriv. GGW stabil.</div>`},
+    {q:'Was ist eine zyklische Koordinate?',badges:['def'],ref:'Skript §3.5.3, S. 82',
+     a:`$\\partial L/\\partial q_k = 0$ → $q_k$ zyklisch → $p_k = \\partial L/\\partial\\dot{q}_k = \\text{const.}$<br>
+Beispiele: Winkel $\\varphi$ bei Rotationssymmetrie ($L$ hängt nicht von $\\varphi$ ab) → $p_\\varphi = l_z$ erhalten.`},
+    {q:'Was ist der generalisierte Impuls und die generalisierte Kraft?',badges:['def'],ref:'Skript §3.5.2, S. 78',
+     a:`$$p_k = \\frac{\\partial L}{\\partial\\dot{q}_k} \\quad\\text{(kanonischer Impuls)}$$
+$$Q_k = \\frac{\\partial L}{\\partial q_k} \\quad\\text{(kanonische Kraft)}$$
+ELG: $\\dot{p}_k = Q_k$`},
+    {q:'Wann ist die Gesamtenergie $E = T+U$ erhalten (Lagrange)?',badges:['def'],ref:'Skript §3.5.3',
+     a:`$\\frac{d}{dt}(T+U) = \\frac{\\partial T}{\\partial t} + \\frac{\\partial U}{\\partial t}$<br>
+Für skleronome Zwangsbedingungen und konservatives Potential: $\\partial L/\\partial t = 0 \\Rightarrow H = T+U = E = \\text{const.}$<br>
+Rheonome Zwangsbedingungen: $E$ i.A. nicht erhalten.`},
+    {q:'Ebenes Pendel: Lagrangefunktion und Bewegungsgleichung.',badges:['calc'],ref:'Skript §3.4, S. 67',
+     a:`<div class="step">$q = \\varphi$; $x = l\\sin\\varphi$, $y = -l\\cos\\varphi$</div>
+<div class="step">$T = \\frac{m}{2}l^2\\dot{\\varphi}^2$, $U = -mgl\\cos\\varphi$</div>
+<div class="step">ELG: $\\frac{d}{dt}(ml^2\\dot{\\varphi}) - mgl\\sin\\varphi = 0$</div>
+<div class="result">$$ml^2\\ddot{\\varphi} = -mgl\\sin\\varphi \\Rightarrow \\ddot{\\varphi} = -\\frac{g}{l}\\sin\\varphi$$
+Für kleine Winkel: $\\omega_0 = \\sqrt{g/l}$</div>`},
+    {q:'[ÜB 1.4e] Wie berechnen Anna und Bernd die Straßenbahngeschwindigkeit $v$?',badges:['ex','calc'],ref:'Übung Blatt 1, Aufg. 4e',
+     a:`<div class="step">Bernd misst Flugzeit: $\\Delta t = 2v^B_{0,z}/g$; also $v^B_{0,z} = g\\Delta t/2$</div>
+<div class="step">Galilei-Transformation: $v^A_{0,x} = v$ (Zug), $v^A_{0,z} = v^B_{0,z}$</div>
+<div class="step">Anna misst kinetische Energie beim Aufprall: $E = \\frac{1}{2}m(v^2 + v^{B2}_{0,z})$</div>
+<div class="result">$$v = \\sqrt{\\frac{2E}{m} - \\left(\\frac{g\\Delta t}{2}\\right)^2}$$</div>`},
+    {q:'[ÜB 3.1a] Elastischer Stoß zweier gleicher Massen: Endgeschwindigkeiten.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 1a',
+     a:`<div class="step">Impulserhaltung: $v_{0,I} = v_{0,F} + v_{1,F}$<br>
+Energieerhaltung: $v_{0,I}^2 = v_{0,F}^2 + v_{1,F}^2$</div>
+<div class="step">Quadriere Impuls: $v_{0,I}^2 = v_{0,F}^2 + 2v_{0,F}v_{1,F} + v_{1,F}^2$<br>
+Vergleich: $2v_{0,F}v_{1,F} = 0$</div>
+<div class="result">$v_{0,F} = 0$, $v_{1,F} = v_{0,I}$ — vollständige Impulsübertragung.</div>`},
+    {q:'[ÜB 4.1e] Flasche im freien Fall: Was passiert mit dem Wasserfluss?',badges:['ex'],ref:'Übung Blatt 4, Aufg. 1e',
+     a:`Im freien Fall ist die effektive Schwerkraft im Flaschensystem null (Inertialrahmen = frei fallend). Kein hydrostatischer Druck → kein Wasserfluss.<br>
+<div class="result">Antwort C: Aus keinem Loch fließt Wasser. Das Wasser ist lokal schwerelos.</div>`}
+  ]
+},
+{
+  id:'ch12', title:'Variationsprinzip & Noether-Theorem', num:'12',
+  desc:'Hamiltonisches Wirkungsprinzip, Variationsrechnung, Noether-Theorem und Erhaltungsgrößen aus Symmetrien.',
+  stats:[{v:'10',l:'Karten'},{v:'3',l:'Symmetrien'},{v:'Skript §3.5',l:'Quelle'}],
+  cards:[
+    {q:'Hamiltonisches Variationsprinzip: Formulierung.',badges:['def'],ref:'Skript §3.5.2, Gl. (72)',
+     a:`$$S[q] = \\int_{t_0}^{t_1} L(q,\\dot{q},t)\\,dt, \\quad \\delta S = 0$$
+Die physikalische Bahnkurve extremiert die Wirkung $S$. Äquivalenz:
+$$\\delta S = 0 \\; \\Leftrightarrow \\; \\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot{q}_k} - \\frac{\\partial L}{\\partial q_k} = 0$$`},
+    {q:'Beweis der Euler-Lagrange-Gleichungen als Extremalbedingung.',badges:['proof'],ref:'Skript §3.5.1, Gl. (70–71)',
+     a:`<div class="step">$S[q+h]-S[q] = \\int_{t_0}^{t_1}[\\partial_q L\\cdot h + \\partial_{\\dot{q}}L\\cdot\\dot{h}]dt + O(h^2)$</div>
+<div class="step">Partielle Integration (mit $h(t_0)=h(t_1)=0$): $\\int\\partial_{\\dot{q}}L\\cdot\\dot{h}\\,dt = -\\int\\frac{d}{dt}\\partial_{\\dot{q}}L\\cdot h\\,dt$</div>
+<div class="step">$= \\int_{t_0}^{t_1}\\left[\\partial_q L - \\frac{d}{dt}\\partial_{\\dot{q}}L\\right]\\cdot h\\,dt$</div>
+<div class="result">$= 0$ für alle $h$ $\\Leftrightarrow$ ELG ✓</div>`},
+    {q:'Formuliere das Noether-Theorem.',badges:['def'],ref:'Skript §3.5.3, S. 83',
+     a:`Sei die Wirkung invariant unter $q(t) \\to q^\\alpha(t)$, $q^{\\alpha=0}=q$. Dann ist der Noether-Impuls erhalten:
+$$I(q,\\dot{q}) = \\sum_k p_k \\frac{dq^\\alpha_k}{d\\alpha}\\bigg|_{\\alpha=0} = \\text{const.}$$
+Symmetrie ↔ Erhaltungsgröße (tiefster Zusammenhang in der Physik!)`},
+    {q:'Translationsinvarianz → Impulserhaltung (Noether).',badges:['proof'],ref:'Skript §3.5.3, S. 85',
+     a:`<div class="step">Translation: $x \\to x+\\alpha$, $dq^\\alpha/d\\alpha|_0 = 1$</div>
+<div class="step">$L$ hängt nicht von $x$ ab (Homogenität): $\\partial L/\\partial x = 0$</div>
+<div class="result">$I = p_x = m\\dot{x} = \\text{const.}$</div>`},
+    {q:'Rotationsinvarianz → Drehimpulserhaltung (Noether).',badges:['proof'],ref:'Skript §3.5.3, S. 85',
+     a:`<div class="step">Rotation um $z$: $q^\\alpha = R(\\alpha)\\vec{r}$, $\\frac{d}{d\\alpha}R(0)\\vec{r} = (y,-x,0)^T$</div>
+<div class="step">Noether-Impuls: $I = p_x y - p_y x = m(\\dot{x}y - \\dot{y}x)$</div>
+<div class="result">$I = l_z = (\\vec{r}\\times\\vec{p})_z = \\text{const.}$</div>`},
+    {q:'Zeittranslationsinvarianz → Energieerhaltung (Noether).',badges:['proof'],ref:'Skript §3.5.3, S. 86',
+     a:`<div class="step">Transformation: $q^\\alpha(t) = q(t+\\alpha)$, $\\partial L/\\partial t = 0$</div>
+<div class="step">Noether-Impuls: $I = \\sum_k p_k\\dot{q}_k - L = 2T-(T-U) = T+U$</div>
+<div class="result">$I = E = T+U = \\text{const.}$ ✓</div>`},
+    {q:'Was ist eine Eichtransformation der Lagrangefunktion?',badges:['def','proof'],ref:'Skript §3.5.2, S. 80',
+     a:`$$L' = L + \\frac{d}{dt}f(q,t)$$
+<div class="step">$S' = S + f(q(t_1),t_1) - f(q(t_0),t_0)$</div>
+<div class="step">$\\delta S' = \\delta S$ (da $\\delta q$ an Endpunkten 0)</div>
+<div class="result">ELG invariant unter Eichtransformation.</div>`},
+    {q:'Galilei-Invarianz der Lagrangefunktion als Eichtransformation.',badges:['proof'],ref:'Skript §3.5.2, S. 80',
+     a:`<div class="step">Galilei-Boost: $\\vec{r} \\to \\vec{r}-\\vec{v}t$, $\\dot{\\vec{r}}' = \\dot{\\vec{r}}-\\vec{v}$</div>
+<div class="step">$L' = \\frac{1}{2}m(\\dot{\\vec{r}}-\\vec{v})^2 - U = L - m\\dot{\\vec{r}}\\cdot\\vec{v} + \\frac{1}{2}mv^2 = L + \\frac{d}{dt}(-m\\vec{r}\\cdot\\vec{v} + \\frac{1}{2}mv^2t)$</div>
+<div class="result">$L' = L + \\ d/dt(...)$ → Eichtransformation → Newton-Gleichungen invariant. ✓</div>`},
+    {q:'Was ist die Zusammenfassung aller Erhaltungsgrößen und ihrer Symmetrien?',badges:['def'],ref:'Skript §3.5.3',
+     a:`<br><strong>Translationsinvarianz (Homogenität des Raums)</strong> → Impulserhaltung $\\vec{p}$<br>
+<strong>Rotationsinvarianz (Isotropie des Raums)</strong> → Drehimpulserhaltung $\\vec{l}$<br>
+<strong>Zeittranslationsinvarianz (Homogenität der Zeit)</strong> → Energieerhaltung $E$<br>
+<strong>Galilei-Invarianz</strong> → Schwerpunktimpulserhaltung<br><br>
+Dies ist der Inhalt des <em>Noether-Theorems</em>.`},
+    {q:'[ÜB 1.3b] Jacobi-Identität: $\\vec{A}\\times(\\vec{B}\\times\\vec{C})+\\vec{B}\\times(\\vec{C}\\times\\vec{A})+\\vec{C}\\times(\\vec{A}\\times\\vec{B})=0$.',badges:['ex','proof'],ref:'Übung Blatt 1, Aufg. 3b',
+     a:`<div class="step">Wende BAC-CAB auf jeden Term an (Ergebnisse aus 1.3b):
+$(\\vec{A}\\cdot\\vec{C})\\vec{B}-(\\vec{A}\\cdot\\vec{B})\\vec{C} + (\\vec{B}\\cdot\\vec{A})\\vec{C}-(\\vec{B}\\cdot\\vec{C})\\vec{A} + (\\vec{C}\\cdot\\vec{B})\\vec{A}-(\\vec{C}\\cdot\\vec{A})\\vec{B}$</div>
+<div class="step">Gruppiere: $\\vec{A}[-(\\vec{B}\\cdot\\vec{C})+(\\vec{C}\\cdot\\vec{B})] + \\vec{B}[(\\vec{A}\\cdot\\vec{C})-(\\vec{C}\\cdot\\vec{A})] + \\vec{C}[-(\\vec{A}\\cdot\\vec{B})+(\\vec{B}\\cdot\\vec{A})]$</div>
+<div class="result">Alle Terme verschwinden, da $\\vec{x}\\cdot\\vec{y} = \\vec{y}\\cdot\\vec{x}$. ✓</div>`}
+  ]
+},
+{
+  id:'ch13', title:'Starre Körper & Trägheitstensor', num:'13',
+  desc:'Definition des starren Körpers, kinetische Energie, Trägheitstensor, Eulersche Gleichungen, Kreisel.',
+  stats:[{v:'9',l:'Karten'},{v:'6',l:'Freiheitsgrade'},{v:'Skript Kap. 4',l:'Quelle'}],
+  cards:[
+    {q:'Definiere den starren Körper und seine Freiheitsgrade.',badges:['def'],ref:'Skript §4.1, S. 88',
+     a:`Starrer Körper: $|\\vec{r}_i-\\vec{r}_j| = \\text{const.}$ für alle Paare $i,j$.<br>
+<strong>6 Freiheitsgrade</strong>: 3 Translation des Schwerpunkts $\\vec{R}(t)$ + 3 Orientierung (Eulersche Winkel).`},
+    {q:'Wie zerfällt die kinetische Energie des starren Körpers?',badges:['def'],ref:'Skript §4.2, S. 89',
+     a:`$$T = \\underbrace{\\frac{1}{2}M\\dot{\\vec{R}}^2}_{T_{trans}} + \\underbrace{\\frac{1}{2}\\vec{\\omega}^T I\\vec{\\omega}}_{T_{rot}}$$
+Wenn der Ursprung des körperfesten Systems im Schwerpunkt liegt.`},
+    {q:'Definition des Trägheitstensors.',badges:['def'],ref:'Skript §4.3, Gl. (79)',
+     a:`$$I_{ab} = \\sum_i m_i(r_{i,c}r_{i,c}\\delta_{ab} - r_{i,a}r_{i,b})$$
+Kontinuumsfall: $I_{ab} = \\int d^3r\\,\\rho(\\vec{r})(r^2\\delta_{ab} - r_a r_b)$<br>
+Symmetrisch ($I_{ab} = I_{ba}$), positiv semi-definit.`},
+    {q:'Was sind Hauptträgheitsmomente und -achsen?',badges:['def'],ref:'Skript §4.3',
+     a:`Durch Diagonalisierung des Trägheitstensors erhält man Eigenwerte $I_1,I_2,I_3$ (Hauptträgheitsmomente) und Eigenvektoren (Hauptträgheitsachsen).<br>
+Im Hauptachsensystem: $T_{rot} = \\frac{1}{2}(I_1\\omega_1^2+I_2\\omega_2^2+I_3\\omega_3^2)$, $\\vec{L} = (I_1\\omega_1,I_2\\omega_2,I_3\\omega_3)$.`},
+    {q:'Eulersche Gleichungen für starre Körper.',badges:['def'],ref:'Skript §4.4',
+     a:`Im Hauptachsensystem (körperfest):
+$$I_1\\dot{\\omega}_1 - (I_2-I_3)\\omega_2\\omega_3 = N_1$$
+$$I_2\\dot{\\omega}_2 - (I_3-I_1)\\omega_3\\omega_1 = N_2$$
+$$I_3\\dot{\\omega}_3 - (I_1-I_2)\\omega_1\\omega_2 = N_3$$`},
+    {q:'Steinerscher Anteilssatz.',badges:['def'],ref:'Skript §4.3',
+     a:`Bei Parallelverschiebung des Drehpunkts um $\\vec{a}$ vom Schwerpunkt:
+$$I_{ab}^{\\text{neu}} = I_{ab}^{SP} + M(|\\vec{a}|^2\\delta_{ab} - a_a a_b)$$
+Der Trägheitstensor bzgl. Schwerpunkt ist minimal.`},
+    {q:'Was sind Eulersche Winkel?',badges:['def'],ref:'Skript §4.5',
+     a:`Drei Winkel $\\psi$ (Präzession), $\\theta$ (Nutation), $\\phi$ (Eigenrotation), die die Orientierung des starren Körpers durch drei sukzessive Drehungen parametrisieren.<br>
+$R = R_z(\\psi)\\cdot R_x(\\theta)\\cdot R_z(\\phi)$ (eine mögliche Konvention).`},
+    {q:'Schwerer Kreisel: Was ist Präzession?',badges:['def'],ref:'Skript §4.6',
+     a:`Schwerer Kreisel: rotierender Körper mit Fixpunkt im Gravitationsfeld. Drehmoment $\\vec{N} = \\vec{r}_{SP}\\times m\\vec{g}$.<br>
+<strong>Präzession:</strong> Die Symmetrieachse dreht sich langsam um die Vertikale, weil $\\dot{\\vec{L}} = \\vec{N} \\perp \\vec{L}$, d.h. $\\vec{L}$ ändert Richtung, nicht Betrag.`},
+    {q:'Wie hängen Drehimpuls und Winkelgeschwindigkeit bei starren Körpern zusammen?',badges:['def'],ref:'Skript §4.3',
+     a:`$$\\vec{L} = I\\vec{\\omega}, \\quad L_a = I_{ab}\\omega_b$$
+<div class="warn">$\\vec{L} \\parallel \\vec{\\omega}$ nur wenn $\\vec{\\omega}$ eine Hauptachse ist. Sonst ist $\\vec{L}$ i.A. nicht parallel zu $\\vec{\\omega}$ (taumelnde Bewegung).</div>`}
+  ]
+},
+{
+  id:'ch14', title:'Hamilton-Mechanik', num:'14',
+  desc:'Legendre-Transformation, Hamilton-Gleichungen, Phasenraum, Poisson-Klammern, kanonische Transformationen, Liouville.',
+  stats:[{v:'10',l:'Karten'},{v:'3',l:'Sätze'},{v:'Skript Kap. 5',l:'Quelle'}],
+  cards:[
+    {q:'Was ist die Legendre-Transformation? Wie gewinnt man $H$?',badges:['def'],ref:'Skript §5.2, S. 111',
+     a:`$$H(q,p,t) = \\sum_k p_k\\dot{q}_k - L(q,\\dot{q},t), \\quad p_k = \\frac{\\partial L}{\\partial\\dot{q}_k}$$
+$\\dot{q}$ wird aus $p = \\partial L/\\partial\\dot{q}$ nach $\\dot{q}$ aufgelöst. Wechsel der unabhängigen Variable: $\\dot{q} \\to p$.`},
+    {q:'Hamiltonsche Bewegungsgleichungen.',badges:['def'],ref:'Skript §5.3, S. 113',
+     a:`$$\\dot{q}_k = \\frac{\\partial H}{\\partial p_k}, \\quad \\dot{p}_k = -\\frac{\\partial H}{\\partial q_k}$$
+$2S$ Gleichungen 1. Ordnung (statt $S$ Gleichungen 2. Ordnung).`},
+    {q:'Poisson-Klammer: Definition und Bewegungsgleichung für Observablen.',badges:['def'],ref:'Skript §5.5, S. 120',
+     a:`$$\\{f,g\\} = \\sum_k\\left(\\frac{\\partial f}{\\partial q_k}\\frac{\\partial g}{\\partial p_k} - \\frac{\\partial f}{\\partial p_k}\\frac{\\partial g}{\\partial q_k}\\right)$$
+Zeitentwicklung: $\\dot{f} = \\partial_t f + \\{f,H\\}$<br>
+Fundamentale Klammern: $\\{q_k,p_l\\} = \\delta_{kl}$`},
+    {q:'Was ist eine kanonische Transformation?',badges:['def'],ref:'Skript §5.6, S. 122',
+     a:`$(q,p) \\to (Q,P)$ kanonisch, wenn die Hamilton-Gleichungen in neuen Koordinaten erhalten bleiben (mit neuer Funktion $K$) — äquivalent: Poisson-Klammern invariant.`},
+    {q:'Liouville-Theorem: Formulierung und physikalische Bedeutung.',badges:['def'],ref:'Skript §5.9, S. 133',
+     a:`Das Phasenraumvolumen ist unter Hamilton-Dynamik erhalten:
+$$\\frac{d}{dt}\\int_{\\Omega(t)} d^{2S}x = 0$$
+Liouville-Gleichung: $\\frac{\\partial\\rho}{\\partial t} + \\{\\rho,H\\} = 0$ für Phasenraumdichte $\\rho$.`},
+    {q:'Wann ist $H = E$ (Gesamtenergie)?',badges:['def'],ref:'Skript §5.3',
+     a:`Falls:<br>
+(i) Skleronome Zwangsbedingungen: $x_n = x_n(q)$ (keine explizite Zeitabhängigkeit)<br>
+(ii) $T$ quadratisch in $\\dot{q}$<br>
+Dann: $H = \\sum_k p_k\\dot{q}_k - L = 2T - (T-U) = T+U = E$`},
+    {q:'Was ist ein erzeugendes Funktional einer kanonischen Transformation?',badges:['def'],ref:'Skript §5.7, S. 125',
+     a:`Typ-1-Erzeugende $F_1(q,Q,t)$:
+$$p_k = \\frac{\\partial F_1}{\\partial q_k}, \\quad P_k = -\\frac{\\partial F_1}{\\partial Q_k}, \\quad K = H+\\frac{\\partial F_1}{\\partial t}$$
+Weitere Typen $F_2, F_3, F_4$ durch Legendre-Transformation.`},
+    {q:'Erhaltung einer Observable: Kriterium.',badges:['def'],ref:'Skript §5.8, S. 130',
+     a:`$f(q,p)$ erhalten $\\Leftrightarrow \\dot{f} = \\{f,H\\} = 0$<br>
+Spezialfall: $H$ erhalten wenn $\\partial H/\\partial t = 0$.`},
+    {q:'Vergleich Newton / Lagrange / Hamilton.',badges:['def'],ref:'Skript Kap. 1–5',
+     a:`<strong>Newton:</strong> $m\\ddot{\\vec{r}} = \\vec{F}$ · $3N$ DGLn 2. Ord. · Kräfte explizit · gut für numerische Sim.<br>
+<strong>Lagrange:</strong> ELG, $L=T-U$ · $S$ DGLn 2. Ord. · Zwangsbedingungen elegant · gut für Symmetrien<br>
+<strong>Hamilton:</strong> $\\dot{q}=\\partial H/\\partial p$, $\\dot{p}=-\\partial H/\\partial q$ · $2S$ DGLn 1. Ord. · Erhaltungsgrößen, Quantisierung, Chaos`},
+    {q:'Was ist der Winkel-Wirkungs-Variable-Formalismus?',badges:['def'],ref:'Skript §6.3, S. 144',
+     a:`Für integrable Systeme: kanonische Transformation $(q,p) \\to (\\theta,I)$:
+$$I_k = \\frac{1}{2\\pi}\\oint p_k\\,dq_k, \\quad H = H(I)$$
+$\\dot{\\theta}_k = \\partial H/\\partial I_k = \\omega_k(I) = \\text{const.}$, $\\dot{I}_k = 0$.<br>
+Die Bewegung ist $\\theta_k(t) = \\omega_k t + \\theta_k^0$ (linear in $t$).`}
+  ]
+},
+{
+  id:'ch15', title:'Stabilität & Chaos', num:'15',
+  desc:'Fixpunkte, lineare Stabilität, integrable Systeme, KAM-Theorem, chaotische Dynamik, Lyapunov-Exponent.',
+  stats:[{v:'8',l:'Karten'},{v:'2',l:'Bereiche'},{v:'Skript Kap. 6',l:'Quelle'}],
+  cards:[
+    {q:'Definition: Fixpunkt und Stabilität in Hamilton-Systemen.',badges:['def'],ref:'Skript §6.1, S. 138',
+     a:`$(q_0,p_0)$ Fixpunkt: $\\partial H/\\partial p|_{q_0,p_0} = 0$ und $\\partial H/\\partial q|_{q_0,p_0} = 0$.<br>
+<strong>Stabil:</strong> Alle Störungen bleiben beschränkt. <strong>Instabil:</strong> Störungen wachsen unbegrenzt.`},
+    {q:'Lineare Stabilitätsanalyse: Vorgehensweise.',badges:['def'],ref:'Skript §6.2, S. 140',
+     a:`<div class="step">Linearisiere um $(q_0,p_0)$: $q = q_0+u$, $p = p_0+v$</div>
+<div class="step">$\\dot{u} = A_{11}u+A_{12}v$, $\\dot{v} = A_{21}u+A_{22}v$ (Jacobi-Matrix $A$)</div>
+<div class="step">Eigenwerte $\\lambda$ von $A$: Stabiles Zentrum ($\\lambda$ rein imaginär), Sattel ($\\lambda$ reell, verschied. VZ), stabiler Fokus (Re$\\lambda < 0$).</div>`},
+    {q:'Was ist ein integrables System?',badges:['def'],ref:'Skript §6.3, S. 144',
+     a:`System mit $S$ Freiheitsgraden ist integrabel, wenn $S$ unabhängige Erhaltungsgrößen in Involution existieren: $\\{I_k,I_l\\} = 0$.<br>
+Bewegung findet auf invarianten Tori im Phasenraum statt. Vollständig analytisch lösbar.`},
+    {q:'KAM-Theorem: Aussage.',badges:['def'],ref:'Skript §6.4, S. 149',
+     a:`(Kolmogorov-Arnold-Moser) Bei schwacher Störung eines integrablen Systems bleiben die meisten KAM-Tori erhalten, sofern die Frequenzen $\\omega_k$ hinreichend irrational sind (Diophantische Bedingung).<br>
+Tori mit rationalen Frequenzverhältnissen werden zerstört → chaotische Schichten.`},
+    {q:'Chaotische Dynamik: Definition und Merkmal.',badges:['def'],ref:'Skript §6.5, S. 154',
+     a:`<strong>Chaos:</strong> Sensitive Abhängigkeit von Anfangsbedingungen.<br>
+$$|\\delta z(t)| \\approx |\\delta z(0)|e^{\\lambda t}, \\quad \\lambda > 0 \\text{ (Lyapunov-Exponent)}$$
+Chaotische Systeme sind deterministisch, aber langfristig unvorhersagbar.`},
+    {q:'Was ist der Poincaré-Schnitt?',badges:['def'],ref:'Skript §6.5',
+     a:`Niederdimensionale Darstellung der Phasenraumdynamik: Punkte, wo die Trajektorie eine gewählte Hyperebene schneidet.<br>
+Integrabel → diskrete Punkte/Kurven (KAM-Tori).<br>
+Chaotisch → diffuse Wolke von Punkten.`},
+    {q:'Unterschied integrables vs. nicht-integrables System.',badges:['def'],ref:'Skript §6.3–6.5',
+     a:`<strong>Integrabel:</strong> $S$ Erhaltungsgrößen, Tori, analytisch lösbar, kein Chaos. Beispiele: Kepler, HO, Zweikörper.<br>
+<strong>Nicht-integrabel:</strong> Weniger Erhaltungsgrößen, mögliches Chaos. Beispiele: Doppelpendel, $N>2$ Körper, Hénon-Heiles.`},
+    {q:'Was ist der Unterschied zwischen globalem und lokalem Chaos?',badges:['def'],ref:'Skript §6.5',
+     a:`<strong>Lokales Chaos:</strong> Nur in bestimmten Regionen des Phasenraums — nahe resonanter Tori (KAM-Struktur bleibt teilweise erhalten).<br>
+<strong>Globales/vollständiges Chaos:</strong> Für genügend starke Störung → alle KAM-Tori zerstört → Phasenraum-Ergodizität.`}
+  ]
+},
+{
+  id:'ch16', title:'Übungsblätter 1–5 – Vollständig', num:'16',
+  desc:'Alle Aufgaben aus Übungsblättern 1–5, vollständige Lösungen mit Bezug zu Skriptkapiteln.',
+  stats:[{v:'22',l:'Aufgaben'},{v:'5',l:'Blätter'},{v:'Alle Typen',l:'Aufgabenform'}],
+  cards:[
+    {q:'[ÜB 1.3a] Beweise mithilfe der Determinantenformel: $\\sum_i\\varepsilon_{ijk}\\varepsilon_{imn} = \\delta_{jm}\\delta_{kn}-\\delta_{jn}\\delta_{km}$.',badges:['ex','proof'],ref:'Übung Blatt 1, Aufg. 3a · Skript §2.1',
+     a:`<div class="step">$\\varepsilon_{ijk}\\varepsilon_{lmn} = \\det(\\delta_{il}...\\delta_{kn})$; setze $l=i$, summiere über $i$.</div>
+<div class="step">Entwickle $3\\times3$-Determinante nach 1. Zeile:<br>$\\sum_i\\delta_{ii}=3$; $\\sum_i\\delta_{im}\\delta_{ji} = \\delta_{jm}$; etc.</div>
+<div class="result">$3(\\delta_{jm}\\delta_{kn}-\\delta_{jn}\\delta_{km}) - (\\delta_{jm}\\delta_{kn}-\\delta_{jn}\\delta_{km}) - (\\delta_{jm}\\delta_{kn}-\\delta_{jn}\\delta_{km}) = \\delta_{jm}\\delta_{kn}-\\delta_{jn}\\delta_{km}$ ✓</div>`},
+    {q:'[ÜB 1.3b] BAC-CAB: $\\vec{A}\\times(\\vec{B}\\times\\vec{C}) = (\\vec{A}\\cdot\\vec{C})\\vec{B}-(\\vec{A}\\cdot\\vec{B})\\vec{C}$.',badges:['ex','proof'],ref:'Übung Blatt 1, Aufg. 3b · Skript §2.1',
+     a:`<div class="step">$[\\vec{A}\\times(\\vec{B}\\times\\vec{C})]_i = \\varepsilon_{ijk}A_j\\varepsilon_{klm}B_lC_m$</div>
+<div class="step">$\\varepsilon_{ijk}\\varepsilon_{klm} = \\delta_{il}\\delta_{jm}-\\delta_{im}\\delta_{jl}$:<br>$= A_jB_iC_j - A_jB_jC_i = (\\vec{A}\\cdot\\vec{C})B_i - (\\vec{A}\\cdot\\vec{B})C_i$ ✓</div>`},
+    {q:'[ÜB 1.4] Annas Freundschaft beginnt: Vollständige Lösung des Wurfproblems.',badges:['ex','calc'],ref:'Übung Blatt 1, Aufg. 4 · Skript §2.4.1',
+     a:`<div class="step"><strong>Anna-System:</strong> $\\ddot{r}_x^A = 0$, $\\ddot{r}_z^A = -g$<br>
+$r_x^A = v_{0x}^A t$, $r_z^A = v_{0z}^A t - \\frac{1}{2}gt^2$</div>
+<div class="step"><strong>Bernd-System:</strong> Sieht rein vertikalen Fall: $r_x^B = 0$, $r_z^B = v_{0z}^A t - \\frac{1}{2}gt^2$<br>
+Flugzeit: $\\Delta t = 2v_{0z}^A/g$</div>
+<div class="step"><strong>Galilei-Trafo:</strong> $r_x^A = r_x^B + vt$ → $v_{0x}^A = v$ (Straßenbahngeschwindigkeit)</div>
+<div class="result">$$v = \\sqrt{\\frac{2E}{m} - \\left(\\frac{g\\Delta t}{2}\\right)^2}$$<br>
+Anna misst $E$, Bernd misst $\\Delta t$.</div>`},
+    {q:'[ÜB 2.1 Quiz] Kurze Fragen zu Newton\'schen Konzepten.',badges:['ex'],ref:'Übung Blatt 2, Aufg. 1 · Skript §2.2',
+     a:`<div class="step">a) Bewegung ohne Kraft? Ja (gleichförmig, Newton LI)</div>
+<div class="step">b) Beschleunigung ohne $|\\vec{v}|$-Änderung? Ja (Kreisbewegung: $\\vec{a}\\perp\\vec{v}$)</div>
+<div class="step">c) Anna biegt rechts ab und langsamer? → Komponente von $\\vec{a}$ gegen $\\vec{v}$ (Abbremsung) und quer (Kurve). Antwort <strong>d)</strong>.</div>
+<div class="step">d) Tauziehen: Sieger hat größere Reibungskraft zum Boden als Gegner.</div>`},
+    {q:'[ÜB 2.2] Endliche Zeit zum Ursprung: vollständiger Beweis.',badges:['ex','proof'],ref:'Übung Blatt 2, Aufg. 2 · Skript §2.3',
+     a:`<div class="step">$V = -\\beta x^\\alpha$, $T = \\frac{1}{2}m\\dot{x}^2$. Energieerhaltung mit $E=V(x_0)+T(x_0)=0$:<br>
+$\\dot{x}^2 = \\frac{2\\beta}{m}x^\\alpha$</div>
+<div class="step">$T_{Ursprung} = \\int_0^{x_0}\\frac{dx}{\\sqrt{2\\beta/m}\\,x^{\\alpha/2}} = \\sqrt{\\frac{m}{2\\beta}}\\int_0^{x_0}x^{-\\alpha/2}dx$</div>
+<div class="step">Integral: $\\int_0^{x_0}x^{-\\alpha/2}dx = \\frac{x_0^{1-\\alpha/2}}{1-\\alpha/2}$ (konvergiert wenn $1-\\alpha/2 > 0$)</div>
+<div class="result"><strong>Endliche Zeit für $\\alpha < 2$; unendliche Zeit für $\\alpha \\geq 2$.</strong></div>`},
+    {q:'[ÜB 2.3] Welche Kräfte sind bezüglich $\\vec{r}_0$ drehimpulserhaltend?',badges:['ex','proof'],ref:'Übung Blatt 2, Aufg. 3 · Skript §2.3',
+     a:`<div class="step"><strong>a) Zentralkraft:</strong> $\\vec{F} = f(|\\vec{r}-\\vec{r}_0|)(\\vec{r}-\\vec{r}_0)$<br>
+$\\vec{N} = (\\vec{r}-\\vec{r}_0)\\times\\vec{F} \\propto (\\vec{r}-\\vec{r}_0)\\times(\\vec{r}-\\vec{r}_0) = 0$ ✓</div>
+<div class="step"><strong>b) Querforce:</strong> $\\vec{F} = \\hat{e}_z\\times(\\vec{r}-\\vec{r}_0)$<br>
+$\\vec{N} = (\\vec{r}-\\vec{r}_0)\\times[\\hat{e}_z\\times(\\vec{r}-\\vec{r}_0)] = \\hat{e}_z|\\vec{r}-\\vec{r}_0|^2 - (\\vec{r}-\\vec{r}_0)[(\\vec{r}-\\vec{r}_0)\\cdot\\hat{e}_z] \\neq 0$ ✗</div>`},
+    {q:'[ÜB 2.4] Kahn auf Fluss: Rotation, Stokes-Theorem.',badges:['ex','calc'],ref:'Übung Blatt 2, Aufg. 4 · Skript §2.3',
+     a:`$\\vec{F} = qv_0(1-x^2/a^2)\\hat{e}_y$<br>
+<div class="step">a) $\\oint \\vec{F}\\cdot d\\vec{r} \\neq 0$ → nicht konservativ (Energie vom Fluss)</div>
+<div class="step">b) $(\\nabla\\times\\vec{F})_z = -2qv_0x/a^2 \\neq 0$</div>
+<div class="step">c) Stokes: $\\oint = \\iint(\\nabla\\times\\vec{F})\\cdot d\\vec{A}$<br>
+$= \\int_0^b dy\\int_{-a/2}^0\\frac{-2qv_0x}{a^2}dx = \\frac{qv_0b}{4}$ ✓ (stimmt mit Kurvenintegral überein)</div>`},
+    {q:'[ÜB 3.1] Newton\'sche Hängevorrichtung: N Kugeln, wie viele Stöße?',badges:['ex'],ref:'Übung Blatt 3, Aufg. 1 · Skript §2.3',
+     a:`<div class="step">Elastischer Stoß gleicher Massen: 1. Masse stoppt, 2. nimmt gesamte Geschwindigkeit auf.</div>
+<div class="step">N ruhende Massen: Stoß 0→1, 1→2, ..., $(N-1)$→N.</div>
+<div class="result"><strong>Genau $N$ Stöße</strong>.</div>`},
+    {q:'[ÜB 3.2] Anna und Bernd auf Eis: Geschwindigkeit und Flugzeit.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 2 · Skript §2.3',
+     a:`<div class="step">Seilkraft ⊥ Bewegung → kein Drehmoment → $l = mvr = \\text{const.}$</div>
+<div class="step">a) $v_f = v_i r_i/r_f = 10\\cdot 10/1 = 100$ km/h</div>
+<div class="step">b) Dauer einer Windung bei Radius $r$: $\\Delta t \\approx 2\\pi r/v(r) = 2\\pi r^2/(v_i r_i)$<br>
+$T = \\sum\\Delta t \\approx \\frac{2\\pi}{v_i r_i}\\int_{r_f}^{r_i}r\\,dr = \\frac{\\pi(r_i^2-r_f^2)}{v_i r_i}$</div>
+<div class="result">$T = \\pi(r_i^2-r_f^2)/(v_i r_i)$</div>`},
+    {q:'[ÜB 3.3/3.4] Rotationsmatrizen: Koordinatentransformation, Ableitung, Orthogonalität.',badges:['ex'],ref:'Übung Blatt 3, Aufg. 3–4 · Skript §2.4',
+     a:`<div class="step">Passive Rotation: $x' = \\cos\\omega\\,x + \\sin\\omega\\,y$, $y' = -\\sin\\omega\\,x + \\cos\\omega\\,y$</div>
+<div class="step">Ableitungen: $\\partial/\\partial x' = \\cos\\omega\\,\\partial/\\partial x + \\sin\\omega\\,\\partial/\\partial y$</div>
+<div class="step">Orthogonalität: $R^TR=I$ aus $\\|Rx\\|=\\|x\\|$; $\\langle Ry,Rx\\rangle = \\langle y,x\\rangle$ wegen $R^TR=I$</div>
+<div class="step">Skalentransformation $\\hat{e}'_x=2\\hat{e}_x$: $x'=x/2$, $\\partial/\\partial x' = 2\\partial/\\partial x$</div>`},
+    {q:'[ÜB 4.1] Quizfragen zu Inertialsystemen.',badges:['ex'],ref:'Übung Blatt 4, Aufg. 1 · Skript §2.4',
+     a:`<div class="step">a) Anna im Zug (gleichförmig): Ball fällt gerade (Trajektorie A)</div>
+<div class="step">b) Bernd draußen: Ball folgt Parabel (Trajektorie B)</div>
+<div class="step">c) Beschleunigter Zug ($a=g$): Anna sieht diagonalen Fall (Trajektorie D)</div>
+<div class="step">d) Bernd sieht Parabel mit höherer Horizontalgeschwindigkeit</div>
+<div class="step">e) Flasche im freien Fall: Aus keinem Loch fließt Wasser (Antwort C, Schwerelosigkeit)</div>`},
+    {q:'[ÜB 4.2] Karussell-Aufgabe: Scheinkräfte.',badges:['ex'],ref:'Übung Blatt 4, Aufg. 2 · Skript §2.4.2',
+     a:`Ball im rotierenden System: Pseudo-Newton $m\\ddot{\\vec{r}}' = \\vec{F}' - 2m\\vec{\\omega}\\times\\dot{\\vec{r}}' - m\\vec{\\omega}\\times(\\vec{\\omega}\\times\\vec{r}')$<br>
+Coriolis $(-2m\\vec{\\omega}\\times\\dot{\\vec{r}}')$ und Zentrifugal $(-m\\vec{\\omega}\\times(\\vec{\\omega}\\times\\vec{r}'))$ erscheinen als Kräfte.`},
+    {q:'[ÜB 4.3] Corioliskraft auf rotierender Plattform.',badges:['ex','calc'],ref:'Übung Blatt 4, Aufg. 3 · Skript §2.4.2',
+     a:`<div class="step">Anna radial nach außen ($\\dot{\\vec{r}}' = \\dot{r}'\\hat{e}_r'$): $\\vec{F}_C = -2m\\omega\\dot{r}'\\hat{e}_\\varphi'$ (quer links)</div>
+<div class="step">Bernd am Rand in Drehrichtung ($\\dot{\\vec{r}}' = v'\\hat{e}_\\varphi'$): $\\vec{F}_C = -2m\\omega v'\\hat{e}_r'$ (nach innen)</div>
+<div class="result">Corioliskraft immer senkrecht zur Bewegungsrichtung → keine Arbeit, aber Ablenkung.</div>`},
+    {q:'[ÜB 4.4] Vollständige Lösung Kipp-Spielzeug.',badges:['ex','calc'],ref:'Übung Blatt 4, Aufg. 4 · Skript §2.5',
+     a:`<div class="step">a) $V(\\theta) = mg(d-2l\\cos\\alpha)\\cos\\theta$</div>
+<div class="step">b) $V''(0) > 0 \\Leftrightarrow d < 2l\\cos\\alpha$ (stabil wenn Schwerpunkt unter Drehpunkt)</div>
+<div class="step">c) $T = ms^2\\dot{\\theta}^2$, $s = \\sqrt{d^2+l^2+2dl\\cos\\alpha}$</div>
+<div class="step">d/e) $B\\ddot{\\theta}+A\\theta = 0 \\Rightarrow \\omega = \\sqrt{A/B} = \\sqrt{g(2l\\cos\\alpha-d)/s^2}$</div>`},
+    {q:'[ÜB 5.1] Lineares Molekül: vollständige Lösung.',badges:['ex','calc'],ref:'Übung Blatt 5, Aufg. 1 · Skript §2.5',
+     a:`<div class="step">a) $V(u_1,u_2,u_3) = \\frac{k}{2}[(u_2-u_1)^2+(u_3-u_2)^2]$</div>
+<div class="step">b) $A = \\frac{k}{m}\\begin{pmatrix}1&-1&0\\\\-1&2&-1\\\\0&-1&1\\end{pmatrix}$</div>
+<div class="step">c) Eigenwerte: $\\omega_1=0$ (Translation), $\\omega_2=\\sqrt{k/m}$ (asym.), $\\omega_3=\\sqrt{3k/m}$ (sym.)</div>
+<div class="result">Drei Normalmoden. $\\omega_1=0$: alle Atome zusammen. $\\omega_2$: Randatome gleich, Mitte entgegen. $\\omega_3$: Mitte ruht, Ränder entgegen.</div>`},
+    {q:'[ÜB 3.3d] Skalentransformation: $\\hat{e}'_x = 2\\hat{e}_x$, $\\hat{e}'_y = \\frac{1}{3}\\hat{e}_y$.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 3d · Skript §2.4',
+     a:`<div class="step">$\\vec{r} = x\\hat{e}_x + y\\hat{e}_y = x'\\cdot 2\\hat{e}_x + y'\\cdot\\frac{1}{3}\\hat{e}_y$<br>
+Vergleich: $x = 2x'$, $y = y'/3$ → $x' = x/2$, $y' = 3y$</div>
+<div class="result">Ableitungen:<br>$\\partial/\\partial x' = 2\\,\\partial/\\partial x$<br>$\\partial/\\partial y' = \\frac{1}{3}\\,\\partial/\\partial y$<br>
+Koordinaten transformieren sich invers zu Basisvektoren (kontravariantes Transformationsverhalten).</div>`},
+    {q:'Zusammenfassung: Virialsatz für Gravitation und Harmonischen Oszillator.',badges:['calc'],ref:'Skript §2.3 / Übungen',
+     a:`<table style="font-size:.88rem;width:100%;border-collapse:collapse;margin-top:.5rem">
+<tr style="border-bottom:1px solid #30363d"><td style="padding:.35rem"><strong>System</strong></td><td style="padding:.35rem">$n$</td><td style="padding:.35rem">$\\overline{T}$</td><td style="padding:.35rem">$\\overline{U}$</td></tr>
+<tr><td style="padding:.3rem">Gravitation $U=-k/r$</td><td>$-1$</td><td>$-E > 0$</td><td>$2E < 0$</td></tr>
+<tr><td style="padding:.3rem">Harmonischer Osc. $U=kx^2/2$</td><td>$2$</td><td>$E/2$</td><td>$E/2$</td></tr>
+</table>`},
+    {q:'Übersicht: Erhaltungsgrößen und ihre Symmetrien (Noether-Theorem).',badges:['def'],ref:'Skript §3.5.3',
+     a:`<table style="font-size:.88rem;width:100%;border-collapse:collapse;margin-top:.5rem">
+<tr style="border-bottom:1px solid #30363d"><td style="padding:.35rem"><strong>Symmetrie</strong></td><td style="padding:.35rem"><strong>Erhaltungsgröße</strong></td></tr>
+<tr><td style="padding:.3rem">Raumtranslation</td><td>Impuls $\\vec{p}$</td></tr>
+<tr><td style="padding:.3rem">Raumrotation</td><td>Drehimpuls $\\vec{l}$</td></tr>
+<tr><td style="padding:.3rem">Zeittranslation</td><td>Energie $E$</td></tr>
+<tr><td style="padding:.3rem">Galilei-Invarianz</td><td>Schwerpunktimpuls $M\\vec{v}_{SP}$</td></tr>
+</table>`},
+    {q:'Was sind die wichtigsten Formeln der klassischen Mechanik in einer Übersicht?',badges:['def'],ref:'Skript Kap. 2–5',
+     a:`Newton: $m\\ddot{\\vec{r}} = \\vec{F}$<br>
+Drehimpuls: $\\dot{\\vec{l}} = \\vec{N}$<br>
+Energie: $E = T+U = \\text{const.}$ (konservativ)<br>
+Lagrange: $\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot{q}_k} - \\frac{\\partial L}{\\partial q_k} = 0$<br>
+Hamilton: $\\dot{q}_k = \\partial H/\\partial p_k$, $\\dot{p}_k = -\\partial H/\\partial q_k$<br>
+Noether: Symmetrie ↔ Erhaltungsgröße`}
+  ]
+}
+];
+
+// ═══════════════════════════════════════════════════════════════════
+//  RENDERING ENGINE
+// ═══════════════════════════════════════════════════════════════════
+
+function initSection(ch) {
+  const sec = document.getElementById(ch.id);
+  const filterRow = sec.querySelector('.filter-row');
+  const cardEl = sec.querySelector('.fc-card');
+  const counter = sec.querySelector('.counter-row');
+  const pbar = sec.querySelector('.pbar');
+
+  let idx = 0, flipped = false, activeFilter = 'all';
+  let good = new Set(), bad = new Set();
+
+  function filtered() {
+    if (activeFilter === 'all') return ch.cards;
+    return ch.cards.filter(c => c.badges && c.badges.includes(activeFilter));
+  }
+
+  function badgeHTML(b) {
+    const map = {ex:'<span class="fc-badge badge-ex">Übung</span>',proof:'<span class="fc-badge badge-proof">Beweis</span>',def:'<span class="fc-badge badge-def">Definition</span>',calc:'<span class="fc-badge badge-calc">Rechnung</span>',ch:'<span class="fc-badge badge-ch">Skript</span>'};
+    return map[b] || '';
+  }
+
+  function render() {
+    const cards = filtered();
+    if (!cards.length) { cardEl.innerHTML='<div class="fc-inner"><div class="face front"><div class="fc-q">Keine Karten in dieser Kategorie.</div></div></div>'; return; }
+    if (idx >= cards.length) idx = 0;
+    const card = cards[idx];
+    flipped = false; cardEl.classList.remove('flipped');
+    cardEl.innerHTML = `<div class="fc-inner">
+      <div class="face front">
+        <div class="fc-badge-row">${(card.badges||[]).map(badgeHTML).join('')}</div>
+        <div class="fc-q">${card.q}</div>
+        <div class="fc-ref">${card.ref||''}</div>
+        <div class="fc-hint">Klicken oder <kbd>F</kbd> zum Umdrehen</div>
+      </div>
+      <div class="face back">
+        <div class="fc-badge-row"><span class="fc-badge badge-ch">Antwort</span></div>
+        <div class="fc-a">${card.a}</div>
+        <div class="fc-hint">Zurückdrehen oder weiter</div>
+      </div>
+    </div>`;
+    if (window.renderMathInElement) renderMathInElement(cardEl,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
+    counter.innerHTML = `${idx+1} / ${cards.length} · <span style="color:var(--green)">${good.size} gut</span> · <span style="color:var(--red)">${bad.size} wiederholen</span>`;
+    pbar.style.width = (((idx+1)/cards.length)*100)+'%';
+  }
+
+  function flip() { flipped=!flipped; cardEl.classList.toggle('flipped',flipped); }
+
+  sec.querySelector('.btn.primary').onclick = flip;
+  sec.querySelector('#prev-'+ch.id).onclick = () => { const c=filtered(); idx=(idx-1+c.length)%c.length; render(); };
+  sec.querySelector('#next-'+ch.id).onclick = () => { const c=filtered(); idx=(idx+1)%c.length; render(); };
+  sec.querySelector('.btn.good').onclick = () => { good.add(idx); sec.querySelector('#next-'+ch.id).click(); };
+  sec.querySelector('.btn.bad').onclick = () => { bad.add(idx); sec.querySelector('#next-'+ch.id).click(); };
+  sec.querySelector('.btn.shuffle').onclick = () => {
+    const c=filtered(); for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];}
+    idx=0; render();
+  };
+  cardEl.onclick = flip;
+  cardEl.setAttribute('tabindex','0');
+  cardEl.onkeydown = e => {
+    if(e.key==='ArrowRight') sec.querySelector('#next-'+ch.id).click();
+    else if(e.key==='ArrowLeft') sec.querySelector('#prev-'+ch.id).click();
+    else if(e.key.toLowerCase()==='f') flip();
+  };
+
+  ['all','ex','def','proof','calc'].forEach(f => {
+    const b=document.createElement('button');
+    b.className='chip'+(f==='all'?' active':'')+(f==='ex'?' ex':'')+(f==='proof'?' proof':'');
+    b.textContent={all:'Alle',ex:'Übungen',def:'Definitionen',proof:'Beweise',calc:'Rechnungen'}[f];
+    b.onclick = () => {
+      filterRow.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); activeFilter=f; idx=0; render();
+    };
+    filterRow.appendChild(b);
+  });
+  render();
+}
+
+function buildAll() {
+  const content = document.getElementById('content');
+  chapters.forEach(ch => {
+    const sec = document.createElement('section');
+    sec.className='chapter'; sec.id=ch.id;
+    sec.innerHTML = `
+      <div class="ch-header" style="margin-bottom:1.1rem">
+        <h2><span class="ch-num">${ch.num}</span>${ch.title}</h2>
+        <p>${ch.desc}</p>
+      </div>
+      <div class="stats">${(ch.stats||[]).map(s=>`<div class="stat"><strong>${s.v}</strong><span>${s.l}</span></div>`).join('')}</div>
+      <div class="fc-section">
+        <h3>${ch.title} — Lernkarten</h3>
+        <div class="filter-row"></div>
+        <div class="counter-row">Lade...</div>
+        <div class="pbar-wrap"><div class="pbar"></div></div>
+        <div class="stage"><div class="fc-card"></div></div>
+        <div class="btn-row">
+          <button class="btn" id="prev-${ch.id}">◀ Zurück</button>
+          <button class="btn primary">⟳ Umdrehen</button>
+          <button class="btn" id="next-${ch.id}">Weiter ▶</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn good">✓ Verstanden</button>
+          <button class="btn bad">✗ Wiederholen</button>
+          <button class="btn shuffle">⇄ Mischen</button>
+        </div>
+        <div class="kbd-hint"><kbd>F</kbd> umdrehen · <kbd>←</kbd><kbd>→</kbd> navigieren</div>
+      </div>`;
+    content.appendChild(sec);
+    initSection(ch);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', buildAll);
+</script>
+</body>
+</html>
