@@ -986,7 +986,7 @@ function initSection(ch) {
         <div class="fc-hint">Zurückdrehen oder weiter</div>
       </div>
     </div>`;
-    if (window.renderMathInElement) renderMathInElement(cardEl,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$\',right:\'$',display:false}]});
+    if (window.renderMathInElement) renderMathInElement(cardEl,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
     counter.innerHTML = `${idx+1} / ${cards.length} · <span style="color:var(--green)">${good.size} gut</span> · <span style="color:var(--red)">${bad.size} wiederholen</span>`;
     pbar.style.width = (((idx+1)/cards.length)*100)+'%';
   }
