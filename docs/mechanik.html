@@ -753,7 +753,149 @@ $R = R_z(\\psi)\\cdot R_x(\\theta)\\cdot R_z(\\phi)$ (eine mögliche Konvention)
 <strong>Präzession:</strong> Die Symmetrieachse dreht sich langsam um die Vertikale, weil $\\dot{\\vec{L}} = \\vec{N} \\perp \\vec{L}$, d.h. $\\vec{L}$ ändert Richtung, nicht Betrag.`},
     {q:'Wie hängen Drehimpuls und Winkelgeschwindigkeit bei starren Körpern zusammen?',badges:['def'],ref:'Skript §4.3',
      a:`$$\\vec{L} = I\\vec{\\omega}, \\quad L_a = I_{ab}\\omega_b$$
-<div class="warn">$\\vec{L} \\parallel \\vec{\\omega}$ nur wenn $\\vec{\\omega}$ eine Hauptachse ist. Sonst ist $\\vec{L}$ i.A. nicht parallel zu $\\vec{\\omega}$ (taumelnde Bewegung).</div>`}
+<div class="warn">$\\vec{L} \\parallel \\vec{\\omega}$ nur wenn $\\vec{\\omega}$ eine Hauptachse ist. Sonst ist $\\vec{L}$ i.A. nicht parallel zu $\\vec{\\omega}$ (taumelnde Bewegung).</div>`},
+    {q:'Herleitung: Warum zerfällt die kinetische Energie des starren Körpers in $T_{\\text{trans}}+T_{\\text{rot}}$?',badges:['proof'],ref:'Skript §4.2, S. 89',
+     a:`<div class="step"><strong>Ausgangspunkt:</strong> Ursprung des körperfesten Systems $K$ liegt im <em>Schwerpunkt</em>. Dann ist $\\vec{r}_{I,i}=\\vec{R}+\\vec{r}_i$ und nach Gl. (78)
+$$\\dot{\\vec{r}}_{I,i}=\\dot{\\vec{R}}+\\vec{\\omega}\\times\\vec{r}_i$$</div>
+<div class="step"><strong>Quadrieren und summieren:</strong>
+$$T=\\frac12\\sum_i m_i\\left(\\dot{\\vec{R}}+\\vec{\\omega}\\times\\vec{r}_i\\right)^2=\\underbrace{\\frac12M\\dot{\\vec{R}}^2}_{T_{\\text{trans}}}+\\underbrace{\\dot{\\vec{R}}\\cdot\\left(\\vec{\\omega}\\times\\sum_i m_i\\vec{r}_i\\right)}_{\\text{Mischterm}}+\\underbrace{\\frac12\\sum_i m_i(\\vec{\\omega}\\times\\vec{r}_i)^2}_{T_{\\text{rot}}}$$</div>
+<div class="result"><strong>Der Mischterm verschwindet</strong>, weil im Schwerpunktsystem $\\sum_i m_i\\vec{r}_i=0$ gilt. Genau <em>deshalb</em> legt man den Ursprung von $K$ in den Schwerpunkt — nur dann entkoppeln Translation und Rotation vollständig:
+$$T=\\frac{1}{2}M\\dot{\\vec{R}}^2+\\frac12\\vec{\\omega}^TI\\vec{\\omega}$$</div>
+<div class="step"><strong>Lagrangefunktion:</strong>
+$$L(\\vec{R},\\dot{\\vec{R}},\\vec{\\phi},\\dot{\\vec{\\phi}})=\\frac12M\\dot{\\vec{R}}^2+\\frac12\\vec{\\omega}^TI\\vec{\\omega}-U(\\vec{R},\\vec{\\phi})$$
+mit $\\vec{\\omega}=\\vec{\\omega}(\\vec{\\phi},\\dot{\\vec{\\phi}})$. Die 6 Freiheitsgrade sind 3 Translationen + 3 Winkel.</div>
+<div class="warn"><strong>Kreisel:</strong> Ist ein Punkt des Körpers fest ($\\dot{\\vec{R}}=0$), bleibt nur $T=T_{\\text{rot}}$ — das ist die Definition eines Kreisels.</div>`},
+    {q:'Trägheitstensor im Kontinuum: Herleitung, Bedeutung der Einträge und Berechnungsrezept.',badges:['proof','calc'],ref:'Skript §4.3, Gl. (79)',
+     a:`<div class="step"><strong>Von diskret zu kontinuierlich:</strong> Man bettet die Massenpunkte in Volumina der Größe $a^3$ ein und definiert die Massendichte $\\rho(\\vec{r}_i)=m_i/a^3$. Aus $\\sum_i$ wird $\\int d^3r$:
+$$I_{ab}=\\sum_i m_i\\left(\\vec{r}_i^2\\delta_{ab}-r_{i,a}r_{i,b}\\right)\\;\\longrightarrow\\;I_{ab}=\\int d^3r\\,\\rho(\\vec{r})\\left(\\vec{r}^2\\delta_{ab}-r_ar_b\\right)$$</div>
+<div class="step"><strong>Woher kommt die Struktur?</strong> Aus $(\\vec{\\omega}\\times\\vec{r})^2=\\vec{\\omega}^2\\vec{r}^2-(\\vec{\\omega}\\cdot\\vec{r})^2=\\omega_a\\omega_b(r_cr_c\\delta_{ab}-r_ar_b)$. Der Tensor ist damit automatisch <strong>symmetrisch</strong>, $I_{ab}=I_{ba}$ — er hat nur 6 unabhängige Komponenten.</div>
+<div class="result"><strong>Bedeutung der Einträge:</strong><br>
+• <em>Diagonale</em> ($I_{11}=\\int\\rho\\,(r_2^2+r_3^2)$): die klassischen <strong>Trägheitsmomente</strong> — Abstandsquadrat zur jeweiligen Achse.<br>
+• <em>Nichtdiagonale</em> ($I_{12}=-\\int\\rho\\,r_1r_2$): die <strong>Deviations- oder Zentrifugalmomente</strong>. Sie sind dafür verantwortlich, dass $\\vec{L}$ nicht parallel zu $\\vec{\\omega}$ liegt und dass ein rotierender Körper an seinen Lagern „rüttelt".</div>
+<div class="step"><strong>Rezept:</strong> 1) Symmetrieachsen suchen → günstiges Koordinatensystem, 2) $\\rho$ und Integrationsgrenzen festlegen, 3) Integrale ausrechnen (bei Symmetrie verschwinden viele Terme), 4) ggf. Steiner anwenden.</div>
+<div class="warn"><strong>Additivität:</strong> Für $\\rho=\\rho_1\\pm\\rho_2$ gilt $I=I^{(1)}\\pm I^{(2)}$ (das Integral ist linear). Damit lassen sich Körper aus Bausteinen zusammensetzen — und Hohlräume durch <em>Subtraktion</em> „negativer Masse" erzeugen.</div>`},
+    {q:'Hauptachsentransformation und Trägheitsellipsoid: Was steckt dahinter?',badges:['def','proof','exam'],ref:'Skript §4.3',
+     a:`<div class="step"><strong>Mathematischer Kern:</strong> $I$ ist reell und symmetrisch → nach dem Spektralsatz existiert stets eine <em>orthogonale</em> Matrix $O$ (also eine Drehung) mit
+$$O^TIO=\\text{diag}(I_1,I_2,I_3)$$
+Die Eigenvektoren heißen <strong>Hauptträgheitsachsen</strong>, die Eigenwerte $I_1,I_2,I_3$ <strong>Hauptträgheitsmomente</strong>. Sie sind stets reell und $\\ge0$.</div>
+<div class="result">In diesem Bezugssystem wird alles einfach:
+$$T_{\\text{rot}}=\\frac12\\left(I_1\\omega_1^2+I_2\\omega_2^2+I_3\\omega_3^2\\right),\\qquad \\vec{L}=(I_1\\omega_1,\\,I_2\\omega_2,\\,I_3\\omega_3)$$
+$\\vec{L}\\parallel\\vec{\\omega}$ genau dann, wenn $\\vec{\\omega}$ entlang einer Hauptachse zeigt.</div>
+<div class="step"><strong>Symmetrie-Kurzschlüsse</strong> (ohne jede Rechnung):<br>
+• Ist $\\rho$ invariant unter einer $\\pi$-Rotation um die 1-Achse ($r_1\\to r_1$, $r_2\\to-r_2$, $r_3\\to-r_3$), so ist $I_{12}=I_{13}=0$ → die 1-Achse ist Hauptachse.<br>
+• Jede Spiegelebene enthält zwei Hauptachsen, die Normale ist die dritte.<br>
+• Volle Rotationssymmetrie um die 1-Achse ⇒ $I_{23}=0$ und $I_{22}=I_{33}$ (symmetrischer Kreisel).<br>
+• Beim <em>Quader</em> mit Achsen parallel zu den Kanten und Ursprung im Schwerpunkt sind alle drei Achsen Hauptachsen (drei $\\pi$-Symmetrien).</div>
+<div class="step"><strong>Trägheitsellipsoid:</strong> Die Fläche $\\vec{n}^TI\\vec{n}=1$ ist ein Ellipsoid, dessen Halbachsen $1/\\sqrt{I_k}$ entlang der Hauptachsen liegen. Es visualisiert die Richtungsabhängigkeit der Trägheit: lange Halbachse = kleines Trägheitsmoment = „leicht drehbar".</div>
+<div class="warn"><strong>Dreiecksungleichung:</strong> Es gilt immer $I_1+I_2\\ge I_3$ (zyklisch). Nicht jedes Zahlentripel ist also als Trägheitsmoment realisierbar. Für ebene Körper (Lamina) gilt sogar $I_3=I_1+I_2$ (Satz der senkrechten Achsen).</div>`},
+    {q:'Steinerscher Satz (Parallelachsensatz): Beweise $I_{11}^{\\prime}=I_{11}+Md^2$.',badges:['proof','ex','exam'],ref:'Skript §4.3 · Übung Blatt 10, Aufg. 2b',
+     a:`<div class="step"><strong>Trick:</strong> Statt die Achse zu verschieben, verschiebt man den Körper. Für die verschobene Dichte $\\rho^{\\prime}(r_1,r_2,r_3)=\\rho(r_1,r_2-d_2,r_3-d_3)$ mit $d_2^2+d_3^2=d^2$:
+$$I_{11}^{\\prime}=\\int d^3r\\,\\rho^{\\prime}(\\vec{r})\\left(r_2^2+r_3^2\\right)$$</div>
+<div class="step"><strong>Substitution</strong> $u_2=r_2-d_2$, $u_3=r_3-d_3$ (Jacobi-Determinante 1):
+$$I_{11}^{\\prime}=\\int d^3u\\,\\rho(\\vec{u})\\left[(u_2+d_2)^2+(u_3+d_3)^2\\right]$$
+$$=\\underbrace{\\int\\rho\\,(u_2^2+u_3^2)}_{=I_{11}}+2d_2\\underbrace{\\int\\rho\\,u_2}_{=0}+2d_3\\underbrace{\\int\\rho\\,u_3}_{=0}+(d_2^2+d_3^2)\\underbrace{\\int\\rho}_{=M}$$</div>
+<div class="result">$$\\boxed{\\;I_{11}^{\\prime}=I_{11}+Md^2\\;}$$
+Die gemischten Terme verschwinden, <strong>weil $I_{11}$ bezüglich der Schwerpunktsachse berechnet wurde</strong> ($\\int\\rho\\,\\vec{u}=0$). Genau das ist die entscheidende Voraussetzung des Satzes!</div>
+<div class="warn"><strong>Zwei Folgerungen:</strong><br>
+1. Das Trägheitsmoment ist bezüglich der Schwerpunktsachse stets <em>minimal</em>.<br>
+2. Beispiel Stab: um die Mitte $\\frac{1}{12}ML^2$, um das Ende $\\frac{1}{12}ML^2+M(L/2)^2=\\frac13ML^2$ ✓<br>
+Häufiger Fehler: Steiner auf ein Trägheitsmoment anwenden, das nicht auf den Schwerpunkt bezogen ist.</div>`},
+    {q:'Katalog der wichtigsten Trägheitsmomente — und warum ein Vollzylinder schneller rollt als ein Rohr.',badges:['calc','ex','exam'],ref:'Skript §4.3 · Übung Blatt 10, Aufg. 1c',
+     a:`<div class="step"><strong>Katalog</strong> (jeweils Schwerpunktsachse, Masse $M$):<br>
+• Dünner Stab, Länge $L$, quer: $\\frac{1}{12}ML^2$ (um ein Ende: $\\frac13ML^2$)<br>
+• Vollzylinder / Scheibe, Symmetrieachse: $\\frac12MR^2$ &nbsp;·&nbsp; Scheibe um Durchmesser: $\\frac14MR^2$<br>
+• Hohlzylinder (dünnwandig): $MR^2$<br>
+• Vollkugel: $\\frac25MR^2$ &nbsp;·&nbsp; Hohlkugel: $\\frac23MR^2$<br>
+• Quader mit Kanten $a,b,c$ um die $a$-Achse: $\\frac{1}{12}M(b^2+c^2)$</div>
+<div class="step"><strong>Rollen ohne Gleiten</strong> auf einer Ebene mit Neigung $\\alpha$: Energiesatz $Mgh=\\frac12Mv^2+\\frac12I\\omega^2$ mit $v=\\omega R$ ergibt
+$$a=\\frac{g\\sin\\alpha}{1+\\dfrac{I}{MR^2}}$$
+Die Masse und der Radius fallen heraus — nur der <em>dimensionslose</em> Formfaktor $I/MR^2$ entscheidet.</div>
+<div class="result"><strong>Wettrennen die schiefe Ebene hinab:</strong><br>
+Vollkugel ($\\frac25$): $a=\\frac57g\\sin\\alpha$ — <strong>Sieger</strong><br>
+Vollzylinder ($\\frac12$): $a=\\frac23g\\sin\\alpha$<br>
+Hohlkugel ($\\frac23$): $a=\\frac35g\\sin\\alpha$<br>
+Rohr ($1$): $a=\\frac12g\\sin\\alpha$ — <strong>Letzter</strong><br>
+Beim Rohr sitzt die ganze Masse außen, es steckt also mehr Energie in der Rotation und weniger in der Translation.</div>
+<div class="warn"><strong>Rennrad-Frage:</strong> 100 g Gewichtsersparnis wirken sich an der <em>Felge</em> deutlich stärker aus als am Rahmen — die Felgenmasse zählt effektiv doppelt ($M+I/R^2=2M$ beim Reifen), weil sie zusätzlich in Rotation versetzt werden muss.</div>`},
+    {q:'Eulersche Gleichungen: Herleitung und Diskussion.',badges:['proof','def','exam'],ref:'Skript §4.4',
+     a:`<div class="step"><strong>Problem:</strong> Im Laborsystem gilt $\\dot{\\vec{L}}=\\vec{N}$, aber dort ist der Trägheitstensor <em>zeitabhängig</em> (der Körper dreht sich ja). Im körperfesten System ist $I$ konstant, aber das System ist nicht inertial.</div>
+<div class="step"><strong>Operatorrelation</strong> (dieselbe wie bei den Scheinkräften, Gl. 34):
+$$\\left(\\frac{d\\vec{L}}{dt}\\right)_{\\text{Lab}}=\\left(\\frac{d\\vec{L}}{dt}\\right)_{\\text{Körper}}+\\vec{\\omega}\\times\\vec{L}=\\vec{N}$$
+Im Hauptachsensystem ist $L_a=I_a\\omega_a$ mit konstanten $I_a$, also $(\\dot{\\vec L})_{\\text{Körper}}=(I_1\\dot\\omega_1,I_2\\dot\\omega_2,I_3\\dot\\omega_3)$.</div>
+<div class="result">$$I_1\\dot\\omega_1+(I_3-I_2)\\omega_2\\omega_3=N_1$$
+$$I_2\\dot\\omega_2+(I_1-I_3)\\omega_3\\omega_1=N_2$$
+$$I_3\\dot\\omega_3+(I_2-I_1)\\omega_1\\omega_2=N_3$$
+Drei gekoppelte, <strong>nichtlineare</strong> DGLs für die Komponenten von $\\vec{\\omega}$ im körperfesten System.</div>
+<div class="step"><strong>Wichtige Spezialfälle:</strong><br>
+• <em>Kugelkreisel</em> $I_1=I_2=I_3$: alle Kopplungsterme verschwinden, $\\vec{\\omega}=$ const bei $\\vec{N}=0$.<br>
+• <em>Symmetrischer Kreisel</em> $I_1=I_2\\ne I_3$: die dritte Gleichung liefert $\\dot\\omega_3=0$, die ersten beiden werden linear → Nutation.<br>
+• <em>Asymmetrischer Kreisel</em>: alle drei gekoppelt → Tennisschlägereffekt.</div>
+<div class="warn">Beachte: Die Eulergleichungen liefern $\\vec{\\omega}$ im <em>körperfesten</em> System. Um die tatsächliche Lage im Raum zu bekommen, muss man zusätzlich die Euler-Winkel integrieren.</div>`},
+    {q:'Kräftefreier symmetrischer Kreisel: Nutation, Präzession und die Frisbee-Rechnung.',badges:['proof','calc','ex','exam'],ref:'Skript §4.4 · Übung Blatt 11, Aufg. 2',
+     a:`<div class="step"><strong>Setup:</strong> $I=I_1=I_2\\ne I_3$, $\\vec{N}=0$, also $\\vec{L}=$ const im Raum.<br>
+Aus $L_a=I_a\\omega_a$ folgt
+$$\\vec{\\omega}=\\frac{1}{I}\\vec{L}+\\left(\\omega_3-\\frac{L_3}{I}\\right)\\hat{e}_3$$
+(die ersten beiden Komponenten stimmen mit $\\vec L/I$ überein, die dritte wird korrigiert).</div>
+<div class="step"><strong>Bewegung der Figurenachse:</strong> Für einen körperfesten Vektor gilt $\\dot{\\hat{e}}_3=\\vec{\\omega}\\times\\hat{e}_3$. Der zu $\\hat e_3$ parallele Anteil von $\\vec\\omega$ fällt heraus:
+$$\\frac{d\\hat{e}_3}{dt}=\\frac{1}{I}\\vec{L}\\times\\hat{e}_3$$
+Das ist eine gleichförmige Kreisbewegung von $\\hat e_3$ um die (raumfeste) Richtung von $\\vec{L}$.</div>
+<div class="result">$$\\omega_{\\text{pr}}=\\frac{L}{I}=\\frac{\\sqrt{I^2(\\omega_1^2+\\omega_2^2)+I_3^2\\omega_3^2}}{I}$$
+Für <strong>schnelle Eigenrotation</strong> ($I_3^2\\omega_3^2\\gg I^2(\\omega_1^2+\\omega_2^2)$):
+$$\\omega_{\\text{pr}}\\approx\\frac{I_3}{I}\\,\\omega_3$$</div>
+<div class="step"><strong>Frisbee</strong> = dünne homogene Scheibe: $I_3=\\frac12mr^2$ (Symmetrieachse), $I=\\frac14mr^2$ (Durchmesser). Also
+$$\\frac{\\omega_{\\text{pr}}}{\\omega_3}=\\frac{I_3}{I}=2$$
+Die Taumelbewegung („Wackeln") läuft also genau <strong>doppelt so schnell</strong> wie die Eigendrehung.</div>
+<div class="warn"><strong>Poinsot-Bild:</strong> Der Körper rollt mit seinem Trägheitsellipsoid gleitfrei auf einer raumfesten Ebene senkrecht zu $\\vec L$ ab; $\\vec\\omega$ beschreibt dabei den <em>Polkegel</em> (körperfest) und den <em>Spurkegel</em> (raumfest).<br>
+<strong>Anwendung Erde:</strong> Die Erde ist abgeplattet mit $(I_3-I)/I\\approx1/306$ → theoretische Nutationsperiode $\\approx306$ Tage; beobachtet wird die <em>Chandler-Wobble</em> mit ca. 433 Tagen (Elastizität der Erde), Amplitude nur wenige Meter.</div>`},
+    {q:'Tennisschlägereffekt (Satz vom Zwischenachsen-Theorem): Warum ist die mittlere Hauptachse instabil?',badges:['proof','ex','exam'],ref:'Übung Blatt 11, Aufg. 3',
+     a:`<div class="step"><strong>Vorbemerkung:</strong> Zeigt $\\vec{\\omega}$ <em>exakt</em> entlang einer Hauptachse, etwa $\\vec\\omega=\\omega_1\\hat e_1$, so verschwinden in den Eulergleichungen alle Produkte $\\omega_a\\omega_b$ ($a\\ne b$) und es folgt $\\dot{\\vec\\omega}=0$: Die Rotation bleibt für immer bestehen. Die Frage ist also die nach der <strong>Stabilität</strong> gegen kleine Störungen.</div>
+<div class="step"><strong>Linearisierung</strong> (Ordnung: $I_1>I_2>I_3$). Sei $\\omega_1\\approx$ const groß, $\\omega_2,\\omega_3$ klein. Der Term $\\omega_2\\omega_3$ ist von 2. Ordnung → entfällt, also $\\dot\\omega_1\\approx0$. Es bleiben
+$$\\dot\\omega_2=-\\frac{I_1-I_3}{I_2}\\omega_1\\omega_3,\\qquad \\dot\\omega_3=-\\frac{I_2-I_1}{I_3}\\omega_1\\omega_2$$
+Einmal ableiten und einsetzen:
+$$\\ddot\\omega_2=-\\underbrace{\\frac{(I_1-I_3)(I_1-I_2)}{I_2I_3}\\omega_1^2}_{\\equiv\\,\\Omega^2}\\,\\omega_2$$</div>
+<div class="result"><strong>Vorzeichenanalyse:</strong><br>
+• Rotation um die <strong>größte</strong> Achse ($I_1$): $(I_1-I_3)(I_1-I_2)>0$ ⇒ $\\Omega^2>0$ ⇒ <em>Oszillation</em> ⇒ <strong>stabil</strong>.<br>
+• Rotation um die <strong>kleinste</strong> Achse ($I_3$): $(I_3-I_1)(I_3-I_2)>0$ ⇒ ebenfalls <strong>stabil</strong>.<br>
+• Rotation um die <strong>mittlere</strong> Achse ($I_2$): $(I_2-I_1)(I_2-I_3)<0$ ⇒ $\\Omega^2<0$ ⇒ Lösungen $\\propto e^{|\\Omega|t}$ ⇒ <strong>exponentiell instabil</strong>.</div>
+<div class="warn">Anschaulich wie im Potential: stabile Achsen entsprechen Minimum/Maximum, die mittlere Achse einem <strong>Sattelpunkt</strong>.<br>
+<strong>Demo:</strong> Wirft man einen Tennisschläger (oder ein Buch, ein Handy) um die mittlere Achse hoch, macht er nach einer halben Umdrehung einen zusätzlichen $180°$-Flip. Berühmt wurde der Effekt 1985, als der Kosmonaut Dschanibekow ihn in Schwerelosigkeit an einer Flügelmutter beobachtete („Dschanibekow-Effekt").</div>`},
+    {q:'Eulersche Winkel: Definition, Reihenfolge und $\\vec{\\omega}$ in Euler-Winkeln.',badges:['def','calc'],ref:'Skript §4.5',
+     a:`<div class="step"><strong>Zweck:</strong> Drei Winkel parametrisieren jede Drehung $R\\in SO(3)$ und damit die Orientierung des starren Körpers. Übliche $z$-$x^{\\prime}$-$z^{\\prime\\prime}$-Konvention:
+$$R=R_{z}(\\psi)\\,R_{x^{\\prime}}(\\theta)\\,R_{z}(\\phi)$$</div>
+<div class="step"><strong>Bedeutung der drei Winkel:</strong><br>
+• $\\phi$ — <strong>Präzession</strong>: Drehung um die raumfeste $z$-Achse; sie legt die <em>Knotenlinie</em> fest (Schnitt der $xy$- mit der $x^{\\prime}y^{\\prime}$-Ebene).<br>
+• $\\theta$ — <strong>Nutation</strong>: Kippwinkel zwischen raumfester $z$- und körperfester $z^{\\prime\\prime}$-Achse (Figurenachse).<br>
+• $\\psi$ — <strong>Eigenrotation</strong>: Drehung des Körpers um seine eigene Figurenachse.</div>
+<div class="result"><strong>Winkelgeschwindigkeit im körperfesten Hauptachsensystem:</strong>
+$$\\omega_1=\\dot\\phi\\sin\\theta\\sin\\psi+\\dot\\theta\\cos\\psi$$
+$$\\omega_2=\\dot\\phi\\sin\\theta\\cos\\psi-\\dot\\theta\\sin\\psi$$
+$$\\omega_3=\\dot\\phi\\cos\\theta+\\dot\\psi$$
+Man liest ab: $\\vec\\omega$ setzt sich aus drei <em>nicht orthogonalen</em> Anteilen zusammen ($\\dot\\phi$ um $\\hat e_z$, $\\dot\\theta$ um die Knotenlinie, $\\dot\\psi$ um $\\hat e_3$).</div>
+<div class="warn">Damit lässt sich die Lagrangefunktion des Kreisels vollständig in $(\\phi,\\theta,\\psi)$ ausdrücken — der Weg zum schweren Kreisel. Nachteil der Euler-Winkel: die <strong>Gimbal-Lock-Singularität</strong> bei $\\theta=0$ (dann sind $\\phi$ und $\\psi$ nicht mehr unterscheidbar). In der Numerik und Computergrafik nimmt man deshalb Quaternionen.</div>`},
+    {q:'Schwerer symmetrischer Kreisel: Lagrangefunktion, Erhaltungsgrößen, Präzession und Nutation.',badges:['proof','calc','exam'],ref:'Skript §4.6',
+     a:`<div class="step"><strong>Lagrangefunktion</strong> (Kreisel im Schwerefeld, Auflagepunkt fest, Schwerpunkt im Abstand $l$, $I_1=I_2\\equiv I$):
+$$L=\\frac{I}{2}\\left(\\dot\\theta^2+\\dot\\phi^2\\sin^2\\theta\\right)+\\frac{I_3}{2}\\left(\\dot\\psi+\\dot\\phi\\cos\\theta\\right)^2-Mgl\\cos\\theta$$</div>
+<div class="step"><strong>Zwei zyklische Koordinaten</strong> ($\\phi$ und $\\psi$ treten in $L$ nicht explizit auf) liefern zwei Erhaltungsgrößen:
+$$p_\\psi=I_3(\\dot\\psi+\\dot\\phi\\cos\\theta)=L_3=\\text{const}$$
+$$p_\\phi=I\\dot\\phi\\sin^2\\theta+L_3\\cos\\theta=L_z=\\text{const}$$
+Dazu kommt die Energie $E=T+U$. Drei Erhaltungsgrößen für drei Freiheitsgrade ⇒ das System ist <strong>integrabel</strong>.</div>
+<div class="result"><strong>Reduktion auf ein 1D-Problem:</strong> Auflösen nach $\\dot\\phi$ und Einsetzen ergibt
+$$E^{\\prime}=\\frac{I}{2}\\dot\\theta^2+U_{\\text{eff}}(\\theta),\\qquad U_{\\text{eff}}(\\theta)=\\frac{(p_\\phi-L_3\\cos\\theta)^2}{2I\\sin^2\\theta}+Mgl\\cos\\theta$$
+Genau dieselbe Struktur wie beim Kepler-Problem! $U_{\\text{eff}}$ hat ein Minimum; $\\theta$ pendelt zwischen zwei Umkehrwinkeln $\\theta_1$ und $\\theta_2$ — das ist die <strong>Nutation</strong>. Gleichzeitig läuft $\\phi$ um: die <strong>Präzession</strong>.</div>
+<div class="step"><strong>Grenzfall des schnellen Kreisels</strong> ($I_3\\omega_3\\gg\\sqrt{MglI}$): Aus $\\dot{\\vec{L}}=\\vec{N}=\\vec{r}_{SP}\\times M\\vec{g}$ mit $|\\vec N|=Mgl\\sin\\theta$ und $|\\Delta\\vec L|=L\\sin\\theta\\,\\Delta\\phi$ folgt sofort
+$$\\Omega_{\\text{pr}}=\\dot\\phi\\approx\\frac{Mgl}{I_3\\omega_3}$$
+Bemerkenswert: <strong>unabhängig vom Neigungswinkel $\\theta$</strong>, und umso <em>langsamer</em>, je schneller der Kreisel dreht.</div>
+<div class="warn"><strong>Warum fällt der Kreisel nicht um?</strong> Weil das Drehmoment senkrecht auf $\\vec{L}$ steht und deshalb nur dessen <em>Richtung</em> ändert, nicht den Betrag. Anwendungen: Kreiselkompass, Trägheitsnavigation, Fahrradstabilität, und die <strong>Präzession der Erdachse</strong> (Platonisches Jahr, ca. 25 800 Jahre — verursacht durch das Drehmoment von Sonne und Mond auf den Äquatorwulst).</div>`},
+    {q:'[ÜB 10.1 Quiz] Drehmoment, Auswuchten und Drehimpulserhaltung — die klassischen Verständnisfragen.',badges:['ex','exam'],ref:'Übung Blatt 10, Aufg. 1',
+     a:`<div class="step"><strong>a) Drehmomente am Quadrat:</strong> $|\\vec\\tau|=|\\vec r||\\vec F|\\sin\\theta$. Bei gleich großen Kräften entscheidet also das Produkt aus Hebelarm <em>und</em> dem Sinus des Winkels zwischen $\\vec r$ und $\\vec F$. Eine Kraft, die genau <em>auf</em> den Drehpunkt zu- oder von ihm wegzeigt ($\\theta=0$), erzeugt gar kein Drehmoment — egal wie groß der Abstand ist.</div>
+<div class="step"><strong>b) Rad im Gleichgewicht:</strong> Anna: $\\tau_A=F_AR$ (Schnur tangential, $\\sin\\theta=1$). Bernd zieht an der Achse mit Radius $\\frac45R$, aber unter dem Winkel $\\phi$:
+$$F_B\\cdot\\frac{4R}{5}\\sin\\phi=F_AR\\;\\Rightarrow\\;F_B=\\frac{5}{4\\sin\\phi}F_A$$
+Nur bei tangentialem Zug ($\\phi=90°$) genügt $\\frac54F_A$.</div>
+<div class="step"><strong>c/d) Zylinder und Felgen:</strong> siehe die Rollformel $a=\\frac{g\\sin\\alpha}{1+I/MR^2}$. Der Hohlzylinder hat das größere Trägheitsmoment ($MR^2$ statt $\\frac12MR^2$) und verliert. Gewicht an der Felge zählt „doppelt", weil es sowohl beschleunigt als auch in Rotation versetzt werden muss.</div>
+<div class="result"><strong>e) Drehstuhl mit Gewichten:</strong> Kein äußeres Drehmoment ⇒ $\\vec{L}=I\\omega=$ <strong>konstant</strong>. Zieht man die Arme an, sinkt $I$, also <em>steigt</em> $\\omega$. Für die Energie gilt
+$$E=\\frac{L^2}{2I}$$
+Bei kleinerem $I$ ist $E$ also <strong>größer</strong> — die zusätzliche Energie stammt aus der Muskelarbeit, die man gegen die Zentrifugalkraft beim Heranziehen leisten muss.</div>
+<div class="warn"><strong>f) Ist $\\vec\\omega\\parallel\\vec L$?</strong> <em>Nein.</em> Nur wenn $\\vec\\omega$ entlang einer Hauptachse zeigt oder der Körper ein Kugelkreisel ist. Sonst ist $\\vec L=I\\vec\\omega$ mit nichtdiagonalem $I$ — die Deviationsmomente kippen $\\vec L$ gegen $\\vec\\omega$. Praktische Folge: Autoräder müssen <strong>ausgewuchtet</strong> werden, sonst erzeugt das rotierende $\\vec L$ ein umlaufendes Drehmoment an den Lagern (Vibration).</div>`}
   ]
 },
 {
