@@ -475,7 +475,48 @@ Corioliskraft: $\\vec{F}_C = -2m\\vec{\\omega}\\times\\dot{\\vec{r}}' = -2m\\ome
 <div class="result">Ablenkung <strong>senkrecht</strong> zur Bewegungsrichtung (in $\\hat{e}'_\\varphi$). Bernd am Rand (in Drehrichtung): Coriolis nach innen.</div>`},
     {q:'[ÜB 4.1b] Was sieht Bernd auf dem Bahnsteig, wenn Anna im Zug einen Ball fallen lässt?',badges:['ex'],ref:'Übung Blatt 4, Aufg. 1b',
      a:`Anna: Ball fällt senkrecht (Trajektorie gerade nach unten — Inertialsystem Zug).<br>
-<div class="result">Bernd: Der Ball hat beim Loslassen die Horizontalgeschwindigkeit des Zuges → parabolische Bahnkurve.</div>`}
+<div class="result">Bernd: Der Ball hat beim Loslassen die Horizontalgeschwindigkeit des Zuges → parabolische Bahnkurve.</div>`},
+    {q:'Zahlenwerte der Erdrotation: Wie groß ist die Zentrifugalbeschleunigung am Äquator — und warum ist die Erde abgeplattet?',badges:['calc','ch'],ref:'Skript §2.4.3',
+     a:`<div class="step"><strong>Winkelgeschwindigkeit:</strong> Ein <em>siderischer</em> Tag dauert $T = 23\\,\\text{h}\\,56\\,\\text{min} = 86164\\,\\text{s}$:
+$$\\omega = \\frac{2\\pi}{T} = 7{,}29\\cdot10^{-5}\\,\\text{s}^{-1}$$</div>
+<div class="step"><strong>Zentrifugalbeschleunigung am Äquator</strong> ($R = 6370\\,\\text{km}$):
+$$a_{zf} = \\omega^2 R = (7{,}29\\cdot10^{-5})^2\\cdot 6{,}37\\cdot10^6 \\approx 0{,}034\\,\\frac{\\text{m}}{\\text{s}^2}$$</div>
+<div class="result">Das sind rund <strong>0,35 % von $g$</strong>. Klein — aber messbar: $g$ beträgt am Äquator $9{,}780$, am Pol $9{,}832\\,\\text{m/s}^2$.</div>
+<div class="info"><strong>Erdabplattung:</strong> Die Erde ist keine starre Kugel. Die Zentrifugalkraft $\\propto\\cos\\theta$ (Abstand zur Drehachse) verformt sie zum <strong>Rotationsellipsoid</strong>: Äquatorradius $6378$ km, Polradius $6357$ km, Differenz $\\approx 21$ km. Die Oberfläche stellt sich so ein, dass sie eine Äquipotentialfläche des <em>effektiven</em> Potentials $\\Phi_{grav} - \\tfrac12\\omega^2\\rho^2$ ist — deshalb steht ein Lot überall senkrecht auf ihr und man spürt die Zentrifugalkraft im Alltag nicht als "Schräglage".</div>
+<div class="warn">Die <strong>Corioliskraft</strong> lässt sich dagegen <em>nicht</em> weg-definieren, weil sie von $\\dot{\\vec r}\\,'$ abhängt — sie ist die einzige Scheinkraft, die man auf der Erde wirklich "sieht" (Wirbelstürme, Foucault-Pendel, Ostablenkung im freien Fall).</div>`},
+    {q:'Beweis (Anhang §2.4.3): Warum ist $A = \\dot{R}R^{T}$ antisymmetrisch, und wie folgt daraus der Vektor $\\vec\\omega$?',badges:['proof','ch'],ref:'Skript §2.4.3 (Anhang)',
+     a:`<div class="step"><strong>Ausgangspunkt:</strong> $R(t)$ ist für jedes $t$ eine Drehmatrix, also $R(t)R^T(t) = \\mathbf{1}$ für <em>alle</em> $t$.</div>
+<div class="step"><strong>Ableiten nach $t$</strong> (Produktregel):
+$$\\dot RR^T + R\\dot R^T = 0 \\quad\\Longrightarrow\\quad A + A^T = 0,\\qquad A \\equiv \\dot RR^T$$
+denn $R\\dot R^T = (\\dot RR^T)^T = A^T$.</div>
+<div class="result">$A^T = -A$: $A$ ist <strong>antisymmetrisch</strong>, hat also nur $3$ unabhängige Einträge — genau die Dimension eines Vektors im $\\mathbb{R}^3$.</div>
+<div class="step"><strong>Zuordnung Matrix ↔ Vektor:</strong> Man definiert
+$$A_{ab} = -\\epsilon_{abc}\\,\\omega_c \\qquad\\Longleftrightarrow\\qquad \\omega_a = -\\tfrac12\\epsilon_{abc}A_{bc}$$
+Explizit: $A = \\begin{pmatrix} 0 & -\\omega_3 & \\omega_2\\\\ \\omega_3 & 0 & -\\omega_1\\\\ -\\omega_2 & \\omega_1 & 0\\end{pmatrix}$</div>
+<div class="step"><strong>Rückrechnung:</strong> $(A\\vec x)_a = A_{ab}x_b = -\\epsilon_{abc}\\omega_c x_b = \\epsilon_{acb}\\omega_c x_b = (\\vec\\omega\\times\\vec x)_a$</div>
+<div class="result">$$A\\vec x = \\vec\\omega\\times\\vec x$$
+Genau das ist der Grund, warum in allen Formeln für rotierende Bezugssysteme das <strong>Kreuzprodukt mit $\\vec\\omega$</strong> auftaucht: Es ist nichts anderes als die Wirkung der antisymmetrischen Matrix $\\dot RR^T$.</div>
+<div class="info">$\\vec\\omega$ ist deshalb ein <strong>Axialvektor</strong> (Pseudovektor): Er kehrt unter Raumspiegelung sein Vorzeichen <em>nicht</em> um, weil er in Wahrheit eine antisymmetrische Matrix ist.</div>`},
+    {q:'Foucault-Pendel vollständig: Herleitung der Drehdauer der Schwingungsebene mit der komplexen Variablen $z = x_1^{\\prime} + ix_2^{\\prime}$.',badges:['calc','proof','exam'],ref:'Skript §2.4.3',
+     a:`<div class="step"><strong>Aufbau:</strong> Pendel am Ort mit Polabstand $\\theta$. Lokale Achsen: $x_1'$ nach Süden, $x_2'$ nach Osten, $x_3'$ nach oben. Für kleine Auslenkungen bleibt die Bewegung horizontal.</div>
+<div class="step"><strong>Bewegungsgleichung</strong> (Pendel + Coriolis, Zentrifugalterm steckt in $g$):
+$$\\ddot{\\vec r}\\,' = -\\omega_0^2\\vec r\\,' - 2\\vec\\omega\\times\\dot{\\vec r}\\,',\\qquad \\omega_0^2 = \\frac{g}{L}$$
+Nur die <em>vertikale</em> Komponente $\\omega_3' = \\omega\\cos\\theta$ dreht die horizontale Ebene; die horizontale Komponente von $\\vec\\omega$ erzeugt nur eine (vernachlässigbare) vertikale Kraft.</div>
+<div class="step"><strong>Komponenten</strong> mit $\\alpha \\equiv \\omega\\cos\\theta$:
+$$\\ddot x_1' = -\\omega_0^2x_1' + 2\\alpha\\dot x_2',\\qquad \\ddot x_2' = -\\omega_0^2x_2' - 2\\alpha\\dot x_1'$$</div>
+<div class="step"><strong>Trick:</strong> Setze $z = x_1' + ix_2'$, addiere die zweite Gleichung mal $i$ zur ersten:
+$$\\ddot z = -\\omega_0^2 z - 2i\\alpha\\dot z$$
+Die beiden gekoppelten reellen Gleichungen sind zu <strong>einer</strong> komplexen geworden.</div>
+<div class="step"><strong>Ansatz</strong> $z = e^{-i\\alpha t}\\,u(t)$ (mitrotierendes Koordinatensystem):
+$$\\dot z = e^{-i\\alpha t}(\\dot u - i\\alpha u),\\quad \\ddot z = e^{-i\\alpha t}(\\ddot u - 2i\\alpha\\dot u - \\alpha^2u)$$
+Einsetzen: $\\ddot u - 2i\\alpha\\dot u - \\alpha^2u = -\\omega_0^2u - 2i\\alpha(\\dot u - i\\alpha u)$</div>
+<div class="result">Alle Coriolis-Terme kürzen sich heraus:
+$$\\ddot u = -(\\omega_0^2 - \\alpha^2)\\,u \\;\\approx\\; -\\omega_0^2 u$$
+Das ist ein <strong>gewöhnlicher ebener harmonischer Oszillator</strong>. Also: Im mit $-\\alpha$ rotierenden System schwingt das Pendel in einer festen Ebene — im Laborsystem <strong>dreht sich die Schwingungsebene mit der Winkelgeschwindigkeit $\\alpha = \\omega\\cos\\theta$</strong> (im Uhrzeigersinn auf der Nordhalbkugel).</div>
+<div class="step"><strong>Drehdauer:</strong>
+$$T_F = \\frac{2\\pi}{\\omega\\cos\\theta} = \\frac{T_{\\text{Tag}}}{\\cos\\theta} = \\frac{23{,}93\\,\\text{h}}{\\cos\\theta}$$</div>
+<div class="info"><strong>Zahlen:</strong> Nordpol ($\\theta=0$): $23{,}9$ h. Braunschweig/Berlin ($\\varphi\\approx52°$, also $\\theta\\approx38°$): $T_F = 23{,}93/\\cos38° \\approx 30{,}4$ h. Äquator ($\\theta=90°$): $T_F\\to\\infty$ — <strong>keine Drehung</strong>.</div>
+<div class="warn">Wegen $\\alpha \\ll \\omega_0$ ist die Frequenzverschiebung $\\sqrt{\\omega_0^2-\\alpha^2}\\approx\\omega_0(1-\\alpha^2/2\\omega_0^2)$ völlig unmessbar — der Effekt steckt allein im Phasenfaktor $e^{-i\\alpha t}$.</div>`}
   ]
 },
 {
@@ -670,7 +711,24 @@ Die partielle Zeitableitung des Potentials "pumpt" Energie in das System (z.B. g
      a:`<div class="step">Fläche $S$: $x\\in[-a/2,0]$, $y\\in[0,b]$. Flächennormale $+\\hat{e}_z$.</div>
 <div class="step">$\\iint_S (\\nabla\\times\\vec{F})_z\\,dA = \\int_0^b dy\\int_{-a/2}^0\\frac{-2qv_0 x}{a^2}dx$<br>
 $= \\frac{-2qv_0}{a^2}\\cdot b\\cdot\\frac{x^2}{2}\\bigg|_{-a/2}^0 = \\frac{-2qv_0}{a^2}\\cdot b\\cdot(-\\frac{a^2}{8}) = \\frac{qv_0 b}{4}$</div>
-<div class="result">Stimmt mit dem direkten Kurvenintegral $\\frac{1}{4}qv_0 b$ überein. ✓</div>`}
+<div class="result">Stimmt mit dem direkten Kurvenintegral $\\frac{1}{4}qv_0 b$ überein. ✓</div>`},
+    {q:'Reibung als Prototyp einer dissipativen Kraft: Zeige für $\\vec F_R = -f\\dot{\\vec r}$, dass die Energie streng monoton fällt.',badges:['proof','calc','ch'],ref:'Skript §2.3 / §3',
+     a:`<div class="step"><strong>Modell (Stokes-Reibung):</strong> $\\vec F_R = -f\\,\\dot{\\vec r}$ mit $f>0$ — gilt für langsame Bewegung in einer zähen Flüssigkeit. Diese Kraft hängt von $\\dot{\\vec r}$ ab, ist also <strong>kein</strong> Gradientenfeld $-\\vec\\nabla V(\\vec r)$.</div>
+<div class="step"><strong>Energiebilanz:</strong> Sei $E = \\tfrac12 m\\dot{\\vec r}^{\\,2} + V(\\vec r)$ mit einer konservativen Zusatzkraft $-\\vec\\nabla V$. Dann
+$$\\frac{dE}{dt} = m\\dot{\\vec r}\\cdot\\ddot{\\vec r} + \\vec\\nabla V\\cdot\\dot{\\vec r} = \\dot{\\vec r}\\cdot\\big(m\\ddot{\\vec r} + \\vec\\nabla V\\big)$$</div>
+<div class="step">Newton: $m\\ddot{\\vec r} = -\\vec\\nabla V + \\vec F_R \\;\\Rightarrow\\; m\\ddot{\\vec r} + \\vec\\nabla V = \\vec F_R$</div>
+<div class="result">$$\\frac{dE}{dt} = \\dot{\\vec r}\\cdot\\vec F_R = -f\\,\\dot{\\vec r}^{\\,2} \\;\\le\\; 0$$
+Gleichheit nur im Ruhezustand $\\dot{\\vec r}=0$. Die Energie <strong>nimmt streng monoton ab</strong>, solange sich das Teilchen bewegt — das System ist <strong>dissipativ</strong>.</div>
+<div class="info"><strong>Wohin geht die Energie?</strong> Nirgendwo hin — sie verschwindet nicht, sondern geht in mikroskopische Freiheitsgrade (Wärme im "Bad"). Die Reibungskraft ist ein <em>effektives</em> Modell: Man hat $10^{23}$ Molekülfreiheitsgrade ausintegriert und behält nur ihren gemittelten Rückstoß. Auf mikroskopischer Ebene ist die Gesamtenergie sehr wohl erhalten.</div>
+<div class="warn"><strong>Zeitumkehr:</strong> Unter $t\\to-t$ gilt $\\dot{\\vec r}\\to-\\dot{\\vec r}$, also $\\vec F_R\\to+f\\dot{\\vec r}$ — die Gleichung ist <strong>nicht</strong> zeitumkehrinvariant. Dissipation bricht die $T$-Symmetrie; genau hier kommt der Zeitpfeil in die Mechanik.</div>`},
+    {q:'Warum ist die Energie bei einem <em>zeitabhängigen</em> Potential $V(\\vec r, t)$ nicht erhalten?',badges:['proof','def'],ref:'Skript §2.3',
+     a:`<div class="step">$E(t) = \\tfrac12 m\\dot{\\vec r}^{\\,2} + V(\\vec r,t)$, totale Zeitableitung:
+$$\\frac{dE}{dt} = m\\dot{\\vec r}\\cdot\\ddot{\\vec r} + \\vec\\nabla V\\cdot\\dot{\\vec r} + \\frac{\\partial V}{\\partial t}$$</div>
+<div class="step">Mit $m\\ddot{\\vec r} = -\\vec\\nabla V$ fallen die ersten beiden Terme weg:</div>
+<div class="result">$$\\boxed{\\;\\frac{dE}{dt} = \\frac{\\partial V}{\\partial t}\\;}$$
+Die Energie ist genau dann erhalten, wenn $V$ <strong>nicht explizit von der Zeit abhängt</strong>.</div>
+<div class="info"><strong>Physikalisch:</strong> Wer $V$ zeitlich verändert, muss Arbeit am System leisten (oder ihm welche entziehen) — z. B. das Anheben des Aufhängepunkts eines Pendels. Das System ist dann <em>offen</em>.</div>
+<div class="info"><strong>Tiefere Ebene (Noether):</strong> Energieerhaltung ist die Konsequenz der <strong>Invarianz unter Zeittranslation</strong> $t\\to t+\\varepsilon$. Ein explizit zeitabhängiges $V$ zerstört genau diese Symmetrie — daher zwingend $\\dot E\\ne0$. In der Hamilton-Sprache: $\\frac{dH}{dt} = \\frac{\\partial H}{\\partial t}$.</div>`}
   ]
 },
 {
@@ -712,7 +770,52 @@ Mit $r=l$, $\\dot{r}=\\ddot{r}=0$; Winkelgleichung: $ml\\ddot{\\varphi} = -mg\\s
 <div class="result">$Z_r = \\lambda_1 = -ml\\dot{\\varphi}^2 - mg\\cos\\varphi$ (Fadenspannung = Zentrifugal + Schwerkraft-Radialkomponente)</div>`},
     {q:'[ÜB 3.2] Anna und Bernd auf dem Eis: Warum dreht Anna sich schneller?',badges:['ex'],ref:'Übung Blatt 3, Aufg. 2a',
      a:`Das Seil von Bernd wickelt sich auf (wird kürzer). Die Seilkraft wirkt senkrecht zur Bewegung → kein Drehmoment → <strong>Drehimpulserhaltung</strong>: $l = m v r = \\text{const.}$<br>
-<div class="result">$v_f = v_i\\frac{r_i}{r_f} = 10\\,\\text{km/h}\\cdot\\frac{10}{1} = 100\\,\\text{km/h}$</div>`}
+<div class="result">$v_f = v_i\\frac{r_i}{r_f} = 10\\,\\text{km/h}\\cdot\\frac{10}{1} = 100\\,\\text{km/h}$</div>`},
+    {q:'Atwoodsche Fallmaschine vollständig mit Lagrange 1. Art: Beschleunigung <em>und</em> Zwangskraft (Seilspannung).',badges:['calc','exam','ch'],ref:'Skript §3.2',
+     a:`<div class="step"><strong>Aufbau:</strong> Masselose, reibungsfreie Rolle (Radius $R$), über sie ein undehnbares Seil der Länge $L$ mit den Massen $m_1$ und $m_2$. Koordinaten $x_1, x_2$ = Abstände nach unten von der Rollenachse.</div>
+<div class="step"><strong>Zwangsbedingung</strong> (halber Rollenumfang $\\pi R$ liegt auf der Rolle):
+$$g(x_1,x_2) = x_1 + x_2 - \\underbrace{(L-\\pi R)}_{\\equiv\\,l} = 0$$
+Holonom-skleronom. Gradient: $\\partial_{x_1}g = \\partial_{x_2}g = 1$.</div>
+<div class="step"><strong>Lagrange 1. Art</strong> ($x$ zeigt nach unten, Schwerkraft also $+m_ig$):
+$$m_1\\ddot x_1 = m_1g + \\lambda,\\qquad m_2\\ddot x_2 = m_2g + \\lambda$$</div>
+<div class="step"><strong>Zwangsbedingung zweimal ableiten:</strong> $\\ddot x_1 + \\ddot x_2 = 0 \\Rightarrow \\ddot x_2 = -\\ddot x_1$.
+Einsetzen und addieren:
+$$\\frac{m_1g+\\lambda}{m_1} = -\\frac{m_2g+\\lambda}{m_2}$$
+$$m_2(m_1g+\\lambda) = -m_1(m_2g+\\lambda) \\;\\Rightarrow\\; \\lambda(m_1+m_2) = -2gm_1m_2$$</div>
+<div class="result">$$\\lambda = -\\frac{2gm_1m_2}{m_1+m_2} = -2g\\mu \\qquad(\\mu = \\text{reduzierte Masse})$$
+$$\\ddot x_1 = g\\,\\frac{m_1-m_2}{m_1+m_2} = -\\ddot x_2$$</div>
+<div class="step"><strong>Bedeutung von $\\lambda$:</strong> Die Zwangskraft auf Masse $i$ ist $Z_i = \\lambda\\,\\partial_{x_i}g = \\lambda$. Also ist $|\\lambda| = \\frac{2gm_1m_2}{m_1+m_2}$ genau die <strong>Seilspannung</strong> — negativ, weil sie nach oben (entgegen $+x$) zieht.</div>
+<div class="info"><strong>Grenzfälle prüfen:</strong><br>
+• $m_1 = m_2 = m$: $\\ddot x_1 = 0$ (Gleichgewicht), $|\\lambda| = mg$ ✓ — jede Seite trägt ihr eigenes Gewicht.<br>
+• $m_2 \\to 0$: $\\ddot x_1 \\to g$ (freier Fall), $\\lambda\\to0$ ✓ — schlaffes Seil.<br>
+• $m_2 \\to \\infty$: $\\ddot x_1 \\to -g$ ✓.</div>
+<div class="warn"><strong>Klausur-Pointe:</strong> Die Konstante $\\pi R$ verschwindet beim zweimaligen Ableiten spurlos — die Dynamik hängt <em>nicht</em> vom Rollenradius ab (solange die Rolle masselos ist). Die Atwood-Maschine "verdünnt" $g$ um den Faktor $\\frac{m_1-m_2}{m_1+m_2}$; genau dafür hat Atwood sie 1784 gebaut: um $g$ mit damaligen Uhren messbar zu machen.</div>`},
+    {q:'Freiheitsgrade abzählen: Wie viele Zwangsbedingungen hat das ebene Doppelpendel — und wie viele beim räumlichen?',badges:['calc','ex'],ref:'Skript §3.1',
+     a:`<div class="step"><strong>Rezept:</strong> $f = 3N - p$, wobei $N$ = Zahl der Massenpunkte, $p$ = Zahl <em>unabhängiger holonomer</em> Zwangsbedingungen.</div>
+<div class="step"><strong>Ebenes Doppelpendel:</strong> $N = 2$, also $3N = 6$ Koordinaten $(x_1,y_1,z_1,x_2,y_2,z_2)$.<br>
+Bedingungen:<br>
+(1) $z_1 = 0$ &nbsp;&nbsp;(2) $z_2 = 0$ &nbsp;&nbsp;→ Bewegung in der $xy$-Ebene<br>
+(3) $x_1^2+y_1^2 = l_1^2$ &nbsp;&nbsp;→ Stab 1 starr<br>
+(4) $(x_2-x_1)^2+(y_2-y_1)^2 = l_2^2$ &nbsp;&nbsp;→ Stab 2 starr</div>
+<div class="result">$p = 4 \\;\\Rightarrow\\; f = 6-4 = \\mathbf{2}$. Generalisierte Koordinaten: $\\vec q = (\\theta_1,\\theta_2)$, die beiden Auslenkwinkel gegen die Vertikale.</div>
+<div class="step"><strong>Einbettung:</strong>
+$$x_1 = l_1\\sin\\theta_1,\\quad y_1 = -l_1\\cos\\theta_1$$
+$$x_2 = l_1\\sin\\theta_1 + l_2\\sin\\theta_2,\\quad y_2 = -l_1\\cos\\theta_1 - l_2\\cos\\theta_2$$
+Alle vier Zwangsbedingungen sind damit <strong>identisch erfüllt</strong> — das ist der ganze Sinn der generalisierten Koordinaten.</div>
+<div class="info"><strong>Räumliches Doppelpendel</strong> (Kugelgelenke): Nur noch (3) und (4), also $p=2$ und $f = 6-2 = 4$. Koordinaten: je zwei Winkel $(\\theta_i,\\varphi_i)$ pro Stab.</div>
+<div class="warn"><strong>Starrer Körper als Grenzfall:</strong> $N$ Punkte mit allen Abständen fixiert hätte naiv $\\binom{N}{2}$ Bedingungen — das wären für $N>4$ mehr als $3N$! Die Bedingungen sind <em>nicht unabhängig</em>. Das korrekte Ergebnis ist immer $f = 6$ (3 Translation + 3 Rotation) für $N\\ge3$.</div>`},
+    {q:'Was ist eine <em>rheonome</em> Zwangsbedingung? Beispiel Kolbenmaschine.',badges:['def','calc'],ref:'Skript §3.1',
+     a:`<div class="step"><strong>Definitionen:</strong><br>
+• <strong>skleronom</strong> (griech. <em>skleros</em> = starr): $g(\\vec r_1,\\dots,\\vec r_N) = 0$ — <em>keine</em> explizite $t$-Abhängigkeit.<br>
+• <strong>rheonom</strong> (griech. <em>rheos</em> = fließend): $g(\\vec r_1,\\dots,\\vec r_N, t) = 0$ — die Zwangsfläche <strong>bewegt sich</strong>.</div>
+<div class="step"><strong>Beispiel Kolbenmaschine:</strong> Kurbelwelle mit Radius $R$ dreht mit fester Winkelgeschwindigkeit $\\Omega$; Pleuel der Länge $L$ treibt einen Kolben, der nur längs $x$ laufen kann. Die Kurbel erzwingt
+$$x_{\\text{Kolben}}(t) = R\\cos\\Omega t + \\sqrt{L^2 - R^2\\sin^2\\Omega t}$$
+als Zwangsbedingung $g(x,t) = x - x_{\\text{Kolben}}(t) = 0$: <strong>rheonom</strong>, weil ein <em>äußerer Antrieb</em> die Zeit vorgibt.</div>
+<div class="result">$f = 0$: Die Maschine hat keinen echten Freiheitsgrad mehr, die Bahn ist vollständig durch die Uhr festgelegt.</div>
+<div class="warn"><strong>Wichtige Konsequenz:</strong> Bei rheonomen Zwangsbedingungen ist die kinetische Energie in $\\vec q$ <strong>nicht mehr rein quadratisch</strong>:
+$$T = T_2 + T_1 + T_0$$
+und dann gilt im Allgemeinen $H \\ne E$! Die Standardaussage "$H$ ist die Energie" setzt <em>skleronome</em> Zwangsbedingungen voraus. Klassiker: Perle auf rotierendem Draht mit fest vorgegebenem $\\Omega$ — dort ist $H$ erhalten, aber $H = T_2 - T_0 + V \\ne E$.</div>
+<div class="info"><strong>Weitere Beispiele:</strong> Pendel mit vertikal bewegtem Aufhängepunkt $y_0(t)=A\\sin\\omega t$ (Kapitza-Pendel), Perle auf rotierendem Ring, Fahrstuhl mit vorgegebenem $z(t)$.</div>`}
   ]
 },
 {
