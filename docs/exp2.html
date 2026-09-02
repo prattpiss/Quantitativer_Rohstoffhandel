@@ -1084,7 +1084,142 @@ Drei mikroskopische Ursachen der Magnetisierung:<br>
      a:`$$\\vec{B} = \\mu_0(\\vec{H} + \\vec{M}), \\quad \\vec{M} = \\chi_m\\vec{H}$$
 $$\\vec{B} = \\mu_0(1+\\chi_m)\\vec{H} = \\mu_0\\mu_r\\vec{H}$$
 $\\vec{H}$ = Magnetfeldstärke, $\\vec{M}$ = Magnetisierung.<br>
-$[H] = \\text{A/m}$, $[B] = \\text{T} = \\text{Vs/m}^2$, $[M] = \\text{A/m}$`}
+$[H] = \\text{A/m}$, $[B] = \\text{T} = \\text{Vs/m}^2$, $[M] = \\text{A/m}$`},
+    {q:'Was ist das magnetische Vektorpotential $\\vec{A}$, und warum darf man die Coulomb-Eichung wählen?',badges:['def','proof'],ref:'Skript §4',
+     a:`<div class="step"><strong>Motivation:</strong> Weil $\\nabla\\cdot\\vec{B}=0$ <em>immer</em> gilt (keine magnetischen Monopole) und weil $\\text{div}(\\text{rot}\\,\\vec{A})\\equiv0$ ist, lässt sich $\\vec{B}$ stets als Rotation eines Feldes schreiben:
+$$\\vec{B}=\\nabla\\times\\vec{A}$$</div>
+<div class="step"><strong>Eichfreiheit:</strong> $\\vec{A}$ ist nicht eindeutig. Wegen $\\text{rot}(\\text{grad}\\,\\Lambda)=0$ liefert
+$$\\vec{A}\\;\\to\\;\\vec{A}+\\nabla\\Lambda$$
+für jede skalare Funktion $\\Lambda$ <em>dasselbe</em> $\\vec{B}$. Man darf daher eine Zusatzbedingung frei wählen.</div>
+<div class="step"><strong>Coulomb-Eichung</strong> $\\nabla\\cdot\\vec{A}=0$: Eingesetzt in $\\nabla\\times\\vec{B}=\\mu_0\\vec{j}$ und mit $\\nabla\\times(\\nabla\\times\\vec{A})=\\nabla(\\nabla\\cdot\\vec{A})-\\Delta\\vec{A}$ folgt
+$$\\Delta A_i = -\\mu_0 j_i\\qquad (i=x,y,z)$$
+— drei entkoppelte Poisson-Gleichungen, exakt analog zu $\\Delta\\varphi=-\\rho/\\varepsilon_0$.</div>
+<div class="result">Damit gilt sofort die Lösung in Analogie zum Coulomb-Potential:
+$$\\vec{A}(\\vec{r}_0)=\\frac{\\mu_0}{4\\pi}\\int\\frac{\\vec{j}(\\vec{r})}{|\\vec{r}-\\vec{r}_0|}\\,dV$$</div>
+<div class="warn">Anders als $\\varphi$ ist $\\vec{A}$ ein <em>Vektor</em>: Der Strom hat eine Richtung, die Ladung nicht. $\\vec{A}$ ist nicht bloß Rechenhilfe — im Aharonov-Bohm-Effekt wirkt es messbar auch dort, wo $\\vec{B}=0$ ist.</div>`},
+    {q:'Berechne das B-Feld <em>innerhalb</em> eines homogen stromdurchflossenen Drahtes (Radius $R$) und begründe die SI-Definition des Ampere.',badges:['calc','def'],ref:'Skript §4',
+     a:`<div class="step"><strong>Ampère\'sches Gesetz</strong> auf einen Kreis vom Radius $r<R$ anwenden. Eingeschlossener Strom bei homogener Stromdichte:
+$$I_{\\text{innen}}=I\\frac{\\pi r^2}{\\pi R^2}=I\\frac{r^2}{R^2}$$</div>
+<div class="step">$$B\\cdot 2\\pi r=\\mu_0 I\\frac{r^2}{R^2}\\quad\\Rightarrow\\quad B(r)=\\frac{\\mu_0 I\\,r}{2\\pi R^2}\\ \\ (r<R)$$
+Außen wie gewohnt $B=\\dfrac{\\mu_0I}{2\\pi r}$ — bei $r=R$ stimmen beide überein ✓</div>
+<div class="warn">Exakt dieselbe Struktur wie beim E-Feld der homogen geladenen Kugel: innen $\\propto r$, außen $\\propto 1/r$ (bzw. $1/r^2$).</div>
+<div class="step"><strong>Kraft zwischen zwei parallelen Leitern:</strong> Leiter b im Feld von a, $F=I_b\\ell B_a$:
+$$\\frac{F}{\\ell}=\\frac{\\mu_0}{2\\pi}\\frac{I_aI_b}{d}$$
+Gleiche Stromrichtung → Anziehung, entgegengesetzt → Abstoßung.</div>
+<div class="result"><strong>Alte SI-Definition (bis 2019):</strong> $1\\,$A ist der Strom, der in zwei unendlich langen parallelen Leitern im Abstand $1\\,$m die Kraft $2\\cdot10^{-7}\\,$N pro Meter erzeugt. Daraus war $\\mu_0=4\\pi\\cdot10^{-7}\\,$Vs/Am <em>exakt</em> festgelegt. Seit 2019 ist stattdessen $e$ exakt definiert, und $\\mu_0$ ist eine gemessene Größe.</div>`},
+    {q:'Leite das Drehmoment $\\vec{M}=\\vec{\\mu}\\times\\vec{B}$ an einer rechteckigen Stromschleife her und gib die Dipolenergie an.',badges:['proof','calc'],ref:'Skript §4',
+     a:`<div class="step"><strong>Aufbau:</strong> Rechteckschleife mit Seiten $a$ und $b$, Strom $I$, homogenes Feld $\\vec{B}$ in der Schleifenebene. Die Flächennormale $\\hat{n}$ schließe den Winkel $\\alpha$ mit $\\vec{B}$ ein.</div>
+<div class="step"><strong>Kräfte:</strong> Auf die beiden Seiten der Länge $a$, die senkrecht zu $\\vec{B}$ stehen, wirkt je $F=BIa$ — <em>entgegengesetzt</em> gerichtet. Die Gesamtkraft ist null (homogenes Feld!), aber es bleibt ein Kräftepaar.</div>
+<div class="step"><strong>Hebelarm:</strong> Der senkrechte Abstand der beiden Kraftwirkungslinien ist $b\\sin\\alpha$:
+$$M=F\\cdot b\\sin\\alpha=BIab\\sin\\alpha=BIA\\sin\\alpha$$</div>
+<div class="result">Mit dem magnetischen Moment $\\vec{\\mu}=I\\,A\\,\\hat{n}$ (bei $N$ Windungen $\\vec\\mu=NIA\\hat n$):
+$$\\vec{M}=\\vec{\\mu}\\times\\vec{B},\\qquad E_{\\text{pot}}=-\\vec{\\mu}\\cdot\\vec{B}=-\\mu B\\cos\\alpha$$
+Energiedifferenz zwischen paralleler und antiparalleler Stellung: $\\Delta E=2\\mu B$.</div>
+<div class="warn">Vollständig analog zum elektrischen Dipol ($\\vec{M}=\\vec{p}\\times\\vec{E}$, $E=-\\vec p\\cdot\\vec E$). Und wie dort gilt: Nettokraft nur im <strong>inhomogenen</strong> Feld, $\\vec{F}=\\nabla(\\vec{\\mu}\\cdot\\vec{B})$ — das ist die Grundlage des Stern-Gerlach-Versuchs und der magnetischen Flasche.</div>`},
+    {q:'Oersted-Versuch, Rechte-Hand-Regel und typische Feldstärken: Ordne die Größenordnungen von $B$ ein.',badges:['def','ex','exam'],ref:'Skript §4',
+     a:`<div class="step"><strong>Oersted 1820:</strong> Eine Kompassnadel unter einem stromdurchflossenen Draht schlägt <em>quer</em> zum Draht aus und kehrt die Richtung um, wenn man den Strom umpolt. Erste Verknüpfung von Elektrizität und Magnetismus überhaupt.</div>
+<div class="step"><strong>Rechte-Hand-Regel:</strong> Daumen in Stromrichtung → die gekrümmten Finger geben die Richtung von $\\vec{B}$ an (konzentrische Kreise um den Leiter). Eisenspäne auf einer Platte machen diese Kreise sichtbar.</div>
+<div class="step"><strong>Größenordnungen:</strong><br>
+Erdmagnetfeld $\\approx 0{,}5\\cdot10^{-4}\\,$T (Inklination in Mitteleuropa $\\approx 65°$!) · Kühlschrankmagnet $\\sim5\\cdot10^{-3}\\,$T · Hufeisenmagnet $\\sim0{,}1\\,$T · MRT-Tomograph $1{,}5\\!-\\!7\\,$T · supraleitende Forschungsmagnete $\\sim20\\,$T · Hybridmagnete stationär $\\sim45\\,$T · gepulst bis $\\sim100\\,$T · Neutronenstern $10^{8}\\,$T</div>
+<div class="result"><strong>Kontrollrechnung "schwebender Draht":</strong> Welches $B$ hält einen Draht mit $50\\,$g/m bei $I=1\\,$A?
+$$BI\\ell=mg\\;\\Rightarrow\\;B=\\frac{(m/\\ell)g}{I}=\\frac{0{,}05\\cdot9{,}81}{1}\\approx 0{,}5\\,\\text{T}$$
+Ein halbes Tesla für 50 Gramm — magnetische Kräfte sind bei Alltagsströmen erstaunlich schwach.</div>`},
+    {q:'Hall-Effekt vollständig: Herleitung von $U_H$, Ladungsträgerdichte, Hall-Konstante, Zahlenbeispiel Kupfer und Quanten-Hall.',badges:['proof','calc','exam'],ref:'Skript §4',
+     a:`<div class="step"><strong>Gleichgewicht:</strong> Im Leiter (Breite $d$, Dicke $h$) drückt die Lorentz-Kraft die Ladungsträger zur Seite, bis das aufgebaute Hall-Feld sie kompensiert:
+$$qE_H=qv_DB\\;\\Rightarrow\\;E_H=v_DB\\;\\Rightarrow\\;U_H=E_Hd=v_DBd$$</div>
+<div class="step"><strong>Drift eliminieren</strong> mit $I=nqv_D\\,(dh)$, also $v_D=\\dfrac{I}{nq\\,dh}$:
+$$U_H=\\frac{IB}{nqh}\\qquad\\Rightarrow\\qquad n=\\frac{IB}{eU_Hh}$$</div>
+<div class="step"><strong>Kenngrößen:</strong> Hall-Konstante $A_H=\\dfrac{1}{nq}$ (Vorzeichen verrät die Ladungsträgerart!) und Hall-Widerstand $R_H=\\dfrac{U_H}{I}=\\dfrac{B}{nqh}$ — beachte: <em>unabhängig</em> von der Probenlänge und -breite.</div>
+<div class="step"><strong>Zahlenbeispiel Kupfer</strong> ($n=8{,}5\\cdot10^{28}\\,$m$^{-3}$):
+$$A_H=\\frac{1}{8{,}5\\cdot10^{28}\\cdot1{,}6\\cdot10^{-19}}\\approx 7{,}4\\cdot10^{-11}\\,\\frac{\\text{m}^3}{\\text{C}}$$
+Mit $I=100\\,$A, $B=1\\,$T, $h=1\\,$mm: $U_H=A_H\\frac{IB}{h}=7{,}4\\cdot10^{-11}\\cdot\\frac{100}{10^{-3}}\\approx 7{,}4\\,\\mu$V — winzig! Deshalb verwendet man <strong>Halbleiter</strong> (kleines $n$ → großes $U_H$) für Hall-Sonden.</div>
+<div class="result"><strong>Anwendungen:</strong> Hall-Sonde zur B-Feld-Messung, Magnetometer im Smartphone, kontaktlose Strommessung, Positions-/Drehzahlsensoren (Zündung, ABS).<br>
+<strong>Quanten-Hall-Effekt:</strong> Im 2D-Elektronengas ist $R_H=\\dfrac{h}{m e^2}$ mit ganzzahligem $m$; $h/e^2=25\\,812{,}807\\,\\Omega$ (von-Klitzing-Konstante).</div>
+<div class="warn">Bei <strong>zwei Ladungsträgersorten</strong> (Elektronen und Löcher) heben sich die Beiträge teilweise auf: $A_H=\\frac{1}{e}\\frac{p\\mu_h^2-n\\mu_e^2}{(p\\mu_h+n\\mu_e)^2}$. Das Vorzeichen kann dann sogar umschlagen — deshalb misst man bei manchen Metallen ein "positives" $A_H$.</div>`},
+    {q:'[ÜB 6C] Fadenstrahlrohr: $U=1\\,$kV Beschleunigungsspannung, $B=2{,}6\\,$mT, gemessener Bahnradius $R=4{,}1\\,$cm. Bestimme $e/m$.',badges:['ex','calc','exam'],ref:'Übung 6, Aufg. C',
+     a:`<div class="step"><strong>Schritt 1 — Beschleunigung:</strong> $eU=\\tfrac12 mv^2\\;\\Rightarrow\\; v=\\sqrt{\\dfrac{2eU}{m}}$</div>
+<div class="step"><strong>Schritt 2 — Kreisbahn:</strong> Lorentz-Kraft = Zentripetalkraft
+$$evB=\\frac{mv^2}{R}\\;\\Rightarrow\\; v=\\frac{eBR}{m}$$</div>
+<div class="step"><strong>Schritt 3 — gleichsetzen und nach $e/m$ auflösen:</strong>
+$$\\frac{eBR}{m}=\\sqrt{\\frac{2eU}{m}}\\;\\Rightarrow\\;\\frac{e^2B^2R^2}{m^2}=\\frac{2eU}{m}\\;\\Rightarrow\\;\\boxed{\\frac{e}{m}=\\frac{2U}{B^2R^2}}$$</div>
+<div class="step"><strong>Einsetzen:</strong>
+$$\\frac{e}{m}=\\frac{2\\cdot 1000}{(2{,}6\\cdot10^{-3})^2(4{,}1\\cdot10^{-2})^2}=\\frac{2000}{6{,}76\\cdot10^{-6}\\cdot1{,}68\\cdot10^{-3}}\\approx 1{,}76\\cdot10^{11}\\,\\frac{\\text{C}}{\\text{kg}}$$</div>
+<div class="result">Literaturwert: $e/m=1{,}759\\cdot10^{11}\\,$C/kg ✓ — die klassische Bestimmung der spezifischen Elektronenladung. Zusammen mit Millikans $e$ folgt $m_e=9{,}11\\cdot10^{-31}\\,$kg.</div>
+<div class="warn">Praktisch: Das Restgas (Neon, $\\sim10^{-5}\\,$mbar) wird durch Stoßionisation zum Leuchten angeregt und macht die Bahn als "Faden" sichtbar. Die Homogenität des Feldes liefert ein <strong>Helmholtz-Spulenpaar</strong>.</div>`},
+    {q:'[ÜB 8A/8B] Kreisspule und Helmholtz-Anordnung: Feld auf der Achse, Abfall auf 10 %, und warum $a=R$ optimal ist.',badges:['ex','calc','proof'],ref:'Übung 8, Aufg. A und B',
+     a:`<div class="step"><strong>Achsenfeld einer Kreisspule</strong> ($N$ Windungen, Radius $R$, Biot-Savart, Transversalkomponenten heben sich auf):
+$$B(z)=\\frac{\\mu_0NI}{2}\\cdot\\frac{R^2}{(R^2+z^2)^{3/2}}$$
+Im Zentrum: $B(0)=\\dfrac{\\mu_0NI}{2R}$.</div>
+<div class="step"><strong>a) Abfall auf 10 %:</strong>
+$$\\frac{R^3}{(R^2+z^2)^{3/2}}=0{,}1\\;\\Rightarrow\\;R^2+z^2=10^{2/3}R^2=4{,}64R^2$$
+$$z=\\sqrt{3{,}64}\\,R\\approx 1{,}91\\,R$$</div>
+<div class="step"><strong>b) Helmholtz-Bedingung:</strong> Zwei gleiche Spulen im Abstand $a$, jede um $\\pm a/2$ vom Mittelpunkt. Aus Symmetrie verschwinden alle <em>ungeraden</em> Ableitungen von $B$ in der Mitte. Fordert man zusätzlich $B^{\\prime\\prime}(0)=0$, ergibt sich genau
+$$\\boxed{a=R}$$
+Dann ist $B$ in der Mitte bis zur <strong>vierten</strong> Ordnung flach — der homogenste Bereich, den zwei Spulen erzeugen können.</div>
+<div class="result">Feld im Zentrum der Helmholtz-Anordnung ($z=R/2$ für jede Spule):
+$$B=2\\cdot\\frac{\\mu_0NIR^2}{2\\left(R^2+\\frac{R^2}{4}\\right)^{3/2}}=\\left(\\frac45\\right)^{3/2}\\frac{\\mu_0NI}{R}\\approx 0{,}7155\\,\\frac{\\mu_0NI}{R}$$</div>
+<div class="warn">Im Bereich $|z|<0{,}2R$ weicht das Feld um weniger als $\\sim0{,}1\\,\\%$ vom Zentralwert ab. Vergrößert man den Abstand über $R$ hinaus, entsteht in der Mitte eine <em>Delle</em> (Doppelmaximum); verkleinert man ihn, ein Buckel.</div>`},
+    {q:'[ÜB 8C] Eine Spule ($l=22\\,$cm, $N=1100$, $d=3\\,$cm) führt $I=200\\,$mA. Berechne $B$ und den Strom für $B=0{,}05\\,$mT.',badges:['ex','calc'],ref:'Übung 8, Aufg. C1–C3',
+     a:`<div class="step"><strong>Ist die Näherung "lange Spule" erlaubt?</strong> $l/d=22/3\\approx7{,}3\\gg1$ ✓ — die Randkorrektur liegt im Prozentbereich.</div>
+<div class="step"><strong>Feld im Inneren:</strong>
+$$B=\\frac{\\mu_0NI}{l}=\\frac{4\\pi\\cdot10^{-7}\\cdot1100\\cdot0{,}2}{0{,}22}=1{,}26\\cdot10^{-3}\\,\\text{T}=1{,}26\\,\\text{mT}$$</div>
+<div class="step"><strong>Umgekehrt für $B=0{,}05\\,$mT:</strong>
+$$I=\\frac{Bl}{\\mu_0N}=\\frac{5\\cdot10^{-5}\\cdot0{,}22}{4\\pi\\cdot10^{-7}\\cdot1100}\\approx 8\\,\\text{mA}$$</div>
+<div class="result">$0{,}05\\,$mT entspricht ungefähr dem Erdmagnetfeld — mit nur $8\\,$mA lässt sich dieses also nachbilden bzw. kompensieren (Helmholtz-Käfige in Präzisionslaboren).</div>
+<div class="warn">Merke: In der Formel steht die <strong>Windungsdichte</strong> $n=N/l$, nicht die Windungszahl allein — und der Spulendurchmesser kommt gar nicht vor (solange $l\\gg d$).</div>`},
+    {q:'[ÜB 8E] Supraleitender Magnet: $B=6\\,$T über $l=30\\,$cm, $1\\,$km NbTi-Draht bei $4{,}2\\,$K. Wieviel Strom, welche Energie?',badges:['ex','calc'],ref:'Übung 8, Aufg. E1–E3',
+     a:`<div class="step"><strong>Benötigte Durchflutung:</strong>
+$$NI=\\frac{Bl}{\\mu_0}=\\frac{6\\cdot0{,}3}{4\\pi\\cdot10^{-7}}\\approx 1{,}43\\cdot10^{6}\\,\\text{A}$$</div>
+<div class="step"><strong>Windungszahl</strong> bei Spulenradius $r=5\\,$cm und $1\\,$km Draht:
+$$N=\\frac{1000\\,\\text{m}}{2\\pi r}=\\frac{1000}{0{,}314}\\approx 3180$$
+$$\\Rightarrow I=\\frac{1{,}43\\cdot10^{6}}{3180}\\approx 450\\,\\text{A}$$</div>
+<div class="step"><strong>Induktivität und Energie:</strong> $L=\\dfrac{\\mu_0N^2A}{l}$ mit $A=\\pi r^2=7{,}9\\cdot10^{-3}\\,$m²:
+$$L\\approx\\frac{4\\pi\\cdot10^{-7}\\cdot(3180)^2\\cdot7{,}9\\cdot10^{-3}}{0{,}3}\\approx 0{,}33\\,\\text{H}$$
+$$W=\\tfrac12LI^2\\approx\\tfrac12\\cdot0{,}33\\cdot450^2\\approx 34\\,\\text{kJ}$$</div>
+<div class="result">$450\\,$A durch einen $\\sim1\\,$mm dünnen Draht sind nur supraleitend möglich — normalleitend ($\\rho_{\\text{Cu}}$) wären das Megawatt an Verlustleistung. Kühlung mit flüssigem Helium bei $4{,}2\\,$K.</div>
+<div class="warn"><strong>Quench:</strong> Wird ein Punkt normalleitend, heizt der Strom ihn weiter auf, die normalleitende Zone wächst lawinenartig und die gespeicherten $34\\,$kJ werden schlagartig in Wärme umgesetzt — das Helium verdampft explosionsartig. Deshalb Quench-Schutzwiderstände und Abblasleitungen (MRT-Räume!).</div>`},
+    {q:'[ÜB 7A] Zeige: Die Kraft auf einen beliebig geformten Draht im homogenen Feld hängt nur von Anfangs- und Endpunkt ab.',badges:['ex','proof'],ref:'Übung 7, Aufg. A1/A2',
+     a:`<div class="step"><strong>Ansatz:</strong> $\\displaystyle \\vec{F}=I\\int_a^b d\\vec{s}\\times\\vec{B}$</div>
+<div class="step">Da $\\vec{B}$ <strong>homogen</strong> ist, darf es aus dem Integral herausgezogen werden:
+$$\\vec{F}=I\\left(\\int_a^b d\\vec{s}\\right)\\times\\vec{B}$$</div>
+<div class="step">Das verbleibende Integral über die Wegelemente ist einfach der Verbindungsvektor:
+$$\\int_a^b d\\vec{s}=\\vec{L}=\\vec{r}_b-\\vec{r}_a$$</div>
+<div class="result">$$\\vec{F}=I\\,\\vec{L}\\times\\vec{B}$$
+Die Kraft auf den krummen Draht ist identisch mit der auf einen <strong>geraden</strong> Draht zwischen denselben Endpunkten — die Form dazwischen ist völlig egal.</div>
+<div class="warn">Wichtige Folgerung: Für eine <strong>geschlossene</strong> Schleife ist $\\oint d\\vec{s}=\\vec{0}$, also $\\vec{F}=\\vec{0}$. Im homogenen Feld wirkt auf jede geschlossene Stromschleife <em>keine Nettokraft</em>, sondern nur das Drehmoment $\\vec{M}=\\vec{\\mu}\\times\\vec{B}$.</div>`},
+    {q:'[ÜB 7B] Massenspektrometer: Wien-Filter und Trennung der Germanium-Isotope (Radien $22{,}8$ / $22{,}2$ / $21{,}9$ / $21{,}6$ / $21{,}0\\,$cm).',badges:['ex','calc'],ref:'Übung 7, Aufg. B1/B2',
+     a:`<div class="step"><strong>1) Wien-Filter (gekreuzte Felder):</strong> Nur Teilchen, bei denen sich elektrische und magnetische Kraft aufheben, fliegen geradeaus:
+$$qE=qvB_1\\;\\Rightarrow\\; v=\\frac{E}{B_1}$$
+Der Filter selektiert also die <strong>Geschwindigkeit</strong> — unabhängig von Masse und Ladung.</div>
+<div class="step"><strong>2) Ablenkmagnet:</strong> Im reinen Feld $B_2$ ist
+$$r=\\frac{mv}{qB_2}\\quad\\Rightarrow\\quad m=\\frac{qB_2r}{v}\\;\\propto\\;r$$
+Bei gleicher Geschwindigkeit und Ladung ist der Radius direkt proportional zur Masse.</div>
+<div class="step"><strong>Auswertung:</strong> Die Radienverhältnisse geben unmittelbar die Massenverhältnisse. Mit $r_1=21{,}0\\,$cm $\\hat{=}\\,70\\,$u:
+$$m_i=70\\,\\text{u}\\cdot\\frac{r_i}{21{,}0\\,\\text{cm}}$$
+$\\to$ $21{,}6\\,\\text{cm}\\to72\\,$u · $21{,}9\\to73\\,$u · $22{,}2\\to74\\,$u · $22{,}8\\to76\\,$u</div>
+<div class="result">Das sind exakt die fünf stabilen Germanium-Isotope $^{70}$Ge, $^{72}$Ge, $^{73}$Ge, $^{74}$Ge, $^{76}$Ge. Aus den Schwärzungsintensitäten liest man die natürlichen Häufigkeiten ab.</div>
+<div class="warn">Auflösungsvermögen: $\\dfrac{\\Delta m}{m}=\\dfrac{\\Delta r}{r}=\\dfrac{0{,}3}{21{,}9}\\approx 1{,}4\\,\\%$ — gerade ausreichend, um benachbarte Isotope zu trennen.</div>`},
+    {q:'[ÜB 7D/7E] Rotierende Ladungsverteilungen: B-Feld einer rotierenden geladenen Scheibe und das gyromagnetische Verhältnis einer rotierenden Hohlkugel.',badges:['ex','proof','calc'],ref:'Übung 7, Aufg. D und E',
+     a:`<div class="step"><strong>Grundidee:</strong> Rotierende Ladung = Kreisstrom. Ein Ring mit Ladung $dq$, der mit $\\omega$ rotiert, entspricht dem Strom
+$$dI=\\frac{dq}{T}=\\frac{\\omega}{2\\pi}dq$$</div>
+<div class="step"><strong>a) Scheibe</strong> (Radius $R$, Flächenladung $\\sigma$): Ring bei $r$ mit $dq=\\sigma 2\\pi r\\,dr$ → $dI=\\sigma\\omega r\\,dr$. Mit dem Zentrumsfeld eines Rings $dB=\\dfrac{\\mu_0 dI}{2r}$:
+$$B=\\int_0^R\\frac{\\mu_0\\sigma\\omega r\\,dr}{2r}=\\frac{\\mu_0\\sigma\\omega R}{2}$$</div>
+<div class="step"><strong>Magnetisches Moment der Scheibe:</strong> $d\\mu=\\pi r^2 dI=\\pi\\sigma\\omega r^3dr$
+$$\\mu=\\int_0^R \\pi\\sigma\\omega r^3dr=\\frac{\\pi\\sigma\\omega R^4}{4}=\\frac{Q\\omega R^2}{4}$$</div>
+<div class="step"><strong>b) Gyromagnetisches Verhältnis:</strong> Für eine Kugel(schale) gilt mit Trägheitsmoment $\\Theta$ und Drehimpuls $L=\\Theta\\omega$
+$$\\gamma=\\frac{\\mu}{L}=\\frac{Q}{2m}$$
+— unabhängig von $\\omega$ und (bei homogener Ladungs-/Massenverteilung) von der Geometrie, weil Ladung und Masse identisch verteilt sind.</div>
+<div class="result">$$\\vec{\\mu}=\\frac{q}{2m}\\vec{L}\\qquad(\\text{klassisch})$$
+Für das Elektron folgt daraus das Bohrsche Magneton $\\mu_B=\\frac{e\\hbar}{2m_e}$. Der <strong>Spin</strong> passt nicht in dieses klassische Bild: Er hat $g\\approx2$, also das <em>doppelte</em> gyromagnetische Verhältnis — ein rein quantenmechanischer Befund.</div>`},
+    {q:'[ÜB 6D] Berechne das B-Feld in einem Zylinderleiter mit exzentrischer zylindrischer Bohrung (Superpositionstrick).',badges:['ex','proof','calc'],ref:'Übung 6, Aufg. D1/D2',
+     a:`<div class="step"><strong>Problem:</strong> Vollzylinder Radius $R$ mit homogener Stromdichte $j$, darin eine Bohrung vom Radius $a$, deren Mittelpunkt um $\\vec{d}$ verschoben ist. Diese Geometrie hat keine ausnutzbare Symmetrie.</div>
+<div class="step"><strong>Trick:</strong> Superposition von <em>zwei</em> vollen Zylindern — einem mit $+j$ (Radius $R$, Mitte im Ursprung) und einem mit $-j$ (Radius $a$, Mitte bei $\\vec{d}$). Beide zusammen ergeben genau die gewünschte Anordnung.</div>
+<div class="step"><strong>Innenfeld eines Vollzylinders</strong> in Vektorform:
+$$\\vec{B}(\\vec{r})=\\frac{\\mu_0}{2}\\,\\vec{j}\\times\\vec{r}$$</div>
+<div class="step"><strong>Addieren:</strong>
+$$\\vec{B}=\\frac{\\mu_0}{2}\\vec{j}\\times\\vec{r}-\\frac{\\mu_0}{2}\\vec{j}\\times(\\vec{r}-\\vec{d})=\\frac{\\mu_0}{2}\\,\\vec{j}\\times\\vec{d}$$</div>
+<div class="result">Das Feld <strong>in der Bohrung ist homogen</strong> — es hängt weder von $\\vec{r}$ noch von $R$ oder $a$ ab, sondern nur von der Exzentrizität $\\vec{d}$! Betrag $B=\\frac{\\mu_0 j d}{2}$, Richtung senkrecht zu $\\vec j$ und $\\vec d$.</div>
+<div class="warn">Derselbe Superpositionstrick funktioniert elektrostatisch: Eine homogen geladene Kugel mit exzentrischem Hohlraum hat darin ein homogenes E-Feld $\\vec{E}=\\frac{\\rho\\vec{d}}{3\\varepsilon_0}$. Immer merken, wenn "Loch in symmetrischem Körper" gefragt ist.</div>`}
   ]
 },
 {
