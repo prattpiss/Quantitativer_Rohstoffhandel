@@ -390,7 +390,19 @@ $\\partial/\\partial y' = -\\sin\\omega\\,\\partial/\\partial x + \\cos\\omega\\
 Wähle $x = e_i+e_j$ ($i\\neq j$): $(R^TR)_{ij} = 0$.</div>
 <div class="result">$R^TR = I$ ✓</div>`},
     {q:'[ÜB 3.4b] Zeige: $\\langle Ry,Rx\\rangle = \\langle y,x\\rangle$ wenn $R^TR = I$.',badges:['ex','proof'],ref:'Übung Blatt 3, Aufg. 4b',
-     a:`$(Ry)^T(Rx) = y^T R^T R x = y^T I x = y^T x = \\langle y,x\\rangle$ ✓`}
+     a:`$(Ry)^T(Rx) = y^T R^T R x = y^T I x = y^T x = \\langle y,x\\rangle$ ✓`},
+    {q:'Konstruktion der Galilei-Transformation aus dem Trägheitsprinzip — und die 10 Parameter der Galileigruppe.',badges:['proof','def','exam'],ref:'Skript §2.4.1, Gl. (26–28)',
+     a:`<div class="step"><strong>Frage:</strong> Welche Koordinatenwechsel $\\vec x\\to\\vec x^{\\prime}$, $t\\to t^{\\prime}$ führen ein Inertialsystem in ein Inertialsystem über? Bedingung: kräftefreie Bewegung $\\vec x(t)=\\vec at+\\vec b$ muss wieder auf eine Gerade abgebildet werden.</div>
+<div class="step"><strong>Schrittweise Konstruktion:</strong><br>
+1. <em>Zeit:</em> Absolute Zeit erlaubt nur $t^{\\prime}=t-t_0$ (1 Parameter).<br>
+2. <em>Translation:</em> $\\vec x^{\\prime}=\\vec x-\\vec d(t)$ bleibt geradlinig nur, wenn $\\ddot{\\vec d}=0$, also $\\vec d(t)=\\vec vt+\\vec c$ ⇒ Boost $\\vec v$ (3 Parameter) und räumliche Verschiebung $\\vec c$ (3 Parameter).<br>
+3. <em>Lineare Abbildung:</em> $x_a^{\\prime}=R_{ab}x_b$ muss Abstände erhalten (Isotropie/Homogenität) ⇒ $R^TR=\\mathbb{1}$, also eine Drehung (3 Parameter).</div>
+<div class="result">$$t^{\\prime}=t-t_0,\\qquad x_a^{\\prime}=R_{ab}x_b-v_at-c_a$$
+<strong>Die Galileigruppe hat $1+3+3+3=10$ Parameter</strong> (Generatoren):<br>
+1 × Zeittranslation, 3 × Raumtranslation, 3 × Drehung, 3 × Boost.</div>
+<div class="step"><strong>Forminvarianz (Kovarianz):</strong> Unter dieser Transformation gilt $\\ddot x_a^{\\prime}=R_{ab}\\ddot x_b$ und ebenso $F_a^{\\prime}=R_{ab}F_b$ — die Newtonsche Gleichung $m\\ddot{\\vec x}=\\vec F$ hat in <em>jedem</em> Inertialsystem <strong>dieselbe Form</strong>. Das ist das Galileische Relativitätsprinzip.</div>
+<div class="warn"><strong>Der Bezug zu Noether:</strong> Genau diese 10 Generatoren liefern die 10 klassischen Erhaltungsgrößen: Energie (1), Impuls (3), Drehimpuls (3) und der Schwerpunktsatz $\\vec I=M\\vec R-\\vec Pt$ (3).<br>
+<strong>Ausblick:</strong> In der speziellen Relativitätstheorie wird die Galileigruppe durch die Poincaré-Gruppe ersetzt — ebenfalls 10 Parameter, aber mit $t^{\\prime}$ von $\\vec x$ abhängig.</div>`}
   ]
 },
 {
@@ -477,7 +489,33 @@ $\\partial^2 V/\\partial u_1\\partial u_2 = -k$, $\\partial^2 V/\\partial u_2\\p
 <div class="result">$\\omega_1 = 0$ (Translation), $\\omega_2 = \\sqrt{k/m}$ (asym. Streckung), $\\omega_3 = \\sqrt{3k/m}$ (sym. Streckung)</div>`},
     {q:'[ÜB 2.1a/b Quiz] Kann sich ein Objekt ohne Kraft bewegen? Kann es beschleunigen ohne Geschwindigkeitsänderung?',badges:['ex'],ref:'Übung Blatt 2, Aufg. 1a/b',
      a:`<div class="step"><strong>a) Ja</strong> — Nach LI bewegt sich ein Körper ohne Kraft mit konstanter Geschwindigkeit. Keine Kraft nötig um die Bewegung aufrechtzuerhalten.</div>
-<div class="step"><strong>b) Ja</strong> — Kreisbewegung mit $|\vec{v}|=\text{const.}$ hat Zentripetalbeschleunigung $\\perp$ Geschwindigkeit.</div>`}
+<div class="step"><strong>b) Ja</strong> — Kreisbewegung mit $|\\vec{v}|=\\text{const.}$ hat Zentripetalbeschleunigung $\\perp$ Geschwindigkeit.</div>`},
+    {q:'Beweis: Warum sind die Eigenwerte der Stabilitätsmatrix reell und für stabile Gleichgewichte positiv?',badges:['proof','exam'],ref:'Skript §2.5, S. 38',
+     a:`<div class="step"><strong>Setup:</strong> Mit $A_{ij}=\\frac{1}{m_i}\\partial_i\\partial_jV|_{\\vec x_0}$ lautet die linearisierte Bewegungsgleichung $\\ddot{\\vec u}=-A\\vec u$. Der Ansatz $\\vec u=e^{i\\omega t}\\vec z$ führt auf $\\omega^2\\vec z=A\\vec z$.</div>
+<div class="step"><strong>Problem:</strong> $A$ ist wegen des Faktors $1/m_i$ i.A. <em>nicht</em> symmetrisch. Trick: Schreibe die Gleichung als verallgemeinertes Eigenwertproblem $\\tilde A\\vec z=\\omega^2M\\vec z$ mit der symmetrischen Hesse-Matrix $\\tilde A_{ij}=\\partial_i\\partial_jV$ und der Diagonalmatrix $M=\\mathrm{diag}(m_i)>0$.</div>
+<div class="step">Multiplikation von links mit $\\vec u^\\dagger$ liefert
+$$\\omega^2=\\frac{\\vec u^\\dagger\\tilde A\\vec u}{\\vec u^\\dagger M\\vec u}$$
+Zähler und Nenner sind als Erwartungswerte <em>hermitescher</em> Matrizen <strong>reell</strong>, der Nenner wegen $m_i>0$ zusätzlich <strong>positiv</strong>.</div>
+<div class="result">⇒ $\\omega^2\\in\\mathbb{R}$. Ist $\\vec x_0$ ein <strong>Minimum</strong> von $V$, so ist $\\tilde A$ positiv definit, also $\\omega^2>0$ und $\\omega$ reell ⇒ <strong>Oszillation</strong> (stabil).<br>
+Ist $\\vec x_0$ ein Maximum oder Sattel, gibt es ein $\\omega^2<0$, also $\\omega=i|\\omega|$ und $e^{i\\omega t}=e^{-|\\omega|t}$ bzw. $e^{+|\\omega|t}$ ⇒ <strong>exponentielles Weglaufen</strong> (instabil).</div>
+<div class="step"><strong>Allgemeine Lösung</strong> für $f$ Freiheitsgrade:
+$$\\vec u(t)=\\sum_{a=1}^{f}\\left(c_ae^{i\\omega_at}+c_a^*e^{-i\\omega_at}\\right)\\vec z^{\\,a}$$
+Das sind $2f$ reelle Konstanten = genau die $2f$ Anfangsbedingungen $\\vec u(0)$ und $\\dot{\\vec u}(0)$. ✓</div>
+<div class="warn"><strong>Sonderfall $\\omega=0$:</strong> Der Ansatz $e^{i\\omega t}$ liefert dann nur <em>eine</em> Lösung. Aus $\\ddot{\\vec u}=0$ folgt die vollständige Lösung $\\vec u(t)=(\\alpha+\\beta t)\\vec z$ — eine gleichförmige Translation. Nullmoden gehören stets zu einer kontinuierlichen Symmetrie (beim linearen Molekül: Impulserhaltung).</div>`},
+    {q:'Getriebener Oszillator: Lösung per Fouriertransformation und die Resonanzkatastrophe.',badges:['proof','calc','exam'],ref:'Skript §2.7, S. 49',
+     a:`<div class="step"><strong>Gleichung:</strong> $m\\ddot x=-m\\omega_0^2x+A\\cos(\\omega_et)$.<br>
+<strong>Methode:</strong> Fouriertransformation $x(t)=\\int\\frac{d\\omega}{2\\pi}\\tilde x(\\omega)e^{-i\\omega t}$. Aus $\\ddot x\\to-\\omega^2\\tilde x$ und $\\cos\\omega_et\\to\\pi\\left[\\delta(\\omega-\\omega_e)+\\delta(\\omega+\\omega_e)\\right]$ wird die DGL zur <em>algebraischen</em> Gleichung
+$$m(\\omega_0^2-\\omega^2)\\,\\tilde x(\\omega)=A\\pi\\left[\\delta(\\omega-\\omega_e)+\\delta(\\omega+\\omega_e)\\right]$$</div>
+<div class="step">Auflösen und rücktransformieren:
+$$\\tilde x(\\omega)=\\frac{A\\pi\\left[\\delta(\\omega-\\omega_e)+\\delta(\\omega+\\omega_e)\\right]}{m(\\omega_0^2-\\omega^2)}\\;\\Rightarrow\\;x_{\\text{part}}(t)=\\frac{A\\cos(\\omega_et)}{m(\\omega_0^2-\\omega_e^2)}$$</div>
+<div class="result"><strong>Allgemeine Lösung</strong> = partikuläre + homogene:
+$$x(t)=\\frac{A\\cos(\\omega_et)}{m(\\omega_0^2-\\omega_e^2)}+x_0\\cos(\\omega_0t+\\phi)$$
+Das System schwingt also mit <em>zwei</em> Frequenzen: der aufgezwungenen $\\omega_e$ und der Eigenfrequenz $\\omega_0$.</div>
+<div class="warn"><strong>Resonanzkatastrophe:</strong> Für $\\omega_e\\to\\omega_0$ divergiert die Amplitude. Ohne Dämpfung wächst die Auslenkung im Resonanzfall sogar <em>linear in der Zeit</em>: $x(t)\\propto t\\sin(\\omega_0t)$.<br>
+Mit Reibung $-f\\dot x$ bleibt die Amplitude endlich:
+$$x_{\\max}=\\frac{A}{m\\sqrt{(\\omega_0^2-\\omega_e^2)^2+(f\\omega_e/m)^2}}$$
+und der Phasensprung von $0$ auf $-\\pi$ läuft über $-\\pi/2$ genau bei $\\omega_e=\\omega_0$.</div>
+<div class="step"><strong>Physikalische Beispiele:</strong> Tacoma-Narrows-Brücke (1940), Millennium Bridge London (2000), gleichschrittmarschierende Soldaten, Schaukeln, Radioempfänger (Schwingkreis), NMR/MRT — und der Grund, warum jedes Gebäude eine Eigenfrequenz fernab typischer Erdbebenfrequenzen haben sollte.</div>`}
   ]
 },
 {
@@ -530,7 +568,45 @@ Große Halbachse: $a = \\frac{r_p+r_a}{2} = \\frac{p}{1-\\varepsilon^2}$`},
     {q:'[ÜB 1.4a/b] Annas Kugel-Bahnkurve: Bewegungsgleichungen und Lösung im Anna-System.',badges:['ex','calc'],ref:'Übung Blatt 1, Aufg. 4a/b',
      a:`<div class="step">Im Anna-System (Inertialsystem der Straßenbahn): Nur Erdbeschleunigung nach unten.<br>
 $m\\ddot{r}^A_x = 0$, $m\\ddot{r}^A_y = 0$, $m\\ddot{r}^A_z = -mg$</div>
-<div class="result">$r^A_x(t) = v^A_{0,x}t$, $r^A_y(t) = 0$, $r^A_z(t) = v^A_{0,z}t - \\frac{1}{2}gt^2$<br>Parabolische Bahnkurve.</div>`}
+<div class="result">$r^A_x(t) = v^A_{0,x}t$, $r^A_y(t) = 0$, $r^A_z(t) = v^A_{0,z}t - \\frac{1}{2}gt^2$<br>Parabolische Bahnkurve.</div>`},
+    {q:'Die drei Reduktionsstufen des Zweikörperproblems und die Separationsintegrale.',badges:['proof','exam'],ref:'Skript §2.6, Gl. (52–53)',
+     a:`<div class="step"><strong>Ausgangslage:</strong> 2 Teilchen im Raum ⇒ $3N=6$ Freiheitsgrade. Drei Erhaltungssätze reduzieren das Problem systematisch:</div>
+<div class="step"><strong>Stufe 1 — Impulserhaltung (6 → 3):</strong> $\\vec R$ und $\\vec r$ entkoppeln vollständig, $M\\ddot{\\vec R}=0$ ist trivial lösbar. Bleibt das Einkörperproblem $\\mu\\ddot{\\vec r}=F(r)\\hat e_r$.</div>
+<div class="step"><strong>Stufe 2 — Drehimpulserhaltung (3 → 1):</strong> $\\vec l=$ const steht senkrecht auf $\\vec r$ und $\\dot{\\vec r}$ ⇒ die Bewegung ist <strong>eben</strong> (2 Freiheitsgrade, Polarkoordinaten $r,\\varphi$). Aus $l=\\mu r^2\\dot\\varphi=$ const wird $\\varphi$ eliminiert. Bleibt 1 Freiheitsgrad $r$ im effektiven Potential.</div>
+<div class="step"><strong>Stufe 3 — Energieerhaltung (Quadratur):</strong> $E=\\frac\\mu2\\dot r^2+U_{\\text{eff}}(r)$ nach $\\dot r$ auflösen und trennen:
+$$t-t_0=\\int_{r_0}^{r}\\frac{dr^{\\prime}}{\\sqrt{\\frac{2}{\\mu}\\left(E-U(r^{\\prime})\\right)-\\frac{l^2}{\\mu^2r^{\\prime2}}}}$$
+$$\\varphi-\\varphi_0=\\int_{r_0}^{r}\\frac{l\\,dr^{\\prime}}{r^{\\prime2}\\sqrt{2\\mu\\left(E-U(r^{\\prime})\\right)-\\frac{l^2}{r^{\\prime2}}}}$$
+Das Problem ist damit auf reine Integrale („Quadraturen") zurückgeführt — es ist <strong>vollständig integrabel</strong>.</div>
+<div class="result"><strong>Qualitative Diskussion ohne Rechnung</strong> anhand von $U_{\\text{eff}}=U(r)+\\frac{l^2}{2\\mu r^2}$:<br>
+• Der Zentrifugalterm $\\propto r^{-2}$ dominiert für kleine $r$ und wirkt als <em>Barriere</em> — bei $l\\ne0$ erreicht das Teilchen nie $r=0$.<br>
+• $E>0$: <strong>ungebunden</strong>, ein Umkehrpunkt (Perihel), Hyperbel.<br>
+• $E<0$: <strong>gebunden</strong>, zwei Umkehrpunkte $r_p$ und $r_a$, Bewegung im Ring dazwischen.<br>
+• $E=\\min U_{\\text{eff}}$: Kreisbahn.</div>
+<div class="warn"><strong>Warum sind Ellipsen so besonders?</strong> Im Allgemeinen ist die Bahn zwischen $r_p$ und $r_a$ nur dann <em>geschlossen</em>, wenn der Winkelzuwachs pro Radialperiode ein rationales Vielfaches von $2\\pi$ ist. Nach dem <strong>Satz von Bertrand</strong> passiert das für <em>alle</em> Bahnen nur bei zwei Potentialen: $U\\propto-1/r$ (Kepler) und $U\\propto r^2$ (harmonischer Oszillator). Jede kleine Abweichung erzeugt <strong>Periheldrehung</strong> — bei Merkur 43 Bogensekunden pro Jahrhundert durch die ART.</div>`},
+    {q:'[ÜB 5.2] Halleyscher Komet: Berechne Perihel- und Apheldistanz aus $T=76$ Jahren und $\\varepsilon=0{,}97$.',badges:['ex','calc','exam'],ref:'Übung Blatt 5, Aufg. 2',
+     a:`<div class="step"><strong>Gegeben:</strong> $T=76\\,\\text{a}=76\\cdot3{,}156\\cdot10^7\\,\\text{s}=2{,}399\\cdot10^9\\,\\text{s}$, $\\varepsilon=0{,}97$, $M_\\odot=2{,}0\\cdot10^{30}\\,\\text{kg}$, $G=6{,}67\\cdot10^{-11}\\,\\text{Nm}^2/\\text{kg}^2$. Die Kometenmasse ist vernachlässigbar ($m\\ll M$).</div>
+<div class="step"><strong>Schritt 1 — große Halbachse aus dem 3. Keplergesetz:</strong>
+$$\\frac{a^3}{T^2}=\\frac{G(M+m)}{4\\pi^2}\\approx\\frac{GM}{4\\pi^2}$$
+$$a^3=\\frac{6{,}67\\cdot10^{-11}\\cdot2{,}0\\cdot10^{30}\\cdot(2{,}399\\cdot10^9)^2}{4\\pi^2}=\\frac{7{,}68\\cdot10^{38}}{39{,}48}=1{,}945\\cdot10^{37}\\,\\text{m}^3$$
+$$a=2{,}69\\cdot10^{12}\\,\\text{m}\\approx18{,}0\\,\\text{AE}$$</div>
+<div class="step"><strong>Schritt 2 — Geometrie der Ellipse.</strong> Aus $r(\\theta)=\\dfrac{p}{1+\\varepsilon\\cos\\theta}$ folgt
+$$r_{\\text{min}}=r(0)=\\frac{p}{1+\\varepsilon}=a(1-\\varepsilon),\\qquad r_{\\text{max}}=r(\\pi)=\\frac{p}{1-\\varepsilon}=a(1+\\varepsilon)$$</div>
+<div class="result"><strong>Perihel:</strong> $r_p=a(1-\\varepsilon)=2{,}69\\cdot10^{12}\\cdot0{,}03=8{,}1\\cdot10^{10}\\,\\text{m}\\approx\\mathbf{0{,}54\\,\\text{AE}}$ — innerhalb der Venusbahn.<br>
+<strong>Aphel:</strong> $r_a=a(1+\\varepsilon)=2{,}69\\cdot10^{12}\\cdot1{,}97=5{,}3\\cdot10^{12}\\,\\text{m}\\approx\\mathbf{35\\,\\text{AE}}$ — jenseits der Neptunbahn.</div>
+<div class="warn"><strong>Konsistenzcheck mit dem 2. Keplergesetz:</strong> $r_pv_p=r_av_a$ ⇒ $\\dfrac{v_p}{v_a}=\\dfrac{r_a}{r_p}=\\dfrac{1+\\varepsilon}{1-\\varepsilon}=\\dfrac{1{,}97}{0{,}03}\\approx66$. Im Perihel ist der Komet also 66-mal schneller als im Aphel — deshalb verbringt er fast seine gesamte Umlaufzeit im äußeren Sonnensystem und ist nur wenige Monate sichtbar. Letzte Sichtung 1986, nächste 2061.</div>`},
+    {q:'[ÜB 5.4] Swing-by / Slingshot-Manöver: Woher nimmt die Sonde ihre Energie?',badges:['ex','proof','calc','exam'],ref:'Übung Blatt 5, Aufg. 4',
+     a:`<div class="step"><strong>a) Im Planetensystem ändert sich nur die Richtung.</strong> Im (näherungsweise inertialen) Ruhesystem des Planeten ist $M\\gg m$, also $\\mu\\approx m$. Die Sonde durchläuft eine Hyperbelbahn; da $U(r)\\to0$ für $r\\to\\infty$ gilt Energieerhaltung zwischen den beiden Asymptoten:
+$$\\frac m2v_{pi}^2=\\frac m2v_{pf}^2\\;\\Rightarrow\\;v_{pi}=v_{pf}\\equiv v_p$$
+Der Geschwindigkeits<em>betrag</em> ist unverändert, nur um den Streuwinkel $\\theta$ gedreht.</div>
+<div class="step"><strong>b) Im Sonnensystem</strong> gilt die Galilei-Addition $\\vec v_s=\\vec v_p+\\vec v_P$ mit der Planetengeschwindigkeit $\\vec v_P$:
+$$E_f-E_i=\\frac m2\\left(\\vec v_{pf}+\\vec v_P\\right)^2-\\frac m2\\left(\\vec v_{pi}+\\vec v_P\\right)^2=\\underbrace{\\frac m2\\left(v_{pf}^2-v_{pi}^2\\right)}_{=0\\text{ nach a)}}+m\\left(\\vec v_{pf}-\\vec v_{pi}\\right)\\cdot\\vec v_P$$
+$$\\boxed{\\;\\Delta E=m\\left(\\vec v_{pf}-\\vec v_{pi}\\right)\\cdot\\vec v_P\\;}$$</div>
+<div class="step"><strong>c) Spezialfall Gegenanflug</strong> $\\vec v_{si}=-s\\vec v_P$ ($s>0$): dann $\\vec v_{pi}=\\vec v_{si}-\\vec v_P=-(1+s)\\vec v_P$, also $v_p=(1+s)|\\vec v_P|$ und $\\vec v_{pi}\\cdot\\vec v_P=-(1+s)|\\vec v_P|^2$. Mit $\\vec v_{pf}\\cdot\\vec v_{pi}=v_p^2\\cos\\theta$ und $\\vec v_P=-\\vec v_{pi}/(1+s)$:
+$$\\vec v_{pf}\\cdot\\vec v_P=-\\frac{\\vec v_{pf}\\cdot\\vec v_{pi}}{1+s}=-(1+s)|\\vec v_P|^2\\cos\\theta$$</div>
+<div class="result">$$\\Delta E=m(1+s)\\left|\\vec v_P\\right|^2\\left(1-\\cos\\theta\\right)\\;\\ge\\;0$$
+Der Energiegewinn ist <strong>immer positiv</strong> und maximal bei $\\theta=180°$ (Vollreflexion): $\\Delta E=2m(1+s)|\\vec v_P|^2$.</div>
+<div class="warn"><strong>Woher kommt die Energie?</strong> Aus der <em>Bahnbewegung des Planeten</em>. Impulserhaltung des Gesamtsystems verlangt, dass der Planet exakt den Gegenimpuls aufnimmt und minimal abgebremst wird. Wegen $M\\gg m$ ist der Effekt unmessbar klein — Jupiter verliert bei einem Vorbeiflug einer Tonne Sonde etwa $10^{-25}$ seiner Bahnenergie.<br>
+<strong>Analogie:</strong> Ein Tennisball, der gegen einen entgegenkommenden Zug prallt, kommt mit $v+2V$ zurück. Genutzt bei Voyager 1/2, Cassini, Rosetta, New Horizons und den Parker Solar Probe (dort umgekehrt zum <em>Abbremsen</em>).</div>`}
   ]
 },
 {
