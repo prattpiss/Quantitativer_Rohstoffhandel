@@ -791,7 +791,62 @@ Dies ist der Inhalt des <em>Noether-Theorems</em>.`},
      a:`<div class="step">Wende BAC-CAB auf jeden Term an (Ergebnisse aus 1.3b):
 $(\\vec{A}\\cdot\\vec{C})\\vec{B}-(\\vec{A}\\cdot\\vec{B})\\vec{C} + (\\vec{B}\\cdot\\vec{A})\\vec{C}-(\\vec{B}\\cdot\\vec{C})\\vec{A} + (\\vec{C}\\cdot\\vec{B})\\vec{A}-(\\vec{C}\\cdot\\vec{A})\\vec{B}$</div>
 <div class="step">Gruppiere: $\\vec{A}[-(\\vec{B}\\cdot\\vec{C})+(\\vec{C}\\cdot\\vec{B})] + \\vec{B}[(\\vec{A}\\cdot\\vec{C})-(\\vec{C}\\cdot\\vec{A})] + \\vec{C}[-(\\vec{A}\\cdot\\vec{B})+(\\vec{B}\\cdot\\vec{A})]$</div>
-<div class="result">Alle Terme verschwinden, da $\\vec{x}\\cdot\\vec{y} = \\vec{y}\\cdot\\vec{x}$. ✓</div>`}
+<div class="result">Alle Terme verschwinden, da $\\vec{x}\\cdot\\vec{y} = \\vec{y}\\cdot\\vec{x}$. ✓</div>`},
+    {q:'Variationsrechnung: Was ist ein Funktional, was ein stationärer Punkt — und wo geht es schief?',badges:['def','proof'],ref:'Skript §3.5.1, Gl. (70–71)',
+     a:`<div class="step"><strong>Funktion vs. Funktional:</strong> Eine Funktion bildet Zahlen auf Zahlen ab, ein <strong>Funktional</strong> $F[\\gamma]$ bildet eine ganze <em>Kurve</em> (oder Funktion) auf eine Zahl ab. Beispiele: Bogenlänge $F[f]=\\int dx\\sqrt{1+f^{\\prime2}}$, Flächeninhalt, Wirkung $S[q]=\\int L\\,dt$.</div>
+<div class="step"><strong>Differential eines Funktionals:</strong> Man stört die Kurve, $\\gamma\\to\\gamma+\\varepsilon h$ mit $h(t_i)=h(t_f)=0$, und entwickelt:
+$$F[\\gamma+\\varepsilon h]=F[\\gamma]+\\varepsilon\\,\\underbrace{F|_\\gamma[h]}_{\\text{linear in }h}+\\mathcal{O}(\\varepsilon^2)$$
+$\\gamma$ heißt <strong>Extremal- oder stationäre Kurve</strong>, wenn $F|_\\gamma[h]=0$ für <em>alle</em> zulässigen $h$.</div>
+<div class="step"><strong>Lokale Funktionale</strong> haben die Form $F[\\gamma]=\\int dt\\,f(t,\\gamma,\\dot\\gamma)$. Partielle Integration liefert
+$$F|_\\gamma[h]=\\int dt\\;h(t)\\left[\\frac{\\partial f}{\\partial\\gamma}-\\frac{d}{dt}\\frac{\\partial f}{\\partial\\dot\\gamma}\\right]+\\underbrace{\\left[h\\frac{\\partial f}{\\partial\\dot\\gamma}\\right]_{t_i}^{t_f}}_{=0}$$
+Mit dem <strong>Fundamentallemma</strong> (gilt $\\int h\\,g=0$ für alle $h$, so ist $g\\equiv0$) folgt die <strong>Euler-Lagrange-Gleichung</strong>.</div>
+<div class="result"><strong>Beispiel: Die kürzeste Verbindung ist eine Gerade.</strong> Mit $f=\\sqrt{1+f^{\\prime2}}$ ist $\\partial_ff=0$, also
+$$\\frac{d}{dx}\\frac{f^{\\prime}}{\\sqrt{1+f^{\\prime2}}}=0\\;\\Rightarrow\\;\\frac{f^{\\prime}}{\\sqrt{1+f^{\\prime2}}}=\\text{const}\\;\\Rightarrow\\;f^{\\prime}=\\text{const}\\;\\Rightarrow\\;f(x)=ax+b\\;✓$$</div>
+<div class="warn"><strong>Gegenbeispiel — nicht jedes Funktional ist differenzierbar:</strong> Das Funktional $F[\\gamma]=\\int dt\\,\\mathrm{sgn}(\\dot\\gamma)$ ist nicht lokal differenzierbar; die Entwicklung in $\\varepsilon$ existiert nicht. Die Variationsrechnung setzt hinreichende Glattheit voraus.<br>
+<strong>Zweite Warnung:</strong> „Stationär" heißt <em>nicht</em> „Minimum". Die Wirkung kann auch ein Sattelpunkt sein (siehe ÜB 8.3) — deshalb spricht man korrekt vom <em>Prinzip der stationären Wirkung</em>, nicht vom „Prinzip der kleinsten Wirkung".</div>`},
+    {q:'Eichfreiheit der Lagrangefunktion: Welche Änderungen von $L$ lassen die Physik unverändert?',badges:['def','proof','exam'],ref:'Skript §3.5.2',
+     a:`<div class="result"><strong>Drei erlaubte Änderungen:</strong><br>
+1. $L\\to cL$ mit $c=$ const $\\ne0$ (Skalierung — die ELG sind linear in $L$).<br>
+2. $L\\to L+\\text{const}$.<br>
+3. $L\\to L+\\dfrac{d}{dt}f(\\vec q,t)$ — <strong>die interessante!</strong></div>
+<div class="step"><strong>Beweis für (3):</strong> Die Wirkung ändert sich um einen reinen Randterm
+$$S^{\\prime}[q]=S[q]+\\int_{t_i}^{t_f}dt\\,\\frac{df}{dt}=S[q]+f(q(t_f),t_f)-f(q(t_i),t_i)$$
+Bei der Variation sind die Endpunkte fest, der Zusatzterm ist also für <em>alle</em> Vergleichskurven derselbe. $\\delta S^{\\prime}=\\delta S$ ⇒ dieselben Bewegungsgleichungen. ✓</div>
+<div class="warn"><strong>Wichtig:</strong> $f$ darf nur von $\\vec q$ und $t$ abhängen, <em>nicht</em> von $\\dot{\\vec q}$ — sonst entstünden Terme mit $\\ddot q$.</div>
+<div class="step"><strong>Anwendung 1 — Galilei-Invarianz:</strong> Unter $\\vec r\\to\\vec r^{\\prime}+\\vec vt$ transformiert sich die Lagrangefunktion eines freien Teilchensystems zu
+$$L^{\\prime}=L+\\frac{d}{dt}\\left[M\\vec R^{\\prime}\\cdot\\vec v+\\frac12M\\vec v^2t\\right]$$
+$L$ ist also nicht <em>invariant</em>, sondern nur bis auf eine Eichung — genau deshalb braucht man das <strong>erweiterte</strong> Noether-Theorem, um daraus den Schwerpunktsatz zu gewinnen.</div>
+<div class="step"><strong>Anwendung 2 — elektromagnetische Eichung:</strong> Aus $\\vec A\\to\\vec A+\\vec\\nabla\\chi$, $\\varphi\\to\\varphi-\\partial_t\\chi$ folgt für $L=\\frac m2\\dot{\\vec r}^2+e\\dot{\\vec r}\\cdot\\vec A-e\\varphi$:
+$$L\\to L+e\\left(\\dot{\\vec r}\\cdot\\vec\\nabla\\chi+\\partial_t\\chi\\right)=L+e\\frac{d\\chi}{dt}$$
+Genau eine erlaubte Eichung ⇒ dieselbe Lorentzkraft. Der kanonische Impuls $\\vec p=m\\dot{\\vec r}+e\\vec A$ ist dagegen <strong>eichabhängig</strong> und damit keine Observable.</div>`},
+    {q:'Invarianz der Lagrange-Gleichungen unter Punkttransformationen — Beweis.',badges:['proof','exam'],ref:'Skript §3.4, S. 74',
+     a:`<div class="step"><strong>Behauptung:</strong> Für jede invertierbare Punkttransformation $q_k=q_k(\\vec Q,t)$ gilt: Erfüllt $\\vec q$ die ELG zu $L$, so erfüllt $\\vec Q$ die ELG zu $\\tilde L(\\vec Q,\\dot{\\vec Q},t)=L(\\vec q(\\vec Q,t),\\dot{\\vec q}(\\vec Q,\\dot{\\vec Q},t),t)$.</div>
+<div class="step"><strong>Schritt 1 — Kettenregel für die Geschwindigkeiten:</strong>
+$$\\dot q_k=\\sum_j\\frac{\\partial q_k}{\\partial Q_j}\\dot Q_j+\\frac{\\partial q_k}{\\partial t}\\;\\Rightarrow\\;\\boxed{\\frac{\\partial\\dot q_k}{\\partial\\dot Q_j}=\\frac{\\partial q_k}{\\partial Q_j}}$$
+(die berühmte Regel vom „<strong>Punktekürzen</strong>").</div>
+<div class="step"><strong>Schritt 2 — Vertauschungsrelation:</strong>
+$$\\frac{d}{dt}\\frac{\\partial q_k}{\\partial Q_j}=\\frac{\\partial\\dot q_k}{\\partial Q_j}$$
+(beide Seiten sind $\\sum_l\\partial^2q_k/\\partial Q_j\\partial Q_l\\,\\dot Q_l+\\partial^2q_k/\\partial Q_j\\partial t$).</div>
+<div class="step"><strong>Schritt 3 — Zusammensetzen:</strong>
+$$\\frac{d}{dt}\\frac{\\partial\\tilde L}{\\partial\\dot Q_j}-\\frac{\\partial\\tilde L}{\\partial Q_j}=\\sum_k\\left(\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_k}-\\frac{\\partial L}{\\partial q_k}\\right)\\frac{\\partial q_k}{\\partial Q_j}$$
+Die Klammer verschwindet nach Voraussetzung, und da $\\partial q_k/\\partial Q_j$ invertierbar ist, verschwindet auch die linke Seite. ∎</div>
+<div class="result"><strong>Bedeutung:</strong> Die Lagrange-Gleichungen sind <em>forminvariant</em> unter <strong>beliebigen</strong> Koordinatenwechseln — Kugelkoordinaten, mitrotierende Systeme, generalisierte Koordinaten aller Art. Genau das macht den Formalismus so mächtig: man wählt einfach die bequemsten Koordinaten und schreibt immer dieselbe Gleichung hin. Newtons $m\\ddot{\\vec r}=\\vec F$ gilt dagegen nur in kartesischen Inertialkoordinaten.</div>
+<div class="warn"><strong>[ÜB 9.1] Musterbeispiel:</strong> Die abschreckende Lagrangefunktion $L=\\cosh(2u)(\\dot v^2+v^2\\dot u^2)+2\\sinh(2u)v\\dot v\\dot u$ wird durch $x=ve^u$, $y=ve^{-u}$ zu $L=\\dot x^2+\\dot y^2$ — also freie Teilchen mit $x=x_0+at$, $y=y_0+bt$. Rücktransformation: $v=\\sqrt{xy}$, $u=\\frac12\\ln(x/y)$.</div>`},
+    {q:'Erweitertes Noether-Theorem: Formulierung mit Randterm $R$ und die Herleitung des Schwerpunktsatzes.',badges:['proof','def','exam'],ref:'Skript §3.5.3, Gl. (77)',
+     a:`<div class="step"><strong>Warum eine Erweiterung nötig ist:</strong> Manche Symmetrien lassen $S$ nicht exakt invariant, sondern ändern es um einen Randterm. Die Zeittranslation und die Galilei-Boosts sind genau solche Fälle.</div>
+<div class="step"><strong>Erweiterte Definition:</strong> $q\\to q^\\alpha$ heißt Symmetrie, wenn
+$$S[q^\\alpha]=S[q]+\\alpha\\int_{t_0}^{t_1}dt\\,\\frac{d}{dt}R(q,t)+\\mathcal{O}(\\alpha^2)$$</div>
+<div class="result"><strong>Erhaltungsgröße (Noether-Ladung):</strong>
+$$I=\\sum_k p_k\\left.\\frac{dq_k^\\alpha}{d\\alpha}\\right|_{\\alpha=0}-R$$
+Für $R=0$ reduziert sich das auf die Standardform.</div>
+<div class="step"><strong>Anwendung 1 — Zeittranslation ⇒ Energie.</strong> Für $\\partial_tL=0$ und $q^\\alpha(t)=q(t+\\alpha)$ ist $\\frac{dq^\\alpha}{d\\alpha}|_0=\\dot q$ und $R=L$:
+$$I=\\sum_kp_k\\dot q_k-L=2T-(T-U)=T+U=E\\;✓$$</div>
+<div class="step"><strong>Anwendung 2 — Galilei-Boost ⇒ Schwerpunktsatz.</strong> Für $\\vec r_i\\to\\vec r_i+\\alpha t\\hat e_x$ ist $\\frac{dq^\\alpha}{d\\alpha}|_0=t$ und (aus der Eichrechnung) $R=Mx_{\\text{SP}}$:
+$$I=P_xt-MR_x=\\text{const}$$
+Also $\\vec R(t)=\\vec R(0)+\\dfrac{\\vec P}{M}t$ — der Schwerpunkt bewegt sich geradlinig-gleichförmig.</div>
+<div class="warn"><strong>[ÜB 9.3] Übungsbeispiel:</strong> Teilchen im zeitabhängigen linearen Potential $V=g(t)q$, also $L=\\frac m2\\dot q^2-g(t)q$. Die Verschiebung $q\\to q+\\alpha$ liefert $\\delta L=-\\alpha g(t)$, was sich als $\\alpha\\frac{d}{dt}R$ mit $R=-\\int^tg(t^{\\prime})dt^{\\prime}$ schreiben lässt. Erhaltungsgröße:
+$$I=m\\dot q+\\int_0^tg(t^{\\prime})dt^{\\prime}$$
+Kontrolle direkt aus der Bewegungsgleichung $m\\ddot q=-g(t)$: Integration liefert exakt dasselbe ✓ — Impuls plus bereits übertragener Kraftstoß.</div>`}
   ]
 },
 {
