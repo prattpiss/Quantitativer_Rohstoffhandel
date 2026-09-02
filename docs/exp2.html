@@ -194,7 +194,58 @@ Verknüpft das Ringintegral über die Randkurve $\\partial S$ mit dem Fluss der 
     {q:'Wie berechnet man $\\text{div}(\\vec{E})$ für $\\vec{E} = r^{2n}\\hat{e}_r + \\vec{b}$ (aus Übung 2D)?',badges:['ex','calc'],ref:'Übung 2, Aufg. D',
      a:`Mit $\\vec{E} = r^{2n}\\hat{e}_r + \\vec{b}$ und $\\hat{e}_r = \\vec{r}/r$:<br>
 $$\\text{div}(r^{2n}\\hat{e}_r) = \\frac{1}{r^2}\\frac{d}{dr}(r^2 \\cdot r^{2n}) = \\frac{1}{r^2}\\cdot(2n+2)r^{2n+1} = (2n+2)r^{2n-1} = \\frac{2n+2}{r}\\cdot r^{2n}$$
-$\\text{div}(\\vec{b}) = 0$ (konstanter Vektor). Gilt für $r\\neq 0$ wenn $n<0$.`}
+$\\text{div}(\\vec{b}) = 0$ (konstanter Vektor). Gilt für $r\\neq 0$ wenn $n<0$.`},
+    {q:'[ÜB 0A] Komplexe Zahl $z=x+iy$: Darstellung in der Gauß\'schen Ebene, Betrag, Konjugation — und was bedeuten Addition und Multiplikation geometrisch?',badges:['ex','def'],ref:'Übung 0, Aufg. A a)–f)',
+     a:`<div class="step"><strong>Darstellung:</strong> $z=x+iy$ = Punkt/Zeiger in der Ebene, x-Achse = Realteil, y-Achse = Imaginärteil. Polarform $z = Ae^{i\\theta}$ mit $A=\\sqrt{x^2+y^2}$, $\\theta=\\arctan(y/x)$.</div>
+<div class="step"><strong>Betrag:</strong> $|z|=\\sqrt{zz^*}=\\sqrt{x^2+y^2}=A$ — Länge des Zeigers.</div>
+<div class="step"><strong>Konjugation:</strong> $z^*=x-iy=Ae^{-i\\theta}$ — Spiegelung an der reellen Achse.</div>
+<div class="step"><strong>Addition:</strong> Vektoraddition der Zeiger (Parallelogrammregel).</div>
+<div class="step"><strong>Multiplikation:</strong> Beträge multiplizieren, Winkel addieren: $A_1e^{i\\theta_1}\\cdot A_2e^{i\\theta_2}=A_1A_2e^{i(\\theta_1+\\theta_2)}$ — also <em>Drehstreckung</em>.</div>
+<div class="result">Genau deshalb ist die komplexe Rechnung in der Wechselstromlehre so mächtig: Multiplikation mit $e^{i\\varphi}$ = Phasenverschiebung.</div>`},
+    {q:'[ÜB 0A g] Bestimme Real- und Imaginärteil von $\\dfrac{1}{\\omega+i\\delta}$ (mit $\\omega,\\delta\\in\\mathbb{R}$) und von $(1+i)^{13}$.',badges:['ex','calc'],ref:'Übung 0, Aufg. A g)',
+     a:`<div class="step"><strong>Teil 1</strong> — mit konjugiert Komplexem erweitern:
+$$\\frac{1}{\\omega+i\\delta}=\\frac{\\omega-i\\delta}{(\\omega+i\\delta)(\\omega-i\\delta)}=\\frac{\\omega-i\\delta}{\\omega^2+\\delta^2}$$
+$$\\Rightarrow\\;\\text{Re}=\\frac{\\omega}{\\omega^2+\\delta^2},\\qquad \\text{Im}=\\frac{-\\delta}{\\omega^2+\\delta^2}$$</div>
+<div class="step"><strong>Teil 2</strong> — Polarform: $1+i=\\sqrt{2}\\,e^{i\\pi/4}$, also
+$$(1+i)^{13}=2^{13/2}e^{i13\\pi/4}=2^{6{,}5}\\,e^{i(3\\pi+\\pi/4)}=-2^{6{,}5}e^{i\\pi/4}$$
+$$=-64\\sqrt{2}\\left(\\tfrac{1}{\\sqrt2}+\\tfrac{i}{\\sqrt2}\\right)=-64-64i$$</div>
+<div class="result">$\\text{Re}\\left[(1+i)^{13}\\right]=-64$, $\\text{Im}\\left[(1+i)^{13}\\right]=-64$.</div>
+<div class="warn">Diese Lorentz-Form $1/(\\omega+i\\delta)$ ist exakt die Resonanzfunktion des gedämpften Oszillators — Realteil = Dispersion, Imaginärteil = Absorption.</div>`},
+    {q:'[ÜB 0A h,j] Begründe $\\sin\\alpha = \\frac{e^{i\\alpha}-e^{-i\\alpha}}{2i}$ und beweise damit die Additionstheoreme.',badges:['ex','proof'],ref:'Übung 0, Aufg. A h) und j)',
+     a:`<div class="step"><strong>Eulerformel:</strong> $e^{i\\alpha}=\\cos\\alpha+i\\sin\\alpha$ und $e^{-i\\alpha}=\\cos\\alpha-i\\sin\\alpha$.</div>
+<div class="step">Addition bzw. Subtraktion:
+$$\\cos\\alpha=\\frac{e^{i\\alpha}+e^{-i\\alpha}}{2},\\qquad \\sin\\alpha=\\frac{e^{i\\alpha}-e^{-i\\alpha}}{2i}$$</div>
+<div class="step"><strong>Additionstheoreme:</strong> Aus $e^{i(\\alpha+\\beta)}=e^{i\\alpha}e^{i\\beta}$ folgt
+$$\\cos(\\alpha+\\beta)+i\\sin(\\alpha+\\beta)=(\\cos\\alpha+i\\sin\\alpha)(\\cos\\beta+i\\sin\\beta)$$
+$$=(\\cos\\alpha\\cos\\beta-\\sin\\alpha\\sin\\beta)+i(\\sin\\alpha\\cos\\beta+\\cos\\alpha\\sin\\beta)$$</div>
+<div class="result">Real- und Imaginärteil vergleichen:
+$\\cos(\\alpha+\\beta)=\\cos\\alpha\\cos\\beta-\\sin\\alpha\\sin\\beta$ und $\\sin(\\alpha+\\beta)=\\sin\\alpha\\cos\\beta+\\cos\\alpha\\sin\\beta$. $\\square$</div>`},
+    {q:'[ÜB 0A i] Welche geometrische Anschauung hat die Abbildung $z \\mapsto -i(iz)^{*}$?',badges:['ex'],ref:'Übung 0, Aufg. A i)',
+     a:`<div class="step">Schrittweise mit $z=x+iy$:</div>
+<div class="step">$iz = i(x+iy) = -y+ix$ &nbsp;→&nbsp; <strong>Drehung um $+90°$</strong></div>
+<div class="step">$(iz)^{*} = -y-ix$ &nbsp;→&nbsp; <strong>Spiegelung an der reellen Achse</strong></div>
+<div class="step">$-i(iz)^{*} = -i(-y-ix) = iy - x = -(x-iy) = -z^{*}$</div>
+<div class="result">Ergebnis $-z^{*} = -x+iy$: Das ist die <strong>Spiegelung an der imaginären Achse</strong> (Vorzeichenwechsel nur des Realteils).</div>`},
+    {q:'[ÜB 0C c] Berechne $\\Delta E_{\\text{pot}} = \\text{div}(\\text{grad}\\,E_{\\text{pot}})$ für $E_{\\text{pot}} = \\alpha\\,\\dfrac{x^3 y}{1+z^2}$.',badges:['ex','calc'],ref:'Übung 0, Aufg. C c)',
+     a:`<div class="step">Zweite Ableitungen einzeln:
+$$\\partial_x^2 E_{\\text{pot}} = \\alpha\\frac{6xy}{1+z^2},\\qquad \\partial_y^2 E_{\\text{pot}} = 0$$</div>
+<div class="step">Für $z$: mit $f(z)=(1+z^2)^{-1}$ ist $f^{\\prime}=-2z(1+z^2)^{-2}$ und
+$$f^{\\prime\\prime}=-2(1+z^2)^{-2}+8z^2(1+z^2)^{-3}=\\frac{6z^2-2}{(1+z^2)^3}$$</div>
+<div class="result">$$\\Delta E_{\\text{pot}} = \\alpha x^3 y\\,\\frac{6z^2-2}{(1+z^2)^3} + \\frac{6\\alpha xy}{1+z^2}$$</div>
+<div class="warn">Physikalische Deutung über die Poisson-Gleichung: $\\Delta\\varphi = -\\rho/\\varepsilon_0$ — ein nichtverschwindender Laplace zeigt eine Ladungsdichte an dieser Stelle an.</div>`},
+    {q:'Raumwinkel $d\\Omega$: Definition, Gesamtraumwinkel — und warum ist er der Schlüssel zum Gauß\'schen Satz?',badges:['def','proof'],ref:'Skript §1.2 / §1.5',
+     a:`<div class="step"><strong>Definition:</strong> $d\\Omega = \\dfrac{dA_\\perp}{r^2} = \\dfrac{\\cos\\alpha\\,dA}{r^2}$, Einheit Steradiant (sr). Gesamtraumwinkel einer geschlossenen Fläche um einen inneren Punkt: $\\oint d\\Omega = 4\\pi$.</div>
+<div class="step"><strong>Anwendung 1 (Kugelschale):</strong> Die Coulomb-Kraft im Inneren einer homogen geladenen Kugelschale verschwindet, weil zu gegenüberliegenden Raumwinkelelementen Flächen $\\propto r_i^2$ gehören, die den $1/r_i^2$-Abfall exakt kompensieren.</div>
+<div class="step"><strong>Anwendung 2 (Gauß):</strong>
+$$\\Phi = \\oint\\vec{E}\\cdot d\\vec{A} = \\frac{Q}{4\\pi\\varepsilon_0}\\oint\\frac{\\cos\\alpha\\,dA}{r^2}=\\frac{Q}{4\\pi\\varepsilon_0}\\oint d\\Omega = \\frac{Q}{\\varepsilon_0}$$</div>
+<div class="result">Beide Aussagen gelten <strong>nur</strong> für exakt $1/r^2$. Experimentell ist der Exponent auf $10^{-16}$ bestätigt.</div>`},
+    {q:'BAC-CAB-Regel und $\\text{rot}(\\text{grad}\\,\\varphi)=0$: Formuliere beide und beweise die zweite Identität.',badges:['def','proof'],ref:'Mathe-Übersicht §3.3 / Skript §1.4',
+     a:`<div class="step"><strong>BAC-CAB:</strong> $\\vec{a}\\times(\\vec{b}\\times\\vec{c}) = \\vec{b}(\\vec{a}\\cdot\\vec{c}) - \\vec{c}(\\vec{a}\\cdot\\vec{b})$</div>
+<div class="step"><strong>Behauptung:</strong> $\\nabla\\times(\\nabla\\varphi)=\\vec{0}$ für jedes zweimal stetig differenzierbare $\\varphi$.</div>
+<div class="step"><strong>Beweis</strong> (z-Komponente, andere analog):
+$$[\\nabla\\times\\nabla\\varphi]_z = \\partial_x(\\partial_y\\varphi) - \\partial_y(\\partial_x\\varphi) = 0$$
+nach dem Satz von Schwarz (Vertauschbarkeit gemischter zweiter Ableitungen). $\\square$</div>
+<div class="result">Physikalische Konsequenz: Jedes Feld, das sich als Gradient schreiben lässt ($\\vec{E}=-\\nabla\\varphi$), ist automatisch <strong>wirbelfrei</strong> und damit konservativ. Umgekehrt hat das induzierte E-Feld ($\\text{rot}\\,\\vec{E}=-\\partial_t\\vec{B}\\neq 0$) <em>kein</em> Potential.</div>`}
   ]
 },
 {
@@ -253,7 +304,61 @@ Im Vakuum: $c_0 = 1/\\sqrt{\\varepsilon_0\\mu_0}$ — Verknüpfung mit Lichtgesc
      a:`<div class="step">Gleichgewicht: $\\tan\\theta = F_C/(mg)$, wobei Abstand $d = 2L\\sin(\\theta/2) \\approx 2L\\sin(\\theta/2)$</div>
 <div class="step">Für kleine Winkel: $d\\approx L\\theta$, $F_C = \\frac{Q^2}{4\\pi\\varepsilon_0(L\\theta)^2}$</div>
 <div class="step">$\\theta^3 \\approx \\frac{Q^2}{4\\pi\\varepsilon_0 m g L^2} = \\frac{(60\\cdot10^{-9})^2}{4\\pi\\cdot8{,}85\\cdot10^{-12}\\cdot10^{-3}\\cdot9{,}81\\cdot0{,}25}\\approx 1{,}19\\cdot10^{-5}$</div>
-<div class="result">$\\theta \\approx 0{,}023\\,\\text{rad} \\approx 1{,}3°$</div>`}
+<div class="result">$\\theta \\approx 0{,}023\\,\\text{rad} \\approx 1{,}3°$</div>`},
+    {q:'[ÜB 1D b] Gleiches Fadenpendel, aber ungleiche Ladungen $Q_1 = 40\\,\\text{nC}$ und $Q_2 = 90\\,\\text{nC}$. Wie groß sind die beiden Auslenkungen?',badges:['ex','calc'],ref:'Übung 1, Aufg. D b)',
+     a:`<div class="step"><strong>Schlüsselargument (actio = reactio):</strong> Die Coulomb-Kraft auf beide Kugeln ist betragsgleich, $F=\\dfrac{Q_1Q_2}{4\\pi\\varepsilon_0 d^2}$. Da beide Kugeln dieselbe Masse $m$ und dieselbe Fadenlänge $L$ haben, gilt für beide dieselbe Gleichgewichtsbedingung $\\tan\\theta=F/(mg)$.</div>
+<div class="result">$\\Rightarrow$ <strong>Beide Kugeln werden gleich weit ausgelenkt</strong>, $\\theta_1=\\theta_2$ — auch bei ungleichen Ladungen!</div>
+<div class="step">Größe: Es zählt nur das Produkt $Q_1Q_2 = 3600\\,\\text{nC}^2$ gegenüber $Q^2=3600\\,\\text{nC}^2$ aus Teil a). Das Produkt ist identisch, also
+$$\\theta \\approx 0{,}023\\,\\text{rad}\\approx 1{,}3°$$ wie in a).</div>
+<div class="warn">Klausurfalle: Viele vermuten, die stärker geladene Kugel würde weiter ausgelenkt. Das ist falsch — nur das Produkt $Q_1Q_2$ geht ein.</div>`},
+    {q:'[ÜB 1A] Vergleiche im Wasserstoff-Grundzustand ($r = 5\\cdot10^{-11}\\,$m) die Coulomb-Anziehung zwischen Elektron und Proton mit der Gravitationsanziehung.',badges:['ex','calc'],ref:'Übung 1, Aufg. A / Probeklausur Aufg. 1',
+     a:`<div class="step"><strong>Coulomb:</strong>
+$$F_C=\\frac{1}{4\\pi\\varepsilon_0}\\frac{e^2}{r^2}=8{,}99\\cdot10^9\\cdot\\frac{(1{,}60\\cdot10^{-19})^2}{(5\\cdot10^{-11})^2}$$
+$$=8{,}99\\cdot10^9\\cdot\\frac{2{,}56\\cdot10^{-38}}{2{,}5\\cdot10^{-21}}\\approx 9{,}2\\cdot10^{-8}\\,\\text{N}$$</div>
+<div class="step"><strong>Gravitation:</strong>
+$$F_G=G\\frac{m_em_p}{r^2}=6{,}67\\cdot10^{-11}\\cdot\\frac{9{,}11\\cdot10^{-31}\\cdot1{,}67\\cdot10^{-27}}{2{,}5\\cdot10^{-21}}\\approx 4{,}1\\cdot10^{-47}\\,\\text{N}$$</div>
+<div class="result">$$\\frac{F_C}{F_G}\\approx 2{,}3\\cdot10^{39}$$
+Die Gravitation ist im Atom <strong>völlig irrelevant</strong>. (Für zwei Elektronen ergibt sich sogar $\\approx 10^{42}$, da $m_e\\ll m_p$.)</div>
+<div class="warn">Beide Kräfte fallen mit $1/r^2$ — das Verhältnis ist daher <em>abstandsunabhängig</em>. Es ist eine reine Materialkonstante der beteiligten Teilchen.</div>`},
+    {q:'[ÜB 1C] Millikan quantitativ: Ein Öltröpfchen sinkt mit $v=0{,}3\\,$mm/s ($\\rho_{\\text{Öl}}=0{,}9\\,$g/cm³, $\\eta_{\\text{Luft}}=1{,}8\\cdot10^{-5}\\,$Ns/m²). Berechne Radius und Masse, und die Ladungszahl bei $E=16{,}7\\,$kV/m Schwebefeld.',badges:['ex','calc'],ref:'Übung 1, Aufg. C',
+     a:`<div class="step"><strong>a) Radius aus Kräftegleichgewicht beim Sinken</strong> (Gewicht = Stokes-Reibung):
+$$\\tfrac{4}{3}\\pi r^3\\rho g = 6\\pi\\eta r v \\;\\Rightarrow\\; r=\\sqrt{\\frac{9\\eta v}{2\\rho g}}$$
+$$r=\\sqrt{\\frac{9\\cdot1{,}8\\cdot10^{-5}\\cdot3\\cdot10^{-4}}{2\\cdot900\\cdot9{,}81}}\\approx 1{,}7\\cdot10^{-6}\\,\\text{m}$$</div>
+<div class="step"><strong>Masse:</strong> $m=\\tfrac43\\pi r^3\\rho \\approx \\tfrac43\\pi(1{,}7\\cdot10^{-6})^3\\cdot 900 \\approx 1{,}9\\cdot10^{-14}\\,\\text{kg}$</div>
+<div class="step"><strong>b) Schweben im E-Feld:</strong> $qE=mg$
+$$q=\\frac{mg}{E}=\\frac{1{,}9\\cdot10^{-14}\\cdot 9{,}81}{1{,}67\\cdot10^{4}}\\approx 1{,}1\\cdot10^{-17}\\,\\text{C}$$</div>
+<div class="result">$$z=\\frac{q}{e}=\\frac{1{,}1\\cdot10^{-17}}{1{,}60\\cdot10^{-19}}\\approx 70\\ \\text{Elementarladungen}$$
+Millikans Befund: $q$ ist <strong>immer</strong> ein ganzzahliges Vielfaches von $e$ → Ladungsquantisierung. Nobelpreis 1932.</div>
+<div class="warn">Fehlerquellen des Originalexperiments: Brown\'sche Bewegung, unsichere Viskosität, Tröpfchengröße nahe der freien Weglänge (Cunningham-Korrektur).</div>`},
+    {q:'Reibungselektrizität, Blättchen-Elektrometer und Faraday-Becher: Welche Versuche zeigen was?',badges:['def','ex'],ref:'Skript §1.1',
+     a:`<div class="step"><strong>Reibungselektrizität:</strong> Kunststoff + Katzenfell → Kunststoff wird <strong>negativ</strong>. Glas + Leder → Glas wird <strong>positiv</strong>. Ursache: unterschiedliche Elektronenbindungsenergien (triboelektrische Reihe). "Elektron" = griechisch für Bernstein.</div>
+<div class="step"><strong>Blättchen-Elektrometer:</strong> Zwei leitend verbundene Metallblättchen stoßen sich bei Aufladung ab; der Winkel $\\alpha$ ist ein Maß für die Ladungsmenge. Misst Ladung/Spannung ohne Stromfluss.</div>
+<div class="step"><strong>Faraday-Becher:</strong> Bringt man eine geladene Kugel <em>in</em> den Becher und berührt die Innenwand, wird die Ladung <strong>vollständig</strong> abgegeben. Umgekehrt kann man aus dem Inneren keine Ladung aufnehmen.</div>
+<div class="result">Beweis: Ladung sitzt <strong>immer auf der äußeren Oberfläche</strong> eines Leiters, das Innere (auch Hohlräume) bleibt ladungs- und feldfrei → Faraday-Käfig.</div>`},
+    {q:'Van-de-Graaff-Bandgenerator, Kelvin-Generator und Wimshurst-Influenzmaschine — erkläre jeweils das Funktionsprinzip und den entscheidenden Unterschied.',badges:['def','ex'],ref:'Skript §1.1',
+     a:`<div class="step"><strong>Van-de-Graaff-Bandgenerator</strong> (Reibung): Ein umlaufendes Band wird unten durch Reibung/Sprühentladung geladen, transportiert die Ladung mechanisch ins Innere einer Hohlkugel und gibt sie dort über einen Abstreifer ab. Da im Inneren $E=0$ ist, kostet der Transport <em>keine</em> Arbeit gegen das Kugelfeld → Spannungen bis MV.</div>
+<div class="step"><strong>Kelvin-Generator</strong> (Influenz + Selbstverstärkung): Zwei Wassertropfströme fallen durch zwei Ringe; die Ringe sind <em>gekreuzt</em> mit den Auffangbehältern der jeweils anderen Seite verbunden (A–B′, B–A′). Eine winzige Anfangsasymmetrie influenziert Ladung im fallenden Tropfen, die die andere Seite weiter auflädt → exponentielle Selbstverstärkung ("Kraft $\\propto$ Auslenkung").</div>
+<div class="step"><strong>Wimshurst-Influenzmaschine</strong> (reine Influenz): Zwei gegenläufig rotierende Isolierscheiben mit metallischen Segmenten; Neutralisatorbürsten sorgen für laufende Ladungstrennung durch Influenz, Sammelkämme führen die Ladung zu den Konduktoren. Bis $\\sim100\\,$kV.</div>
+<div class="result">Unterschied: Van-de-Graaff nutzt <strong>Reibung + mechanischen Transport</strong>, Kelvin und Wimshurst nutzen <strong>Influenz</strong> (Ladungsverschiebung ohne Ladungsübertragung) mit positiver Rückkopplung.</div>`},
+    {q:'Warum sind Quarks mit Ladung $\\pm\\frac13 e$, $\\pm\\frac23 e$ kein Widerspruch zur Ladungsquantisierung? Und was ist der (fraktionale) Quanten-Hall-Effekt?',badges:['def'],ref:'Skript §1.1',
+     a:`<div class="step"><strong>Confinement:</strong> Quarks (Gell-Mann, Nobelpreis 1969) tragen Drittelladungen, treten aber <em>nie frei</em> auf — sie sind stets zu farbneutralen Hadronen gebunden, deren Gesamtladung wieder ein ganzzahliges Vielfaches von $e$ ist. Freie Ladung ist also weiterhin $Q=z\\,e$.</div>
+<div class="step"><strong>Quanten-Hall-Effekt</strong> (von Klitzing 1980, Nobelpreis 1985): In einem 2D-Elektronengas bei $T\\ll1\\,$K und $B>10\\,$T ist der Hall-Widerstand exakt quantisiert:
+$$R_H=\\frac{1}{m}\\cdot\\frac{h}{e^2},\\qquad m=1,2,3,\\dots$$
+mit der von-Klitzing-Konstante $h/e^2 = 25\\,812{,}807\\,\\Omega$ → heute Widerstandsnormal.</div>
+<div class="step"><strong>Fraktionaler QHE</strong> (Tsui, Störmer, Laughlin, Nobelpreis 1998): Bei noch höheren Feldern treten Plateaus bei <em>gebrochenen</em> $m$ auf. Die Anregungen dieser Quantenflüssigkeit verhalten sich wie Quasiteilchen mit Ladung $\\pm e/n$.</div>
+<div class="result">Fazit: Die Quantisierung der <em>freien</em> Ladung in Einheiten von $e$ ist experimentell auf $10^{-20}$ genau bestätigt ($|+e|=|-e|$).</div>`},
+    {q:'Zeige an der CsCl-Struktur, dass die Coulomb-Kraft auf ein zentrales Cl$^-$ verschwindet, und berechne die Kraft bei einer Fehlstelle ($d\\approx0{,}35\\,$nm).',badges:['calc','proof'],ref:'Skript §1.2',
+     a:`<div class="step"><strong>Geometrie:</strong> In der CsCl-Struktur sitzt ein Cl$^-$ im Zentrum eines Würfels, an dessen 8 Ecken je ein Cs$^+$ sitzt. Der Abstand ist $d=\\frac{\\sqrt3}{2}\\cdot\\frac{a}{1}$ bzw. $d=r(\\text{Cs}^+)+r(\\text{Cl}^-)\\approx 0{,}17+0{,}18=0{,}35\\,$nm.</div>
+<div class="step"><strong>Symmetrie:</strong> Zu jeder Ecke gibt es die diagonal gegenüberliegende Ecke mit gleichem Abstand und exakt entgegengesetzter Kraftrichtung. Alle 4 Paare heben sich auf:
+$$\\vec{F}_{\\text{ges}} = \\sum_{i=1}^{8}\\vec{F}_i = \\vec{0}$$</div>
+<div class="step"><strong>Mit einer Fehlstelle</strong> (ein Cs$^+$ fehlt): Der Kompensationspartner fehlt, es bleibt genau eine unkompensierte Paarkraft:
+$$F=\\frac{1}{4\\pi\\varepsilon_0}\\frac{e^2}{d^2}=8{,}99\\cdot10^9\\cdot\\frac{(1{,}60\\cdot10^{-19})^2}{(3{,}5\\cdot10^{-10})^2}\\approx 1{,}9\\cdot10^{-9}\\,\\text{N}$$</div>
+<div class="result">$F\\approx 1{,}9\\,$nN — gerichtet <em>weg</em> von der Fehlstelle (das fehlende anziehende Cs$^+$ zieht nicht mehr). Genau solche Kräfte treiben die Ionendiffusion in Festkörpern und Batterien.</div>`},
+    {q:'Wie zeigt die Ladungsbilanz des $\\beta^-$-Zerfalls $n \\to p + e^- + \\bar{\\nu}$ die Ladungserhaltung?',badges:['def'],ref:'Skript §1.1',
+     a:`<div class="step">Ladungen der Beteiligten:
+$$\\underbrace{0}_{n} \\;\\to\\; \\underbrace{+e}_{p} \\;+\\; \\underbrace{-e}_{e^-} \\;+\\; \\underbrace{0}_{\\bar{\\nu}}$$</div>
+<div class="result">Summe vorher $=0$, Summe nachher $=+e-e+0=0$. <strong>Ladung ist streng erhalten</strong> — in jedem abgeschlossenen System, bei jedem Prozess, auch wenn sich die Teilchenzahl ändert.</div>
+<div class="warn">Ladung ist darüber hinaus <strong>invariant</strong> (nicht nur erhalten): Sie hat in jedem Inertialsystem denselben Wert. Genau diese Invarianz ist der Ausgangspunkt für die relativistische Herleitung des Magnetfelds (Kap. 11.4). Energie dagegen ist nur erhalten, aber nicht invariant.</div>`}
   ]
 },
 {
@@ -313,7 +418,47 @@ $$E_{\\text{Oberfläche}} = \\frac{\\sigma}{\\varepsilon_0}$$`},
     {q:'Superpositionsprinzip für E-Felder und Kraft auf Probeladung.',badges:['def'],ref:'Skript §1.3',
      a:`$$\\vec{E}(\\vec{r}) = \\sum_{i=1}^n \\vec{E}_i(\\vec{r}) = \\frac{1}{4\\pi\\varepsilon_0}\\sum_i q_i\\frac{\\hat{r}-\\hat{r}_i}{|\\vec{r}-\\vec{r}_i|^2}$$
 Kraft auf Probeladung $q_0$: $\\vec{F} = q_0\\vec{E}(\\vec{r})$<br>
-<div class="warn">Das Superpositionsprinzip ist ein fundamentales Prinzip — gilt exakt für klassische Elektrostatik.</div>`}
+<div class="warn">Das Superpositionsprinzip ist ein fundamentales Prinzip — gilt exakt für klassische Elektrostatik.</div>`},
+    {q:'Warum erfährt ein Dipol nur im <em>inhomogenen</em> Feld eine Nettokraft? Gib Drehmoment und Kraft an.',badges:['def','proof'],ref:'Skript §1.3',
+     a:`<div class="step"><strong>Homogenes Feld:</strong> $\\vec{F}=q\\vec{E}(\\vec{r}_+)+(-q)\\vec{E}(\\vec{r}_-)=\\vec{0}$, weil $\\vec{E}$ an beiden Orten gleich ist. Es bleibt nur ein <strong>Drehmoment</strong>:
+$$\\vec{M}=\\vec{p}\\times\\vec{E},\\qquad E_{\\text{pot}}=-\\vec{p}\\cdot\\vec{E}$$
+→ der Dipol richtet sich parallel zu $\\vec{E}$ aus (Minimum der Energie).</div>
+<div class="step"><strong>Inhomogenes Feld:</strong> Taylor-Entwicklung von $\\vec{E}$ über die Dipollänge $\\vec{d}$:
+$$\\vec{F}=q\\left[\\vec{E}(\\vec{r}+\\vec{d})-\\vec{E}(\\vec{r})\\right]\\approx q(\\vec{d}\\cdot\\nabla)\\vec{E} = (\\vec{p}\\cdot\\nabla)\\vec{E}=\\nabla(\\vec{p}\\cdot\\vec{E})$$</div>
+<div class="result">$$\\vec{F}=\\nabla(\\vec{p}\\cdot\\vec{E}) \\quad\\text{bzw. komponentenweise}\\quad F_x=p_x\\frac{\\partial E_x}{\\partial x}+\\dots$$
+Ein ausgerichteter Dipol wird immer in Richtung <strong>steigender Feldstärke</strong> gezogen.</div>
+<div class="warn">Anschauliche Konsequenzen: Ein Wasserstrahl wird von einem geladenen Stab abgelenkt; Papierschnipsel/Styroporkugeln werden angezogen; Staub sammelt sich an Feldspitzen. Immer erst Ausrichtung (Drehmoment), dann Anziehung (Gradientenkraft).</div>`},
+    {q:'Wie misst man elektrische Felder und Potentiale? Erkläre Feldmühle, Flammensonde und Elektrometer.',badges:['def','ex'],ref:'Skript §1.3',
+     a:`<div class="step"><strong>Feldmühle (E-Feld-Messung):</strong> Eine geerdete Flügelscheibe rotiert vor einer Messelektrode und deckt sie periodisch ab. Die influenzierte Ladung $Q=\\varepsilon_0 E A(t)$ wird dadurch moduliert; der resultierende Wechselstrom $I=\\varepsilon_0 E \\,\\dot A$ ist proportional zur Feldstärke. Vorteil: misst <em>statische</em> Felder driftfrei (Gewittervorwarnung, Flugzeuge).</div>
+<div class="step"><strong>Flammensonde (Potentialmessung):</strong> Eine kleine Flamme an der Sondenspitze ionisiert die Luft; die Ionen leiten überschüssige Ladung ab, bis die Sonde exakt das <em>lokale Potential</em> des Raumpunktes angenommen hat. Damit lassen sich Äquipotentiallinien im Raum ausmessen.</div>
+<div class="step"><strong>Elektrometer (z. B. Keithley 6517b):</strong> Spannungsmessung mit Eingangswiderstand $>200\\,\\text{T}\\Omega$ und Strommessung bis in den fA-Bereich — misst also praktisch <em>ohne</em> Ladung abzuziehen. Das klassische Analogon ist das Blättchen-Elektrometer.</div>
+<div class="result">Merksatz: Feldmühle → $\\vec{E}$, Flammensonde → $\\varphi$, Elektrometer → $Q$ bzw. $U$ ohne Belastung.</div>`},
+    {q:'Warum ist die Feldliniendichte ein anschauliches Bild für das $1/r^2$-Gesetz?',badges:['proof'],ref:'Skript §1.3',
+     a:`<div class="step">Von einer Punktladung $q$ gehen $N$ Feldlinien aus. Sie enden nirgends im freien Raum, also durchstoßen <strong>alle $N$</strong> jede Kugelfläche um die Ladung.</div>
+<div class="step">Flächendichte der Linien auf einer Kugel vom Radius $r$:
+$$n(r)=\\frac{N}{4\\pi r^2}\\propto \\frac{1}{r^2}$$</div>
+<div class="result">Da $|\\vec{E}|\\propto n(r)$, folgt unmittelbar $E\\propto 1/r^2$. Das $1/r^2$-Gesetz ist damit eine reine Konsequenz der <strong>Dreidimensionalität</strong> des Raumes und der Quellenfreiheit außerhalb der Ladung.</div>
+<div class="warn">Dimensionalitäts-Merkregel: Punktladung (Kugel, 3D) → $1/r^2$; unendlicher Draht (Zylinder, 2D) → $1/r$; unendliche Platte (1D) → <strong>konstant</strong>.</div>`},
+    {q:'Leite das Dipolfeld auf der Dipolachse her und gib die allgemeine Formel für $\\vec{E}(r,\\vartheta)$ an.',badges:['proof','calc'],ref:'Skript §1.3',
+     a:`<div class="step"><strong>Auf der Achse</strong> (Abstand $z$ vom Mittelpunkt, Ladungen $\\pm q$ bei $\\mp d/2$):
+$$E_z=\\frac{q}{4\\pi\\varepsilon_0}\\left[\\frac{1}{(z-d/2)^2}-\\frac{1}{(z+d/2)^2}\\right]$$</div>
+<div class="step">Für $z\\gg d$ Taylor-entwickeln: $(z\\mp d/2)^{-2}=z^{-2}(1\\pm d/z+\\dots)$, also
+$$E_z\\approx\\frac{q}{4\\pi\\varepsilon_0 z^2}\\cdot\\frac{2d}{z}=\\frac{2p}{4\\pi\\varepsilon_0 z^3}\\quad\\text{mit}\\quad p=qd$$</div>
+<div class="step"><strong>Allgemein</strong> (Kugelkoordinaten, $\\vartheta$ von der Dipolachse gemessen):
+$$\\vec{E}(\\vec{r})=\\frac{1}{4\\pi\\varepsilon_0 r^3}\\left(3\\cos\\vartheta\\,\\frac{\\vec{r}}{r}\\,p-\\vec{p}\\right)$$
+Auf der Achse ($\\vartheta=0$): $E=\\frac{2p}{4\\pi\\varepsilon_0r^3}$. In der Mittelebene ($\\vartheta=90°$): $E=\\frac{-p}{4\\pi\\varepsilon_0r^3}$, also halb so groß und entgegengesetzt.</div>
+<div class="result">Merke: Dipolfeld $\\propto 1/r^3$ (statt $1/r^2$), weil sich die Felder der beiden Ladungen in führender Ordnung wegheben. Allgemein fällt ein $2^n$-Pol wie $1/r^{n+2}$.</div>`},
+    {q:'Warum ist Wasser ein so besonderes Lösungsmittel? Erkläre über den H$_2$O-Dipol und die Hydrathülle.',badges:['def'],ref:'Skript §1.3',
+     a:`<div class="step"><strong>Molekülbau:</strong> H$_2$O ist gewinkelt (Bindungswinkel $\\approx104{,}5°$), der Sauerstoff zieht Elektronendichte an sich. Es entsteht ein <strong>permanentes</strong> Dipolmoment $p\\approx 6{,}2\\cdot10^{-30}\\,$Cm $=1{,}85\\,$Debye.</div>
+<div class="step"><strong>Hydrathülle:</strong> Um ein gelöstes Ion (z. B. Na$^+$) richten sich die Wasserdipole radial aus und schirmen dessen Feld ab. Effektiv wird die Coulomb-Anziehung um den Faktor $\\varepsilon_r\\approx81$ geschwächt — deshalb löst Wasser Ionenkristalle wie NaCl.</div>
+<div class="step"><strong>Demonstrationsversuch:</strong> Grießkörner (längliche Dielektrika) in Rizinusöl richten sich im E-Feld entlang der Feldlinien aus und machen den Feldlinienverlauf sichtbar — dasselbe Drehmoment $\\vec{M}=\\vec{p}\\times\\vec{E}$ wie bei Wassermolekülen.</div>
+<div class="result">Der Wasserstrahl, der von einem geladenen Stab abgelenkt wird, ist der direkte Nachweis: erst Ausrichtung durch $\\vec{M}$, dann Anziehung durch $\\vec{F}=\\nabla(\\vec{p}\\cdot\\vec{E})$ im inhomogenen Feld.</div>`},
+    {q:'Wie geht man vom Feld zweier Punktladungen über 4 Ladungen zum homogenen Plattenfeld über?',badges:['proof'],ref:'Skript §1.3',
+     a:`<div class="step"><strong>2 Ladungen (+/−):</strong> Dipolfeld — in der Mitte zwischen den Ladungen zeigen beide Beiträge in dieselbe Richtung, das Feld ist dort maximal, außen fällt es wie $1/r^3$.</div>
+<div class="step"><strong>4 Ladungen (2 Paare nebeneinander):</strong> Zwischen den beiden Ladungsreihen wird das Feld in der Mitte flacher, weil sich die Transversalkomponenten der Nachbarn paarweise aufheben. Nur die Komponente senkrecht zur Reihe überlebt.</div>
+<div class="step"><strong>Grenzfall $N\\to\\infty$ (Flächenladung $\\sigma$):</strong> Alle Parallelkomponenten heben sich aus Symmetriegründen exakt auf; übrig bleibt ein rein senkrechtes, ortsunabhängiges Feld:
+$$E=\\frac{\\sigma}{2\\varepsilon_0}\\ \\text{(eine Platte)},\\qquad E=\\frac{\\sigma}{\\varepsilon_0}\\ \\text{(Plattenkondensator)}$$</div>
+<div class="result">Kernbotschaft: Das homogene Feld des Plattenkondensators ist kein neues Gesetz, sondern die <strong>Superposition unendlich vieler Coulomb-Felder</strong>. Randfelder ("Streufeld") treten nur an den Kanten auf.</div>`}
   ]
 },
 {
@@ -373,7 +518,62 @@ Analogie: Gravitation → $E_{\\text{pot}} = mgh$; Potential $\\leftrightarrow g
      a:`$\\varphi = r^{-n}-1$, mit $r = \\sqrt{x^2+y^2+z^2}$:<br>
 $$\\frac{\\partial\\varphi}{\\partial x} = (-n)r^{-n-1}\\frac{\\partial r}{\\partial x} = -n r^{-n-1}\\frac{x}{r} = -n x r^{-n-2}$$
 Analog für $y, z$: $\\nabla\\varphi = -n r^{-n-2}\\vec{r} = -n r^{-n-1}\\hat{e}_r$<br>
-<div class="result">$\\vec{E} = -\\nabla\\varphi = n r^{-n-1}\\hat{e}_r$ — radiales Feld mit Potenzgesetz.</div>`}
+<div class="result">$\\vec{E} = -\\nabla\\varphi = n r^{-n-1}\\hat{e}_r$ — radiales Feld mit Potenzgesetz.</div>`},
+    {q:'Leite das Potential eines Dipols in großer Entfernung her: $\\varphi = \\dfrac{p\\cos\\vartheta}{4\\pi\\varepsilon_0 r^2}$.',badges:['proof','calc'],ref:'Skript §1.4',
+     a:`<div class="step"><strong>Ansatz (Superposition):</strong> Ladungen $+q$ bei $\\vec{r}_+$, $-q$ bei $\\vec{r}_-$, Abstand $d$:
+$$\\varphi(\\vec{r})=\\frac{q}{4\\pi\\varepsilon_0}\\left(\\frac{1}{r_+}-\\frac{1}{r_-}\\right)=\\frac{q}{4\\pi\\varepsilon_0}\\cdot\\frac{r_--r_+}{r_+r_-}$$</div>
+<div class="step"><strong>Fernfeldnäherung</strong> $r\\gg d$: Die Verbindungslinien werden parallel, also $r_--r_+\\approx d\\cos\\vartheta$ und $r_+r_-\\approx r^2$.</div>
+<div class="result">$$\\varphi(r,\\vartheta)=\\frac{qd\\cos\\vartheta}{4\\pi\\varepsilon_0 r^2}=\\frac{\\vec{p}\\cdot\\hat{r}}{4\\pi\\varepsilon_0 r^2}$$</div>
+<div class="step"><strong>Probe:</strong> $\\vec{E}=-\\nabla\\varphi$ liefert in Kugelkoordinaten
+$$E_r=-\\frac{\\partial\\varphi}{\\partial r}=\\frac{2p\\cos\\vartheta}{4\\pi\\varepsilon_0r^3},\\qquad E_\\vartheta=-\\frac1r\\frac{\\partial\\varphi}{\\partial\\vartheta}=\\frac{p\\sin\\vartheta}{4\\pi\\varepsilon_0r^3}$$
+— genau das bekannte Dipolfeld.</div>
+<div class="warn">Merke: $\\varphi_{\\text{Dipol}}\\propto 1/r^2$ und $E_{\\text{Dipol}}\\propto1/r^3$; in der Mittelebene ($\\vartheta=90°$) ist $\\varphi=0$, aber $\\vec{E}\\neq0$!</div>`},
+    {q:'Berechne das Potential einer homogen geladenen Kreisscheibe (Radius $R$, Flächenladung $\\sigma$) auf der Symmetrieachse.',badges:['calc','proof'],ref:'Skript §1.4',
+     a:`<div class="step"><strong>Zerlegung in Ringe:</strong> Ein Ring vom Radius $r$ und Breite $dr$ trägt $dQ=\\sigma\\,2\\pi r\\,dr$; alle seine Punkte haben denselben Abstand $\\sqrt{r^2+z^2}$ vom Aufpunkt. Daher <em>skalare</em> Addition ohne Winkelprojektion:
+$$d\\varphi=\\frac{1}{4\\pi\\varepsilon_0}\\frac{\\sigma\\,2\\pi r\\,dr}{\\sqrt{r^2+z^2}}$$</div>
+<div class="step"><strong>Integration</strong> mit $\\int_0^R \\frac{r\\,dr}{\\sqrt{r^2+z^2}}=\\left[\\sqrt{r^2+z^2}\\right]_0^R$:
+$$\\varphi(z)=\\frac{\\sigma}{2\\varepsilon_0}\\left(\\sqrt{R^2+z^2}-|z|\\right)$$</div>
+<div class="step"><strong>Feld:</strong> $E_z=-\\dfrac{\\partial\\varphi}{\\partial z}=\\dfrac{\\sigma}{2\\varepsilon_0}\\left(1-\\dfrac{z}{\\sqrt{R^2+z^2}}\\right)$</div>
+<div class="result">Grenzfälle: für $z\\ll R$ folgt $E\\to\\frac{\\sigma}{2\\varepsilon_0}$ (unendliche Platte ✓); für $z\\gg R$ folgt mit $Q=\\sigma\\pi R^2$ die Punktladung $E\\to\\frac{Q}{4\\pi\\varepsilon_0z^2}$ ✓.</div>
+<div class="warn">Der große Vorteil des Potentials: Es ist ein <strong>Skalar</strong>. Man muss keine Komponenten projizieren — deshalb ist der Weg "erst $\\varphi$, dann $\\vec{E}=-\\nabla\\varphi$" fast immer der kürzere.</div>`},
+    {q:'Berechne das Potential eines unendlich langen geladenen Drahtes durch direkte Integration (nicht über Gauß).',badges:['calc','proof'],ref:'Skript §1.4',
+     a:`<div class="step">Linienladungsdichte $\\lambda$, Aufpunkt im Abstand $d$ senkrecht zum Draht:
+$$\\varphi(d)=\\frac{\\lambda}{4\\pi\\varepsilon_0}\\int_{-L}^{+L}\\frac{dx}{\\sqrt{x^2+d^2}}$$</div>
+<div class="step"><strong>Stammfunktion:</strong> $\\displaystyle\\int\\frac{dx}{\\sqrt{x^2+d^2}}=\\ln\\!\\left(x+\\sqrt{x^2+d^2}\\right)$, also
+$$\\varphi=\\frac{\\lambda}{4\\pi\\varepsilon_0}\\left[\\ln\\!\\left(L+\\sqrt{L^2+d^2}\\right)-\\ln\\!\\left(-L+\\sqrt{L^2+d^2}\\right)\\right]$$</div>
+<div class="step">Für $L\\gg d$: $\\sqrt{L^2+d^2}\\approx L+\\frac{d^2}{2L}$, damit wird der zweite Logarithmus $\\ln\\frac{d^2}{2L}$ und
+$$\\varphi\\approx\\frac{\\lambda}{4\\pi\\varepsilon_0}\\ln\\frac{4L^2}{d^2}=-\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln d+\\text{const}$$</div>
+<div class="result">$$\\varphi(d)=-\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln d + \\text{const}\\qquad\\Rightarrow\\qquad E=-\\frac{\\partial\\varphi}{\\partial d}=\\frac{\\lambda}{2\\pi\\varepsilon_0 d}$$ ✓</div>
+<div class="warn">Wichtig: Beim unendlichen Draht divergiert die Konstante — man <strong>kann $\\varphi(\\infty)=0$ nicht wählen</strong>. Man legt den Nullpunkt auf einen endlichen Referenzradius $d_0$: $\\varphi=-\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln(d/d_0)$.</div>`},
+    {q:'Klausur-Rechnung NaCl: Ionisierungsenergie Na $=5{,}14\\,$eV, Elektronenaffinität Cl $=3{,}62\\,$eV, Bindungsabstand $d=0{,}236\\,$nm. Ist das Molekül stabil?',badges:['calc','exam'],ref:'Skript §1.4',
+     a:`<div class="step"><strong>Schritt 1 — Ladungstrennung kostet Energie:</strong>
+$$\\Delta E = E_{\\text{ion}}(\\text{Na}) - E_{\\text{aff}}(\\text{Cl}) = 5{,}14 - 3{,}62 = 1{,}52\\,\\text{eV}$$
+So viel muss man aufwenden, um aus Na + Cl das Ionenpaar Na$^+$ + Cl$^-$ (in großem Abstand) zu machen.</div>
+<div class="step"><strong>Schritt 2 — Coulomb-Anziehung liefert Energie:</strong>
+$$E_{\\text{Coul}} = -\\frac{e^2}{4\\pi\\varepsilon_0 d} = -\\frac{8{,}99\\cdot10^9\\cdot(1{,}60\\cdot10^{-19})^2}{2{,}36\\cdot10^{-10}\\,\\text{m}}\\approx -9{,}75\\cdot10^{-19}\\,\\text{J}\\approx -6{,}1\\,\\text{eV}$$</div>
+<div class="step"><strong>Schritt 3 — Bilanz:</strong> $E_{\\text{Diss}} = 6{,}1 - 1{,}52 \\approx 4{,}6\\,\\text{eV}$ (experimentell $4{,}27\\,$eV — Rest: abstoßende Pauli-Wechselwirkung der Elektronenhüllen).</div>
+<div class="result">$E_{\\text{Diss}}>0$ → das Molekül ist <strong>gebunden</strong>. Die Ionenbindung ist also nichts anderes als angewandte Elektrostatik.</div>
+<div class="warn">Umrechnung immer parat haben: $1\\,\\text{eV}=1{,}602\\cdot10^{-19}\\,$J. Ein Elektron, das $1\\,$V Spannung durchläuft, gewinnt genau $1\\,$eV.</div>`},
+    {q:'Konservatives Feld: Nenne die vier äquivalenten Formulierungen und wie der Satz von Stokes sie verbindet.',badges:['def','proof'],ref:'Skript §1.4 / §1.5',
+     a:`<div class="step">Für das elektrostatische Feld sind folgende Aussagen <strong>vollständig äquivalent</strong>:</div>
+<div class="step">(1) Die Arbeit $W=q\\int_a^b\\vec{E}\\cdot d\\vec{r}$ ist <strong>wegunabhängig</strong>.</div>
+<div class="step">(2) Für jeden geschlossenen Weg gilt $\\displaystyle\\oint\\vec{E}\\cdot d\\vec{r}=0$.</div>
+<div class="step">(3) Es existiert ein Potential mit $\\vec{E}=-\\nabla\\varphi$.</div>
+<div class="step">(4) Das Feld ist wirbelfrei: $\\nabla\\times\\vec{E}=\\vec{0}$.</div>
+<div class="result"><strong>Satz von Stokes</strong> verknüpft (2) und (4):
+$$\\oint_{\\partial A}\\vec{E}\\cdot d\\vec{r}=\\iint_A(\\nabla\\times\\vec{E})\\cdot d\\vec{A}$$
+Verschwindet das Ringintegral für <em>jede</em> Fläche, muss der Integrand punktweise null sein. (3) $\\Rightarrow$ (4) folgt aus $\\text{rot}(\\text{grad}\\,\\varphi)=0$.</div>
+<div class="warn">Klausurwarnung: Sobald $\\partial\\vec{B}/\\partial t\\neq0$ ist, gilt $\\nabla\\times\\vec{E}=-\\partial_t\\vec{B}\\neq0$ — dann ist das E-Feld ein <strong>Wirbelfeld</strong>, es gibt kein Potential und $\\oint\\vec{E}d\\vec{r}=U_{\\text{ind}}\\neq0$.</div>`},
+    {q:'Rechne nach: $\\text{div}\\left(\\dfrac{x}{r},\\dfrac{y}{r},0\\right)$ und $\\text{div}\\left(\\dfrac{\\vec{r}}{r^3}\\right)$ für $r\\neq0$.',badges:['calc','ex'],ref:'Skript §1.5 / Mathe-Übersicht',
+     a:`<div class="step"><strong>Erstes Feld</strong> mit $r=\\sqrt{x^2+y^2+z^2}$, $\\partial_x r = x/r$:
+$$\\partial_x\\!\\left(\\frac{x}{r}\\right)=\\frac{1}{r}-\\frac{x^2}{r^3},\\qquad \\partial_y\\!\\left(\\frac{y}{r}\\right)=\\frac{1}{r}-\\frac{y^2}{r^3},\\qquad \\partial_z(0)=0$$
+$$\\Rightarrow \\text{div}=\\frac{2}{r}-\\frac{x^2+y^2}{r^3}$$
+Speziell in der Ebene $z=0$ (dort $x^2+y^2=r^2$): $\\;\\text{div}=\\dfrac{2}{r}-\\dfrac{1}{r}=\\dfrac{1}{r}$.</div>
+<div class="step"><strong>Zweites Feld</strong> (Coulomb-Feld):
+$$\\partial_x\\!\\left(\\frac{x}{r^3}\\right)=\\frac{1}{r^3}-\\frac{3x^2}{r^5}$$
+Summe über $x,y,z$: $\\;\\dfrac{3}{r^3}-\\dfrac{3(x^2+y^2+z^2)}{r^5}=\\dfrac{3}{r^3}-\\dfrac{3}{r^3}=0$</div>
+<div class="result">$$\\text{div}\\frac{\\vec r}{r^3}=0\\quad\\text{für } r\\neq 0$$
+Das Coulomb-Feld ist <strong>überall quellenfrei außer am Ort der Ladung</strong>. Exakt gilt $\\text{div}\\frac{\\vec r}{r^3}=4\\pi\\delta^3(\\vec r)$ — daraus folgt $\\nabla\\cdot\\vec{E}=\\rho/\\varepsilon_0$.</div>`}
   ]
 },
 {
