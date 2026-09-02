@@ -939,7 +939,157 @@ Spezialfall: $H$ erhalten wenn $\\partial H/\\partial t = 0$.`},
      a:`Für integrable Systeme: kanonische Transformation $(q,p) \\to (\\theta,I)$:
 $$I_k = \\frac{1}{2\\pi}\\oint p_k\\,dq_k, \\quad H = H(I)$$
 $\\dot{\\theta}_k = \\partial H/\\partial I_k = \\omega_k(I) = \\text{const.}$, $\\dot{I}_k = 0$.<br>
-Die Bewegung ist $\\theta_k(t) = \\omega_k t + \\theta_k^0$ (linear in $t$).`}
+Die Bewegung ist $\\theta_k(t) = \\omega_k t + \\theta_k^0$ (linear in $t$).`},
+    {q:'Legendre-Transformation: Definition, geometrische Bedeutung, Rezept — und warum sie eine Involution ist.',badges:['def','proof','calc'],ref:'Skript §5.2, S. 111 · Übung Blatt 12, Aufg. 2',
+     a:`<div class="step"><strong>Rezept (drei Schritte):</strong><br>
+1. $u(x)=\\dfrac{df}{dx}$ &nbsp;→&nbsp; 2. nach $x(u)$ auflösen &nbsp;→&nbsp; 3. $g(u)=u\\,x(u)-f\\big(x(u)\\big)$</div>
+<div class="step"><strong>Geometrische Bedeutung:</strong> Statt die Kurve durch Punktepaare $(x,f)$ zu beschreiben, beschreibt man sie durch ihre <em>Tangenten</em>: $u$ ist die Steigung, $-g(u)$ der $y$-Achsenabschnitt der Tangente mit Steigung $u$. Es geht also keine Information verloren.</div>
+<div class="step"><strong>Voraussetzung:</strong> $x\\mapsto u$ muss umkehrbar sein, d.h. $f^{\\prime\\prime}\\ne0$ — $f$ muss <em>strikt konvex</em> (oder konkav) sein. Bei nichtkonvexen Funktionen liefert die Legendre-Transformierte nur die konvexe Hülle.</div>
+<div class="result"><strong>Involution:</strong> $\\dfrac{dg}{du}=x+u\\dfrac{dx}{du}-f^{\\prime}(x)\\dfrac{dx}{du}=x$ (da $f^{\\prime}=u$). Die Rücktransformation von $g$ liefert also wieder $f$: $\\mathcal{L}[\\mathcal{L}[f]]=f$.</div>
+<div class="step"><strong>[ÜB 12.2a] $f(x)=x^4$:</strong> $u=4x^3\\Rightarrow x=(u/4)^{1/3}$
+$$g(u)=u\\left(\\frac{u}{4}\\right)^{1/3}-\\left(\\frac{u}{4}\\right)^{4/3}=\\frac{3}{4}\\,u\\left(\\frac{u}{4}\\right)^{1/3}=3\\cdot4^{-4/3}\\,u^{4/3}\\approx0{,}4725\\,u^{4/3}$$</div>
+<div class="step"><strong>[ÜB 12.2b] $f(x_1,x_2)=x_1^2+x_2^2+x_1x_2$:</strong> $\\vec{u}=\\vec\\nabla f=(2x_1+x_2,\\;x_1+2x_2)=A\\vec{x}$ mit $A=\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}$, $\\det A=3$.
+$$\\vec{x}=A^{-1}\\vec{u}=\\frac13\\begin{pmatrix}2&-1\\\\-1&2\\end{pmatrix}\\vec{u}\\;\\Rightarrow\\;x_1=\\frac{2u_1-u_2}{3},\\quad x_2=\\frac{2u_2-u_1}{3}$$
+Da $f$ homogen vom Grad 2 ist, gilt $\\vec{u}\\cdot\\vec{x}=2f$, also $g=2f-f=f(\\vec{x}(\\vec{u}))=\\frac12\\vec{u}^TA^{-1}\\vec{u}$:
+$$g(u_1,u_2)=\\frac{u_1^2-u_1u_2+u_2^2}{3}$$</div>
+<div class="warn"><strong>Warum das für uns wichtig ist:</strong> Der Übergang $L(q,\\dot q,t)\\to H(q,p,t)$ ist genau eine Legendre-Transformation in der Variablen $\\dot q$. Dieselbe Struktur begegnet einem in der Thermodynamik ($U\\to F\\to G\\to H$).</div>`},
+    {q:'Herleitung der Hamiltonschen Gleichungen aus der Lagrangefunktion.',badges:['proof','exam'],ref:'Skript §5.3, S. 113',
+     a:`<div class="step"><strong>Definition:</strong> $p_k=\\dfrac{\\partial L}{\\partial\\dot q_k}$ (kanonischer Impuls), $\\;H(\\vec q,\\vec p,t)=\\sum_k p_k\\dot q_k-L(\\vec q,\\dot{\\vec q},t)$, wobei $\\dot{\\vec q}=\\dot{\\vec q}(\\vec q,\\vec p,t)$ eingesetzt wird.</div>
+<div class="step"><strong>Totales Differential</strong> von $H$ — einmal direkt, einmal über $L$:
+$$dH=\\sum_k\\left(\\dot q_k\\,dp_k+p_k\\,d\\dot q_k\\right)-\\sum_k\\left(\\frac{\\partial L}{\\partial q_k}dq_k+\\underbrace{\\frac{\\partial L}{\\partial\\dot q_k}}_{=p_k}d\\dot q_k\\right)-\\frac{\\partial L}{\\partial t}dt$$
+<strong>Die $d\\dot q_k$-Terme heben sich exakt weg</strong> — das ist der ganze Zauber der Legendre-Transformation. Es bleibt
+$$dH=\\sum_k\\dot q_k\\,dp_k-\\sum_k\\frac{\\partial L}{\\partial q_k}dq_k-\\frac{\\partial L}{\\partial t}dt$$</div>
+<div class="step"><strong>Koeffizientenvergleich</strong> mit $dH=\\sum_k\\left(\\frac{\\partial H}{\\partial q_k}dq_k+\\frac{\\partial H}{\\partial p_k}dp_k\\right)+\\frac{\\partial H}{\\partial t}dt$ und Einsetzen der Euler-Lagrange-Gleichung $\\frac{\\partial L}{\\partial q_k}=\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot q_k}=\\dot p_k$:</div>
+<div class="result">$$\\boxed{\\;\\dot q_k=\\frac{\\partial H}{\\partial p_k},\\qquad \\dot p_k=-\\frac{\\partial H}{\\partial q_k},\\qquad \\frac{\\partial H}{\\partial t}=-\\frac{\\partial L}{\\partial t}\\;}$$
+$2S$ Differentialgleichungen <strong>erster</strong> Ordnung statt $S$ Gleichungen zweiter Ordnung. Die Antisymmetrie im Vorzeichen (<em>symplektische Struktur</em>) ist der Ursprung fast aller schönen Eigenschaften der Hamilton-Mechanik.</div>
+<div class="warn">Die Hamilton-Gleichungen folgen auch aus einem Variationsprinzip im Phasenraum:
+$$\\delta\\int\\left(\\sum_kp_k\\dot q_k-H\\right)dt=0$$
+wobei $q$ und $p$ <em>unabhängig</em> variiert werden.</div>`},
+    {q:'Rezept: Wie stellt man $H$ auf? Drei durchgerechnete Beispiele.',badges:['calc','exam'],ref:'Skript §5.3',
+     a:`<div class="step"><strong>4-Schritte-Rezept:</strong> 1) $L=T-U$ in generalisierten Koordinaten aufstellen. 2) $p_k=\\partial L/\\partial\\dot q_k$ bilden. 3) Nach $\\dot q_k(\\vec q,\\vec p)$ auflösen. 4) In $H=\\sum p_k\\dot q_k-L$ einsetzen und <em>alle</em> $\\dot q$ eliminieren.</div>
+<div class="step"><strong>(1) Harmonischer Oszillator:</strong> $L=\\frac m2\\dot x^2-\\frac k2x^2$, $p=m\\dot x$, $\\dot x=p/m$:
+$$H=\\frac{p^2}{2m}+\\frac{k}{2}x^2,\\qquad \\dot x=\\frac{p}{m},\\quad\\dot p=-kx\\;\\Rightarrow\\;m\\ddot x=-kx\\;✓$$</div>
+<div class="step"><strong>(2) Teilchen im Zentralpotential (Kugelkoordinaten):</strong> $L=\\frac m2(\\dot r^2+r^2\\dot\\theta^2+r^2\\sin^2\\theta\\,\\dot\\varphi^2)-U(r)$
+$$H=\\frac{p_r^2}{2m}+\\frac{p_\\theta^2}{2mr^2}+\\frac{p_\\varphi^2}{2mr^2\\sin^2\\theta}+U(r)$$
+$\\varphi$ ist zyklisch ⇒ $p_\\varphi=L_z$ erhalten. Bei $\\theta=\\pi/2$ wird $p_\\theta=0$ und man erhält direkt das effektive Potential $U+\\frac{l^2}{2mr^2}$.</div>
+<div class="result"><strong>(3) Geladenes Teilchen im EM-Feld:</strong> Aus $L=\\frac m2\\dot{\\vec r}^2+e\\dot{\\vec r}\\cdot\\vec A-e\\varphi$ folgt $\\vec p=m\\dot{\\vec r}+e\\vec A$ (also $\\vec p\\ne m\\vec v$!), und
+$$H=\\frac{\\left(\\vec p-e\\vec A\\right)^2}{2m}+e\\varphi$$
+Diese <strong>minimale Kopplung</strong> ist der Ausgangspunkt für die Quantenmechanik geladener Teilchen (Landau-Niveaus, Aharonov-Bohm-Effekt).</div>
+<div class="warn">Der kanonische Impuls ist <em>eichabhängig</em> und im Allgemeinen nicht der mechanische Impuls $m\\vec v$. Beim Rechnen immer sauber zwischen beiden unterscheiden.</div>`},
+    {q:'Wann gilt $H=E$? Die beiden unabhängigen Bedingungen.',badges:['proof','exam'],ref:'Skript §5.3',
+     a:`<div class="warn">Es gibt <strong>zwei verschiedene Fragen</strong>, die man häufig verwechselt:<br>
+(a) Ist $H$ <em>erhalten</em>? &nbsp;→&nbsp; Ja, genau dann wenn $\\partial H/\\partial t=0$, also $\\partial L/\\partial t=0$.<br>
+(b) Ist $H$ <em>gleich der Energie</em> $T+U$? &nbsp;→&nbsp; Eine völlig andere Bedingung!</div>
+<div class="step"><strong>Zu (b):</strong> Ist $T$ eine <em>homogen quadratische</em> Form in den $\\dot q_k$, also $T=\\frac12\\sum_{jk}a_{jk}(\\vec q)\\dot q_j\\dot q_k$, so liefert der Eulersche Satz über homogene Funktionen
+$$\\sum_k\\dot q_k\\frac{\\partial T}{\\partial\\dot q_k}=2T\\;\\Rightarrow\\;H=2T-(T-U)=T+U=E$$</div>
+<div class="result"><strong>Zwei Voraussetzungen für $H=E$:</strong><br>
+1. Die Zwangsbedingungen sind <strong>skleronom</strong> (zeitunabhängig) — nur dann ist $T$ rein quadratisch in $\\dot q$.<br>
+2. Das Potential $U$ hängt <strong>nicht von $\\dot q$</strong> ab.</div>
+<div class="step"><strong>Gegenbeispiel (Perle auf rotierendem Ring, $\\Omega=$ const):</strong> $T=\\frac m2R^2(\\dot\\theta^2+\\Omega^2\\sin^2\\theta)$ enthält einen von $\\dot\\theta$ unabhängigen Term (rheonome Zwangsbedingung!). Hier ist
+$$H=\\frac{p_\\theta^2}{2mR^2}-\\frac m2R^2\\Omega^2\\sin^2\\theta+mgR\\cos\\theta\\;\\ne\\;T+U$$
+$H$ ist zwar <strong>erhalten</strong> (da $\\partial L/\\partial t=0$ nach Elimination von $t$), aber <em>nicht</em> die Energie. Die Differenz entspricht der Arbeit, die der Motor am Ring leistet.</div>`},
+    {q:'Phasenraum und Phasenporträts: Was liest man aus ihnen ab?',badges:['def','exam'],ref:'Skript §5.4, S. 116 · Übung Blatt 12, Aufg. 1',
+     a:`<div class="step"><strong>Definition:</strong> Der Phasenraum $\\Gamma$ ist der $2S$-dimensionale Raum der $(\\vec q,\\vec p)$. Ein Punkt darin legt den Zustand <em>vollständig</em> fest; die Hamilton-Gleichungen definieren ein Vektorfeld $\\vec v=(\\partial_pH,-\\partial_qH)$, dessen Integralkurven die Trajektorien sind.</div>
+<div class="result"><strong>Fundamentale Eigenschaft:</strong> Durch jeden Punkt geht <strong>genau eine</strong> Trajektorie (Eindeutigkeitssatz für DGLn). Deshalb dürfen sich Phasenraumkurven <em>niemals schneiden</em> — außer in Fixpunkten, die selbst Trajektorien sind.</div>
+<div class="step"><strong>1D-System $H=\\frac{p^2}{2m}+V(q)$:</strong> Die Bahnen sind einfach die Höhenlinien $H=E$, also $p=\\pm\\sqrt{2m(E-V(q))}$. Daraus die Konstruktionsregeln:<br>
+• <strong>Minimum</strong> von $V$ → <em>elliptischer</em> Fixpunkt („Zentrum"), umgeben von geschlossenen Kurven = gebundene Schwingungen.<br>
+• <strong>Maximum</strong> von $V$ → <em>hyperbolischer</em> Fixpunkt („Sattel") mit zwei ein- und zwei auslaufenden <strong>Separatrizen</strong>.<br>
+• Die Separatrix trennt qualitativ verschiedene Bewegungstypen und wird in <em>unendlicher</em> Zeit erreicht.<br>
+• <strong>Flussrichtung:</strong> In der oberen Halbebene ist $p>0$, also $\\dot q>0$ — die Bewegung läuft immer nach <em>rechts</em>; unten nach links. Also stets im <strong>Uhrzeigersinn</strong>.</div>
+<div class="step"><strong>Beispiele:</strong><br>
+• Harmonischer Oszillator: Ellipsen $\\frac{p^2}{2m}+\\frac{k}{2}q^2=E$ (mit passender Skalierung Kreise).<br>
+• Pendel: Zentren bei $\\theta=0,\\pm2\\pi$, Sättel bei $\\theta=\\pm\\pi$; innerhalb der Separatrix Schwingung (Libration), außerhalb Rotation.<br>
+• <strong>Doppelmulde</strong> $V=-aq^2+bq^4$: zwei Zentren, ein Sattel bei $q=0$, eine „Acht"-förmige Separatrix.</div>
+<div class="warn">Der Phasenraum ist die natürliche Bühne der statistischen Mechanik (Ensembles), der Chaostheorie (Attraktoren, Poincaré-Schnitte) und — nach Quantisierung — der Quantenmechanik.</div>`},
+    {q:'Poisson-Klammern: Algebraische Eigenschaften und Verbindung zur Quantenmechanik.',badges:['def','proof','exam'],ref:'Skript §5.5, S. 120',
+     a:`<div class="step"><strong>Definition:</strong>
+$$\\{f,g\\}=\\sum_n\\left(\\frac{\\partial f}{\\partial q_n}\\frac{\\partial g}{\\partial p_n}-\\frac{\\partial f}{\\partial p_n}\\frac{\\partial g}{\\partial q_n}\\right)$$</div>
+<div class="step"><strong>Eigenschaften</strong> (definieren eine <em>Lie-Algebra</em>):<br>
+• Antisymmetrie: $\\{f,g\\}=-\\{g,f\\}$, insbesondere $\\{f,f\\}=0$<br>
+• Bilinearität<br>
+• Produktregel: $\\{fg,h\\}=f\\{g,h\\}+\\{f,h\\}g$<br>
+• <strong>Jacobi-Identität:</strong> $\\{f,\\{g,h\\}\\}+\\{g,\\{h,f\\}\\}+\\{h,\\{f,g\\}\\}=0$</div>
+<div class="result"><strong>Fundamentale Klammern:</strong>
+$$\\{q_j,q_k\\}=0,\\qquad \\{p_j,p_k\\}=0,\\qquad \\{q_j,p_k\\}=\\delta_{jk}$$
+<strong>Bewegungsgleichung für jede Observable:</strong>
+$$\\frac{df}{dt}=\\{f,H\\}+\\frac{\\partial f}{\\partial t}$$
+Speziell $\\dot q_k=\\{q_k,H\\}$ und $\\dot p_k=\\{p_k,H\\}$ — die Hamilton-Gleichungen in eleganter, koordinatenfreier Form.</div>
+<div class="step"><strong>Satz von Poisson:</strong> Sind $f$ und $g$ Erhaltungsgrößen, so ist auch $\\{f,g\\}$ eine (folgt aus der Jacobi-Identität). Damit lassen sich manchmal neue Erhaltungsgrößen „erzeugen" — allerdings oft nur triviale oder bereits bekannte.<br>
+<strong>Beispiel Drehimpuls:</strong> $\\{l_a,l_b\\}=\\varepsilon_{abc}l_c$ — genau die Lie-Algebra von $SO(3)$.</div>
+<div class="warn"><strong>Brücke zur Quantenmechanik (Dirac):</strong>
+$$\\{f,g\\}\\;\\longrightarrow\\;\\frac{1}{i\\hbar}[\\hat f,\\hat g]$$
+Aus $\\{q,p\\}=1$ wird $[\\hat q,\\hat p]=i\\hbar$, aus $\\dot f=\\{f,H\\}$ wird die Heisenberg-Gleichung $\\dot{\\hat f}=\\frac{i}{\\hbar}[\\hat H,\\hat f]$. Die Hamilton-Mechanik ist damit die <em>klassische Grenze</em> der Quantenmechanik.</div>`},
+    {q:'[ÜB 12.5] Zeige mit Poisson-Klammern, dass $F=q_1q_2$ und $G=(p_1-aq_1)/q_2$ erhalten sind.',badges:['ex','proof','calc'],ref:'Übung Blatt 12, Aufg. 5',
+     a:`<div class="step"><strong>Gegeben:</strong> $H=q_1p_1-q_2p_2-aq_1^2+bq_2^2$ und $\\dfrac{df}{dt}=\\{f,H\\}+\\dfrac{\\partial f}{\\partial t}$.<br>
+Benötigte Ableitungen: $\\dfrac{\\partial H}{\\partial p_1}=q_1$, $\\dfrac{\\partial H}{\\partial p_2}=-q_2$, $\\dfrac{\\partial H}{\\partial q_1}=p_1-2aq_1$, $\\dfrac{\\partial H}{\\partial q_2}=-p_2+2bq_2$.</div>
+<div class="step"><strong>(1) $F=q_1q_2$:</strong> $\\partial F/\\partial q_1=q_2$, $\\partial F/\\partial q_2=q_1$, $\\partial F/\\partial p_n=0$.
+$$\\{F,H\\}=q_2\\cdot\\frac{\\partial H}{\\partial p_1}+q_1\\cdot\\frac{\\partial H}{\\partial p_2}=q_2q_1+q_1(-q_2)=0\\;✓$$</div>
+<div class="step"><strong>(2) $G=\\dfrac{p_1-aq_1}{q_2}$ — bequemer über die Bewegungsgleichungen:</strong>
+$$\\dot q_1=q_1,\\qquad \\dot p_1=-(p_1-2aq_1),\\qquad \\dot q_2=-q_2$$
+Damit für den Zähler:
+$$\\frac{d}{dt}\\left(p_1-aq_1\\right)=-p_1+2aq_1-aq_1=-\\left(p_1-aq_1\\right)$$
+Zähler und Nenner erfüllen also <em>dieselbe</em> DGL $\\dot u=-u$.</div>
+<div class="result">$$\\dot G=\\frac{\\frac{d}{dt}(p_1-aq_1)\\cdot q_2-(p_1-aq_1)\\dot q_2}{q_2^2}=\\frac{-(p_1-aq_1)q_2+(p_1-aq_1)q_2}{q_2^2}=0\\;✓$$
+Beide Größen sind erhalten. Man sieht auch direkt: $q_1(t)=q_1(0)e^{t}$, $q_2(t)=q_2(0)e^{-t}$ — deshalb ist das Produkt $q_1q_2$ konstant (hyperbolischer Fluss, flächenerhaltend, ganz im Sinne von Liouville).</div>
+<div class="warn">Merke: Erhaltungsgrößen müssen <em>nicht</em> Energie, Impuls oder Drehimpuls sein. Jede Funktion mit $\\{f,H\\}=0$ ist eine — und sie erzeugt über die kanonischen Transformationen eine zugehörige Symmetrie.</div>`},
+    {q:'[ÜB 12.4] Kanonische Transformation: Bedingungen an $\\alpha,\\beta,\\gamma,\\delta$ und Lösung von $H=\\tfrac12p^2q^4+\\tfrac{1}{2q^2}$.',badges:['ex','calc','exam'],ref:'Übung Blatt 12, Aufg. 4',
+     a:`<div class="step"><strong>a) Kriterium:</strong> Für einen Freiheitsgrad ist $p^{\\prime}=\\alpha p^\\beta q^\\gamma$, $q^{\\prime}=q^\\delta$ genau dann kanonisch, wenn $\\{q^{\\prime},p^{\\prime}\\}=1$:
+$$\\{q^{\\prime},p^{\\prime}\\}=\\frac{\\partial q^{\\prime}}{\\partial q}\\frac{\\partial p^{\\prime}}{\\partial p}-\\underbrace{\\frac{\\partial q^{\\prime}}{\\partial p}}_{=0}\\frac{\\partial p^{\\prime}}{\\partial q}=\\delta q^{\\delta-1}\\cdot\\alpha\\beta p^{\\beta-1}q^{\\gamma}=\\alpha\\beta\\delta\\,q^{\\gamma+\\delta-1}p^{\\beta-1}$$
+Damit das für <em>alle</em> $q,p$ gleich 1 ist:
+$$\\boxed{\\beta=1,\\qquad \\gamma+\\delta=1,\\qquad \\alpha\\delta=1}$$
+(Die anderen beiden Bedingungen $\\{q^{\\prime},q^{\\prime}\\}=\\{p^{\\prime},p^{\\prime}\\}=0$ sind wegen der Antisymmetrie automatisch erfüllt.)</div>
+<div class="step"><strong>b) Passende Wahl:</strong> Wir wollen $\\frac{1}{2q^2}\\to\\frac12q^{\\prime2}$, also $q^{\\prime}=q^{-1}$ ⇒ $\\delta=-1$. Daraus $\\alpha=1/\\delta=-1$ und $\\gamma=1-\\delta=2$:
+$$q^{\\prime}=\\frac1q,\\qquad p^{\\prime}=-p\\,q^2$$
+Probe: $\\frac12p^{\\prime2}=\\frac12p^2q^4$ ✓ und $\\frac12q^{\\prime2}=\\frac{1}{2q^2}$ ✓ — also
+$$H(q^{\\prime},p^{\\prime})=\\frac12p^{\\prime2}+\\frac12q^{\\prime2}$$
+Das ist der <strong>harmonische Oszillator mit $\\omega=1$</strong>.</div>
+<div class="result"><strong>c) Lösen:</strong> $q^{\\prime}(t)=A\\cos(t+\\varphi_0)$, $p^{\\prime}(t)=\\dot q^{\\prime}=-A\\sin(t+\\varphi_0)$. Rücktransformation:
+$$q(t)=\\frac{1}{q^{\\prime}}=\\frac{1}{A\\cos(t+\\varphi_0)},\\qquad p(t)=-\\frac{p^{\\prime}}{q^2}=-p^{\\prime}q^{\\prime2}=A^3\\sin(t+\\varphi_0)\\cos^2(t+\\varphi_0)$$</div>
+<div class="warn"><strong>Die Moral:</strong> Ein hoffnungslos aussehendes nichtlineares Problem wird durch eine geschickte kanonische Transformation zum trivialen harmonischen Oszillator. Genau das ist die Idee hinter der Hamilton-Jacobi-Theorie und den Winkel-Wirkungs-Variablen. Die Lösung divergiert bei $t+\\varphi_0=\\pi/2$ — das Teilchen läuft in endlicher Zeit ins Unendliche.</div>`},
+    {q:'Erzeugende Funktionen: Die vier Typen $F_1$ bis $F_4$ und ihre Anwendung.',badges:['def','calc'],ref:'Skript §5.7, S. 125',
+     a:`<div class="step"><strong>Grundidee:</strong> Eine Transformation ist kanonisch, wenn sich die Integranden der Wirkung nur um eine totale Zeitableitung unterscheiden:
+$$\\sum p_k\\dot q_k-H=\\sum P_k\\dot Q_k-K+\\frac{dF}{dt}$$
+$F$ heißt <strong>Erzeugende</strong>. Sie muss von je einer „alten" und einer „neuen" Variablen abhängen (sonst ist die Transformation nicht definiert).</div>
+<div class="result"><strong>Die vier Typen:</strong>
+$$F_1(q,Q,t):\\quad p=\\frac{\\partial F_1}{\\partial q},\\quad P=-\\frac{\\partial F_1}{\\partial Q}$$
+$$F_2(q,P,t):\\quad p=\\frac{\\partial F_2}{\\partial q},\\quad Q=\\frac{\\partial F_2}{\\partial P}$$
+$$F_3(p,Q,t):\\quad q=-\\frac{\\partial F_3}{\\partial p},\\quad P=-\\frac{\\partial F_3}{\\partial Q}$$
+$$F_4(p,P,t):\\quad q=-\\frac{\\partial F_4}{\\partial p},\\quad Q=\\frac{\\partial F_4}{\\partial P}$$
+In allen Fällen: $K=H+\\dfrac{\\partial F}{\\partial t}$. Die Typen gehen durch Legendre-Transformation auseinander hervor.</div>
+<div class="step"><strong>Wichtige Beispiele:</strong><br>
+• $F_1=qQ$ ⇒ $p=Q$, $P=-q$: <strong>Vertauschung von Ort und Impuls</strong>. In der Hamilton-Mechanik gibt es also keinen prinzipiellen Unterschied zwischen $q$ und $p$ — beide sind gleichberechtigte „kanonische Variablen".<br>
+• $F_2=\\sum q_kP_k$ ⇒ die <strong>Identität</strong>; $F_2=\\sum q_kP_k+\\varepsilon G(q,P)$ erzeugt die infinitesimale Transformation mit Generator $G$.<br>
+• $F_1=\\frac{m\\omega}{2}q^2\\cot Q$ überführt den harmonischen Oszillator in $K=\\omega P$ mit zyklischem $Q$ ⇒ Winkel-Wirkungs-Variablen.</div>
+<div class="step"><strong>Hamilton-Jacobi-Gleichung:</strong> Sucht man $F_2=S(q,P,t)$ so, dass $K\\equiv0$ (alle neuen Variablen konstant!), erhält man
+$$H\\!\\left(q,\\frac{\\partial S}{\\partial q},t\\right)+\\frac{\\partial S}{\\partial t}=0$$
+$S$ ist die <strong>Wirkungsfunktion</strong>. Diese partielle DGL ist der direkte Vorläufer der Schrödinger-Gleichung ($\\psi\\sim e^{iS/\\hbar}$).</div>
+<div class="warn"><strong>Generatoren und Symmetrien:</strong> Eine infinitesimale kanonische Transformation mit Generator $G$ ändert eine Observable um $\\delta f=\\varepsilon\\{f,G\\}$. Ist $G$ erhalten, ist die Transformation eine Symmetrie — <em>Noether in Hamiltonscher Sprache</em>. Konkret: $G=p$ erzeugt Translationen, $G=l_z$ Drehungen, $G=H$ die Zeitentwicklung selbst.</div>`},
+    {q:'Satz von Liouville: Beweis und Konsequenzen.',badges:['proof','exam'],ref:'Skript §5.9, S. 133',
+     a:`<div class="step"><strong>Aussage:</strong> Das Phasenraumvolumen ist unter dem Hamiltonschen Fluss <strong>invariant</strong>. Eine Menge von Anfangsbedingungen kann sich beliebig verformen („Filamentierung"), aber ihr Volumen bleibt exakt konstant.</div>
+<div class="step"><strong>Beweis:</strong> Der Phasenraumfluss hat die Geschwindigkeit
+$$\\vec v=(\\dot q_1,\\dots,\\dot q_S,\\dot p_1,\\dots,\\dot p_S)$$
+Seine Divergenz im $2S$-dimensionalen Raum:
+$$\\vec\\nabla\\cdot\\vec v=\\sum_k\\left(\\frac{\\partial\\dot q_k}{\\partial q_k}+\\frac{\\partial\\dot p_k}{\\partial p_k}\\right)=\\sum_k\\left(\\frac{\\partial^2H}{\\partial q_k\\partial p_k}-\\frac{\\partial^2H}{\\partial p_k\\partial q_k}\\right)=0$$
+Die gemischten zweiten Ableitungen heben sich weg (Satz von Schwarz). Der Hamiltonsche Fluss ist also <strong>inkompressibel</strong>, wie eine ideale Flüssigkeit.</div>
+<div class="result">Mit der Kontinuitätsgleichung $\\partial_t\\rho+\\vec\\nabla\\cdot(\\rho\\vec v)=0$ folgt die <strong>Liouville-Gleichung</strong>:
+$$\\frac{d\\rho}{dt}=\\frac{\\partial\\rho}{\\partial t}+\\{\\rho,H\\}=0$$
+Die Phasenraumdichte entlang einer Trajektorie ist konstant.</div>
+<div class="warn"><strong>Konsequenzen:</strong><br>
+• Es gibt in Hamiltonschen Systemen <strong>keine Attraktoren</strong> — kein Volumen kann auf einen Punkt schrumpfen. Dissipation (Reibung) ist nicht hamiltonsch.<br>
+• Grundlage der <strong>statistischen Mechanik</strong>: das mikrokanonische Ensemble $\\rho=$ const auf der Energieschale ist stationär.<br>
+• <strong>Poincaréscher Wiederkehrsatz:</strong> In einem endlichen Phasenraumvolumen kehrt fast jede Trajektorie beliebig nah an ihren Startpunkt zurück (allerdings nach absurd langen Zeiten) — der Ursprung des Umkehreinwands gegen den 2. Hauptsatz.<br>
+• In der Beschleunigerphysik: die <strong>Emittanz</strong> eines Teilchenstrahls kann durch keine noch so raffinierte Ionenoptik verkleinert werden.</div>`},
+    {q:'[ÜB 12.3] Von Lagrange zu Hamilton: $L=A\\dot\\theta_1^2+B\\dot\\theta_2^2+C\\cos(\\theta_2-\\theta_1)$.',badges:['ex','calc'],ref:'Übung Blatt 12, Aufg. 3',
+     a:`<div class="step"><strong>a) Kanonische Impulse:</strong>
+$$p_1=\\frac{\\partial L}{\\partial\\dot\\theta_1}=2A\\dot\\theta_1,\\qquad p_2=\\frac{\\partial L}{\\partial\\dot\\theta_2}=2B\\dot\\theta_2$$
+Invertieren: $\\dot\\theta_1=\\dfrac{p_1}{2A}$, $\\dot\\theta_2=\\dfrac{p_2}{2B}$.</div>
+<div class="step"><strong>Hamiltonfunktion:</strong>
+$$H=p_1\\dot\\theta_1+p_2\\dot\\theta_2-L=\\frac{p_1^2}{2A}+\\frac{p_2^2}{2B}-\\left(\\frac{p_1^2}{4A}+\\frac{p_2^2}{4B}+C\\cos(\\theta_2-\\theta_1)\\right)$$
+$$\\boxed{\\;H=\\frac{p_1^2}{4A}+\\frac{p_2^2}{4B}-C\\cos(\\theta_2-\\theta_1)\\;}$$</div>
+<div class="result"><strong>b) Hamiltonsche Bewegungsgleichungen:</strong>
+$$\\dot\\theta_1=\\frac{\\partial H}{\\partial p_1}=\\frac{p_1}{2A},\\qquad \\dot\\theta_2=\\frac{\\partial H}{\\partial p_2}=\\frac{p_2}{2B}$$
+$$\\dot p_1=-\\frac{\\partial H}{\\partial\\theta_1}=+C\\sin(\\theta_2-\\theta_1),\\qquad \\dot p_2=-\\frac{\\partial H}{\\partial\\theta_2}=-C\\sin(\\theta_2-\\theta_1)$$</div>
+<div class="warn"><strong>Konsistenzprobe:</strong> $\\dot p_1+\\dot p_2=0$, also ist $p_1+p_2$ erhalten — genau die Noether-Ladung zur Symmetrie $(\\theta_1,\\theta_2)\\to(\\theta_1+\\alpha,\\theta_2+\\alpha)$ aus ÜB 9.2. Beide Zugänge liefern dasselbe. Einsetzen von $p_1=2A\\dot\\theta_1$ reproduziert außerdem die Euler-Lagrange-Gleichung $2A\\ddot\\theta_1=C\\sin(\\theta_2-\\theta_1)$ ✓</div>`}
   ]
 },
 {
