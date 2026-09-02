@@ -1751,7 +1751,76 @@ Konvexlinse: $f > 0$; Konkavlinse: $f < 0$<br>
      a:`<strong>Kohärenz:</strong> Feste Phazenbeziehung zwischen Wellenzügen — notwendig für Interferenz.<br>
 Kohärenzlänge $l_c = c/\\Delta f$ (Laser: sehr lang, Glühbirne: sehr kurz).<br>
 <strong>Laser</strong>: Stimulierte Emission → alle Photonen gleiche $\\lambda$, Phase, Richtung → kohärentes Licht.<br>
-Holographie, Interferometrie, Faseroptik benötigen Laserkohärenz.`}
+Holographie, Interferometrie, Faseroptik benötigen Laserkohärenz.`},
+    {q:'Huygens\'sches und Fermat\'sches Prinzip: Formuliere beide und leite damit Reflexions- und Brechungsgesetz her.',badges:['def','proof','exam'],ref:'Skript §8.1',
+     a:`<div class="step"><strong>Huygens\'sches Prinzip:</strong> Jeder Punkt einer Wellenfront ist Ausgangspunkt einer neuen <em>Elementarkugelwelle</em>. Die neue Wellenfront ist deren Einhüllende. Damit erklären sich Beugung, Brechung und Reflexion rein geometrisch.</div>
+<div class="step"><strong>Fermat\'sches Prinzip:</strong> Licht nimmt den Weg, dessen <em>optische Weglänge</em> $\\int n\\,ds$ <strong>stationär</strong> (meist minimal) ist.</div>
+<div class="step"><strong>Reflexionsgesetz aus Huygens:</strong> Die Wellenfront trifft schräg auf. Bis der letzte Punkt die Wand erreicht, hat die Elementarwelle des ersten Punkts genau denselben Weg $c\\,\\Delta t$ zurückgelegt. Zwei kongruente rechtwinklige Dreiecke mit gemeinsamer Hypotenuse liefern
+$$\\alpha_{\\text{ein}}=\\alpha_{\\text{aus}}$$</div>
+<div class="step"><strong>Brechungsgesetz:</strong> Dieselbe Konstruktion, aber im zweiten Medium ist $c_2=c/n_2$. Mit gemeinsamer Hypotenuse $s$:
+$$\\sin\\theta_1=\\frac{c_1\\Delta t}{s},\\quad\\sin\\theta_2=\\frac{c_2\\Delta t}{s}\\;\\Rightarrow\\;\\frac{\\sin\\theta_1}{\\sin\\theta_2}=\\frac{c_1}{c_2}=\\frac{n_2}{n_1}$$</div>
+<div class="result">$$n_1\\sin\\theta_1=n_2\\sin\\theta_2\\qquad\\text{(Snellius)}$$
+Elektrodynamisch folgt dasselbe aus der Stetigkeit der Tangentialkomponenten an der Grenzfläche: Nur wenn die Phasen entlang der Grenzfläche übereinstimmen, ist $E_\\parallel$ überall stetig — das erzwingt $k_1\\sin\\theta_1=k_2\\sin\\theta_2$.</div>
+<div class="warn">Merke die Begriffe: Einfallender, reflektierter und gebrochener Strahl liegen zusammen mit dem Lot alle in der <strong>Einfallsebene</strong>. Beim Übergang ins optisch <em>dichtere</em> Medium ($n_2>n_1$) wird zum Lot hin gebrochen, ins <em>dünnere</em> vom Lot weg.</div>`},
+    {q:'Totalreflexion: Grenzwinkel, Zahlenwerte und Anwendungen.',badges:['def','calc','exam'],ref:'Skript §8.1',
+     a:`<div class="step"><strong>Bedingung:</strong> Nur beim Übergang ins optisch <em>dünnere</em> Medium ($n_1>n_2$). Für $\\theta_2=90°$ folgt aus Snellius
+$$\\sin\\theta_{\\text{cr}}=\\frac{n_2}{n_1}$$
+Für $\\theta_1>\\theta_{\\text{cr}}$ gibt es keinen gebrochenen Strahl mehr — <strong>100 %</strong> der Energie werden reflektiert (besser als jeder Spiegel!).</div>
+<div class="step"><strong>Zahlenwerte</strong> (jeweils gegen Luft):<br>
+Glas $n=1{,}5$: $\\theta_{\\text{cr}}=\\arcsin(1/1{,}5)=41{,}8°$<br>
+Wasser $n=1{,}33$: $\\theta_{\\text{cr}}=48{,}8°$<br>
+Diamant $n=2{,}42$: $\\theta_{\\text{cr}}=24{,}4°$</div>
+<div class="result"><strong>Anwendungen:</strong><br>
+• <strong>Lichtwellenleiter/Endoskop:</strong> Kern mit höherem $n$ als Mantel → Licht bleibt gefangen, auch um Kurven. Basis der gesamten Glasfaser-Datenübertragung.<br>
+• <strong>Umlenkprisma</strong> ($45°$-Prisma in Ferngläsern) — verlustfreier als jeder verspiegelte Umlenkspiegel.<br>
+• <strong>Retroreflektor / Katzenauge:</strong> Drei zueinander senkrechte Flächen werfen das Licht exakt in die Einfallsrichtung zurück (Fahrradreflektor, Mondreflektoren der Apollo-Missionen).<br>
+• <strong>Brillanz des Diamanten:</strong> Der kleine Grenzwinkel von $24{,}4°$ sorgt dafür, dass fast alles Licht im Stein mehrfach total reflektiert wird, bevor es oben wieder austritt.</div>
+<div class="warn">Auch bei Totalreflexion dringt eine <strong>evaneszente Welle</strong> um etwa eine Wellenlänge in das dünnere Medium ein. Bringt man dort ein zweites Prisma nah heran, tunnelt Licht hinüber ("frustrierte Totalreflexion") — das optische Analogon zum Tunneleffekt.</div>`},
+    {q:'Wieviel Licht wird an einer Grenzfläche reflektiert? Gib $R$ an und nenne die wichtigsten Brechungsindizes.',badges:['def','calc'],ref:'Skript §8.1',
+     a:`<div class="step"><strong>Senkrechter Einfall</strong> (aus den Fresnel-Formeln):
+$$R=\\left(\\frac{n_1-n_2}{n_1+n_2}\\right)^2,\\qquad T=1-R$$</div>
+<div class="step"><strong>Beispiel Luft–Glas:</strong> $R=\\left(\\dfrac{1-1{,}5}{1+1{,}5}\\right)^2=(0{,}2)^2=4\\,\\%$ pro Fläche. Eine Fensterscheibe hat zwei Flächen → $\\approx8\\,\\%$ Verlust; ein Objektiv mit 10 Linsen (20 Flächen) käme unbeschichtet auf nur $0{,}96^{20}\\approx44\\,\\%$ Transmission — daher die Vergütung.</div>
+<div class="step"><strong>Brechungsindizes:</strong> Luft $1{,}00029$ · Wasser $1{,}33$ · Quarzglas $1{,}46$ · Kronglas $1{,}52$ · Schwerflint $1{,}65$ · Diamant $2{,}42$</div>
+<div class="result"><strong>Zusammenhang mit der Elektrodynamik:</strong>
+$$n=\\sqrt{\\varepsilon_r\\mu_r}\\approx\\sqrt{\\varepsilon_r},\\qquad c_m=\\frac{c}{n},\\qquad \\lambda_m=\\frac{\\lambda}{n}$$
+Die <strong>Frequenz bleibt beim Übergang konstant</strong> (die Grenzfläche schwingt mit der aufgeprägten Frequenz), nur $\\lambda$ und $v$ ändern sich.</div>
+<div class="warn">Klausurfalle: $n=\\sqrt{\\varepsilon_r}$ muss mit dem $\\varepsilon_r$ <em>bei optischer Frequenz</em> gebildet werden. Wasser hat statisch $\\varepsilon_r=81$ (also $n=9$), aber bei $500\\,$nm nur $\\varepsilon_r=1{,}77$ ($n=1{,}33$) — die schweren Dipole können der Lichtfrequenz nicht folgen.</div>`},
+    {q:'Woher kommt der Brechungsindex physikalisch — und was ist Dispersion?',badges:['def','proof'],ref:'Skript §8.2',
+     a:`<div class="step"><strong>Mikroskopisches Bild:</strong> Die einfallende Welle regt die gebundenen Elektronen zu <em>erzwungenen Schwingungen</em> an. Diese oszillierenden Dipole strahlen Sekundärwellen ab, die sich mit der Primärwelle überlagern. Das Ergebnis ist eine Welle mit derselben Frequenz, aber <strong>verschobener Phase</strong> — makroskopisch beschrieben durch $v=c/n$.</div>
+<div class="step"><strong>Modell des erzwungenen Oszillators</strong> mit Resonanzfrequenz $\\omega_0$ und Dämpfung $\\gamma$:
+$$\\varepsilon(\\omega)=1+\\frac{Ne^2/(m\\varepsilon_0)}{\\omega_0^2-\\omega^2-i\\gamma\\omega}=\\varepsilon^{\\prime}+i\\varepsilon^{\\prime\\prime}$$
+$\\varepsilon^{\\prime}$ → Brechung (Dispersion), $\\varepsilon^{\\prime\\prime}$ → <strong>Absorption</strong>. Der Zusammenhang mit der lokalen Feldkorrektur liefert die Clausius-Mossotti-Beziehung.</div>
+<div class="result"><strong>Normale Dispersion:</strong> Weit unterhalb der Resonanz steigt $n$ mit der Frequenz, also
+$$n_{\\text{blau}}>n_{\\text{rot}}$$
+Blau wird stärker gebrochen und stärker verlangsamt. In der Nähe der Resonanz (im Absorptionsbereich) fällt $n$ dagegen — <em>anomale</em> Dispersion.</div>
+<div class="step"><strong>Prismenzerlegung:</strong> Wegen $n(\\lambda)$ wird weißes Licht am Prisma aufgefächert — Blau am stärksten abgelenkt. Newton zeigte 1666 mit dem zweiten Prisma, dass Weiß eine <em>Mischung</em> ist und die Farben selbst nicht weiter zerlegbar sind.</div>
+<div class="warn">Praktische Konsequenzen: <strong>chromatische Aberration</strong> von Linsen (Korrektur durch Achromat aus Kron- und Flintglas), <strong>Pulsverbreiterung</strong> in Glasfasern, und die endliche Bandbreite optischer Datenübertragung.</div>`},
+    {q:'Erkläre den Regenbogen: Warum $42°$, warum rot außen, und warum ist der Nebenregenbogen umgekehrt?',badges:['def','exam'],ref:'Skript §8.2',
+     a:`<div class="step"><strong>Strahlengang (Hauptregenbogen):</strong> Brechung beim Eintritt in den Wassertropfen → <em>eine</em> Totalreflexion an der Rückwand → Brechung beim Austritt.</div>
+<div class="step"><strong>Warum ein scharfer Winkel?</strong> Der Ablenkwinkel als Funktion des Auftreffparameters hat ein <strong>Extremum</strong> bei $\\approx42°$. In der Nähe des Extremums ändert sich der Winkel kaum → dort häufen sich die austretenden Strahlen (Regenbogen-Kaustik) und es wird hell.</div>
+<div class="step"><strong>Farbfolge:</strong> Wegen der Dispersion ist der Winkel für Rot $\\approx42{,}4°$ und für Violett $\\approx40{,}6°$. Rot kommt also unter dem <em>größeren</em> Winkel — daher liegt <strong>Rot außen</strong>.</div>
+<div class="result"><strong>Nebenregenbogen:</strong> <em>Zwei</em> Totalreflexionen im Tropfen. Der Winkel beträgt $\\approx51°$ (er liegt also außerhalb), die Farbfolge ist <strong>umgekehrt</strong> (Rot innen, Blau außen) und er ist deutlich lichtschwächer, weil bei jeder Reflexion Licht verloren geht.</div>
+<div class="warn">Der Bereich zwischen beiden Bögen ist auffällig dunkel ("Alexanders dunkles Band"), weil dorthin weder ein- noch zweifach reflektiertes Licht gelangt. Außerdem ist Regenbogenlicht stark <strong>polarisiert</strong> — der Reflexionswinkel im Tropfen liegt nahe am Brewster-Winkel.</div>`},
+    {q:'Doppelbrechung: Erkläre ordentlichen und außerordentlichen Strahl sowie $\\lambda/4$- und $\\lambda/2$-Plättchen.',badges:['def','exam'],ref:'Skript §8.3',
+     a:`<div class="step"><strong>Entdeckung:</strong> Bartholinus 1669 an <strong>Kalkspat</strong> (CaCO$_3$, Raumgruppe R$\\bar3$c): Ein Text unter dem Kristall erscheint doppelt; dreht man den Kristall, wandert eines der beiden Bilder.</div>
+<div class="step"><strong>Ursache:</strong> Der Kristall ist optisch <em>anisotrop</em> — $\\varepsilon$ und damit $n$ hängen von der Schwingungsrichtung von $\\vec{E}$ ab (beschrieben durch die <strong>optische Indikatrix</strong>, ein Ellipsoid). Bei uniaxialen Kristallen gibt es eine optische Achse.</div>
+<div class="step"><strong>Zwei Strahlen:</strong><br>
+• <strong>o-Strahl</strong> (ordentlich): $\\vec{E}\\perp$ optische Achse, sieht $n_o$, folgt dem normalen Snellius-Gesetz.<br>
+• <strong>ao-Strahl</strong> (außerordentlich): sieht ein richtungsabhängiges $n_{ao}$, wird selbst bei senkrechtem Einfall abgelenkt.<br>
+Beide sind <strong>senkrecht zueinander linear polarisiert</strong>.</div>
+<div class="result"><strong>Verzögerungsplättchen:</strong> Die Phasendifferenz nach der Dicke $d$ beträgt $\\Delta\\varphi=\\frac{2\\pi}{\\lambda}(n_o-n_{ao})d$.<br>
+• <strong>$\\lambda/4$-Plättchen</strong> ($\\Delta\\varphi=90°$): wandelt lineare in <strong>zirkulare</strong> Polarisation um (und umgekehrt).<br>
+• <strong>$\\lambda/2$-Plättchen</strong> ($\\Delta\\varphi=180°$): <strong>dreht</strong> die lineare Polarisationsrichtung (um $2\\alpha$, wenn $\\alpha$ der Winkel zur Achse ist).</div>
+<div class="warn"><strong>Polarisatoren aus Doppelbrechung:</strong> Im <strong>Nicol-Prisma</strong> wird der Kalkspat schräg zerschnitten und mit <em>Kanadabalsam</em> ($n=1{,}55$) verkittet. Der o-Strahl ($n_o=1{,}66$) erleidet an der Kittschicht Totalreflexion und wird weggeführt, der ao-Strahl ($n_{ao}=1{,}49$) geht durch — heraus kommt perfekt linear polarisiertes Licht. Modernere Variante: Glan-Thompson-/Glan-Taylor-Prisma.</div>`},
+    {q:'Induzierte Doppelbrechung: Kerr-Effekt, Faraday-Effekt, MOKE und Spannungsdoppelbrechung.',badges:['def','ex'],ref:'Skript §8.3',
+     a:`<div class="step"><strong>Kerr-Effekt (elektrooptisch):</strong> Ein angelegtes E-Feld macht ein isotropes Medium doppelbrechend, mit
+$$\\Delta n\\propto E^2$$
+Eine <strong>Kerr-Zelle</strong> zwischen gekreuzten Polarisatoren ist damit ein Lichtschalter mit Schaltzeiten bis herab zu $\\sim40\\,$ps — Güteschaltung von Lasern, Hochgeschwindigkeitsfotografie. (Der verwandte <em>Pockels-Effekt</em> ist linear in $E$ und tritt nur in nichtzentrosymmetrischen Kristallen wie KDP auf.)</div>
+<div class="step"><strong>Faraday-Effekt (magnetooptisch, Faraday 1845):</strong> Ein Längsmagnetfeld dreht die Polarisationsebene:
+$$\\beta=V\\,B\\,l$$
+mit der <strong>Verdet\'schen Konstante</strong> $V$. Entscheidend: Die Drehung ist <em>nichtreziprok</em> — läuft das Licht zurück, addiert sich die Drehung, statt sich aufzuheben. Genau darauf beruht der <strong>optische Isolator</strong> (Faraday-Rotator), der Rückreflexe von Lasern fernhält. Historisch war dies der <em>erste</em> Nachweis, dass Licht und Magnetismus zusammenhängen.</div>
+<div class="step"><strong>MOKE</strong> (magnetooptischer Kerr-Effekt): Bei Reflexion an einer magnetisierten Oberfläche dreht sich die Polarisation — Standardmethode zur Abbildung magnetischer Domänen und ehemals Ausleseprinzip magnetooptischer Datenträger.</div>
+<div class="result"><strong>Spannungsdoppelbrechung:</strong> Mechanisch verspannter Kunststoff wird doppelbrechend. Zwischen gekreuzten Polarisatoren erscheinen farbige Isochromaten, die die Spannungsverteilung sichtbar machen — klassisches Verfahren der <em>Spannungsoptik</em> im Bauwesen (z. B. Modelluntersuchungen der Kathedrale von Bourges) und in der Materialprüfung.</div>`}
   ]
 },
 {
