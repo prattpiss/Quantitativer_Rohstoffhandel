@@ -625,7 +625,58 @@ Im Gleichgewicht: $\\nabla\\cdot\\vec{j} = 0$ (stationärer Strom).`},
     {q:'Warum ist das E-Feld im Inneren eines Hohlleiters null? (Faraday-Käfig)',badges:['def'],ref:'Skript §1.1',
      a:`Im Gleichgewicht: $\\vec{E}_{\\text{innen}} = 0$, da sonst Kräfte auf Elektronen wirken würden → Elektronen bewegen sich → Gleichgewicht nicht erreicht.<br>
 Ladungen verteilen sich ausschließlich auf der <strong>äußeren Oberfläche</strong>.<br>
-<div class="result">Faraday-Käfig: Metall schirmt das Innere vollständig gegen externe E-Felder ab.</div>`}
+<div class="result">Faraday-Käfig: Metall schirmt das Innere vollständig gegen externe E-Felder ab.</div>`},
+    {q:'Zwei leitende Kugeln (Radien $r_a$, $r_b$) sind durch einen Draht verbunden. Wie verteilt sich die Ladung, und was folgt für die Feldstärken?',badges:['proof','calc'],ref:'Skript §2 / Spitzeneffekt',
+     a:`<div class="step"><strong>Bedingung:</strong> Leitend verbunden → <em>gleiches Potential</em>:
+$$\\frac{q_a}{4\\pi\\varepsilon_0 r_a}=\\frac{q_b}{4\\pi\\varepsilon_0 r_b}\\quad\\Rightarrow\\quad \\boxed{\\frac{q_a}{q_b}=\\frac{r_a}{r_b}}$$
+Die <strong>größere</strong> Kugel trägt die größere Ladung.</div>
+<div class="step"><strong>Feldstärke an der Oberfläche:</strong> $E=\\dfrac{q}{4\\pi\\varepsilon_0 r^2}$, also
+$$\\frac{E_a}{E_b}=\\frac{q_a}{q_b}\\cdot\\frac{r_b^2}{r_a^2}=\\frac{r_a}{r_b}\\cdot\\frac{r_b^2}{r_a^2}=\\boxed{\\frac{r_b}{r_a}}$$</div>
+<div class="result"><strong>Spitzeneffekt:</strong> Die <em>kleinere</em> Kugel (kleiner Krümmungsradius) hat die <em>größere</em> Feldstärke — obwohl sie weniger Ladung trägt. Gleichbedeutend: $\\sigma\\propto 1/r$.</div>
+<div class="warn">Anwendungen: Blitzableiter (Spitze zündet Entladung), Sprühentladung/Elektrofilter, Elmsfeuer — und umgekehrt: Hochspannungselektroden werden bewusst <strong>kugelrund und glatt</strong> gebaut, um Überschläge zu vermeiden.</div>`},
+    {q:'Abschätzung: Welchen Radius muss ein Blitzkanal haben, damit bei $\\lambda\\approx10^{-3}\\,$C/m die Durchbruchfeldstärke von Luft erreicht wird?',badges:['calc','exam'],ref:'Skript §2',
+     a:`<div class="step"><strong>Gegeben:</strong> Durchbruchfeldstärke von Luft $E_{\\text{krit}}=3\\cdot10^6\\,$V/m $=30\\,$kV/cm; Ladung pro Länge eines Gewitterkanals $\\lambda\\approx10^{-3}\\,$C/m.</div>
+<div class="step"><strong>Draht-Feld</strong> (Gauß, Zylindersymmetrie): $E(r)=\\dfrac{\\lambda}{2\\pi\\varepsilon_0 r}$</div>
+<div class="step">Nach $r$ auflösen:
+$$r=\\frac{\\lambda}{2\\pi\\varepsilon_0 E_{\\text{krit}}}=\\frac{10^{-3}}{2\\pi\\cdot8{,}85\\cdot10^{-12}\\cdot3\\cdot10^{6}}\\approx 6\\,\\text{m}$$</div>
+<div class="result">Innerhalb von ca. $6\\,$m um den Kanal ist die Luft ionisiert — das erklärt den beobachteten Durchmesser der leuchtenden Blitzkorona und warum man sich bei Gewitter nicht in der Nähe hoher Objekte aufhalten soll.</div>
+<div class="warn">Typische Blitzdaten zum Mitrechnen: $I\\sim10^4\\,$A, $U\\sim10^8\\,$V, Dauer $\\sim100\\,\\mu$s, transportierte Ladung einige C.</div>`},
+    {q:'Wie stark muss das Feld für Feldelektronenemission sein — und was hat das mit dem Rastertunnelmikroskop (STM) zu tun?',badges:['def','ex'],ref:'Skript §2 / Übung 3, Aufg. E5',
+     a:`<div class="step"><strong>Feldemission:</strong> Ab $E\\gtrsim10^{9}\\,$V/m wird die Potentialbarriere an der Metalloberfläche so schmal, dass Elektronen sie <strong>durchtunneln</strong> — ohne thermische Anregung (kalte Emission).</div>
+<div class="step">Solche Felder erreicht man <em>nur</em> über den Spitzeneffekt: An einer Spitze mit Krümmungsradius $r\\approx10\\,$nm genügen bereits wenige Volt, denn $E\\approx U/r$.</div>
+<div class="step"><strong>STM</strong> (Binnig & Rohrer, Nobelpreis 1986): Eine atomar scharfe Spitze wird auf $\\sim1\\,$nm an die Oberfläche gefahren. Der Tunnelstrom hängt <strong>exponentiell</strong> vom Abstand ab ($I\\propto e^{-2\\kappa d}$, Faktor $\\sim10$ pro Å) — daher die atomare Auflösung.</div>
+<div class="result">Prinzip-Kette: kleiner Krümmungsradius → riesiges lokales Feld ($\\sigma\\propto1/r$) → Tunneln → Abbildung einzelner Atome. Gleiches Prinzip: Feldionenmikroskop, Feldemissionskathoden in Elektronenmikroskopen.</div>`},
+    {q:'Erkläre die Spiegelladungsmethode: Welche Kraft wirkt auf eine Punktladung $q$ im Abstand $d$ vor einer geerdeten Metallplatte?',badges:['proof','calc'],ref:'Skript §2',
+     a:`<div class="step"><strong>Randbedingung:</strong> Die geerdete Platte ist eine Äquipotentialfläche mit $\\varphi=0$; die Feldlinien müssen senkrecht auf ihr stehen.</div>
+<div class="step"><strong>Trick:</strong> Man ersetzt die Platte durch eine fiktive <strong>Spiegelladung</strong> $-q$ im Abstand $d$ <em>hinter</em> der Plattenebene. Dieses Zwei-Ladungs-System erzeugt in der Mittelebene ebenfalls $\\varphi=0$.</div>
+<div class="step"><strong>Eindeutigkeitssatz</strong> der Potentialtheorie: Eine Lösung der Poisson-Gleichung, die die Randbedingungen erfüllt, ist <em>die</em> Lösung. Also ist das Feld im Halbraum vor der Platte identisch mit dem Dipolfeld.</div>
+<div class="result">$$F=\\frac{1}{4\\pi\\varepsilon_0}\\frac{q^2}{(2d)^2}=\\frac{q^2}{16\\pi\\varepsilon_0 d^2}\\quad\\text{(anziehend)}$$</div>
+<div class="warn">Häufiger Fehler: Abstand ist $2d$, nicht $d$! Die influenzierte Flächenladung beträgt $\\sigma(r)=-\\frac{qd}{2\\pi(r^2+d^2)^{3/2}}$; ihre Integration über die ganze Ebene ergibt genau $-q$.</div>`},
+    {q:'Bestimme mit Gauß das Feld im Kugelkondensator und begründe die perfekte Abschirmung nach außen.',badges:['calc','proof'],ref:'Skript §2',
+     a:`<div class="step"><strong>Aufbau:</strong> Innenkugel $r_1$ mit $+Q$, konzentrische Hohlkugel $r_2>r_1$ mit $-Q$.</div>
+<div class="step"><strong>Bereich $r<r_1$:</strong> $Q_{\\text{innen}}=0$ (Leiter) → $E=0$.</div>
+<div class="step"><strong>Bereich $r_1<r<r_2$:</strong> $E\\cdot4\\pi r^2=Q/\\varepsilon_0$
+$$\\Rightarrow E(r)=\\frac{Q}{4\\pi\\varepsilon_0 r^2}$$</div>
+<div class="step"><strong>Bereich $r>r_2$:</strong> $Q_{\\text{innen}}=+Q-Q=0$ → $E=0$.</div>
+<div class="result">Spannung: $\\displaystyle U=\\int_{r_1}^{r_2}E\\,dr=\\frac{Q}{4\\pi\\varepsilon_0}\\left(\\frac{1}{r_1}-\\frac{1}{r_2}\\right)$, also
+$$C=4\\pi\\varepsilon_0\\frac{r_1r_2}{r_2-r_1}$$
+Für $r_2\\to\\infty$: $C=4\\pi\\varepsilon_0 r_1$ — die Kapazität einer <strong>einzelnen</strong> Kugel (Erde: $C\\approx710\\,\\mu$F).</div>
+<div class="warn">Die vollständige Abschirmung nach außen ($E=0$ für $r>r_2$) gilt <em>nur</em>, weil die Außenkugel die exakt entgegengesetzte Ladung trägt. Ein bloßer Faraday-Käfig schirmt umgekehrt das <em>Innere</em> gegen äußere Felder ab.</div>`},
+    {q:'Berechne das Feld einer leitenden Platte <em>endlicher Dicke</em>, auf die von außen die Flächenladung $\\sigma$ aufgebracht wurde.',badges:['proof','calc'],ref:'Skript §2',
+     a:`<div class="step"><strong>Schlüsselüberlegung:</strong> Im Metallinneren gilt $\\vec{E}=0$. Die aufgebrachte Ladung verteilt sich daher zu gleichen Teilen auf <strong>beide</strong> Oberflächen: je $\\sigma/2$.</div>
+<div class="step"><strong>Gauß-Dose</strong>, die eine Oberfläche umschließt (eine Deckfläche außen, eine im Metall, wo $E=0$):
+$$E\\cdot A = \\frac{(\\sigma/2)\\cdot A\\cdot 2}{\\varepsilon_0}\\;?$$
+Sauberer: Zwei geladene Ebenen mit je $\\sigma/2$ liefern außen $2\\cdot\\frac{\\sigma/2}{2\\varepsilon_0}=\\frac{\\sigma}{2\\varepsilon_0}$ und innen $\\frac{\\sigma/2}{2\\varepsilon_0}-\\frac{\\sigma/2}{2\\varepsilon_0}=0$ ✓</div>
+<div class="result">$$E_{\\text{außen}}=\\frac{\\sigma}{2\\varepsilon_0},\\qquad E_{\\text{innen}}=0$$</div>
+<div class="warn">Nicht verwechseln! Drei ähnlich aussehende Ergebnisse:<br>
+• <strong>Isolierende</strong> Ladungsebene (Ladung $\\sigma$ auf einer Fläche): $E=\\frac{\\sigma}{2\\varepsilon_0}$ beidseitig.<br>
+• <strong>Leitende</strong> Platte, Gesamtflächenladung $\\sigma$ (auf beide Seiten verteilt): $E=\\frac{\\sigma}{2\\varepsilon_0}$ außen.<br>
+• <strong>Leiteroberfläche</strong> mit lokaler Flächenladung $\\sigma$ (z. B. im Kondensator): $E=\\frac{\\sigma}{\\varepsilon_0}$.</div>`},
+    {q:'[ÜB 3B] Was ist die Einheit des elektrischen Flusses $\\Phi=\\oint\\vec{E}\\cdot d\\vec{A}$, und wie groß ist er für eine Kugel um eine Punktladung $Q$?',badges:['ex','def'],ref:'Übung 3, Aufg. B',
+     a:`<div class="step"><strong>Einheit:</strong> $[\\Phi]=\\frac{\\text{V}}{\\text{m}}\\cdot\\text{m}^2=\\text{V}\\cdot\\text{m}$. Über $\\Phi=Q/\\varepsilon_0$ auch $\\frac{\\text{C}}{\\text{As/Vm}}=\\text{Vm}$ ✓</div>
+<div class="step"><strong>Kugel vom Radius $r$:</strong> $\\vec{E}\\parallel d\\vec{A}$ und $|E|$ konstant, also
+$$\\Phi=E\\cdot 4\\pi r^2=\\frac{Q}{4\\pi\\varepsilon_0 r^2}\\cdot 4\\pi r^2=\\frac{Q}{\\varepsilon_0}$$</div>
+<div class="result">Der Fluss ist <strong>radiusunabhängig</strong> — und sogar unabhängig von der <em>Form</em> der geschlossenen Fläche. Er hängt nur von der eingeschlossenen Ladung ab. Ladungen <em>außerhalb</em> tragen exakt null bei (Feldlinien treten ein und wieder aus).</div>`}
   ]
 },
 {
@@ -693,7 +744,58 @@ In beiden Fällen: $F = -\\frac{dW}{dx}$ bestimmt die Kraft auf das Dielektrikum
     {q:'Wie lautet die erste Maxwell-Gleichung in Materie?',badges:['def'],ref:'Skript',
      a:`$$\\nabla\\cdot\\vec{D} = \\rho_{\\text{frei}}$$
 Mit $\\vec{D} = \\varepsilon_0\\varepsilon_r\\vec{E}$ und $\\nabla\\cdot(\\varepsilon_r\\vec{E}) = \\rho_{\\text{frei}}/\\varepsilon_0$.<br>
-Die Polarisationsladung ist in $\\vec{P}$ versteckt: $\\rho_{\\text{Pol}} = -\\nabla\\cdot\\vec{P}$.`}
+Die Polarisationsladung ist in $\\vec{P}$ versteckt: $\\rho_{\\text{Pol}} = -\\nabla\\cdot\\vec{P}$.`},
+    {q:'Leite die im Kondensator gespeicherte Energie $W=\\frac12 CU^2$ aus der Ladearbeit her und gib die Energiedichte an.',badges:['proof','calc'],ref:'Skript §3',
+     a:`<div class="step"><strong>Ladearbeit:</strong> Ist bereits die Ladung $q$ aufgebracht, liegt die Spannung $u=q/C$ an. Um $dq$ nachzuschieben, braucht man
+$$dW = u\\,dq = \\frac{q}{C}\\,dq$$</div>
+<div class="step"><strong>Integration</strong> von $0$ bis $Q$:
+$$W=\\int_0^Q\\frac{q}{C}dq=\\frac{Q^2}{2C}=\\frac12 CU^2=\\frac12 QU$$</div>
+<div class="warn">Der Faktor $\\frac12$ kommt daher, dass die Spannung <em>während</em> des Ladens von 0 auf $U$ ansteigt — es ist also $\\bar u = U/2$. Exakt dieselbe Struktur wie bei der Feder: $W=\\frac12 kx^2$ (Kraft steigt linear mit der Auslenkung). Merke: <strong>$Q\\leftrightarrow x$, $1/C\\leftrightarrow k$, $U\\leftrightarrow F$.</strong></div>
+<div class="step"><strong>Energiedichte:</strong> Mit $C=\\varepsilon\\varepsilon_0 A/d$ und $U=Ed$:
+$$w=\\frac{W}{Ad}=\\frac{\\frac12\\varepsilon\\varepsilon_0\\frac Ad E^2d^2}{Ad}=\\frac12\\varepsilon\\varepsilon_0E^2$$</div>
+<div class="result">$$w=\\frac12\\varepsilon\\varepsilon_0 E^2=\\frac12\\vec{E}\\cdot\\vec{D}$$
+Die Energie steckt im <strong>Feld</strong>, nicht in den Ladungen — diese Formel gilt allgemein, auch für beliebige Feldgeometrien.</div>`},
+    {q:'Nenne und erkläre die vier Arten der Polarisation eines Dielektrikums.',badges:['def'],ref:'Skript §3',
+     a:`<div class="step"><strong>1. Verschiebungspolarisation (dielektrisch):</strong> Das äußere Feld verschiebt die Elektronenhülle gegen den Kern → induziertes Dipolmoment $\\vec{p}=\\alpha\\vec{E}$. Vorhanden in <em>jedem</em> Material, sehr schnell ($10^{-15}\\,$s, folgt bis in den optischen Bereich → Brechungsindex).</div>
+<div class="step"><strong>2. Orientierungspolarisation (paraelektrisch):</strong> Bereits vorhandene permanente Dipole (H$_2$O) werden gegen die thermische Bewegung ausgerichtet. Stark temperaturabhängig, $\\chi\\propto 1/T$ (Curie-Gesetz), und träge (Relaxation im GHz-Bereich → Mikrowellenherd).</div>
+<div class="step"><strong>3. Piezoelektrizität:</strong> Mechanischer Druck erzeugt Polarisation (direkter Effekt), angelegte Spannung erzeugt Verformung (inverser Effekt = <em>Elektrostriktion</em>). Voraussetzung: <strong>kein Inversionszentrum</strong> im Kristall (Quarz, KDP, PZT). Anwendungen: Quarzuhr, Ultraschall, Feuerzeug, Nanopositionierung (STM/AFM).</div>
+<div class="step"><strong>4. Ferroelektrizität:</strong> Spontane Polarisation <em>ohne</em> äußeres Feld unterhalb einer Curie-Temperatur $T_C$; Domänen und <strong>Hysterese</strong> $P(E)$ mit Remanenz und Koerzitivfeld. Beispiel BaTiO$_3$: das Ti-Ion sitzt außerhalb des Oktaederzentrums. $\\varepsilon$ bis $\\sim10\\,000$.</div>
+<div class="result"><strong>Multiferroika</strong> sind Materialien, in denen ferroelektrische <em>und</em> magnetische Ordnung koexistieren und gekoppelt sind (z. B. TbMnO$_3$, BiFeO$_3$) — man kann die Magnetisierung elektrisch schalten. Kandidaten für energiearme Datenspeicher.</div>`},
+    {q:'Dielektrizitätszahlen: Nenne typische Werte und ordne sie den Polarisationsmechanismen zu.',badges:['def','exam'],ref:'Skript §3',
+     a:`<div class="step"><strong>Tabelle (statisch):</strong><br>
+Vakuum $1$ (exakt) · Luft $1{,}00059$ · Papier/Öl $\\sim2\\!-\\!4$ · Glas $5\\!-\\!10$ · <strong>Wasser $81$</strong> · SrTiO$_3$ $310$ · BaTiO$_3$ $\\sim10\\,000$ · Relaxor Pb(Mg,Nb)O$_3$ $20\\,000\\!-\\!30\\,000$</div>
+<div class="step"><strong>Zuordnung:</strong> Gase/unpolare Stoffe $\\to$ nur Verschiebungspolarisation ($\\varepsilon\\approx1\\!-\\!3$). Wasser $\\to$ Orientierungspolarisation permanenter Dipole ($\\varepsilon=81$). Perowskite/Ferroelektrika $\\to$ kollektive Gitterverzerrung ($\\varepsilon\\gg100$).</div>
+<div class="result"><strong>Frequenzabhängigkeit als Beweis:</strong> Wasser hat statisch $\\varepsilon=81$, also $n_{\\text{DC}}=\\sqrt{81}\\approx 9$. Bei optischen Frequenzen ($500\\,$nm) ist aber $n=1{,}33$, also $\\varepsilon_{\\text{opt}}\\approx1{,}77$. Grund: Die schweren Moleküle können der Lichtfrequenz ($10^{15}\\,$Hz) nicht mehr folgen — nur die Elektronenhülle kann es noch.</div>
+<div class="warn">Klausurfalle: $n=\\sqrt{\\varepsilon_r\\mu_r}$ gilt <strong>nur mit dem $\\varepsilon_r$ bei der jeweiligen Frequenz</strong>.</div>`},
+    {q:'Wie hängen $\\chi$, $\\vec{P}$, $\\vec{D}$ und die Polarisationsladung zusammen? Zeige $Q_{\\text{pol}}=\\frac{\\varepsilon-1}{\\varepsilon}Q_{\\text{frei}}$.',badges:['proof','def'],ref:'Skript §3',
+     a:`<div class="step"><strong>Definitionen:</strong>
+$$\\vec{P}=\\chi\\varepsilon_0\\vec{E}=(\\varepsilon-1)\\varepsilon_0\\vec{E},\\qquad \\chi=\\varepsilon-1$$
+$$\\vec{D}=\\varepsilon_0\\vec{E}+\\vec{P}=\\varepsilon\\varepsilon_0\\vec{E}$$
+$\\vec{P}$ = Dipolmoment pro Volumen; an den Stirnflächen erscheint die Flächenladung $\\sigma_{\\text{pol}}=|\\vec{P}|$, im Volumen $\\rho_{\\text{pol}}=-\\text{div}\\,\\vec{P}$.</div>
+<div class="step"><strong>Herleitung:</strong> Im Kondensator ist $\\sigma_{\\text{frei}}=D=\\varepsilon\\varepsilon_0E$ und $\\sigma_{\\text{pol}}=P=(\\varepsilon-1)\\varepsilon_0E$. Verhältnis bilden:
+$$\\frac{\\sigma_{\\text{pol}}}{\\sigma_{\\text{frei}}}=\\frac{(\\varepsilon-1)\\varepsilon_0E}{\\varepsilon\\varepsilon_0E}=\\frac{\\varepsilon-1}{\\varepsilon}$$</div>
+<div class="result">$$Q_{\\text{pol}}=\\frac{\\varepsilon-1}{\\varepsilon}\\,Q_{\\text{frei}}$$
+Für Wasser ($\\varepsilon=81$): $Q_{\\text{pol}}=0{,}988\\,Q_{\\text{frei}}$ — fast das gesamte Feld wird kompensiert, das Restfeld ist $E=E_0/81$.</div>
+<div class="warn">Deshalb wird ein Dielektrikum in den Kondensator <strong>hineingezogen</strong>: Bei $Q=$ const sinkt die Energie auf $W=W_0/\\varepsilon$; die Differenz wird als mechanische Arbeit frei ($F=-dW/dx$).</div>`},
+    {q:'[ÜB 4B] Ein Kondensator hat $C_0=0{,}19\\,$nF bei $d_0=2{,}7\\,$mm und wird auf $U=73\\,$kV geladen. Berechne Fläche, Ladung, Feldstärke, Energie und die Zahl der Elementarladungen pro cm².',badges:['ex','calc','exam'],ref:'Übung 4, Aufg. B1',
+     a:`<div class="step"><strong>Fläche:</strong> aus $C_0=\\varepsilon_0A/d_0$
+$$A=\\frac{C_0d_0}{\\varepsilon_0}=\\frac{0{,}19\\cdot10^{-9}\\cdot2{,}7\\cdot10^{-3}}{8{,}85\\cdot10^{-12}}\\approx 5{,}8\\cdot10^{-2}\\,\\text{m}^2 = 580\\,\\text{cm}^2$$</div>
+<div class="step"><strong>Ladung:</strong> $Q=C_0U=0{,}19\\cdot10^{-9}\\cdot7{,}3\\cdot10^{4}\\approx 1{,}39\\cdot10^{-5}\\,\\text{C}=13{,}9\\,\\mu\\text{C}$</div>
+<div class="step"><strong>Feldstärke:</strong> $E=U/d_0=\\dfrac{7{,}3\\cdot10^4}{2{,}7\\cdot10^{-3}}\\approx 2{,}7\\cdot10^{7}\\,\\text{V/m}=270\\,\\text{kV/cm}$</div>
+<div class="step"><strong>Energie:</strong> $W=\\frac12C_0U^2=\\frac12\\cdot0{,}19\\cdot10^{-9}\\cdot(7{,}3\\cdot10^4)^2\\approx 0{,}51\\,\\text{J}$</div>
+<div class="step"><strong>Flächenladungsdichte:</strong> $\\sigma=Q/A=\\dfrac{1{,}39\\cdot10^{-5}}{5{,}8\\cdot10^{-2}}\\approx 2{,}4\\cdot10^{-4}\\,\\text{C/m}^2=2{,}4\\cdot10^{-8}\\,\\text{C/cm}^2$</div>
+<div class="result">$$n=\\frac{\\sigma}{e}=\\frac{2{,}4\\cdot10^{-8}}{1{,}60\\cdot10^{-19}}\\approx 1{,}5\\cdot10^{11}\\ \\frac{\\text{Elementarladungen}}{\\text{cm}^2}$$</div>
+<div class="warn">Realitätscheck: $E=2{,}7\\cdot10^7\\,$V/m liegt <strong>weit über</strong> der Durchbruchfeldstärke von Luft ($3\\cdot10^6\\,$V/m). Ein solcher Kondensator braucht zwingend ein Isolieröl oder Vakuum. Und: $1{,}5\\cdot10^{11}$ Ladungen/cm² klingt viel, ist aber nur ein Elektron auf $\\sim10^4$ Oberflächenatome — deshalb ist $E=0$ im Metallinneren so leicht zu erreichen.</div>`},
+    {q:'Rechne nach: Warum hat eine Computertastatur-Taste eine Kapazität von etwa $9\\,$pF, und wie erkennt die Elektronik den Tastendruck?',badges:['calc','ex'],ref:'Skript §3',
+     a:`<div class="step"><strong>Aufbau:</strong> Kapazitive Taste = kleiner Plattenkondensator, typ. $A\\approx1\\,\\text{cm}^2=10^{-4}\\,$m², Abstand im Ruhezustand $d\\approx 0{,}5\\,$mm, dazwischen eine Kunststofffolie mit $\\varepsilon_r\\approx5$.</div>
+<div class="step">$$C=\\varepsilon_r\\varepsilon_0\\frac{A}{d}=5\\cdot 8{,}85\\cdot10^{-12}\\cdot\\frac{10^{-4}}{5\\cdot10^{-4}}\\approx 8{,}9\\cdot10^{-12}\\,\\text{F}=8{,}9\\,\\text{pF}$$</div>
+<div class="result">Beim Drücken sinkt $d$ → $C$ <strong>steigt</strong> ($C\\propto1/d$). Die Elektronik misst die Kapazitätsänderung (z. B. über die Zeitkonstante $\\tau=RC$ oder die Resonanzfrequenz eines Schwingkreises).</div>
+<div class="warn">Vorteil gegenüber mechanischen Kontakten: <strong>verschleißfrei</strong>, kein Prellen, kein Oxidieren. Dasselbe Prinzip steckt in Touchscreens, kapazitiven Füllstands- und Abstandssensoren.</div>`},
+    {q:'Beschreibe die Faraday-Käfig-Demonstrationen im Hörsaal und den KDP-Praktikumsversuch.',badges:['ex','def'],ref:'Skript §1.1 / §3, Praktikum B',
+     a:`<div class="step"><strong>Versuch 1 — Elektrometer im Käfig:</strong> Ein Elektrometer im geschlossenen Metallgitter zeigt <em>keinen</em> Ausschlag, egal wie stark man den Käfig von außen auflädt. Die Ladung sitzt ausschließlich auf der Außenfläche.</div>
+<div class="step"><strong>Versuch 2 — Käfig am Tesla-Transformator:</strong> Selbst bei Hochspannungsentladungen, die außen am Käfig entlangschlagen, bleibt das Innere feldfrei. Anwendung: Auto und Flugzeug bei Blitzschlag, Abschirmung empfindlicher Messgeräte, Mikrowellentürgitter (Maschenweite $\\ll\\lambda$).</div>
+<div class="step"><strong>KDP-Versuch (Praktikum B):</strong> Kaliumdihydrogenphosphat ist piezoelektrisch <em>und</em> elektrooptisch. Legt man eine Spannung an, ändert sich der Brechungsindex (Pockels-/Kerr-Effekt) — zwischen gekreuzten Polarisatoren wird daraus ein extrem schneller <strong>Lichtschalter</strong> (Güteschaltung von Lasern, ps-Zeitauflösung). Zusätzlich misst man die Dielektrizitätskonstante als Funktion der Temperatur und findet den ferroelektrischen Phasenübergang.</div>
+<div class="result">Roter Faden: Leiter schirmen E-Felder <em>vollständig</em> ab ($\\varepsilon\\to\\infty$), Dielektrika schwächen sie nur um den Faktor $\\varepsilon$.</div>`}
   ]
 },
 {
