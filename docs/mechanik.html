@@ -1123,7 +1123,83 @@ Chaotisch → diffuse Wolke von Punkten.`},
 <strong>Nicht-integrabel:</strong> Weniger Erhaltungsgrößen, mögliches Chaos. Beispiele: Doppelpendel, $N>2$ Körper, Hénon-Heiles.`},
     {q:'Was ist der Unterschied zwischen globalem und lokalem Chaos?',badges:['def'],ref:'Skript §6.5',
      a:`<strong>Lokales Chaos:</strong> Nur in bestimmten Regionen des Phasenraums — nahe resonanter Tori (KAM-Struktur bleibt teilweise erhalten).<br>
-<strong>Globales/vollständiges Chaos:</strong> Für genügend starke Störung → alle KAM-Tori zerstört → Phasenraum-Ergodizität.`}
+<strong>Globales/vollständiges Chaos:</strong> Für genügend starke Störung → alle KAM-Tori zerstört → Phasenraum-Ergodizität.`},
+    {q:'Lineare Stabilitätsanalyse im Phasenraum: Rezept, Fixpunkttypen und warum es in Hamilton-Systemen keine Attraktoren gibt.',badges:['proof','calc','exam'],ref:'Skript §6.2, S. 140',
+     a:`<div class="step"><strong>Rezept (4 Schritte):</strong><br>
+1. System als autonomes DGL-System 1. Ordnung schreiben: $\\dot{\\vec x}=\\vec f(\\vec x)$ mit $\\vec x=(\\vec q,\\vec p)$.<br>
+2. Fixpunkte aus $\\vec f(\\vec x_0)=0$ bestimmen.<br>
+3. Linearisieren: $\\vec x=\\vec x_0+\\delta\\vec x$ ⇒ $\\dot{\\delta\\vec x}=J\\,\\delta\\vec x$ mit der <strong>Jacobimatrix</strong> $J_{ij}=\\partial f_i/\\partial x_j|_{\\vec x_0}$.<br>
+4. Eigenwerte $\\lambda_i$ von $J$ berechnen. $\\delta\\vec x\\propto e^{\\lambda_it}$.</div>
+<div class="result"><strong>Klassifikation über die Eigenwerte:</strong><br>
+• $\\mathrm{Re}\\,\\lambda>0$ für mindestens ein $i$ ⇒ <strong>instabil</strong> (exponentielles Weglaufen).<br>
+• Alle $\\mathrm{Re}\\,\\lambda<0$ ⇒ asymptotisch stabil (nur in dissipativen Systemen möglich).<br>
+• Alle $\\lambda$ rein imaginär ⇒ <strong>elliptischer Fixpunkt (Zentrum)</strong>, marginal stabil, Oszillation.<br>
+• Reelles Paar $\\pm\\lambda$ ⇒ <strong>hyperbolischer Fixpunkt (Sattel)</strong> mit stabiler und instabiler Mannigfaltigkeit.</div>
+<div class="step"><strong>Die Hamiltonsche Einschränkung:</strong> Aus $\\dot q=\\partial_pH$, $\\dot p=-\\partial_qH$ folgt
+$$\\mathrm{tr}\\,J=\\frac{\\partial^2H}{\\partial q\\partial p}-\\frac{\\partial^2H}{\\partial p\\partial q}=0$$
+Die Spur ist immer null, also $\\sum_i\\lambda_i=0$. Für ein 1D-System heißt das: die Eigenwerte kommen nur als $\\pm\\lambda$ (Sattel) oder $\\pm i\\omega$ (Zentrum) vor.</div>
+<div class="warn"><strong>Konsequenz:</strong> In Hamilton-Systemen gibt es <em>keine</em> stabilen Knoten, keine Spiralen, keine Attraktoren und keine Grenzzyklen — das ist Liouville in lokaler Form. „Stabil" bedeutet hier immer nur <em>marginal</em> stabil (Oszillation um den Fixpunkt), nie asymptotische Anziehung.</div>
+<div class="step"><strong>Beispiel Pendel</strong> $H=\\frac{p^2}{2ml^2}-mgl\\cos\\theta$: Fixpunkte $p=0$, $\\sin\\theta=0$.<br>
+• $\\theta=0$: $\\lambda^2=-g/l$ ⇒ $\\lambda=\\pm i\\sqrt{g/l}$ → <strong>Zentrum</strong>, Schwingung mit $\\omega_0=\\sqrt{g/l}$.<br>
+• $\\theta=\\pi$: $\\lambda^2=+g/l$ ⇒ $\\lambda=\\pm\\sqrt{g/l}$ → <strong>Sattel</strong>, die Separatrix läuft durch ihn hindurch.</div>`},
+    {q:'Stabilität von Gleichgewichtslagen in Lagrange-Systemen und die Bifurkation der rotierenden Schleife.',badges:['calc','proof','exam'],ref:'Skript §3.4, S. 71 · §6.1',
+     a:`<div class="step"><strong>Allgemeines Kriterium:</strong> Gleichgewichtslagen erfüllen $\\partial U/\\partial q_k=0$. Stabil sind sie, wenn die Hesse-Matrix $\\partial_j\\partial_kU$ <strong>positiv definit</strong> ist (Minimum von $U$); ein Maximum oder Sattel ist instabil. Bei rheonomen Zwangsbedingungen tritt an die Stelle von $U$ das <em>effektive</em> Potential.</div>
+<div class="step"><strong>Perle auf rotierendem Ring</strong> (Radius $R$, Winkelgeschwindigkeit $\\omega$): Aus $L=\\frac m2R^2(\\dot\\theta^2+\\omega^2\\sin^2\\theta)-mgR\\cos\\theta$ folgt
+$$R\\ddot\\theta=R\\omega^2\\sin\\theta\\left(\\cos\\theta+\\frac{g}{R\\omega^2}\\right)$$
+Gleichgewichtslagen: $\\theta_0=0$ (oben), $\\theta_0=\\pi$ (unten) und — falls möglich — $\\cos\\theta_0=-\\dfrac{g}{R\\omega^2}$.</div>
+<div class="result"><strong>Stabilitätsanalyse</strong> (Definiere $\\kappa\\equiv g/(R\\omega^2)$):<br>
+• $\\theta_0=0$: stets <strong>instabil</strong>.<br>
+• $\\theta_0=\\pi$: <strong>stabil für $\\kappa>1$</strong> (langsame Rotation), instabil für $\\kappa<1$.<br>
+• $\\cos\\theta_0=-\\kappa$: existiert nur für $\\kappa<1$ und ist dann <strong>stabil</strong>.</div>
+<div class="step"><strong>Die Bifurkation bei $\\kappa=1$, d.h. $\\omega_c=\\sqrt{g/R}$:</strong> Unterhalb der kritischen Drehzahl hängt die Perle unten. Überschreitet man $\\omega_c$, wird diese Lage instabil und <em>zwei</em> neue stabile Lagen entstehen symmetrisch bei $\\pm\\theta_0$ — eine <strong>Pitchfork-Bifurkation</strong> (Heugabelverzweigung) mit spontaner Symmetriebrechung.</div>
+<div class="warn">Dasselbe mathematische Muster begegnet einem beim Fliehkraftregler von Watt, beim ferromagnetischen Phasenübergang (Landau-Theorie) und beim Knicken eines belasteten Stabs. Der Ordnungsparameter wächst dabei stets wie $\\theta_0\\propto\\sqrt{\\omega-\\omega_c}$.</div>`},
+    {q:'Liouville-Arnold-Theorem: Was macht ein System integrabel?',badges:['def','proof'],ref:'Skript §6.3, S. 144',
+     a:`<div class="step"><strong>Satz von Liouville-Arnold:</strong> Besitzt ein Hamilton-System mit $S$ Freiheitsgraden $S$ unabhängige Erhaltungsgrößen $F_1,\\dots,F_S$, die paarweise <em>in Involution</em> stehen,
+$$\\{F_i,F_j\\}=0\\quad\\forall i,j$$
+so ist es <strong>vollständig integrabel</strong>. Die Bewegung findet dann auf einem $S$-dimensionalen <strong>Torus</strong> $T^S$ im $2S$-dimensionalen Phasenraum statt, und das System ist durch Quadraturen (Integrale) lösbar.</div>
+<div class="step"><strong>Warum ein Torus?</strong> Die $S$ Bedingungen $F_i=$ const definieren eine $S$-dimensionale kompakte Mannigfaltigkeit. Die $S$ kommutierenden Vektorfelder $\\{\\cdot,F_i\\}$ sind darauf überall linear unabhängig — die einzige kompakte Mannigfaltigkeit mit dieser Eigenschaft ist der Torus.</div>
+<div class="result"><strong>Winkel-Wirkungs-Variablen:</strong>
+$$I_k=\\frac{1}{2\\pi}\\oint_{C_k}\\vec p\\cdot d\\vec q,\\qquad H=H(\\vec I)\\;\\text{(alle }\\theta_k\\text{ zyklisch!)}$$
+$$\\dot I_k=0,\\qquad \\dot\\theta_k=\\frac{\\partial H}{\\partial I_k}=\\omega_k(\\vec I)=\\text{const}\\;\\Rightarrow\\;\\theta_k(t)=\\omega_kt+\\theta_k^0$$
+Die $I_k$ legen den Torus fest, die $\\theta_k$ die Position darauf. <strong>Jedes</strong> integrable System ist damit im Kern nur eine Menge unabhängiger gleichförmiger Kreisbewegungen.</div>
+<div class="step"><strong>Durchgerechnet: harmonischer Oszillator.</strong> $H=\\frac{p^2}{2m}+\\frac{m\\omega^2}{2}q^2=E$ ist eine Ellipse mit Halbachsen $\\sqrt{2E/(m\\omega^2)}$ und $\\sqrt{2mE}$, Fläche $\\pi ab=2\\pi E/\\omega$. Also
+$$I=\\frac{1}{2\\pi}\\oint p\\,dq=\\frac{E}{\\omega}\\quad\\Rightarrow\\quad H=\\omega I,\\qquad \\dot\\theta=\\frac{\\partial H}{\\partial I}=\\omega\\;✓$$</div>
+<div class="warn"><strong>Beispiele integrabler Systeme:</strong> harmonischer Oszillator, Kepler-Problem, freier symmetrischer Kreisel, schwerer symmetrischer Kreisel (Lagrange-Kreisel), Toda-Kette.<br>
+<strong>Nicht integrabel:</strong> Doppelpendel, Dreikörperproblem, Hénon-Heiles, asymmetrischer schwerer Kreisel. Integrabilität ist der <em>Ausnahmefall</em> — „fast alle" Hamilton-Systeme sind nicht integrabel.</div>`},
+    {q:'Resonante und irrationale Tori: Warum kommt es überhaupt zu Chaos?',badges:['def','exam'],ref:'Skript §6.3–6.4',
+     a:`<div class="step"><strong>Bewegung auf dem Torus:</strong> Bei zwei Freiheitsgraden ist die Bahn durch das Frequenzverhältnis $\\alpha=\\omega_1/\\omega_2$ charakterisiert.<br>
+• $\\alpha=r/s$ <strong>rational</strong> ⇒ die Bahn schließt sich nach $s$ Umläufen: <strong>periodisch</strong>, <em>resonanter Torus</em>.<br>
+• $\\alpha$ <strong>irrational</strong> ⇒ die Bahn schließt sich nie und überdeckt den Torus dicht: <strong>quasiperiodisch</strong>.</div>
+<div class="step"><strong>Das Problem der kleinen Nenner:</strong> Stört man ein integrables System, $H=H_0(\\vec I)+\\varepsilon H_1(\\vec I,\\vec\\theta)$, liefert die Störungsrechnung Terme der Form
+$$\\frac{\\varepsilon\\,H_{1,\\vec k}}{\\vec k\\cdot\\vec\\omega}=\\frac{\\varepsilon\\,H_{1,\\vec k}}{k_1\\omega_1+k_2\\omega_2}$$
+Genau auf den <em>resonanten</em> Tori verschwindet der Nenner — die Reihe divergiert. Poincaré nannte das „das Grundproblem der Dynamik".</div>
+<div class="result"><strong>Poincaré-Birkhoff-Theorem:</strong> Unter der Störung <em>zerfallen</em> die resonanten Tori. Von den ursprünglich unendlich vielen periodischen Bahnen überleben nur $2s$ — abwechselnd $s$ elliptische und $s$ hyperbolische Fixpunkte. Um jeden elliptischen Punkt bildet sich eine Miniaturkopie der Gesamtstruktur (<strong>Inselketten</strong>, selbstähnlich auf allen Skalen).</div>
+<div class="warn"><strong>Die Chaosquelle:</strong> An den hyperbolischen Punkten schneiden sich stabile und instabile Mannigfaltigkeit transversal — es entsteht ein <strong>homoklines Gewirr</strong> („homoclinic tangle"). Schneiden sie sich einmal, schneiden sie sich unendlich oft, und der Fluss wird in dieser Region exponentiell gestreckt und gefaltet. Genau dort sitzt das lokale Chaos, das sich mit wachsender Störung ausbreitet.</div>
+<div class="step"><strong>Astronomische Beobachtung:</strong> Die <strong>Kirkwood-Lücken</strong> im Asteroidengürtel liegen bei Resonanzen 3:1, 5:2, 7:3 mit Jupiter — dort wurden die Bahnen chaotisch und die Asteroiden herausgeworfen. Umgekehrt stabilisieren Resonanzen manchmal auch (Trojaner bei 1:1, Pluto in 3:2-Resonanz mit Neptun).</div>`},
+    {q:'KAM-Theorem: Genaue Aussage, diophantische Bedingung und der goldene Torus.',badges:['def','exam'],ref:'Skript §6.4, S. 149',
+     a:`<div class="step"><strong>Aussage (Kolmogorov 1954, Arnold 1963, Moser 1962):</strong> Wird ein integrables System $H_0$ hinreichend schwach und glatt gestört,
+$$H=H_0(\\vec I)+\\varepsilon H_1(\\vec I,\\vec\\theta),$$
+und ist $H_0$ <em>nichtentartet</em> ($\\det(\\partial^2H_0/\\partial I_j\\partial I_k)\\ne0$), so bleibt die <strong>überwiegende Mehrzahl der Tori erhalten</strong> — nur leicht deformiert. Zerstört werden nur die resonanten und die ihnen „zu nahen" Tori.</div>
+<div class="result"><strong>Diophantische Bedingung</strong> — welche Tori überleben:
+$$\\left|\\vec k\\cdot\\vec\\omega\\right|\\ge\\frac{\\gamma}{|\\vec k|^\\tau}\\qquad\\text{für alle }\\vec k\\in\\mathbb{Z}^S\\setminus\\{0\\}$$
+Ein Torus überlebt also, wenn sein Frequenzverhältnis <em>hinreichend schlecht</em> durch rationale Zahlen approximierbar ist. Das Maß der zerstörten Tori geht wie $\\mathcal{O}(\\sqrt{\\varepsilon})$ gegen null.</div>
+<div class="step"><strong>Der zäheste Torus:</strong> Die „irrationalste" Zahl ist der <strong>goldene Schnitt</strong>
+$$\\gamma=\\frac{\\sqrt5-1}{2}=[0;1,1,1,\\dots]$$
+Ihr Kettenbruch besteht nur aus Einsen — sie lässt sich am schlechtesten rational annähern. Der Torus mit $\\omega_1/\\omega_2=\\gamma$ ist deshalb der <strong>letzte, der bei wachsender Störung zerbricht</strong>. Sein Zerfall markiert den Übergang zu globalem Chaos.</div>
+<div class="step"><strong>Warum das historisch so wichtig ist:</strong> Vor KAM war unklar, ob das Sonnensystem überhaupt langzeitstabil sein kann — Poincaré hatte gezeigt, dass die Störungsreihen divergieren. KAM erklärt, warum die Planetenbahnen über Milliarden Jahre trotzdem quasiperiodisch bleiben: sie liegen auf überlebenden Tori.</div>
+<div class="warn"><strong>Einschränkung (Arnold-Diffusion):</strong> Für $S\\ge3$ zerlegen die $S$-dimensionalen Tori den $(2S-1)$-dimensionalen Energieraum nicht mehr in getrennte Gebiete. Trajektorien können dann durch das Netz der Resonanzen „hindurchsickern" — allerdings extrem langsam (exponentiell in $1/\\varepsilon$).</div>`},
+    {q:'Ljapunov-Exponent und die Definition von deterministischem Chaos.',badges:['def','exam'],ref:'Skript §6.5, S. 154',
+     a:`<div class="step"><strong>Ljapunov-Exponent:</strong> Zwei Trajektorien mit anfänglichem Abstand $\\delta_0$ im Phasenraum entfernen sich wie
+$$|\\delta(t)|\\approx|\\delta_0|\\,e^{\\lambda t},\\qquad \\lambda=\\lim_{t\\to\\infty}\\lim_{\\delta_0\\to0}\\frac1t\\ln\\frac{|\\delta(t)|}{|\\delta_0|}$$
+$\\lambda>0$ ⇒ <strong>chaotisch</strong>; $\\lambda=0$ ⇒ reguläre (quasiperiodische) Bewegung. In Hamilton-Systemen treten die Exponenten wegen $\\mathrm{tr}\\,J=0$ stets paarweise als $\\pm\\lambda$ auf.</div>
+<div class="result"><strong>Drei Merkmale des deterministischen Chaos:</strong><br>
+1. <strong>Sensitive Abhängigkeit von den Anfangsbedingungen</strong> ($\\lambda>0$, „Schmetterlingseffekt").<br>
+2. <strong>Topologische Transitivität</strong> (Mischen): jede Umgebung wird irgendwann über den ganzen erreichbaren Bereich verteilt.<br>
+3. <strong>Dichte Menge periodischer Orbits</strong> — im Chaos steckt eine unendliche, fein verwobene Struktur.<br>
+Wichtig: Das System bleibt dabei vollständig <em>deterministisch</em>. Chaos ist kein Zufall, sondern praktische Unvorhersagbarkeit.</div>
+<div class="step"><strong>Ljapunov-Zeit</strong> $t_\\lambda=1/\\lambda$ — die Zeitskala, auf der Vorhersagen zerfallen. Um die Vorhersagedauer zu <em>verdoppeln</em>, muss man die Anfangsdaten <em>quadratisch</em> genauer kennen. Beispiele: Wetter ca. 2 Tage, Pluto-Bahn ca. 20 Mio. Jahre, innere Planeten ca. 5 Mio. Jahre, Saturnmond Hyperion nur wenige Wochen (er taumelt chaotisch).</div>
+<div class="step"><strong>Poincaré-Schnitt</strong> als Diagnosewerkzeug: Man markiert die Durchstoßpunkte der Trajektorie durch eine Hyperebene (z.B. $q_2=0$, $p_2>0$). Reguläre Bahn ⇒ geschlossene Kurve (Schnitt durch den Torus). Chaotische Bahn ⇒ flächenfüllende Punktwolke. So sieht man in einem 2D-Bild sofort, welcher Anteil des Phasenraums regulär ist.</div>
+<div class="warn"><strong>Standardbeispiele:</strong> Doppelpendel (bei großen Auslenkungen), Hénon-Heiles-Modell ($V=\\frac12(x^2+y^2)+x^2y-\\frac13y^3$; regulär für kleine $E$, chaotisch ab $E\\approx1/8$), Chirikov-Standardabbildung $p_{n+1}=p_n+K\\sin\\theta_n$, $\\theta_{n+1}=\\theta_n+p_{n+1}$ (globales Chaos ab $K\\approx0{,}9716$ — genau dort zerfällt der goldene Torus), sowie das eingeschränkte Dreikörperproblem.</div>`}
   ]
 },
 {
