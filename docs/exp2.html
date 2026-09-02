@@ -101,22 +101,23 @@
     <div class="nav-label">Magnetismus</div>
     <a class="nav-link" href="#ch8">8 · Magnetostatik</a>
     <a class="nav-link" href="#ch9">9 · Induktion</a>
+    <a class="nav-link" href="#ch9b">10 · Materie im Magnetfeld</a>
   </div>
   <div class="nav-group">
     <div class="nav-label">Wellen & Optik</div>
-    <a class="nav-link" href="#ch10">10 · Maxwell-Gleichungen</a>
-    <a class="nav-link" href="#ch11">11 · Optik</a>
+    <a class="nav-link" href="#ch10">11 · Maxwell-Gleichungen</a>
+    <a class="nav-link" href="#ch11">12 · Optik</a>
   </div>
   <div class="nav-group">
     <div class="nav-label">Wechselstrom & Relativität</div>
-    <a class="nav-link" href="#ch11b">12 · Wechselstrom & Schwingkreise</a>
-    <a class="nav-link" href="#ch11c">13 · Spezielle Relativitätstheorie</a>
+    <a class="nav-link" href="#ch11b">13 · Wechselstrom & Schwingkreise</a>
+    <a class="nav-link" href="#ch11c">14 · Spezielle Relativitätstheorie</a>
   </div>
   <div class="nav-group">
     <div class="nav-label">Prüfung</div>
-    <a class="nav-link" href="#ch12">14 · Übungsaufgaben</a>
-    <a class="nav-link" href="#ch13">15 · Probeklausur A</a>
-    <a class="nav-link" href="#ch14">16 · Probeklausur B</a>
+    <a class="nav-link" href="#ch12">15 · Übungsaufgaben</a>
+    <a class="nav-link" href="#ch13">16 · Probeklausur A</a>
+    <a class="nav-link" href="#ch14">17 · Probeklausur B</a>
   </div>
 </nav>
 
@@ -125,8 +126,8 @@
   <h1>Experimentalphysik II — Lernkarten</h1>
   <p>Elektrostatik, Elektrodynamik, Magnetismus, Maxwell-Gleichungen, Wechselstrom, Optik und Spezielle Relativitätstheorie — vollständig mit Definitionen, Formeln, Beweisen, allen Experimenten/Maschinen und 2 neuen Probeklausuren.</p>
   <div class="badges">
-    <span class="badge">16 Kapitel</span>
-    <span class="badge">200+ Karten</span>
+    <span class="badge">17 Kapitel</span>
+    <span class="badge">300+ Karten</span>
     <span class="badge">Übungsaufgaben</span>
     <span class="badge">2 Probeklausuren</span>
     <span class="badge">SoSe 2026 · Braden/Petsch</span>
@@ -1280,7 +1281,243 @@ Im Widerstand verbraucht: $W_R = \\frac{1}{2}CU_0^2$<br>
      a:`Bei Frequenz $\\omega = 2\\pi f$:<br>
 <strong>Kondensator:</strong> $Z_C = \\frac{1}{i\\omega C}$ — wirkt wie Widerstand, der mit $\\omega$ sinkt<br>
 <strong>Spule:</strong> $Z_L = i\\omega L$ — wirkt wie Widerstand, der mit $\\omega$ steigt<br>
-Resonanzfrequenz LC-Kreis: $\\omega_0 = 1/\\sqrt{LC}$ (gleiche Impedanzbeträge)`}
+Resonanzfrequenz LC-Kreis: $\\omega_0 = 1/\\sqrt{LC}$ (gleiche Impedanzbeträge)`},
+    {q:'Leite das Induktionsgesetz aus der Lorentz-Kraft her (bewegter Leiterstab) und zeige die Energiebilanz.',badges:['proof','calc'],ref:'Skript §6',
+     a:`<div class="step"><strong>Aufbau:</strong> Ein Stab der Länge $L$ gleitet mit $v$ auf zwei Schienen im Feld $\\vec{B}\\perp$ Ebene.</div>
+<div class="step"><strong>Lorentz-Kraft</strong> auf die Leitungselektronen im Stab: $F=evB$, senkrecht zur Bewegung, also <em>längs</em> des Stabes. Sie treibt Ladung an die Enden, bis das aufgebaute E-Feld sie kompensiert:
+$$U_{\\text{ind}}=E\\cdot L=vBL$$</div>
+<div class="step"><strong>Vergleich mit dem Flussgesetz:</strong> $\\Phi=B\\cdot L\\cdot x$, also
+$$-\\frac{d\\Phi}{dt}=-BL\\frac{dx}{dt}=-BLv\\ ✓$$
+Beide Wege liefern dasselbe — Faradays Gesetz ist im bewegten Fall nichts anderes als die Lorentz-Kraft.</div>
+<div class="step"><strong>Energiebilanz:</strong> Der induzierte Strom $I=U/R$ erzeugt nach Lenz eine bremsende Kraft $F_{\\text{brems}}=BIL$. Um konstant weiterzuziehen, braucht man
+$$P_{\\text{mech}}=F_{\\text{brems}}\\,v=BIL\\,v = I\\cdot(BLv)=I\\,U_{\\text{ind}}=P_{\\text{elektr}}$$</div>
+<div class="result">$$P_{\\text{mech}}=P_{\\text{elektr}}$$
+Die Lenz\'sche Regel ist damit <strong>keine Zusatzannahme</strong>, sondern eine direkte Folge des Energieerhaltungssatzes: Hätte die induzierte Kraft das umgekehrte Vorzeichen, könnte man ein Perpetuum mobile bauen.</div>`},
+    {q:'Warum ist das induzierte elektrische Feld ein <em>Wirbelfeld</em>? Leite $\\nabla\\times\\vec{E}=-\\partial_t\\vec{B}$ her.',badges:['proof','def'],ref:'Skript §6',
+     a:`<div class="step"><strong>Ausgangspunkt (Integralform):</strong>
+$$\\oint_{\\partial A}\\vec{E}\\cdot d\\vec{r}=U_{\\text{ind}}=-\\frac{d}{dt}\\iint_A\\vec{B}\\cdot d\\vec{A}$$</div>
+<div class="step"><strong>Satz von Stokes</strong> auf die linke Seite:
+$$\\oint_{\\partial A}\\vec{E}\\cdot d\\vec{r}=\\iint_A(\\nabla\\times\\vec{E})\\cdot d\\vec{A}$$</div>
+<div class="step">Gleichsetzen und Zeitableitung ins Integral ziehen (feste Fläche):
+$$\\iint_A(\\nabla\\times\\vec{E})\\cdot d\\vec{A}=-\\iint_A\\frac{\\partial\\vec{B}}{\\partial t}\\cdot d\\vec{A}$$
+Da das für <em>jede</em> Fläche gelten muss, folgt punktweise:</div>
+<div class="result">$$\\nabla\\times\\vec{E}=-\\frac{\\partial\\vec{B}}{\\partial t}\\qquad\\text{(Maxwell II)}$$</div>
+<div class="warn"><strong>Die zentrale konzeptionelle Konsequenz:</strong> Ein zeitveränderliches $\\vec{B}$ erzeugt geschlossene E-Feldlinien, die <em>keine</em> Ladungen als Quellen haben. Für dieses Feld gilt:<br>
+• $\\oint\\vec{E}\\cdot d\\vec{r}\\neq0$ → <strong>kein Potential</strong>, die Spannung ist wegabhängig!<br>
+• Der Effekt braucht keinen Leiter: Das Wirbelfeld existiert auch im Vakuum (→ Betatron, EM-Wellen).</div>`},
+    {q:'Wirbelströme: Erkläre Wirbelstrombremse, fallenden Ring, Cola-Dose und elektromagnetische Schleuder.',badges:['ex','def'],ref:'Skript §6',
+     a:`<div class="step"><strong>Wirbelstrombremse:</strong> Eine Metallscheibe rotiert im inhomogenen Feld; die Flussänderung induziert geschlossene Ströme, die nach Lenz bremsen. Die Bremskraft ist $\\propto v$ (geschwindigkeitsproportional!) — sie bremst also stark bei hoher Geschwindigkeit, wird aber nie ganz zu null. <strong>Schlüsselversuch:</strong> Schlitzt man die Scheibe radial ein, können sich keine großen Wirbel mehr ausbilden und die Bremswirkung verschwindet nahezu. Anwendung: LKW-Retarder, ICE, Freifalltürme, Kilowattstundenzähler.</div>
+<div class="step"><strong>Fallender Ring / fallender Magnet im Cu-Rohr:</strong> Ein geschlossener Al-Ring, der über einen Magneten fällt, wird stark abgebremst — ein <em>geschlitzter</em> Ring nicht. Im Kupferrohr sinkt ein Magnet in Zeitlupe.</div>
+<div class="step"><strong>Thomson\'scher Ringversuch / Cola-Dose:</strong> Ein Kondensator wird über eine Spule entladen. Der extrem schnell ansteigende Fluss induziert im darüber liegenden Ring (oder in der Dose) einen <strong>antiparallelen</strong> Strom → zwei antiparallele Ströme stoßen sich ab → der Ring fliegt bis an die Decke, die Dose wird zerquetscht.</div>
+<div class="step"><strong>Elektromagnetische Schleuder / Railgun:</strong> Dasselbe Prinzip als Beschleuniger. Bei ausreichender Feldenergie werden Projektile auf km/s beschleunigt.</div>
+<div class="result"><strong>Gegenmaßnahme in Trafos und Motoren:</strong> Der Eisenkern wird <em>geblecht</em> (dünne, gegeneinander isolierte Bleche parallel zum Fluss). Die Wirbelstromverluste skalieren mit dem Quadrat der Blechdicke — deshalb $0{,}35\\,$mm-Bleche oder Ferrite bei hohen Frequenzen.</div>`},
+    {q:'Ein- und Ausschaltvorgang bei einer Spule (RL-Kreis): Löse die DGL und erkläre den Abschaltfunken.',badges:['proof','calc','exam'],ref:'Skript §6',
+     a:`<div class="step"><strong>DGL beim Einschalten</strong> (Maschenregel): $U_0=RI+L\\dfrac{dI}{dt}$</div>
+<div class="step"><strong>Lösung</strong> mit $I(0)=0$:
+$$I(t)=\\frac{U_0}{R}\\left(1-e^{-t/\\tau}\\right),\\qquad \\tau=\\frac{L}{R}$$
+Beim Ausschalten (Kurzschluss über $R$): $I(t)=I_0e^{-t/\\tau}$.</div>
+<div class="step"><strong>Einheitenbeweis für $\\tau$:</strong>
+$$[L/R]=\\frac{\\text{Vs/A}}{\\text{V/A}}=\\text{s}\\ ✓$$</div>
+<div class="warn"><strong>Der Abschaltfunke:</strong> Öffnet man den Schalter, ist $dI/dt$ betragsmäßig riesig. Die Selbstinduktionsspannung
+$$U_{\\text{ind}}=-L\\frac{dI}{dt}$$
+kann das Vielfache der Betriebsspannung erreichen — bis zum Lichtbogen am Schalter. Deshalb: <strong>Freilaufdiode</strong> parallel zur Spule (Relais, Motoren). Umgekehrt nutzt man den Effekt bewusst in der Zündspule des Verbrennungsmotors ($12\\,$V → $>20\\,$kV).</div>
+<div class="result"><strong>Merksatz:</strong> Die Spule ist träge für den <em>Strom</em>: $I$ kann sich nie sprunghaft ändern. Der Kondensator ist träge für die <em>Spannung</em>: $U$ kann sich nie sprunghaft ändern. Deshalb: Spule kurz nach dem Einschalten = Unterbrechung, nach langer Zeit = Kurzschluss.</div>`},
+    {q:'[ÜB 9C] $L=0{,}4\\,$H, $R=120\\,\\Omega$: Wann sind 99 % des Endstroms erreicht? Und was passiert, wenn $R$ in $1\\,$ms linear auf $1\\,$M$\\Omega$ steigt?',badges:['ex','calc','exam'],ref:'Übung 9, Aufg. C',
+     a:`<div class="step"><strong>a) Zeitkonstante:</strong> $\\tau=\\dfrac{L}{R}=\\dfrac{0{,}4}{120}=3{,}33\\,$ms</div>
+<div class="step">99 %-Kriterium: $1-e^{-t/\\tau}=0{,}99\\;\\Rightarrow\\;e^{-t/\\tau}=0{,}01$
+$$t=\\tau\\ln 100=3{,}33\\,\\text{ms}\\cdot 4{,}605\\approx 15{,}3\\,\\text{ms}$$</div>
+<div class="step"><strong>b) Zeitabhängiger Widerstand:</strong> Der Strom folgt quasistatisch $I(t)=\\dfrac{U}{R(t)}$. Die Induktionsspannung ist
+$$U_i=-L\\frac{dI}{dt}=-LU\\frac{d}{dt}\\left(\\frac{1}{R}\\right)=\\frac{LU}{R^2}\\frac{dR}{dt}$$</div>
+<div class="step"><strong>Einsetzen</strong> mit $\\dfrac{dR}{dt}=\\dfrac{10^6\\,\\Omega}{10^{-3}\\,\\text{s}}=10^{9}\\,\\dfrac{\\Omega}{\\text{s}}$ und $R=120\\,\\Omega$ (Startwert):
+$$U_i=\\frac{0{,}4\\cdot U}{120^2}\\cdot10^{9}\\approx 2{,}8\\cdot10^{4}\\cdot U$$</div>
+<div class="result">Bei $U=10\\,$V entstehen also Spitzen von $\\sim2{,}8\\cdot10^{5}\\,$V. Genau so funktioniert die <strong>Zündspule</strong>: Nicht die Spannung wird erhöht, sondern der Widerstand extrem schnell — daher die Hochspannung.</div>
+<div class="warn">Wichtig: $U_i\\propto1/R^2$, die Überhöhung ist also <em>zu Beginn</em> des Abschaltens am größten und fällt dann rapide ab.</div>`},
+    {q:'[ÜB 9B] Induktionsofen: Ein Cu-Ring ($r=3\\,$cm, $A=1\\,$mm²) soll geschmolzen werden. Wieviel Energie und welcher Strom sind nötig?',badges:['ex','calc'],ref:'Übung 9, Aufg. B1–B3',
+     a:`<div class="step"><strong>Masse:</strong> $V=2\\pi r\\cdot A=2\\pi\\cdot0{,}03\\cdot10^{-6}=1{,}88\\cdot10^{-7}\\,$m³
+$$m=\\rho V=8960\\cdot1{,}88\\cdot10^{-7}\\approx 1{,}7\\,\\text{g}$$</div>
+<div class="step"><strong>Aufheizen</strong> von $20\\,°$C auf $T_S=1083\\,°$C ($c=385\\,$J/(kg·K)):
+$$Q_1=mc\\Delta T=1{,}7\\cdot10^{-3}\\cdot385\\cdot1063\\approx 695\\,\\text{J}$$</div>
+<div class="step"><strong>Schmelzen</strong> ($q_S=205\\,$kJ/kg):
+$$Q_2=m\\,q_S=1{,}7\\cdot10^{-3}\\cdot2{,}05\\cdot10^{5}\\approx 350\\,\\text{J}$$</div>
+<div class="result">$$Q_{\\text{ges}}=Q_1+Q_2\\approx 1{,}0\\,\\text{kJ}\\quad(\\text{Größenordnung } \\sim930\\,\\text{J})$$</div>
+<div class="step"><strong>Ringwiderstand:</strong> $R=\\rho_W\\dfrac{l}{A}=1{,}7\\cdot10^{-8}\\cdot\\dfrac{0{,}188}{10^{-6}}\\approx 3{,}2\\,\\text{m}\\Omega$.
+Soll die Energie in $t=1\\,$s deponiert werden, braucht man $P=Q/t\\approx1\\,$kW:
+$$I=\\sqrt{\\frac{P}{R}}=\\sqrt{\\frac{1000}{3{,}2\\cdot10^{-3}}}\\approx 560\\,\\text{A}$$</div>
+<div class="warn">Solche Ströme werden <strong>induktiv</strong> und berührungslos erzeugt: Die Spule des Induktionsofens arbeitet als Transformator, dessen "Sekundärwicklung" das Werkstück selbst ist (eine kurzgeschlossene Windung → riesiger Strom bei winziger Spannung). Deshalb schmilzt Metall im Tiegel, ohne dass irgendetwas es berührt — und deshalb funktioniert das Induktionskochfeld.</div>`},
+    {q:'Transformator quantitativ: Punktschweißgerät ($N_1=500$, $U_1=230\\,$V, $N_2=5$) und die Rechnung zur Hochspannungsübertragung.',badges:['calc','exam'],ref:'Skript §6',
+     a:`<div class="step"><strong>Spannungsübersetzung:</strong> $\\dfrac{U_2}{U_1}=\\dfrac{N_2}{N_1}$
+$$U_2=230\\,\\text{V}\\cdot\\frac{5}{500}=2{,}3\\,\\text{V}$$</div>
+<div class="step"><strong>Stromübersetzung</strong> (idealer Trafo, $P_1=P_2$): $\\dfrac{I_2}{I_1}=\\dfrac{N_1}{N_2}=100$.
+Bei $I_1=10\\,$A fließen sekundär $1000\\,$A — genug, um zwei Bleche punktuell zu verschweißen. Deshalb ist die Sekundärwicklung ein <em>fingerdicker</em> Kupferbügel mit wenigen Windungen.</div>
+<div class="step"><strong>Hochspannungsübertragung</strong> — Beispiel $P=2{,}3\\,$kW über eine Leitung mit Widerstand $R$:<br>
+• bei $U=230\\,$V: $I=10\\,$A → $P_{\\text{Verlust}}=I^2R=100\\,R$<br>
+• bei $U=23\\,$kV: $I=0{,}1\\,$A → $P_{\\text{Verlust}}=0{,}01\\,R$</div>
+<div class="result">Faktor $10^4$ weniger Verlust! Da $P_{\\text{Verlust}}=I^2R=\\dfrac{P^2R}{U^2}$ gilt, sinken die Verluste <strong>quadratisch</strong> mit der Übertragungsspannung. Genau deshalb arbeiten Überlandleitungen mit $110$/$220$/$380\\,$kV — und genau deshalb hat sich Wechselstrom gegen Edisons Gleichstrom durchgesetzt: nur er lässt sich einfach transformieren.</div>
+<div class="warn">Umgekehrtes Beispiel: Der Hochspannungstransformator ($N_2\\gg N_1$) erzeugt einen wandernden Lichtbogen ("Jakobsleiter") — die heiße, ionisierte Luft steigt auf, der Bogen wird länger, bis er abreißt und unten neu zündet.</div>`},
+    {q:'[ÜB 11A] Eine quadratische Leiterschleife (Seite $a$, Widerstand $R$) rotiert mit $\\omega$ im homogenen Feld $B$. Bestimme $\\Phi(t)$, $U(t)$, $I(t)$ und $\\langle P\\rangle$.',badges:['ex','proof','calc','exam'],ref:'Übung 11, Aufg. A1–A5',
+     a:`<div class="step"><strong>1) Fluss:</strong> Der Winkel zwischen Flächennormale und $\\vec{B}$ ist $\\alpha=\\omega t$:
+$$\\Phi(t)=B\\,a^2\\cos(\\omega t)$$</div>
+<div class="step"><strong>2) Induzierte Spannung:</strong>
+$$U(t)=-\\frac{d\\Phi}{dt}=B a^2\\omega\\sin(\\omega t)=U_0\\sin(\\omega t),\\qquad U_0=Ba^2\\omega$$</div>
+<div class="step"><strong>3) Skizze/Phasenlage:</strong> $U$ ist maximal, wenn $\\Phi=0$ (Schleifenebene <em>parallel</em> zu $\\vec{B}$ — dort ändert sich der Fluss am schnellsten), und $U=0$, wenn $\\Phi$ extremal ist. Beide sind um $90°$ phasenverschoben.</div>
+<div class="step"><strong>4) Strom:</strong> $I(t)=\\dfrac{U_0}{R}\\sin(\\omega t)$ — in Phase mit $U$, da rein ohmsch.</div>
+<div class="step"><strong>5) Mittlere Leistung</strong> mit $\\langle\\sin^2\\rangle=\\tfrac12$:
+$$\\langle P\\rangle=\\frac{U_0^2}{R}\\langle\\sin^2(\\omega t)\\rangle=\\frac{U_0^2}{2R}=\\frac{(Ba^2\\omega)^2}{2R}$$</div>
+<div class="result">Das ist das Grundprinzip jedes <strong>Generators</strong>: Rotation im Magnetfeld erzeugt sinusförmige Wechselspannung mit $U_0\\propto\\omega$. Effektivwerte: $U_{\\text{eff}}=U_0/\\sqrt2$, $\\langle P\\rangle=U_{\\text{eff}}I_{\\text{eff}}$.</div>
+<div class="warn">Die mechanische Leistung, die man zum Drehen aufbringen muss, ist exakt $\\langle P\\rangle$ — vermittelt über das bremsende Drehmoment $M=\\mu B\\sin(\\omega t)$ der Schleife (Lenz).</div>`},
+    {q:'[ÜB 9D] Zwei Stäbe auf reibungsfreien Schienen im Feld $B$: Der eine wird angestoßen. Was passiert, und wie lautet die Energiebilanz?',badges:['ex','proof'],ref:'Übung 9, Aufg. D1/D2',
+     a:`<div class="step"><strong>Situation:</strong> Zwei Stäbe (Masse $m$, Länge $L$) auf leitenden Schienen, Feld $\\vec{B}\\perp$ Ebene. Stab 1 startet mit $v_0$, Stab 2 ruht.</div>
+<div class="step"><strong>Induzierte Spannung</strong> = Differenz der beiden Bewegungsspannungen:
+$$U=BL(v_1-v_2)\\;\\Rightarrow\\; I=\\frac{BL(v_1-v_2)}{R}$$
+Der Strom bremst Stab 1 und beschleunigt Stab 2 (Lenz).</div>
+<div class="step"><strong>Impulserhaltung:</strong> Die Kräfte $\\pm BIL$ sind entgegengesetzt gleich, also
+$$m\\dot v_1=-BIL,\\qquad m\\dot v_2=+BIL\\;\\Rightarrow\\;\\frac{d}{dt}(v_1+v_2)=0$$</div>
+<div class="result"><strong>Endzustand:</strong> Der Strom fließt, solange $v_1\\neq v_2$. Im Grenzfall $t\\to\\infty$ gilt
+$$v_1=v_2=\\frac{v_0}{2}$$
+Wie bei einem <em>vollkommen inelastischen Stoß</em> — nur ohne jede Berührung.</div>
+<div class="step"><strong>Energiebilanz:</strong>
+$$W_{\\text{Joule}}=\\tfrac12mv_0^2-2\\cdot\\tfrac12m\\left(\\tfrac{v_0}{2}\\right)^2=\\tfrac12mv_0^2-\\tfrac14mv_0^2=\\tfrac14mv_0^2$$
+Genau die Hälfte der Anfangsenergie wird im Widerstand in Wärme umgesetzt — dieselbe 50 %-Regel wie beim inelastischen Stoß und beim Laden eines Kondensators über einen Widerstand.</div>`}
+  ]
+},
+{
+  id:'ch9b', title:'Materie im Magnetfeld', num:'09b',
+  desc:'Magnetische Momente, Dia-, Para- und Ferromagnetismus, Hysterese, H-Feld, Toroid mit Luftspalt, Feldenergie.',
+  stats:[{v:'12',l:'Karten'},{v:'3',l:'Ordnungstypen'},{v:'Skript §5',l:'Quelle'}],
+  cards:[
+    {q:'Woher kommt das magnetische Moment eines Atoms? Leite $\\vec{\\mu}=-\\frac{e}{2m}\\vec{L}$ her und definiere das Bohrsche Magneton.',badges:['proof','def'],ref:'Skript §5.1',
+     a:`<div class="step"><strong>Klassisches Bild:</strong> Ein Elektron auf einer Kreisbahn (Radius $r$, Umlaufdauer $T$) entspricht dem Kreisstrom
+$$I=-\\frac{e}{T}=-\\frac{ev}{2\\pi r}$$</div>
+<div class="step"><strong>Magnetisches Moment:</strong>
+$$\\mu=IA=-\\frac{ev}{2\\pi r}\\cdot\\pi r^2=-\\frac{evr}{2}$$
+Mit dem Bahndrehimpuls $L=mvr$ folgt $vr=L/m$, also</div>
+<div class="result">$$\\vec{\\mu}=-\\frac{e}{2m}\\vec{L}\\qquad(\\text{gyromagnetisches Verhältnis }\\gamma=-e/2m)$$
+Das Minuszeichen kommt von der negativen Elektronenladung: $\\vec\\mu$ und $\\vec L$ sind <strong>antiparallel</strong>.</div>
+<div class="step"><strong>Quantisierung:</strong> $L_z=m_l\\hbar$ mit $m_l=-l,\\dots,+l$. Damit ist die kleinste Einheit des magnetischen Moments
+$$\\mu_B=\\frac{e\\hbar}{2m_e}=9{,}274\\cdot10^{-24}\\,\\frac{\\text{J}}{\\text{T}}\\qquad\\text{(Bohrsches Magneton)}$$</div>
+<div class="warn"><strong>Spin:</strong> Das Elektron hat zusätzlich einen Eigendrehimpuls $S$ mit $g_s\\approx2{,}0023$, also $\\vec\\mu_s=-g_s\\frac{e}{2m}\\vec{S}$ — das <em>doppelte</em> gyromagnetische Verhältnis. Das ist klassisch nicht erklärbar und folgt erst aus der Dirac-Gleichung. Beispiel Ti$^{3+}$ (3d$^1$): ein einzelnes ungepaartes Elektron → $\\mu\\approx1{,}73\\,\\mu_B$.</div>`},
+    {q:'Zeeman-Energie und Kraft im Gradientenfeld: Wie verhält sich ein magnetisches Moment im B-Feld?',badges:['def','proof'],ref:'Skript §5.1',
+     a:`<div class="step"><strong>Energie:</strong> $E=-\\vec{\\mu}\\cdot\\vec{B}=-\\mu B\\cos\\alpha$. Für ein Spin-$\\tfrac12$-Teilchen gibt es nur zwei Einstellungen ($\\pm$), die Aufspaltung beträgt
+$$\\Delta E=2\\mu B=g\\mu_B B$$
+Das ist der <strong>Zeeman-Effekt</strong> — die Grundlage von ESR, NMR/MRT und der Spektroskopie im Magnetfeld.</div>
+<div class="step"><strong>Zahlenbeispiel:</strong> Bei $B=1\\,$T ist $\\Delta E\\approx1{,}9\\cdot10^{-23}\\,$J $\\approx1{,}2\\cdot10^{-4}\\,$eV — verglichen mit $k_BT\\approx2{,}5\\cdot10^{-2}\\,$eV bei Raumtemperatur <strong>winzig</strong>. Deshalb ist die thermische Unordnung dominant und $\\chi$ so klein.</div>
+<div class="step"><strong>Kraft:</strong> Wie beim elektrischen Dipol gibt es im homogenen Feld nur ein Drehmoment. Im <em>Gradientenfeld</em>:
+$$\\vec{F}=\\nabla(\\vec{\\mu}\\cdot\\vec{B})\\ \\ \\to\\ \\ F_z=\\mu_z\\frac{\\partial B_z}{\\partial z}$$</div>
+<div class="result">Damit erklärt sich alles Wesentliche: <strong>Stern-Gerlach-Versuch</strong> (Strahlaufspaltung → Nachweis der Richtungsquantelung), <strong>Faraday-Waage</strong> (Messung von $\\chi$), <strong>magnetische Flasche</strong> und die Anziehung/Abstoßung von para-/diamagnetischen Proben im inhomogenen Feld.</div>`},
+    {q:'Larmor-Präzession und die Herleitung der diamagnetischen Suszeptibilität.',badges:['proof','calc'],ref:'Skript §5.2',
+     a:`<div class="step"><strong>Larmor-Theorem:</strong> Schaltet man ein Feld $B_0$ ein, überlagert sich der Bahnbewegung eine Präzession mit der Larmor-Frequenz
+$$\\Delta\\omega=\\pm\\frac{e}{2m}B_0=\\frac{\\gamma}{1}B_0$$
+Anschaulich: Die zusätzliche Lorentz-Kraft verändert die Umlauffrequenz je nach Umlaufsinn um $+\\Delta\\omega$ bzw. $-\\Delta\\omega$.</div>
+<div class="step"><strong>Induziertes Moment:</strong> Die geänderte Umlauffrequenz erzeugt einen Zusatzstrom und damit ein Moment, das nach Lenz dem angelegten Feld <strong>entgegengerichtet</strong> ist:
+$$\\Delta\\mu=-\\frac{e^2\\langle r^2\\rangle}{4m}B_0$$</div>
+<div class="result">Summation über $Z$ Elektronen und $N$ Atome pro Volumen:
+$$\\chi_{\\text{dia}}=-\\frac{\\mu_0NZe^2}{6m}\\langle r^2\\rangle\\;<\\;0$$</div>
+<div class="warn">Drei zentrale Eigenschaften des Diamagnetismus:<br>
+• <strong>immer negativ</strong> (Lenz!) und <strong>temperaturunabhängig</strong><br>
+• in <strong>jedem</strong> Material vorhanden — wird nur von Para-/Ferromagnetismus überdeckt, wenn diese vorliegen<br>
+• typische Größe $\\chi\\approx-10^{-5}\\dots-10^{-4}$; Extremfall <strong>Supraleiter mit $\\chi=-1$</strong> (idealer Diamagnet, Meißner-Effekt)</div>`},
+    {q:'Paramagnetismus: Brillouin-Funktion, Curie-Gesetz und effektives Moment.',badges:['def','proof'],ref:'Skript §5.3',
+     a:`<div class="step"><strong>Ausgangspunkt:</strong> Permanente atomare Momente konkurrieren mit der thermischen Bewegung. Die Besetzung der Zeeman-Niveaus folgt der Boltzmann-Statistik; die Mittelung liefert die <strong>Brillouin-Funktion</strong>
+$$M=Ng\\mu_BJ\\,B_J(x),\\qquad x=\\frac{g\\mu_BJB}{k_BT}$$</div>
+<div class="step"><strong>Grenzfälle:</strong><br>
+• $x\\gg1$ (hohes $B$, tiefes $T$): $B_J\\to1$ → <strong>Sättigung</strong>, alle Momente ausgerichtet.<br>
+• $x\\ll1$ (Normalfall): $B_J(x)\\approx\\frac{J+1}{3J}x$ → lineares Verhalten.</div>
+<div class="result"><strong>Curie-Gesetz</strong> (aus dem Kleinfeld-Grenzfall):
+$$\\chi=\\frac{C}{T},\\qquad C=\\frac{N p^2\\mu_B^2\\mu_0}{3k_B},\\qquad p=g\\sqrt{J(J+1)}$$
+$p$ heißt <em>effektive Magnetonenzahl</em>. Aus der Steigung von $1/\\chi$ gegen $T$ liest man direkt $p$ und damit den Spinzustand des Ions ab.</div>
+<div class="warn">Abgrenzungen: <strong>Pauli-Paramagnetismus</strong> der Leitungselektronen ist klein und <em>temperaturunabhängig</em>. <strong>Van-Vleck-Paramagnetismus</strong> entsteht durch Beimischung angeregter Zustände, ebenfalls temperaturunabhängig und positiv.</div>`},
+    {q:'Fliegende Frösche und paramagnetischer Sauerstoff: Zwei Demonstrationen des Magnetismus der Materie.',badges:['ex','calc'],ref:'Skript §5.2/5.3',
+     a:`<div class="step"><strong>Schwebender Frosch</strong> (Andre Geim, Nijmegen 1997, Ig-Nobelpreis 2000; Geim erhielt 2010 den Physik-Nobelpreis für Graphen): Wasser ist diamagnetisch ($\\chi\\approx-9\\cdot10^{-6}$). In einem Bitter-Magneten mit $B\\approx16\\!-\\!20\\,$T und starkem Gradienten wird die Kraft
+$$F_z=\\frac{\\chi V}{2\\mu_0}\\frac{\\partial B^2}{\\partial z}$$
+so groß wie die Gewichtskraft — der Frosch schwebt <em>stabil</em> (bei Diamagneten ist die Schwebelage im Gegensatz zu Permanentmagneten stabil, Earnshaw-Theorem greift nicht).</div>
+<div class="step"><strong>Energiebedarf:</strong> Ein solcher Widerstandsmagnet verbraucht mehrere Megawatt Leistung — deshalb ist das kein Alltagseffekt.</div>
+<div class="step"><strong>Flüssiger Sauerstoff:</strong> O$_2$ hat im Grundzustand <em>zwei ungepaarte Elektronen</em> (Triplett) und ist daher stark <strong>paramagnetisch</strong>. Gießt man flüssiges O$_2$ zwischen die Polschuhe eines Magneten, bleibt es dort hängen — flüssiger Stickstoff (diamagnetisch, alle Elektronen gepaart) fließt einfach durch.</div>
+<div class="result">Merkregel: <strong>ungepaarte Elektronen → paramagnetisch (angezogen)</strong>, alle Elektronen gepaart → diamagnetisch (abgestoßen).</div>`},
+    {q:'[ÜB 10B] Faraday-Waage: Bestimme $\\chi$ von Aluminium und Kupfer ($r=0{,}5\\,$cm, $k=10^{-6}\\,$N/m, $I=200\\,$A, $V=1\\,$mm³, $\\delta_{\\text{Al}}=0{,}234\\,$mm, $\\delta_{\\text{Cu}}=100\\,\\mu$m).',badges:['ex','calc','exam'],ref:'Übung 10, Aufg. B1–B3',
+     a:`<div class="step"><strong>1) Feld am Probenort</strong> (gerader Leiter):
+$$B=\\frac{\\mu_0I}{2\\pi r}=\\frac{4\\pi\\cdot10^{-7}\\cdot200}{2\\pi\\cdot0{,}005}=8\\cdot10^{-3}\\,\\text{T}$$</div>
+<div class="step"><strong>2) Gradient:</strong> $\\dfrac{\\partial B}{\\partial r}=-\\dfrac{B}{r}=-1{,}6\\,\\dfrac{\\text{T}}{\\text{m}}$, also
+$$\\frac{\\partial B^2}{\\partial r}=2B\\frac{\\partial B}{\\partial r}=-2{,}56\\cdot10^{-2}\\,\\frac{\\text{T}^2}{\\text{m}}$$</div>
+<div class="step"><strong>3) Kraft auf die Probe:</strong>
+$$F=\\frac{\\chi V}{2\\mu_0}\\frac{\\partial B^2}{\\partial r}\\;\\Rightarrow\\;|F|=|\\chi|\\cdot\\frac{10^{-9}}{2\\cdot1{,}257\\cdot10^{-6}}\\cdot2{,}56\\cdot10^{-2}=|\\chi|\\cdot1{,}02\\cdot10^{-5}\\,\\text{N}$$</div>
+<div class="step"><strong>4) Kraft aus der Auslenkung</strong> ($F=k\\delta$):<br>
+Al: $F=10^{-6}\\cdot2{,}34\\cdot10^{-4}=2{,}34\\cdot10^{-10}\\,$N<br>
+Cu: $F=10^{-6}\\cdot1{,}00\\cdot10^{-4}=1{,}00\\cdot10^{-10}\\,$N</div>
+<div class="result">$$\\chi_{\\text{Al}}=\\frac{2{,}34\\cdot10^{-10}}{1{,}02\\cdot10^{-5}}\\approx +2{,}3\\cdot10^{-5}\\quad(\\text{paramagnetisch, angezogen})$$
+$$\\chi_{\\text{Cu}}=\\frac{1{,}00\\cdot10^{-10}}{1{,}02\\cdot10^{-5}}\\approx -9{,}8\\cdot10^{-6}\\quad(\\text{diamagnetisch, abgestoßen})$$
+Literaturwerte: $\\chi_{\\text{Al}}=+2{,}2\\cdot10^{-5}$, $\\chi_{\\text{Cu}}=-9{,}7\\cdot10^{-6}$ — ausgezeichnete Übereinstimmung.</div>
+<div class="warn">Das <strong>Vorzeichen</strong> entscheidet man an der Richtung der Auslenkung: Zum Draht hin (ins stärkere Feld) = paramagnetisch, vom Draht weg = diamagnetisch.</div>`},
+    {q:'Ferromagnetismus: Austauschwechselwirkung, Weiss-Bezirke, Curie-Weiss-Gesetz und Curie-Temperaturen.',badges:['def','exam'],ref:'Skript §5.4',
+     a:`<div class="step"><strong>Ursache — Austauschwechselwirkung:</strong> Kein magnetischer Dipol-Dipol-Effekt (der wäre um Größenordnungen zu schwach), sondern eine <em>quantenmechanische</em> Konsequenz des Pauli-Prinzips:
+$$H=-J\\,\\vec{S}_1\\cdot\\vec{S}_2$$
+$J>0$ → Parallelstellung günstiger → Ferromagnetismus; $J<0$ → Antiparallelstellung → Antiferromagnetismus.</div>
+<div class="step"><strong>Weiss-Bezirke (Domänen):</strong> Auch unmagnetisiertes Eisen ist lokal vollständig magnetisiert — nur zeigen die Domänen in verschiedene Richtungen, sodass sich die Momente makroskopisch aufheben. Im äußeren Feld wachsen günstig orientierte Domänen (Wandverschiebung), danach drehen sich die Momente (Drehprozesse) → <strong>Neukurve</strong> bis zur Sättigung.</div>
+<div class="step"><strong>Curie-Weiss-Gesetz</strong> oberhalb von $T_C$:
+$$\\chi=\\frac{C}{T-T_C}$$
+Der Auftrag $1/\\chi$ gegen $T$ ergibt eine Gerade, deren Nullstelle direkt $T_C$ liefert. (Antiferromagnet: $\\chi=C/(T+T_N)$, Nullstelle bei negativer Temperatur.)</div>
+<div class="result"><strong>Curie-Temperaturen:</strong> Fe $770\\,°$C ($1043\\,$K) · Co $\\approx1130\\,°$C · Ni $\\approx358\\,°$C · Gd $\\approx20\\,°$C. Oberhalb $T_C$ wird das Material <em>paramagnetisch</em> — der Hörsaalversuch: ein am Faden hängender Eisennagel wird vom Magneten angezogen, fällt nach dem Erhitzen mit dem Brenner ab und wird beim Abkühlen wieder angezogen.</div>
+<div class="warn">Weitere Ordnungstypen: <strong>Antiferromagnetismus</strong> (Néel-Temperatur $T_N$, kein Nettomoment), <strong>Ferrimagnetismus</strong> (ungleiche Untergitter → Restmoment, z. B. Magnetit, Ferrite), <strong>Spindichtewellen</strong> (Cr), <strong>Altermagnetismus</strong> (seit 2022 neue Klasse), <strong>Multiferroika</strong> (TbMnO$_3$: Magnetismus und Ferroelektrizität gekoppelt).</div>`},
+    {q:'Hysteresekurve: Erkläre Neukurve, Remanenz, Koerzitivfeld und die Bedeutung der Schleifenfläche.',badges:['def','exam'],ref:'Skript §5.4',
+     a:`<div class="step"><strong>Neukurve:</strong> Vom entmagnetisierten Zustand aus steigt $M$ mit $H$ zunächst reversibel (Wandverschiebung), dann irreversibel, bis zur <strong>Sättigungsmagnetisierung</strong> $M_S$.</div>
+<div class="step"><strong>Remanenz $B_r$:</strong> Beim Zurückfahren auf $H=0$ bleibt eine Magnetisierung übrig — das ist der Permanentmagnet.</div>
+<div class="step"><strong>Koerzitivfeldstärke $H_c$:</strong> Das <em>Gegenfeld</em>, das nötig ist, um $B$ wieder auf null zu bringen.</div>
+<div class="result"><strong>Fläche der Schleife = Energieverlust pro Volumen und Umlauf:</strong>
+$$w_{\\text{Verlust}}=\\oint H\\,dB$$
+Diese Ummagnetisierungsarbeit wird als Wärme frei — bei $50\\,$Hz also 50-mal pro Sekunde.</div>
+<div class="warn"><strong>Zwei Materialklassen, die man nie verwechseln darf:</strong><br>
+• <strong>Weichmagnetisch</strong> (schmale Schleife, kleines $H_c$): Trafokerne, Motoren, Abschirmungen. Ziel: minimale Verluste. Beispiele: Weicheisen, Fe-Si-Blech, Permalloy.<br>
+• <strong>Hartmagnetisch</strong> (breite Schleife, großes $H_c$ und $B_r$): Permanentmagnete und Datenspeicher (Festplatte, Magnetstreifen). Ziel: stabile Information. Beispiele: AlNiCo, SmCo, NdFeB.</div>`},
+    {q:'Warum braucht man neben $\\vec{B}$ auch das $\\vec{H}$-Feld? Wie lauten die Grenzflächenbedingungen?',badges:['def','proof'],ref:'Skript §5.5',
+     a:`<div class="step"><strong>Problem:</strong> Die Magnetisierung entspricht gebundenen Kreisströmen, $\\nabla\\times\\vec{M}=\\vec{j}_{\\text{geb}}$. Diese kennt man aber nicht — man kennt nur den Strom, den man selbst einspeist.</div>
+<div class="step"><strong>Definition:</strong> $\\vec{H}=\\dfrac{\\vec{B}}{\\mu_0}-\\vec{M}$, also $\\vec{B}=\\mu_0(\\vec{H}+\\vec{M})$ und mit $\\vec{M}=\\chi\\vec{H}$:
+$$\\vec{B}=\\mu_0(1+\\chi)\\vec{H}=\\mu_0\\mu_r\\vec{H},\\qquad \\chi=\\mu_r-1$$</div>
+<div class="step"><strong>Der Nutzen:</strong> Das Durchflutungsgesetz für $\\vec{H}$ enthält <em>nur die freien Ströme</em>:
+$$\\oint\\vec{H}\\cdot d\\vec{r}=I_{\\text{frei}}$$
+— genau die Analogie zu $\\vec{D}$ in der Elektrostatik ($\\oint\\vec{D}d\\vec{A}=Q_{\\text{frei}}$).</div>
+<div class="result"><strong>Grenzflächenbedingungen:</strong><br>
+• $B_\\perp$ ist <strong>stetig</strong> (aus $\\nabla\\cdot\\vec{B}=0$, Gauß-Dose)<br>
+• $H_\\parallel$ ist <strong>stetig</strong> (aus $\\oint\\vec{H}d\\vec{r}=I_{\\text{frei}}$, Ampère-Schleife ohne freien Strom)<br>
+Folglich sind $H_\\perp$ und $B_\\parallel$ <em>unstetig</em> — sie springen um den Faktor $\\mu_r$.</div>
+<div class="warn">Typische $\\mu_r$: Luft $\\approx1$ · Weicheisen $\\sim5000$ · <strong>$\\mu$-Metall / Permalloy</strong> (70–81 % Ni) $50\\,000\\!-\\!140\\,000$. Wegen der Brechung der Feldlinien werden diese in $\\mu$-Metall "eingesaugt" — daher die hervorragende Abschirmung <em>statischer</em> Magnetfelder (Photomultiplier, MRT-Räume). Ein normaler Faraday-Käfig kann das <strong>nicht</strong>.</div>`},
+    {q:'[ÜB 10C / Probeklausur] Ringspule mit Luftspalt: $\\mu_r=1000$, $R=20\\,$cm, $N=1000$, $I=1\\,$A, Spaltbreite $d=2\\,$mm. Wie groß ist $B$?',badges:['ex','calc','exam'],ref:'Übung 10, Aufg. C',
+     a:`<div class="step"><strong>Zwei Bedingungen:</strong><br>
+(1) $B$ ist im Eisen und im Spalt <strong>gleich</strong> (Stetigkeit von $B_\\perp$).<br>
+(2) Durchflutungsgesetz für $H$ entlang des mittleren Umfangs:
+$$H_{\\text{Fe}}\\,l_{\\text{Fe}} + H_{\\text{L}}\\,d = NI$$</div>
+<div class="step">Mit $H_{\\text{Fe}}=\\dfrac{B}{\\mu_0\\mu_r}$, $H_{\\text{L}}=\\dfrac{B}{\\mu_0}$ und $l_{\\text{Fe}}=2\\pi R-d$:
+$$\\frac{B}{\\mu_0}\\left(\\frac{2\\pi R-d}{\\mu_r}+d\\right)=NI$$</div>
+<div class="result">$$B=\\frac{\\mu_0\\mu_r NI}{2\\pi R-d+\\mu_r d}\\approx\\frac{\\mu_0 NI}{\\frac{2\\pi R}{\\mu_r}+d}$$
+$$B=\\frac{1{,}257\\cdot10^{-6}\\cdot1000\\cdot1}{1{,}255\\cdot10^{-3}+2\\cdot10^{-3}}\\approx 0{,}39\\,\\text{T}$$</div>
+<div class="warn"><strong>Ohne</strong> Luftspalt wäre $B=\\dfrac{\\mu_0\\mu_rNI}{2\\pi R}\\approx 1{,}0\\,$T. Ein Spalt von nur $2\\,$mm auf $126\\,$cm Umfang (0,16 %!) <strong>drittelt</strong> das Feld. Grund: Im Nenner steht $2\\pi R/\\mu_r=1{,}26\\,$mm gegenüber $d=2\\,$mm — der winzige Spalt dominiert den magnetischen Widerstand.</div>
+<div class="result">Merke die Analogie: magnetischer Kreis $\\leftrightarrow$ Stromkreis. $NI\\leftrightarrow U$ (Durchflutung), $\\Phi\\leftrightarrow I$, $R_m=\\frac{l}{\\mu_0\\mu_r A}\\leftrightarrow R$. Reihenschaltung von Widerständen — der größte dominiert.</div>`},
+    {q:'Magnetische Feldenergie: Leite $W=\\frac12LI^2$ her und gib die Energiedichte an.',badges:['proof','calc'],ref:'Skript §5.6',
+     a:`<div class="step"><strong>Ansatz:</strong> Beim Aufbau des Stroms wirkt die Induktionsspannung $U_{\\text{ind}}=-L\\dfrac{dI}{dt}$ dagegen. Die Quelle muss dagegen Arbeit leisten:
+$$dW=U I\\,dt=L\\frac{dI}{dt}I\\,dt=LI\\,dI$$</div>
+<div class="step"><strong>Integration:</strong>
+$$W=\\int_0^{I}LI^{\\prime}\\,dI^{\\prime}=\\tfrac12LI^2$$</div>
+<div class="step"><strong>Energiedichte:</strong> Für die lange Spule ist $L=\\dfrac{\\mu_0\\mu_rN^2A}{l}$ und $B=\\dfrac{\\mu_0\\mu_rNI}{l}$. Einsetzen und durch das Volumen $Al$ teilen:
+$$w=\\frac{B^2}{2\\mu_0\\mu_r}=\\tfrac12\\vec{B}\\cdot\\vec{H}$$</div>
+<div class="result">$$w_{\\text{magn}}=\\tfrac12\\vec{B}\\cdot\\vec{H}\\qquad\\text{(vgl. }w_{\\text{elektr}}=\\tfrac12\\vec{E}\\cdot\\vec{D}\\text{)}$$
+Gesamtenergiedichte des elektromagnetischen Feldes: $w=\\tfrac12(\\vec{E}\\cdot\\vec{D}+\\vec{B}\\cdot\\vec{H})$.</div>
+<div class="warn">Zahlenvergleich: Bei $B=1\\,$T ist $w=\\frac{1}{2\\cdot1{,}257\\cdot10^{-6}}\\approx 4\\cdot10^{5}\\,$J/m³. Bei der Durchbruchfeldstärke von Luft ($E=3\\cdot10^6\\,$V/m) dagegen nur $w=\\frac12\\varepsilon_0E^2\\approx 40\\,$J/m³ — magnetische Felder speichern rund $10^4$-mal mehr Energie pro Volumen. Deshalb sind Elektromotoren magnetisch und nicht elektrostatisch gebaut.</div>`},
+    {q:'Entmagnetisierungsfaktoren: Warum ist das Feld <em>in</em> einer magnetisierten Probe kleiner als das angelegte Feld?',badges:['def','calc'],ref:'Skript §5.5',
+     a:`<div class="step"><strong>Ursache:</strong> An den Stirnflächen einer magnetisierten Probe erscheinen "magnetische Oberflächenladungen" ($\\vec{M}$ endet dort). Sie erzeugen im Inneren ein Gegenfeld — das <strong>Entmagnetisierungsfeld</strong>:
+$$\\vec{H}_{\\text{innen}}=\\vec{H}_{\\text{ext}}-N\\vec{M}$$</div>
+<div class="step"><strong>Entmagnetisierungsfaktoren $N$</strong> (Summe über drei Achsen immer $=1$):<br>
+• <strong>Kugel:</strong> $N=\\tfrac13$ in jede Richtung<br>
+• <strong>Langer Stab, längs magnetisiert:</strong> $N\\approx0$ · quer: $N=\\tfrac12$<br>
+• <strong>Dünne Platte, in der Ebene:</strong> $N=0$ · senkrecht dazu: $N=1$</div>
+<div class="result">Praktische Folgen:<br>
+• Ein <strong>langer, dünner Stab</strong> parallel zum Feld hat fast kein Entmagnetisierungsfeld — deshalb baut man Kompassnadeln und Kernproben stabförmig.<br>
+• Eine <strong>dünne Schicht</strong> lässt sich in der Ebene leicht, senkrecht dazu extrem schwer magnetisieren (Formanisotropie — zentral in der Festplattentechnik).<br>
+• Die <em>gemessene</em> Suszeptibilität ist stets kleiner als die wahre: $\\chi_{\\text{gemessen}}=\\dfrac{\\chi}{1+N\\chi}$. Für $\\chi\\gg1$ folgt $\\chi_{\\text{gem}}\\to1/N$ — bei Ferromagneten misst man also im Wesentlichen die <strong>Form</strong>, nicht das Material!</div>
+<div class="warn">Deshalb ist der <em>geschlossene</em> Eisenkreis (Toroid, Trafokern) so beliebt: Er hat keine Stirnflächen und damit $N=0$.</div>`},
+    {q:'Wozu braucht die Forschung starke Magnetfelder? Nenne Großanlagen und ihre Aufgaben.',badges:['def'],ref:'Skript §5.6',
+     a:`<div class="step"><strong>Teilchenbeschleuniger:</strong> Ablenk- und Fokussiermagnete (Dipole, Quadrupole) halten die Strahlen auf der Bahn — LHC: $8{,}3\\,$T NbTi-Dipole bei $1{,}9\\,$K.</div>
+<div class="step"><strong>Neutronenquellen:</strong> Der Forschungsreaktor <strong>FRM II</strong> (München) und die Spallationsquelle <strong>ESS</strong> (Lund) liefern Neutronen, die wegen ihres magnetischen Moments <em>direkt</em> magnetische Strukturen abbilden können — Röntgenstrahlung kann das nur indirekt.</div>
+<div class="step"><strong>Synchrotron/FEL:</strong> Undulatoren und Wiggler sind periodische Magnetanordnungen, die relativistische Elektronen auf Schlangenbahnen zwingen und dabei brillante Röntgenstrahlung erzeugen (ESRF Grenoble, <strong>European XFEL</strong> Hamburg, seit 2017).</div>
+<div class="step"><strong>Hochfeldlabore:</strong> Dresden, Nijmegen, Tallahassee — gepulste Felder bis $\\sim100\\,$T zur Untersuchung von Quantenphasenübergängen, Quanten-Hall-Effekt, Fermiflächen (Shubnikov-de-Haas-Oszillationen).</div>
+<div class="result"><strong>Medizin:</strong> MRT ($1{,}5\\!-\\!7\\,$T) — nutzt die Zeeman-Aufspaltung der Protonenspins; die Resonanzfrequenz $\\omega=\\gamma B$ liegt bei $64\\,$MHz pro Tesla. Zusammen mit Gradientenspulen wird daraus eine Ortskodierung.</div>`}
   ]
 },
 {
