@@ -2096,7 +2096,83 @@ Konsequenz: Im frei fallenden Fahrstuhl ($\\vec{a}=\\vec{g}$) herrscht Schwerelo
 Dies motiviert (in der Allgemeinen Relativitätstheorie) das <strong>starke Äquivalenzprinzip</strong>: lokale Ununterscheidbarkeit von Trägheits- und Gravitationskräften.`},
     {q:'β-Zerfall $^{90}$Sr $\\to$ $^{90}$Y: Warum sind die Zerfallselektronen relativistisch zu behandeln?',badges:['ex','calc'],ref:'Skript §11.3',
      a:`Maximale kinetische Energie der Elektronen $E_{\\text{kin,max}}\\approx2{,}2\\,\\text{MeV} \\gg m_0c^2=511\\,\\text{keV}$ (Elektronen-Ruheenergie) $\\Rightarrow$ die Elektronen sind hochrelativistisch ($\\gamma\\gg1$).<br>
-Impulsmessung über Ablenkradius im Magnetfeld: $p=qBr$; Energiemessung über Szintillator. Beide Messungen zusammen bestätigen $E^2=(pc)^2+(m_0c^2)^2$.`}
+Impulsmessung über Ablenkradius im Magnetfeld: $p=qBr$; Energiemessung über Szintillator. Beide Messungen zusammen bestätigen $E^2=(pc)^2+(m_0c^2)^2$.`},
+    {q:'Relativistische Geschwindigkeitsaddition: Formel, Grenzfälle und warum $c$ unüberschreitbar ist.',badges:['def','proof','calc','exam'],ref:'Skript §11.3',
+     a:`<div class="step"><strong>Herleitung</strong> direkt aus der Lorentz-Transformation: mit $u_x=dx/dt$ und $u_x^{\\prime}=dx^{\\prime}/dt^{\\prime}$, wobei $dx^{\\prime}=\\gamma(dx-v\\,dt)$ und $dt^{\\prime}=\\gamma(dt-\\frac{v}{c^2}dx)$:
+$$u_x^{\\prime}=\\frac{dx-v\\,dt}{dt-\\frac{v}{c^2}dx}=\\frac{u_x-v}{1-\\frac{v\\,u_x}{c^2}}$$</div>
+<div class="result">$$u_x^{\\prime}=\\frac{u_x-v}{1-\\dfrac{v\\,u_x}{c^2}},\\qquad u_y^{\\prime}=\\frac{u_y}{\\gamma\\left(1-\\dfrac{v\\,u_x}{c^2}\\right)}$$
+Die Transversalkomponente ändert sich <em>auch</em>, obwohl es keine Längenkontraktion quer zur Bewegung gibt — weil die Zeit anders läuft.</div>
+<div class="step"><strong>Grenzfälle:</strong><br>
+• $v,u\\ll c$: Nenner $\\to1$ → Galilei-Addition $u^{\\prime}=u-v$.<br>
+• $u_x=c$: $u^{\\prime}=\\frac{c-v}{1-v/c}=c$ — <strong>Licht ist in jedem System gleich schnell</strong>, genau wie das 2. Postulat verlangt.<br>
+• $u_x=0{,}9c$, $v=-0{,}9c$ (Kollision): $u^{\\prime}=\\frac{1{,}8c}{1+0{,}81}=0{,}994c$ — nicht $1{,}8c$!</div>
+<div class="warn">Aus der Formel folgt: Addiert man beliebig viele Geschwindigkeiten $<c$, bleibt das Ergebnis immer $<c$. $c$ ist keine "technische" Schranke, sondern eine Struktureigenschaft der Raumzeit.</div>`},
+    {q:'Energie-Impuls-Beziehung: Leite $E^2=m_0^2c^4+p^2c^2$ her und wende sie auf Kernbindungsenergien an.',badges:['proof','calc','exam'],ref:'Skript §11.3',
+     a:`<div class="step"><strong>Herleitung:</strong> Mit $E=\\gamma m_0c^2$ und $p=\\gamma m_0 v$:
+$$E^2-p^2c^2=\\gamma^2m_0^2c^4-\\gamma^2m_0^2v^2c^2=\\gamma^2m_0^2c^4\\left(1-\\frac{v^2}{c^2}\\right)=m_0^2c^4$$
+denn $\\gamma^2(1-\\beta^2)=1$.</div>
+<div class="result">$$E^2=m_0^2c^4+p^2c^2,\\qquad \\beta=\\frac{v}{c}=\\frac{pc}{E}$$
+$m_0c^2$ ist eine <strong>Lorentz-Invariante</strong>: Alle Beobachter messen dieselbe Ruhemasse, auch wenn $E$ und $p$ verschieden sind.<br>
+Grenzfälle: $p=0\\Rightarrow E=m_0c^2$; &nbsp; $m_0=0\\Rightarrow E=pc$ (Photon!); &nbsp; $v\\ll c\\Rightarrow E\\approx m_0c^2+\\frac{p^2}{2m_0}$.</div>
+<div class="step"><strong>Umrechnung in der Kernphysik:</strong>
+$$1\\,\\text{u}\\;\\hat{=}\\;931{,}5\\,\\text{MeV}/c^2,\\qquad m_ec^2=511\\,\\text{keV},\\qquad m_pc^2=938{,}3\\,\\text{MeV}$$</div>
+<div class="step"><strong>Beispiel Deuterium:</strong> Die Bindungsenergie beträgt $2{,}22\\,$MeV. Der <strong>Massendefekt</strong> ist damit
+$$\\Delta m=\\frac{2{,}22\\,\\text{MeV}}{931{,}5\\,\\text{MeV/u}}=0{,}00238\\,\\text{u}$$
+Ein Deuteron ist also <em>leichter</em> als Proton + Neutron zusammen. Genau diese fehlende Masse wurde bei der Bindung als Energie frei — Grundlage von Kernspaltung und Fusion ($E=mc^2$ ist keine Metapher, sondern eine Bilanzgleichung).</div>`},
+    {q:'Minkowski-Diagramm: Wie liest man Gleichzeitigkeit, Zeitdilatation und Kausalität ab?',badges:['def','exam'],ref:'Skript §11.2',
+     a:`<div class="step"><strong>Aufbau:</strong> Auftragen von $ct$ (vertikal) über $x$ (horizontal). Licht läuft dann unter exakt $45°$ — die <strong>Lichtkegel</strong>. Ein ruhendes Teilchen ist eine senkrechte Weltlinie, ein bewegtes eine geneigte (immer steiler als $45°$).</div>
+<div class="step"><strong>Bewegtes System $S^{\\prime}$:</strong> Die $ct^{\\prime}$-Achse ist die Weltlinie des Ursprungs, also die Gerade $x=vt$ mit Steigungswinkel $\\alpha=\\arctan\\beta$ zur $ct$-Achse. Die $x^{\\prime}$-Achse (Menge aller in $S^{\\prime}$ gleichzeitigen Ereignisse, $t^{\\prime}=0$) ist die Gerade $ct=\\beta x$ — sie ist um denselben Winkel zur $x$-Achse geneigt. Die Achsen <strong>scheren</strong> also symmetrisch auf die Lichtlinie zu.</div>
+<div class="result"><strong>Ablesen:</strong><br>
+• <em>Gleichzeitigkeit</em>: Parallelen zur $x^{\\prime}$-Achse — sie sind für $S$ <em>nicht</em> gleichzeitig. Damit ist die Relativität der Gleichzeitigkeit rein geometrisch sichtbar.<br>
+• <em>Zeitdilatation / Längenkontraktion</em>: entstehen durch die verschiedenen Skalen auf den geneigten Achsen (Hyperbeln $c^2t^2-x^2=\\text{const}$ als Eichkurven).<br>
+• <em>Invariantes Intervall</em>: $\\Delta s^2=c^2\\Delta t^2-\\Delta x^2$ ist für alle Beobachter gleich.</div>
+<div class="warn"><strong>Kausalität:</strong> $\\Delta s^2>0$ zeitartig (Wirkung möglich, Reihenfolge absolut) · $\\Delta s^2=0$ lichtartig · $\\Delta s^2<0$ raumartig (kein kausaler Zusammenhang; die Reihenfolge ist beobachterabhängig, aber genau deshalb entsteht kein Widerspruch).</div>`},
+    {q:'Feld einer gleichförmig bewegten Punktladung — und wie daraus das Magnetfeld entsteht.',badges:['proof','def','exam'],ref:'Skript §11.4',
+     a:`<div class="step"><strong>Ausgangspunkt:</strong> Im Ruhesystem der Ladung existiert nur ein radiales Coulomb-Feld, <em>kein</em> Magnetfeld. Transformiert man in das Laborsystem, gilt für die Komponenten
+$$E_\\parallel^{\\prime}=E_\\parallel,\\qquad E_\\perp^{\\prime}=\\gamma E_\\perp$$
+(die Feldlinien "quetschen" sich zusammen).</div>
+<div class="result">$$\\vec{E}=\\frac{q}{4\\pi\\varepsilon_0}\\,\\frac{1-\\beta^2}{\\left(1-\\beta^2\\sin^2\\theta\\right)^{3/2}}\\,\\frac{\\hat{r}}{r^2}$$
+• In Bewegungsrichtung ($\\theta=0$): $E=\\dfrac{E_{\\text{Coulomb}}}{\\gamma^2}$ — <strong>abgeschwächt</strong>.<br>
+• Senkrecht dazu ($\\theta=90°$): $E=\\gamma\\,E_{\\text{Coulomb}}$ — <strong>verstärkt</strong>.<br>
+Für $v\\to c$ wird das Feld zu einer flachen "Pfannkuchen"-Scheibe senkrecht zur Bewegung.</div>
+<div class="step"><strong>Das Magnetfeld ist ein reiner Transformationseffekt:</strong>
+$$\\vec{B}=\\frac{1}{c^2}\\,\\vec{v}\\times\\vec{E}$$
+Setzt man das Coulomb-Feld ein und nutzt $\\frac{1}{\\varepsilon_0c^2}=\\mu_0$, erhält man unmittelbar
+$$\\vec{B}=\\frac{\\mu_0}{4\\pi}\\frac{q\\,\\vec{v}\\times\\hat{r}}{r^2}\\quad\\Rightarrow\\quad d\\vec{B}=\\frac{\\mu_0 I}{4\\pi}\\frac{d\\vec{l}\\times\\hat{r}}{r^2}$$
+also das <strong>Biot-Savart-Gesetz</strong>.</div>
+<div class="warn">Das Verhältnis $B/E=v/c^2$ zeigt, warum Magnetfelder so "schwach" wirken: Die Driftgeschwindigkeit in einem Draht beträgt nur mm/s. Dass wir Magnetismus überhaupt bemerken, liegt allein an der exakten Ladungsneutralität des Drahtes — ein Ungleichgewicht von $10^{-11}$ würde die elektrische Kraft dominieren lassen.</div>`},
+    {q:'Zeige relativistisch: Ein neutraler stromdurchflossener Draht erscheint im mitbewegten System geladen — und liefert $B=\\frac{\\mu_0 I}{2\\pi r}$.',badges:['proof','exam'],ref:'Skript §11.4',
+     a:`<div class="step"><strong>Laborsystem $S$:</strong> Der Draht ist neutral: die positiven Ionen ruhen mit Linienladung $+\\lambda$, die Elektronen driften mit $v$ und tragen $-\\lambda$. Netto $\\lambda_{\\text{ges}}=0$ → <em>kein</em> E-Feld, aber ein Strom $I=\\lambda v$ und damit ein B-Feld.</div>
+<div class="step"><strong>System $S^{\\prime}$, das mit einer Testladung mitläuft</strong> (Geschwindigkeit $u$): Jetzt sind die Ionen bewegt und die Elektronen anders bewegt. Weil <strong>Ladung invariant</strong>, <em>Länge</em> aber nicht ist, ändern sich beide Linienladungsdichten unterschiedlich:
+$$\\lambda_+^{\\prime}=\\gamma_u\\lambda,\\qquad \\lambda_-^{\\prime}=-\\gamma_u\\lambda\\left(1-\\frac{uv}{c^2}\\right)$$</div>
+<div class="step"><strong>Nettoladung in $S^{\\prime}$:</strong>
+$$\\lambda^{\\prime}=\\lambda_+^{\\prime}+\\lambda_-^{\\prime}=\\gamma_u\\lambda\\frac{uv}{c^2}\\;\\ne\\;0$$
+Der Draht ist im mitbewegten System <strong>elektrisch geladen</strong>! Er erzeugt dort ein radiales Feld $E^{\\prime}=\\frac{\\lambda^{\\prime}}{2\\pi\\varepsilon_0 r}$, das auf die Testladung eine rein <em>elektrische</em> Kraft ausübt.</div>
+<div class="result">Rücktransformation dieser Kraft ins Laborsystem ergibt exakt die Lorentz-Kraft $F=quB$ mit
+$$B=\\frac{\\mu_0 I}{2\\pi r}$$
+<strong>Fazit:</strong> Magnetismus ist kein eigenständiges Phänomen, sondern die relativistische Kehrseite der Elektrostatik. $\\vec{E}$ und $\\vec{B}$ sind Komponenten <em>eines</em> Objekts, des Feldstärketensors $F^{\\mu\\nu}$ — was der eine als E-Feld sieht, sieht der andere teilweise als B-Feld.</div>
+<div class="warn">Erstaunlich: Ein Effekt der Ordnung $v/c^2$ mit Driftgeschwindigkeiten im mm/s-Bereich reicht aus, um Elektromotoren anzutreiben — weil die Coulomb-Kraft selbst so überwältigend stark ist.</div>`},
+    {q:'β-Zerfall im Magnetfeld: Wie misst man $p$ und $E$ getrennt und prüft damit die Relativitätstheorie?',badges:['ex','calc'],ref:'Skript §11.3 (Praktikumsversuch)',
+     a:`<div class="step"><strong>Impulsmessung über den Ablenkradius:</strong> Im homogenen Feld gilt exakt (auch relativistisch!) $p=qBr$, denn die Lorentz-Kraft liefert $\\gamma m_0v^2/r=qvB$. Praktische Form:
+$$pc\\,[\\text{keV}]=299{,}79\\cdot B\\,[\\text{mT}]\\cdot r\\,[\\text{m}]$$</div>
+<div class="step"><strong>Zahlenbeispiel:</strong> $r=6{,}2\\,$cm bei $B=10\\,$mT:
+$$pc=299{,}79\\cdot10\\cdot0{,}062=186\\,\\text{keV}$$
+$$E=\\sqrt{(pc)^2+(m_ec^2)^2}=\\sqrt{186^2+511^2}=544\\,\\text{keV}$$
+$$E_{\\text{kin}}=544-511=33\\,\\text{keV},\\qquad \\beta=\\frac{pc}{E}=\\frac{186}{544}=0{,}34$$</div>
+<div class="step"><strong>Energiemessung unabhängig davon:</strong> Der abgelenkte Strahl trifft auf einen <strong>Szintillator</strong>; die Lichtblitze werden von einem <em>Photomultiplier</em> in Ladungspulse verwandelt, deren Höhe proportional zu $E_{\\text{kin}}$ ist (Vielkanalanalysator).</div>
+<div class="result">Trägt man die für jeden Radius gemessene Energie gegen $p$ auf, liegen die Punkte auf der Hyperbel $E^2=(pc)^2+(m_0c^2)^2$ — und <em>nicht</em> auf der klassischen Parabel $E_{\\text{kin}}=p^2/2m$. Bei $\\beta\\to1$ nähert sich die Kurve der Asymptote $E=pc$ an. Der Achsenabschnitt liefert direkt $m_ec^2=511\\,$keV.</div>
+<div class="warn">Warum sind β-Elektronen relativistisch? Typische Zerfallsenergien liegen bei einigen $100\\,$keV bis MeV — also in derselben Größenordnung wie die Ruheenergie $511\\,$keV. Genau dann ist $\\gamma$ merklich $>1$ und die klassische Rechnung versagt.</div>`},
+    {q:'Zwillingsparadoxon mit Zahlen: Zwei durchgerechnete Beispiele.',badges:['calc','ex','exam'],ref:'Skript §11.2',
+     a:`<div class="step"><strong>Beispiel 1 — Reise zu einem Stern in $3\\,$Lj Entfernung mit $v=0{,}6c$:</strong><br>
+$\\gamma=\\frac{1}{\\sqrt{1-0{,}36}}=\\frac{1}{0{,}8}=1{,}25$<br>
+Erdzeit: $t=\\frac{2\\cdot3\\,\\text{Lj}}{0{,}6c}=10\\,$Jahre.<br>
+Reisezeit an Bord: $\\tau=\\frac{t}{\\gamma}=\\frac{10}{1{,}25}=8\\,$Jahre.<br>
+<em>Aus Sicht des Reisenden</em>: Die Strecke ist auf $3/1{,}25=2{,}4\\,$Lj kontrahiert, also $\\frac{2\\cdot2{,}4}{0{,}6}=8\\,$Jahre — dasselbe Ergebnis, andere Erklärung. Der Reisende ist bei der Rückkehr $2$ Jahre jünger.</div>
+<div class="step"><strong>Beispiel 2 — $v=0{,}9994c$:</strong>
+$$\\gamma=\\frac{1}{\\sqrt{1-0{,}99880}}=\\frac{1}{\\sqrt{1{,}1996\\cdot10^{-3}}}=28{,}9$$
+Erlebt der Reisende $2$ Jahre, vergehen auf der Erde $2\\cdot28{,}9=57{,}7$ Jahre.</div>
+<div class="result"><strong>Auflösung des "Paradoxons":</strong> Die Situation ist <em>nicht</em> symmetrisch. Nur der Reisende wechselt beim Umkehren das Inertialsystem — er erfährt eine Beschleunigung, seine Weltlinie hat einen Knick. Beim Umkehrpunkt "springt" seine Gleichzeitigkeitslinie über einen großen Teil der Erdgeschichte. Der zu Hause gebliebene Zwilling bleibt durchgehend in <em>einem</em> Inertialsystem und altert deshalb mehr.</div>
+<div class="warn">Geometrisch: Von allen Weltlinien zwischen zwei Ereignissen hat die <strong>gerade</strong> (unbeschleunigte) die <em>größte</em> Eigenzeit — die umgekehrte Dreiecksungleichung der Minkowski-Raumzeit. Experimentell bestätigt durch Hafele–Keating (1971, Atomuhren im Flugzeug), Myonen in der Atmosphäre und die tägliche GPS-Korrektur.</div>`}
   ]
 },
 {
