@@ -1820,7 +1820,103 @@ Eine <strong>Kerr-Zelle</strong> zwischen gekreuzten Polarisatoren ist damit ein
 $$\\beta=V\\,B\\,l$$
 mit der <strong>Verdet\'schen Konstante</strong> $V$. Entscheidend: Die Drehung ist <em>nichtreziprok</em> — läuft das Licht zurück, addiert sich die Drehung, statt sich aufzuheben. Genau darauf beruht der <strong>optische Isolator</strong> (Faraday-Rotator), der Rückreflexe von Lasern fernhält. Historisch war dies der <em>erste</em> Nachweis, dass Licht und Magnetismus zusammenhängen.</div>
 <div class="step"><strong>MOKE</strong> (magnetooptischer Kerr-Effekt): Bei Reflexion an einer magnetisierten Oberfläche dreht sich die Polarisation — Standardmethode zur Abbildung magnetischer Domänen und ehemals Ausleseprinzip magnetooptischer Datenträger.</div>
-<div class="result"><strong>Spannungsdoppelbrechung:</strong> Mechanisch verspannter Kunststoff wird doppelbrechend. Zwischen gekreuzten Polarisatoren erscheinen farbige Isochromaten, die die Spannungsverteilung sichtbar machen — klassisches Verfahren der <em>Spannungsoptik</em> im Bauwesen (z. B. Modelluntersuchungen der Kathedrale von Bourges) und in der Materialprüfung.</div>`}
+<div class="result"><strong>Spannungsdoppelbrechung:</strong> Mechanisch verspannter Kunststoff wird doppelbrechend. Zwischen gekreuzten Polarisatoren erscheinen farbige Isochromaten, die die Spannungsverteilung sichtbar machen — klassisches Verfahren der <em>Spannungsoptik</em> im Bauwesen (z. B. Modelluntersuchungen der Kathedrale von Bourges) und in der Materialprüfung.</div>`},
+    {q:'Kohärenz: Definiere zeitliche und räumliche Kohärenz und rechne die Kohärenzlänge einer Spektrallampe aus.',badges:['def','calc','exam'],ref:'Skript §8.4',
+     a:`<div class="step"><strong>Warum überhaupt?</strong> Interferenz sichtbar wird nur, wenn die Phasendifferenz zweier Teilwellen über die Beobachtungsdauer <em>konstant</em> bleibt. Zwei unabhängige Glühlampen interferieren nie sichtbar.</div>
+<div class="step"><strong>Zeitliche (longitudinale) Kohärenz:</strong> Ein Atom emittiert einen Wellenzug endlicher Dauer $\\tau\\approx10^{-8}\\ldots10^{-9}\\,$s. Daraus:
+$$\\Delta T=\\frac{1}{\\Delta\\nu},\\qquad l_c=c\\,\\Delta T=\\frac{\\lambda^2}{\\Delta\\lambda}$$
+Mit $\\tau=10^{-8}\\,$s folgt $l_c=3\\cdot10^8\\cdot10^{-8}=3\\,$m; mit $\\tau=10^{-9}\\,$s nur $0{,}3\\,$m. Ein Wegunterschied größer als $l_c$ → kein Kontrast mehr.</div>
+<div class="step"><strong>Zahlenbeispiel:</strong> Weißes Licht ($\\lambda=550\\,$nm, $\\Delta\\lambda=300\\,$nm): $l_c\\approx1\\,\\mu$m → nur wenige Interferenzordnungen (deshalb sind Seifenblasenfarben so „flach"). Ein stabilisierter HeNe-Laser erreicht dagegen $l_c>100\\,$m.</div>
+<div class="step"><strong>Räumliche (transversale) Kohärenz:</strong> Betrifft die Phasenbeziehung <em>quer</em> zur Ausbreitung. Sie ist umso besser, je kleiner die Quelle bzw. je weiter sie entfernt ist — deshalb steht bei Young ein Vorspalt vor dem Doppelspalt.</div>
+<div class="result"><strong>Zwei Wege zu kohärenten Teilstrahlen:</strong><br>
+• <strong>Wellenfrontaufteilung</strong> — verschiedene Bereiche derselben Front (Doppelspalt, Fresnel\'scher Spiegel, Lloyd\'scher Spiegel).<br>
+• <strong>Amplitudenaufteilung</strong> — Strahlteiler oder dünne Schicht teilt dieselbe Front energetisch auf (Michelson-Interferometer, Seifenblase).</div>`},
+    {q:'Interferenzterm und Young\'scher Doppelspalt (1802): Leite die Streifenlage her.',badges:['proof','calc','exam'],ref:'Skript §8.4',
+     a:`<div class="step"><strong>Interferenzterm:</strong> Die Intensität ist $I\\propto\\langle(\\vec{E}_1+\\vec{E}_2)^2\\rangle=I_1+I_2+\\underbrace{2\\langle\\vec{E}_1\\cdot\\vec{E}_2\\rangle}_{\\text{Interferenzterm}}$.<br>
+Er verschwindet, wenn $\\vec{E}_1\\perp\\vec{E}_2$ (orthogonale Polarisation!) oder wenn die Phase zufällig schwankt (inkohärent).</div>
+<div class="step">Für gleiche Amplituden und Phasendifferenz $\\delta$:
+$$I=4I_0\\cos^2\\!\\left(\\frac{\\delta}{2}\\right),\\qquad \\delta=\\frac{2\\pi}{\\lambda}\\,\\Delta s$$
+Maximum $4I_0$ (viermal, nicht doppelt so hell!), Minimum $0$ — der Mittelwert $2I_0$ erhält die Energie.</div>
+<div class="step"><strong>Geometrie (Young 1802):</strong> Spaltabstand $d$, Schirmabstand $s\\gg d$. Gangunterschied $\\Delta s=d\\sin\\theta\\approx d\\,y/s$.<br>
+Maxima: $d\\sin\\theta=m\\lambda$ &nbsp;·&nbsp; Minima: $d\\sin\\theta=(m+\\tfrac12)\\lambda$</div>
+<div class="result">$$y_m=\\frac{m\\lambda s}{d},\\qquad \\Delta y=\\frac{\\lambda s}{d}$$
+Die Streifen sind <strong>äquidistant</strong>. Young konnte damit erstmals $\\lambda$ des Lichts messen und die Wellennatur beweisen — gegen Newtons Korpuskeltheorie.</div>
+<div class="warn">Rechenbeispiel: $\\lambda=600\\,$nm, $d=0{,}2\\,$mm, $s=2\\,$m $\\Rightarrow \\Delta y=\\frac{600\\cdot10^{-9}\\cdot2}{2\\cdot10^{-4}}=6\\,$mm. Aus $\\Delta y\\propto\\lambda$ folgt: Blau eng, Rot weit — bei weißem Licht ist nur das nullte Maximum weiß.</div>`},
+    {q:'Interferenz an dünnen Schichten: planparallele Platte, Seifenblase und Antireflexbeschichtung.',badges:['proof','calc','ex'],ref:'Skript §8.4',
+     a:`<div class="step"><strong>Gangunterschied</strong> zwischen dem an der Oberseite und dem an der Unterseite reflektierten Strahl (Dicke $d$, Index $n$, Einfallswinkel $\\theta$):
+$$\\Delta_{12}=2d\\sqrt{n^2-\\sin^2\\theta}\\;+\\;\\frac{\\lambda}{2}$$</div>
+<div class="warn">Der Zusatzterm $\\lambda/2$ ist der <strong>Phasensprung von $\\pi$</strong> bei Reflexion am optisch <em>dichteren</em> Medium (fest eingespanntes Seilende). Am dünneren Medium gibt es <em>keinen</em> Sprung. Das ist die häufigste Klausurfalle.</div>
+<div class="step"><strong>Folgen:</strong> Maxima für $\\Delta_{12}=m\\lambda$. Da $\\Delta_{12}$ von $\\lambda$, $d$ und $\\theta$ abhängt, sieht man bei weißem Licht <strong>Farben</strong>: Seifenblasen, Ölfilm auf der Straße, angelaufener Stahl, Newton\'sche Ringe. Sehr dünne Schichten ($d\\ll\\lambda$) erscheinen <em>schwarz</em> — nur der $\\lambda/2$-Term bleibt, also destruktiv für alle Farben (die abreißende Seifenlamelle!).</div>
+<div class="result"><strong>Antireflexbeschichtung (Vergütung):</strong> Damit sich beide Reflexe auslöschen, braucht man
+$$d=\\frac{\\lambda}{4n_S}\\qquad\\text{und}\\qquad n_S=\\sqrt{n_{\\text{Luft}}\\,n_{\\text{Glas}}}$$
+Für Glas: $n_S=\\sqrt{1{,}5}=1{,}22$. Real verwendet man <strong>MgF$_2$</strong> mit $n=1{,}38$ — daher der typische blau-violette Restreflex vergüteter Objektive (optimiert für die Mitte des Spektrums bei $550\\,$nm).</div>`},
+    {q:'Michelson-Interferometer: Aufbau, Intensitätsformel, Michelson-Morley-Experiment und LIGO.',badges:['def','calc','ex','exam'],ref:'Skript §8.4',
+     a:`<div class="step"><strong>Aufbau:</strong> Strahlteiler → zwei senkrechte Arme mit Endspiegeln → Rekombination am Detektor (Amplitudenaufteilung). Gangunterschied $\\Delta s=2(l_1-l_2)$ (Hin- und Rückweg!).</div>
+<div class="result">$$I=2I_0\\cos^2\\!\\left(\\frac{\\pi\\,\\Delta s}{\\lambda}\\right)$$
+Verschiebt man einen Spiegel um $\\lambda/2$, wandert das Muster um <em>einen</em> ganzen Streifen. Damit sind Längenmessungen mit Auflösung $\\ll\\lambda$ möglich — das Interferometer war lange die Grundlage der Meterdefinition.</div>
+<div class="step"><strong>Michelson-Morley (1881–1887):</strong> Gesucht wurde die Bewegung der Erde gegen den „Äther": Bei Drehung des Apparats um $90°$ hätte sich das Streifenmuster verschieben müssen. Erwartet wurden $\\sim0{,}4$ Streifen, gemessen wurde <strong>nichts</strong> (Obergrenze $<0{,}01$). Ergebnis: Es gibt keinen Äther, $c$ ist in jedem Inertialsystem gleich → direkter Wegbereiter der Speziellen Relativitätstheorie. Michelson erhielt 1907 den Nobelpreis.</div>
+<div class="step"><strong>LIGO:</strong> Michelson-Interferometer mit $4\\,$km Armlänge (effektiv $\\sim1600\\,$km durch Fabry-Pérot-Überhöhung). Eine Gravitationswelle dehnt einen Arm und staucht den anderen; nachgewiesen wurden Längenänderungen von $\\sim10^{-18}\\,$m — ein Tausendstel eines Protonendurchmessers. Erster Nachweis 14.09.2015, <strong>Nobelpreis 2017</strong>.</div>
+<div class="warn">Weitere Anwendungen: Fourier-Transform-Infrarotspektroskopie (FTIR), Brechungsindexmessung von Gasen (Gaszelle in einem Arm), Oberflächenprüfung mit $\\text{nm}$-Genauigkeit.</div>`},
+    {q:'Vielstrahlinterferenz am Gitter: Intensitätsformel, Nebenmaxima und Auflösungsvermögen.',badges:['proof','calc','exam'],ref:'Skript §8.5',
+     a:`<div class="step"><strong>Ansatz:</strong> $N$ gleich starke Spalte im Abstand $d$, jeweils Phasenversatz $\\delta=\\frac{2\\pi d}{\\lambda}\\sin\\theta$. Die Summe der $N$ Zeiger ist eine geometrische Reihe:
+$$E=E_0\\sum_{k=0}^{N-1}e^{ik\\delta}=E_0\\frac{1-e^{iN\\delta}}{1-e^{i\\delta}}$$</div>
+<div class="result">$$I=E_0^2\\,\\frac{\\sin^2(N\\delta/2)}{\\sin^2(\\delta/2)}$$</div>
+<div class="step"><strong>Diskussion:</strong><br>
+• <strong>Hauptmaxima</strong> bei $\\delta=2\\pi m$, d.h. $d\\sin\\theta=m\\lambda$; dort addieren sich alle Zeiger in Phase → $I_{\\max}=(E_0N)^2$, also $\\propto N^2$.<br>
+• Zwischen zwei Hauptmaxima liegen <strong>$N-1$ Nullstellen</strong> und <strong>$N-2$ Nebenmaxima</strong>.<br>
+• Mit wachsendem $N$ werden die Hauptmaxima <em>immer schärfer</em> und die Nebenmaxima immer unbedeutender.</div>
+<div class="step"><strong>Auflösungsvermögen:</strong> $\\dfrac{\\lambda}{\\Delta\\lambda}=mN$. Ein Gitter mit $10^4$ Strichen liefert in 2. Ordnung $\\lambda/\\Delta\\lambda=2\\cdot10^4$ — genug, um die Natrium-D-Doppellinie ($589{,}0$ / $589{,}6\\,$nm) mühelos zu trennen. Genau darauf beruht der <strong>Gittermonochromator</strong> in jedem Spektrometer.</div>
+<div class="warn"><strong>Reales Gitter:</strong> Jeder Spalt hat eine endliche Breite $b$. Nach dem <em>Faltungstheorem</em> ist das Gesamtmuster das Produkt aus Gitterfaktor und Einzelspalt-Einhüllender:
+$$I=I_0\\,\\frac{\\sin^2\\alpha}{\\alpha^2}\\cdot\\frac{\\sin^2(N\\delta/2)}{\\sin^2(\\delta/2)}$$
+Fällt ein Gitter-Hauptmaximum auf eine Nullstelle des Einzelspalts, <em>fehlt</em> diese Ordnung.</div>`},
+    {q:'Bragg-Reflexion und Röntgenbeugung an Kristallen.',badges:['def','calc','ex'],ref:'Skript §8.5',
+     a:`<div class="step"><strong>Idee:</strong> Ein Kristall ist ein natürliches 3D-Gitter mit Netzebenenabstand $d\\sim0{,}1\\ldots0{,}5\\,$nm — passend zur Wellenlänge von Röntgenstrahlung.</div>
+<div class="result">$$2d\\sin\\theta=m\\lambda\\qquad\\text{(Bragg-Bedingung)}$$
+$\\theta$ wird dabei gegen die <em>Netzebene</em> gemessen, nicht gegen das Lot. Der Faktor 2 kommt vom Gangunterschied zweier an benachbarten Ebenen reflektierter Strahlen.</div>
+<div class="step"><strong>Historie:</strong> Max <strong>von Laue</strong> zeigte 1912, dass Röntgenstrahlen an Kristallen Beugungsbilder erzeugen — damit war gleichzeitig die Wellennatur der Röntgenstrahlung <em>und</em> die Gitterstruktur der Kristalle bewiesen. <strong>Nobelpreis 1914</strong>; W. H. und W. L. Bragg folgten 1915.</div>
+<div class="warn">Aus $2d\\sin\\theta\\le 2d$ folgt sofort $\\lambda\\le 2d$: Mit sichtbarem Licht ($\\lambda\\approx500\\,$nm) ist Kristallstrukturanalyse prinzipiell unmöglich. Anwendungen: Strukturaufklärung von Proteinen und der DNA-Doppelhelix (Franklin/Watson/Crick), Materialanalytik, Röntgenmonochromatoren an Synchrotronquellen.</div>`},
+    {q:'Beugung am Einzelspalt: Leite die Intensitätsverteilung her (Fraunhofer) und rechne ein Beispiel.',badges:['proof','calc','exam'],ref:'Skript §8.6',
+     a:`<div class="step"><strong>Fraunhofer vs. Fresnel:</strong> <em>Fraunhofer</em>-Beugung = Quelle und Schirm im Unendlichen (ebene Wellen, in der Praxis mit Linsen realisiert); das Beugungsbild ist dann genau die <strong>Fouriertransformierte der Blendenfunktion</strong>. <em>Fresnel</em>-Beugung = Nahfeld, gekrümmte Wellenfronten, mathematisch deutlich aufwendiger.</div>
+<div class="step"><strong>Anschauliche Herleitung der Minima:</strong> Teile den Spalt der Breite $b$ gedanklich in zwei Hälften. Zu jedem Punkt der oberen Hälfte gibt es einen Partner in der unteren im Abstand $b/2$. Beträgt deren Gangunterschied gerade $\\lambda/2$, löschen sich <em>alle</em> Paare aus:
+$$\\frac{b}{2}\\sin\\theta=\\frac{\\lambda}{2}\\;\\Rightarrow\\;b\\sin\\theta=\\lambda$$
+Vierteilung liefert $b\\sin\\theta=2\\lambda$ usw.</div>
+<div class="result">$$I(\\theta)=I_0\\,\\frac{\\sin^2\\alpha}{\\alpha^2},\\qquad \\alpha=\\frac{\\pi b}{\\lambda}\\sin\\theta$$
+Minima: $b\\sin\\theta=m\\lambda$ ($m=1,2,\\ldots$; $m=0$ ist das <em>Hauptmaximum</em>, keine Nullstelle!). Rund <strong>90 %</strong> der Intensität stecken im Zentralmaximum; das erste Nebenmaximum hat nur noch $4{,}7\\,\\%$.</div>
+<div class="step"><strong>Beispiel:</strong> $b=5\\lambda$ $\\Rightarrow \\sin\\theta_1=\\lambda/b=0{,}2\\Rightarrow\\theta_1=11{,}5°$. Je <em>schmaler</em> der Spalt, desto <em>breiter</em> das Muster — die Fourier-Reziprozität ($\\Delta x\\cdot\\Delta k\\gtrsim2\\pi$), das optische Analogon zur Unschärferelation.</div>
+<div class="warn"><strong>Schall an der Tür:</strong> Bei $100\\,$Hz ist $\\lambda=340/100=3{,}4\\,$m $\\gg$ Türbreite → starke Beugung, man hört tiefe Stimmen um die Ecke. Bei $10\\,$kHz ist $\\lambda=3{,}4\\,$cm → kaum Beugung, die Höhen fehlen. Deshalb klingt Musik aus dem Nebenraum dumpf.<br>
+<strong>Quadratische Blende:</strong> Das Muster faktorisiert in $\\text{sinc}^2(\\alpha_x)\\cdot\\text{sinc}^2(\\alpha_y)$ — ein Kreuzmuster.</div>`},
+    {q:'Kreisblende, Airy-Scheibchen und Rayleigh-Kriterium.',badges:['def','calc','exam'],ref:'Skript §8.6',
+     a:`<div class="step">Für eine <strong>kreisförmige</strong> Blende vom Radius $a$ liefert die Fouriertransformation eine Besselfunktion erster Ordnung:
+$$I(q)=I(0)\\left[\\frac{2J_1(q)}{q}\\right]^2,\\qquad q=\\frac{2\\pi a}{\\lambda}\\sin\\theta$$
+Das Bild eines Punktes ist also nie ein Punkt, sondern das <strong>Airy-Scheibchen</strong> mit konzentrischen Ringen.</div>
+<div class="result">Erste Nullstelle von $J_1$ bei $q=3{,}83$:
+$$\\theta_{\\min}\\approx0{,}61\\frac{\\lambda}{a}=1{,}22\\frac{\\lambda}{D}$$
+<strong>Rayleigh-Kriterium:</strong> Zwei Punkte gelten als getrennt, wenn das Maximum des einen auf die erste Nullstelle des anderen fällt.</div>
+<div class="step"><strong>Zahlenbeispiele:</strong><br>
+• Auge ($D=3\\,$mm, $\\lambda=550\\,$nm): $\\theta\\approx2{,}2\\cdot10^{-4}\\,$rad $\\approx1^{\\prime}$ — auf $10\\,$m rund $2\\,$mm.<br>
+• Teleskop $D=1\\,$m: $\\theta\\approx0{,}7\\cdot10^{-6}\\,$rad (erdgebunden meist durch Luftunruhe begrenzt).<br>
+• <strong>Mikroskop:</strong> $d_{\\min}=\\frac{0{,}61\\lambda}{n\\sin\\alpha}$ — daher Ölimmersion ($n=1{,}5$) und kurze Wellenlängen.</div>
+<div class="warn">Das ist eine <em>prinzipielle</em>, nicht durch bessere Fertigung überwindbare Grenze — deshalb arbeitet die moderne Chip-Lithografie mit <strong>EUV</strong> ($\\lambda=13{,}5\\,$nm) und die Elektronenmikroskopie mit Materiewellen von wenigen pm.</div>`},
+    {q:'ÜB12 C: Ein Objekt liegt in der Tiefe $d$ unter Wasser. Wie tief erscheint es von oben?',badges:['ex','calc'],ref:'Übungsblatt 12 C',
+     a:`<div class="step"><strong>Ansatz:</strong> Betrachte zwei Strahlen aus dem Objektpunkt: den senkrechten (ungebrochen) und einen unter kleinem Winkel $\\theta_1$ zur Vertikalen. Letzterer wird beim Austritt zum Winkel $\\theta_2$ gebrochen, mit $n\\sin\\theta_1=\\sin\\theta_2$.</div>
+<div class="step"><strong>Geometrie:</strong> Der horizontale Versatz an der Wasseroberfläche ist $x=d\\tan\\theta_1$. Rückwärts verlängert schneidet der gebrochene Strahl die Senkrechte in der scheinbaren Tiefe $d_a$ mit $x=d_a\\tan\\theta_2$. Also
+$$d_a=d\\,\\frac{\\tan\\theta_1}{\\tan\\theta_2}$$</div>
+<div class="step"><strong>Paraxiale Näherung</strong> (Blick nahezu senkrecht von oben, $\\theta\\ll1$): $\\tan\\theta\\approx\\sin\\theta$, also $\\frac{\\sin\\theta_1}{\\sin\\theta_2}=\\frac{1}{n}$.</div>
+<div class="result">$$\\boxed{\\,d_a=\\frac{d}{n}\\,}$$
+Für Wasser ($n=1{,}33$): $d_a=0{,}75\\,d$. Ein $2\\,$m tiefes Becken erscheint nur $1{,}5\\,$m tief.</div>
+<div class="warn">Deshalb wird die Wassertiefe systematisch <em>unterschätzt</em> (Badeunfälle) und ein schräg ins Wasser gehaltener Stab erscheint <em>geknickt</em>. Blickt man <em>schräg</em>, ist $d_a$ noch kleiner als $d/n$ — die Näherung gilt nur für senkrechte Sicht.</div>`},
+    {q:'ÜB12 D: Bei welchem Brechungsindex fokussiert eine Glaskugel paralleles Licht auf ihre Rückseite?',badges:['ex','calc','proof'],ref:'Übungsblatt 12 D1/D2',
+     a:`<div class="step"><strong>Brechung an <em>einer</em> Kugelfläche</strong> (Radius $R$, von $n_1$ nach $n_2$), paraxial:
+$$\\frac{n_1}{g}+\\frac{n_2}{b}=\\frac{n_2-n_1}{R}$$</div>
+<div class="step"><strong>D1 — nur die vordere Fläche betrachtet.</strong> Paralleles Licht: $g\\to\\infty$, $n_1=1$, $n_2=n$:
+$$\\frac{n}{b}=\\frac{n-1}{R}\\;\\Rightarrow\\; b=\\frac{nR}{n-1}$$
+Der Fokus soll auf der Rückseite liegen, also $b=2R$:
+$$2R=\\frac{nR}{n-1}\\;\\Rightarrow\\;2(n-1)=n\\;\\Rightarrow\\;\\boxed{n=2}$$</div>
+<div class="step"><strong>D2 — vollständige Kugellinse (beide Flächen).</strong> Die Brennweite, gemessen vom Kugelmittelpunkt, beträgt
+$$f=\\frac{nR}{2(n-1)}$$
+Fokus auf der Rückseite bedeutet $f=R$ und liefert wieder $n=2$. Ein Fokus im <em>Mittelpunkt</em> verlangte $f=0$, also $n\\to\\infty$ — <strong>physikalisch unmöglich</strong>. Der Brennpunkt einer Kugellinse liegt für alle $n<2$ außerhalb der Kugel, für $n>2$ innerhalb.</div>
+<div class="result">$n=2$ ist der Grenzfall „Brennpunkt genau auf der Rückfläche". Reale Glaskugeln haben $n\\approx1{,}5$, also $f=1{,}5R$ vom Mittelpunkt — der Fokus liegt $0{,}5R$ <em>hinter</em> der Kugel.</div>
+<div class="warn">Anwendung: Kugellinsen ($n\\approx2$, z. B. LaSF-Gläser) koppeln Laserlicht in Glasfasern ein, weil der Fokus direkt auf der berührenden Faserstirnfläche liegt. Achtung: Wegen starker sphärischer Aberration gilt das nur paraxial.</div>`}
   ]
 },
 {
