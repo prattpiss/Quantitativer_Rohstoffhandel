@@ -1533,7 +1533,69 @@ Flussrichtung: obere Halbebene ($p>0$) $\\Rightarrow \\dot q>0$ (Bewegung nach r
 1) Kanonische Impulse $p_j=\\partial L/\\partial\\dot q_j$.<br>
 2) Invertiere nach $\\dot q_j(\\vec q,\\vec p,t)$.<br>
 3) $H(\\vec q,\\vec p,t)=\\sum_j p_j\\dot q_j-L$, ausgedrückt durch $\\vec q,\\vec p,t$.<br>
-Für $L=\\tfrac12 m\\dot q^2-U(q)$: $p=m\\dot q$, $\\dot q=p/m$, $H=p^2/(2m)+U(q)=T+U$ — die vertraute Gesamtenergie!`}
+Für $L=\\tfrac12 m\\dot q^2-U(q)$: $p=m\\dot q$, $\\dot q=p/m$, $H=p^2/(2m)+U(q)=T+U$ — die vertraute Gesamtenergie!`},
+    {q:'[ÜB 8.3] Doctor Å und die böse Wirkung: Vollständige Lösung.',badges:['ex','calc','exam'],ref:'Übung Blatt 8, Aufg. 3',
+     a:`<div class="step"><strong>Setup:</strong> $x(t)$ = bis zur Zeit $t$ verarbeitete Stoffmenge, $x(0)=0$, $x(T)=Q$,
+$$L(x,\\dot x)=4\\frac{Q}{T^2}x-\\dot x^2,\\qquad S[x]=\\int_0^TL\\,dt$$</div>
+<div class="step"><strong>a) Euler-Lagrange:</strong> $\\dfrac{\\partial L}{\\partial\\dot x}=-2\\dot x$, $\\dfrac{\\partial L}{\\partial x}=\\dfrac{4Q}{T^2}$
+$$\\frac{d}{dt}(-2\\dot x)-\\frac{4Q}{T^2}=0\\;\\Rightarrow\\;\\ddot x=-\\frac{2Q}{T^2}$$
+Konstante „Verzögerung" — formal ein freier Fall.</div>
+<div class="step"><strong>b) Allgemeine Lösung:</strong> $x(t)=-\\dfrac{Q}{T^2}t^2+At+B$.<br>
+<strong>c) Randbedingungen:</strong> $x(0)=0\\Rightarrow B=0$; $x(T)=Q\\Rightarrow-Q+AT=Q\\Rightarrow A=\\dfrac{2Q}{T}$
+$$\\boxed{\\;x_{\\text{stat}}(t)=\\frac{Q}{T^2}\\left(2Tt-t^2\\right)\\;}$$</div>
+<div class="step"><strong>d) Physikalische Konsistenz:</strong> $x_{\\text{stat}}=\\frac{Q}{T^2}t(2T-t)\\ge0$ auf $[0,T]$ ✓ und
+$$\\dot x_{\\text{stat}}=\\frac{2Q}{T}\\left(1-\\frac tT\\right)\\ge0\\;✓$$
+Die Rate startet bei $2Q/T$ (doppelt so hoch wie der Durchschnitt) und fällt linear auf null.</div>
+<div class="result"><strong>e) Wert der Wirkung:</strong>
+$$\\int_0^T\\frac{4Q}{T^2}x\\,dt=\\frac{4Q^2}{T^4}\\left[Tt^2-\\frac{t^3}{3}\\right]_0^T=\\frac{8Q^2}{3T},\\qquad \\int_0^T\\dot x^2dt=\\frac{4Q^2}{T^2}\\cdot\\frac T3=\\frac{4Q^2}{3T}$$
+$$S[x_{\\text{stat}}]=\\frac{8Q^2}{3T}-\\frac{4Q^2}{3T}=\\frac{4Q^2}{3T}$$
+<strong>f) Vergleich mit $x_{\\text{lin}}=\\dfrac{Q}{T}t$:</strong> $\\int\\frac{4Q}{T^2}x=\\frac{2Q^2}{T}$, $\\int\\dot x^2=\\frac{Q^2}{T}$, also $S[x_{\\text{lin}}]=\\dfrac{Q^2}{T}$.
+$$\\frac{S[x_{\\text{stat}}]}{S[x_{\\text{lin}}]}=\\frac{4}{3}$$</div>
+<div class="warn"><strong>Die Pointe:</strong> Die lineare Kurve erzeugt <em>weniger</em> „Böses" als die stationäre. Der stationäre Punkt ist also <strong>kein Minimum</strong> — hier sogar ein Maximum bzw. Sattel. Das ist die didaktische Botschaft der Aufgabe: das Hamiltonsche Prinzip ist ein Prinzip der <em>stationären</em>, nicht der <em>kleinsten</em> Wirkung. (Das Minus-Vorzeichen vor $\\dot x^2$ verkehrt hier die übliche Konvexität.)</div>`},
+    {q:'[ÜB 8.4, Goldstern] Verallgemeinerte Euler-Lagrange-Gleichung für $f(t,x,\\dot x,\\ddot x)$.',badges:['ex','proof'],ref:'Übung Blatt 8, Aufg. 4',
+     a:`<div class="step"><strong>Behauptung:</strong> Ist $x(t)$ stationärer Punkt von $S[x]=\\int_{t_i}^{t_f}f(t,x,\\dot x,\\ddot x)\\,dt$, so gilt
+$$\\frac{d^2}{dt^2}\\left(\\frac{\\partial f}{\\partial\\ddot x}\\right)-\\frac{d}{dt}\\left(\\frac{\\partial f}{\\partial\\dot x}\\right)+\\frac{\\partial f}{\\partial x}=0$$</div>
+<div class="step"><strong>Beweis:</strong> Variation $x\\to x+\\varepsilon h$, lineare Ordnung:
+$$\\delta S=\\int_{t_i}^{t_f}dt\\left(\\frac{\\partial f}{\\partial x}h+\\frac{\\partial f}{\\partial\\dot x}\\dot h+\\frac{\\partial f}{\\partial\\ddot x}\\ddot h\\right)$$</div>
+<div class="step"><strong>Partielle Integration</strong> — der $\\dot h$-Term <em>einmal</em>, der $\\ddot h$-Term <strong>zweimal</strong>:
+$$\\int\\frac{\\partial f}{\\partial\\dot x}\\dot h=\\left[\\frac{\\partial f}{\\partial\\dot x}h\\right]-\\int\\frac{d}{dt}\\!\\left(\\frac{\\partial f}{\\partial\\dot x}\\right)h$$
+$$\\int\\frac{\\partial f}{\\partial\\ddot x}\\ddot h=\\left[\\frac{\\partial f}{\\partial\\ddot x}\\dot h\\right]-\\left[\\frac{d}{dt}\\!\\left(\\frac{\\partial f}{\\partial\\ddot x}\\right)h\\right]+\\int\\frac{d^2}{dt^2}\\!\\left(\\frac{\\partial f}{\\partial\\ddot x}\\right)h$$</div>
+<div class="result"><strong>Die passenden Randbedingungen:</strong> Es reicht nicht mehr, $x(t_i)$ und $x(t_f)$ zu fixieren — man muss zusätzlich $\\dot x(t_i)$ und $\\dot x(t_f)$ festhalten, also
+$$h(t_i)=h(t_f)=0\\quad\\text{und}\\quad\\dot h(t_i)=\\dot h(t_f)=0$$
+Dann verschwinden alle Randterme, und das Fundamentallemma liefert die Behauptung. ∎</div>
+<div class="warn"><strong>Allgemeines Muster:</strong> Für $f(t,x,\\dot x,\\dots,x^{(n)})$ gilt
+$$\\sum_{k=0}^{n}(-1)^k\\frac{d^k}{dt^k}\\left(\\frac{\\partial f}{\\partial x^{(k)}}\\right)=0$$
+Man braucht dann $n$ Randbedingungen an jedem Ende und erhält eine DGL der Ordnung $2n$.<br>
+<strong>Wo das auftritt:</strong> Balkenbiegung (Euler-Bernoulli, $f\\propto\\ddot x^2$), Ostrogradski-Instabilität in höheren Ableitungstheorien der Feldtheorie.</div>`},
+    {q:'[ÜB 11.1 Quiz] Doppelrotation: Winkelgeschwindigkeitsvektor und nötiges Drehmoment.',badges:['ex','calc','exam'],ref:'Übung Blatt 11, Aufg. 1',
+     a:`<div class="step"><strong>a) Der Winkelgeschwindigkeitsvektor addiert sich vektoriell.</strong> Der Körper rotiert mit $\\alpha$ um die Achse $\\hat e_r(t)=\\cos(\\beta t)\\hat e_x+\\sin(\\beta t)\\hat e_y$, und diese Achse rotiert selbst mit $\\beta$ um $\\hat e_z$. Also
+$$\\vec\\omega=\\alpha\\,\\hat e_r(t)+\\beta\\,\\hat e_z=\\alpha\\cos(\\beta t)\\hat e_x+\\alpha\\sin(\\beta t)\\hat e_y+\\beta\\hat e_z$$
+Das ist <strong>Antwort 4</strong>. Der Vektor beschreibt einen Kegel um die $z$-Achse.</div>
+<div class="step"><strong>b) Vorzeichenumkehr:</strong> Kehrt man die Eigendrehung um ($\\alpha\\to-\\alpha$), spiegelt sich der horizontale Anteil; $\\vec\\omega$ läuft auf dem gespiegelten Kegel, der Öffnungswinkel bleibt. Kehrt man dagegen die erzwungene Rotation um ($\\beta\\to-\\beta$), ändert sich sowohl die $z$-Komponente als auch der Umlaufsinn von $\\hat e_r$.</div>
+<div class="step"><strong>c) Drehmoment für eine homogene Kugel</strong> (Kugelkreisel, $I_{ab}=I\\delta_{ab}$, also $\\vec L=I\\vec\\omega$):
+$$\\vec\\tau=\\dot{\\vec L}=I\\dot{\\vec\\omega}=I\\alpha\\frac{d\\hat e_r}{dt}=I\\alpha\\beta\\left(-\\sin(\\beta t)\\hat e_x+\\cos(\\beta t)\\hat e_y\\right)=I\\alpha\\beta\\,\\hat e_\\varphi$$</div>
+<div class="result">$\\vec\\tau$ liegt horizontal und steht stets <strong>senkrecht auf $\\hat e_r(t)$</strong> (und auf $\\hat e_z$). Es rotiert mit derselben Winkelgeschwindigkeit $\\beta$ mit. Betrag $|\\vec\\tau|=I\\alpha\\beta$ konstant.</div>
+<div class="step"><strong>d) Quadratische Winkelentwicklung</strong> $\\hat e_r=\\cos(\\gamma t^2)\\hat e_x+\\sin(\\gamma t^2)\\hat e_y$: Die momentane Rate der erzwungenen Drehung ist $\\frac{d}{dt}(\\gamma t^2)=2\\gamma t$, also $\\vec\\omega=\\alpha\\hat e_r+2\\gamma t\\,\\hat e_z$ und
+$$\\vec\\tau=I\\left(2\\alpha\\gamma t\\,\\hat e_\\varphi+2\\gamma\\,\\hat e_z\\right)$$
+Jetzt kommt eine <em>vertikale</em> Komponente hinzu, weil auch die Drehrate um $\\hat e_z$ selbst wächst.</div>
+<div class="warn"><strong>e) Ist $\\vec\\omega$ beim freien Körper konstant? Nein.</strong> Erhalten ist $\\vec L$, nicht $\\vec\\omega$. Nur wenn $\\vec\\omega$ entlang einer Hauptachse zeigt oder der Körper ein Kugelkreisel ist, gilt $\\vec\\omega=\\vec L/I=$ const. Sonst taumelt $\\vec\\omega$ (Nutation, vgl. Frisbee).</div>`},
+    {q:'[ÜB 11.4, Goldstern] Ball auf rotierender Scheibe: Herleitung der 2/7-Kreisbewegung.',badges:['ex','proof','calc'],ref:'Übung Blatt 11, Aufg. 4',
+     a:`<div class="step"><strong>a) Geschwindigkeit am Auflagepunkt des Balls</strong> (Vektor vom Schwerpunkt zum Kontaktpunkt: $-a\\hat e_z$):
+$$\\vec v_b=\\dot{\\vec r}+\\vec\\omega\\times(-a\\hat e_z)$$
+<strong>b) Geschwindigkeit der Scheibenoberfläche</strong> am selben Ort: $\\vec v_d=\\Omega\\hat e_z\\times\\vec r$.</div>
+<div class="step"><strong>c) Rollbedingung</strong> (kein Gleiten): $\\vec v_b=\\vec v_d$, also
+$$\\dot{\\vec r}-a\\,\\vec\\omega\\times\\hat e_z=\\Omega\\,\\hat e_z\\times\\vec r$$</div>
+<div class="step"><strong>d) Dynamik.</strong> Die Reibungskraft $\\vec F$ am Kontaktpunkt beschleunigt den Schwerpunkt <em>und</em> erzeugt das Drehmoment:
+$$m\\ddot{\\vec r}=\\vec F,\\qquad I\\dot{\\vec\\omega}=(-a\\hat e_z)\\times\\vec F=-a\\,m\\,\\hat e_z\\times\\ddot{\\vec r}$$</div>
+<div class="step"><strong>e) Elimination von $\\dot{\\vec\\omega}$:</strong> Ableiten der Rollbedingung und Einsetzen liefert
+$$\\ddot{\\vec r}=\\Omega\\,\\hat e_z\\times\\dot{\\vec r}-\\frac{ma^2}{I}\\left(\\hat e_z\\times\\ddot{\\vec r}\\right)\\times\\hat e_z$$
+Für Bewegung in der Ebene ist $(\\hat e_z\\times\\ddot{\\vec r})\\times\\hat e_z=\\ddot{\\vec r}$, also mit $\\vec v=\\dot{\\vec r}$:
+$$\\left(1+\\frac{ma^2}{I}\\right)\\dot{\\vec v}=\\Omega\\,\\hat e_z\\times\\vec v$$</div>
+<div class="result"><strong>f) Homogene Kugel:</strong> $I=\\frac25ma^2$ ⇒ $\\dfrac{ma^2}{I}=\\dfrac52$ ⇒ Vorfaktor $1+\\frac52=\\frac72$:
+$$\\boxed{\\;\\frac{d\\vec v}{dt}=\\frac{2}{7}\\,\\Omega\\,\\hat e_z\\times\\vec v\\;}$$
+<strong>g) Ansatz</strong> $\\vec r=\\vec r_0+R\\left[\\cos(\\lambda t)\\hat e_x+\\sin(\\lambda t)\\hat e_y\\right]$ ⇒ $\\vec v=R\\lambda\\left[-\\sin\\hat e_x+\\cos\\hat e_y\\right]$, $\\dot{\\vec v}=-\\lambda^2\\vec\\rho$ und $\\hat e_z\\times\\vec v=-R\\lambda\\left[\\cos\\hat e_x+\\sin\\hat e_y\\right]$. Einsetzen liefert $\\lambda=\\frac27\\Omega$ ✓</div>
+<div class="warn"><strong>Bemerkenswert:</strong> Der Ball läuft auf einem <em>Kreis</em> mit fester Frequenz $\\frac27\\Omega$ — unabhängig von Radius $R$ und Mittelpunkt $\\vec r_0$. Er wird also niemals von der Scheibe geworfen; die Zentrifugalkraft „verliert" gegen die Rollreibung.<br>
+<strong>Formale Analogie</strong> zur Lorentzkraft $\\dot{\\vec v}=-\\frac{qB}{m}\\hat e_z\\times\\vec v$: der rollende Ball auf der Drehscheibe verhält sich wie ein geladenes Teilchen im Magnetfeld (Zyklotronbewegung). Genutzt in Zufalls-Mischtrommeln und als klassisches Demonstrationsexperiment.</div>`}
   ]
 }
 ];
