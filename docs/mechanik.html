@@ -291,7 +291,24 @@ Dies gilt für Gravitationskräfte und elektromagnetische Kräfte. Erlaubt die s
 $\\vec{F}_{ij}$: innere Kräfte (Wechselwirkung zwischen Teilchen $i$ und $j$)<br>
 $\\vec{F}_{e,i}$: äußere Kräfte auf Teilchen $i$`},
     {q:'Was ist $1\\,\\text{N}$ (Newton)?',badges:['def'],ref:'Skript §2.2.2',
-     a:`$1\\,\\text{N} = 1\\,\\text{kg}\\cdot\\text{m}/\\text{s}^2$<br>Die Kraft, die eine Masse von 1 kg mit $1\\,\\text{m/s}^2$ beschleunigt (aus $F=ma$).`}
+     a:`$1\\,\\text{N} = 1\\,\\text{kg}\\cdot\\text{m}/\\text{s}^2$<br>Die Kraft, die eine Masse von 1 kg mit $1\\,\\text{m/s}^2$ beschleunigt (aus $F=ma$).`},
+    {q:'Operationale Massenmessung: Wie misst man Masse, ohne Kraft zu kennen — und ist die Definition zirkulär?',badges:['def','proof','exam'],ref:'Skript §2.2.2, S. 11',
+     a:`<div class="warn"><strong>Das Zirkularitätsproblem:</strong> LII definiert die Kraft über die Masse ($\\vec F=m\\vec a$), aber wie misst man die Masse, ohne die Kraft schon zu kennen? Newton wird dafür bis heute kritisiert (Mach).</div>
+<div class="step"><strong>Ausweg über LIII:</strong> Man lässt <em>nur</em> zwei Körper aufeinander wirken (isoliert von allem anderen). Actio = Reactio liefert
+$$m_1\\ddot{\\vec r}_1=\\vec F_{12}=-\\vec F_{21}=-m_2\\ddot{\\vec r}_2$$
+Die beiden Beschleunigungen sind also stets antiparallel, und ihr Betragsverhältnis ist konstant:</div>
+<div class="result">$$\\frac{m_2}{m_1}=\\frac{\\left|\\ddot{\\vec r}_1\\right|}{\\left|\\ddot{\\vec r}_2\\right|}$$
+Man legt eine Referenzmasse $m_1$ als Einheit fest (früher das Urkilogramm, seit 2019 über die Planck-Konstante) und <em>misst</em> daraus jede andere Masse rein kinematisch — allein aus Ort und Zeit. Die Kraft ist dann keine Definition mehr, sondern eine messbare Größe.</div>
+<div class="step"><strong>Bemerkenswert:</strong> Dieses Verhältnis ist unabhängig davon, <em>welche</em> Wechselwirkung man benutzt (Feder, Stoß, Gravitation, Elektrostatik). Genau das macht die Masse zu einer intrinsischen Eigenschaft des Körpers.</div>
+<div class="warn"><strong>Träge vs. schwere Masse:</strong> Die so gemessene <em>träge</em> Masse ist begrifflich etwas völlig anderes als die <em>schwere</em> Masse im Gravitationsgesetz. Dass beide gleich sind (schwaches Äquivalenzprinzip), ist ein experimenteller Befund — heute bestätigt bis auf $10^{-15}$ (MICROSCOPE-Satellit) — und der Ausgangspunkt der Allgemeinen Relativitätstheorie.</div>`},
+    {q:'Grenzen des Newtonschen Kraftbegriffs: Mehrkörper-, geschwindigkeits- und zeitabhängige Kräfte.',badges:['def'],ref:'Skript §2.2.2, S. 11–12',
+     a:`<div class="step">Der einfache Fall — zentrale Paarkräfte mit Superposition, $\\vec F_i=\\sum_{j\\ne i}\\vec F_{ij}$ — deckt Gravitation und Elektrostatik ab. Er ist aber nicht der allgemeinste.</div>
+<div class="result"><strong>Erweiterungen:</strong><br>
+• <strong>Mehrkörperkräfte:</strong> $\\vec F_i=\\vec F(\\vec r_1,\\dots,\\vec r_N)$ lässt sich nicht in Paarbeiträge zerlegen. Beispiele: effektive Kernkräfte (Drei-Nukleonen-Kraft), Van-der-Waals-Kräfte in dichten Medien.<br>
+• <strong>Geschwindigkeitsabhängige Kräfte:</strong> Reibung $\\vec F=-f\\dot{\\vec r}$, Luftwiderstand $\\propto v^2$, Lorentzkraft $\\frac qc\\dot{\\vec r}\\times\\vec B$.<br>
+• <strong>Explizit zeitabhängige Kräfte:</strong> $\\vec F(t)$ beim getriebenen Oszillator, rheonome Zwangskräfte.</div>
+<div class="warn"><strong>Konsequenzen:</strong> Bei geschwindigkeits- oder zeitabhängigen Kräften ist die Energie i.A. <em>nicht</em> erhalten, und bei nichtzentralen Kräften auch der Drehimpuls nicht. Die Erhaltungssätze sind also keine Selbstverständlichkeit, sondern folgen aus konkreten Eigenschaften der Kräfte (bzw. nach Noether aus Symmetrien).<br>
+<strong>Wichtige Verletzung von LIII:</strong> Die magnetische Kraft zwischen zwei bewegten Ladungen erfüllt actio = reactio <em>nicht</em>. Die Bilanz stimmt erst wieder, wenn man den Impuls des elektromagnetischen <em>Feldes</em> mitzählt.</div>`}
   ]
 },
 {
@@ -351,7 +368,26 @@ Integral konvergiert $\\Leftrightarrow$ $-\\alpha/2 > -1$ $\\Leftrightarrow$ $\\
     {q:'[ÜB 2.3b] Kraft $\\vec{F} = \\hat{e}_z\\times(\\vec{r}-\\vec{r}_0)$: Ist Drehimpuls erhalten?',badges:['ex','proof'],ref:'Übung Blatt 2, Aufg. 3b',
      a:`<div class="step">$\\vec{N} = (\\vec{r}-\\vec{r}_0)\\times[\\hat{e}_z\\times(\\vec{r}-\\vec{r}_0)]$</div>
 <div class="step">BAC-CAB: $= \\hat{e}_z|\\vec{r}-\\vec{r}_0|^2 - (\\vec{r}-\\vec{r}_0)[(\\vec{r}-\\vec{r}_0)\\cdot\\hat{e}_z]$</div>
-<div class="result">$\\vec{N} \\neq \\vec{0}$ (i.A.), also <strong>Drehimpuls nicht erhalten.</strong></div>`}
+<div class="result">$\\vec{N} \\neq \\vec{0}$ (i.A.), also <strong>Drehimpuls nicht erhalten.</strong></div>`},
+    {q:'Nicht-konservative Kräfte am Beispiel: Der „Hurrikan" $\\vec{F}=-x_2\\hat{e}_1+x_1\\hat{e}_2$.',badges:['calc','proof'],ref:'Skript §2.3, S. 21',
+     a:`<div class="step"><strong>Test 1 — Rotation:</strong>
+$$\\left(\\vec\\nabla\\times\\vec F\\right)_3=\\partial_1F_2-\\partial_2F_1=\\partial_1x_1-\\partial_2(-x_2)=1+1=2\\ne0$$
+Das Feld ist <strong>nicht konservativ</strong>. Es besitzt kein Potential.</div>
+<div class="step"><strong>Test 2 — geschlossenes Kurvenintegral</strong> über einen Kreis mit Radius $R$: In Polarkoordinaten ist $\\vec F=\\varrho\\,\\hat e_\\varphi$, also überall tangential. Mit $d\\vec r=R\\,d\\varphi\\,\\hat e_\\varphi$:
+$$\\oint\\vec F\\cdot d\\vec r=\\int_0^{2\\pi}R\\cdot R\\,d\\varphi=2\\pi R^2\\ne0$$
+Konsistent mit Stokes: $\\iint(\\vec\\nabla\\times\\vec F)\\cdot d\\vec A=2\\cdot\\pi R^2$ ✓</div>
+<div class="result">Ein Teilchen, das einmal im Kreis läuft, gewinnt Energie — das Feld leistet <em>netto</em> Arbeit. Genau so funktioniert ein Wirbelsturm: er pumpt fortwährend Energie in die Luftmassen (aus dem Temperaturgefälle des Ozeans).</div>
+<div class="warn"><strong>Merke — die drei äquivalenten Bedingungen für Konservativität</strong> (auf einem <em>einfach zusammenhängenden</em> Gebiet):<br>
+1. $\\oint_C\\vec F\\cdot d\\vec r=0$ für jeden geschlossenen Weg<br>
+2. $\\vec\\nabla\\times\\vec F=0$ überall<br>
+3. Es existiert $U$ mit $\\vec F=-\\vec\\nabla U$<br>
+Die Voraussetzung „einfach zusammenhängend" ist wesentlich: Auf einem Gebiet mit Loch kann $\\vec\\nabla\\times\\vec F=0$ gelten, ohne dass ein globales Potential existiert (Beispiel: Magnetfeld eines Drahtes).</div>`},
+    {q:'Schwerpunktsatz konkret: Wo liegt der Schwerpunkt des Systems Erde–Mond?',badges:['calc','def'],ref:'Skript §2.3, S. 13',
+     a:`<div class="step"><strong>Definition:</strong> $\\vec R=\\dfrac{1}{M}\\sum_im_i\\vec r_i$ mit $M=\\sum_im_i$. Aus $\\dot{\\vec P}=\\vec F_{\\text{ext}}$ folgt bei verschwindender äußerer Kraft $M\\ddot{\\vec R}=0$: der Schwerpunkt bewegt sich wie ein <em>freies</em> Teilchen der Gesamtmasse.</div>
+<div class="step"><strong>Zahlen:</strong> $m_E=5{,}97\\cdot10^{24}$ kg, $m_M=7{,}35\\cdot10^{22}$ kg, Abstand $d=3{,}84\\cdot10^8$ m, Erdradius $R_E=6371$ km.
+$$r_E=\\frac{m_M}{m_E+m_M}\\,d=\\frac{7{,}35\\cdot10^{22}}{6{,}04\\cdot10^{24}}\\cdot3{,}84\\cdot10^8\\,\\text{m}\\approx4{,}67\\cdot10^6\\,\\text{m}=4670\\,\\text{km}$$</div>
+<div class="result">Der gemeinsame Schwerpunkt (<strong>Baryzentrum</strong>) liegt also rund 4670 km vom Erdmittelpunkt entfernt — <strong>noch innerhalb der Erde</strong>, etwa 1700 km unter der Oberfläche. Streng genommen umkreist nicht der Mond die Erde, sondern beide umkreisen diesen Punkt; die Erde „eiert" mit einer Amplitude von 4670 km im Monatsrhythmus.</div>
+<div class="warn"><strong>Vergleich:</strong> Beim System Sonne–Jupiter liegt das Baryzentrum knapp <em>außerhalb</em> der Sonnenoberfläche. Genau diese Wackelbewegung eines Sterns ist die Grundlage der <strong>Radialgeschwindigkeitsmethode</strong> zur Entdeckung von Exoplaneten.</div>`},
   ]
 },
 {
