@@ -127,8 +127,8 @@
   <p>Elektrostatik, Elektrodynamik, Magnetismus, Maxwell-Gleichungen, Wechselstrom, Optik und Spezielle Relativitätstheorie — vollständig mit Definitionen, Formeln, Beweisen, allen Experimenten/Maschinen und 2 neuen Probeklausuren.</p>
   <div class="badges">
     <span class="badge">17 Kapitel</span>
-    <span class="badge">300+ Karten</span>
-    <span class="badge">Übungsaufgaben</span>
+    <span class="badge">350 Karten</span>
+    <span class="badge">Übungsblätter 0–12 komplett</span>
     <span class="badge">2 Probeklausuren</span>
     <span class="badge">SoSe 2026 · Braden/Petsch</span>
   </div>
@@ -140,7 +140,7 @@ const chapters = [
 {
   id:'ch1', title:'Mathematische Grundlagen', num:'01',
   desc:'Vektoranalysis, Kurvenintegrale, Koordinatensysteme, lineare DGLn — Werkzeuge für die gesamte Vorlesung.',
-  stats:[{v:'12',l:'Karten'},{v:'3',l:'Koordinatensysteme'},{v:'Mathe-Übersicht',l:'Quelle'}],
+  stats:[{v:'19',l:'Karten'},{v:'3',l:'Koordinatensysteme'},{v:'Mathe-Übersicht',l:'Quelle'}],
   cards:[
     {q:'Skalares vs. vektorielles Kurvenintegral — Formeln und physikalische Bedeutung.',badges:['def'],ref:'Mathe-Übersicht §1.1',
      a:`<div class="step"><strong>Skalar</strong> (z.B. Masse eines Drahtes): $\\int_C f\\,ds = \\int_a^b f(\\vec{r}(t))\\,|\\vec{r}^{\\prime}(t)|\\,dt$</div>
@@ -252,7 +252,7 @@ nach dem Satz von Schwarz (Vertauschbarkeit gemischter zweiter Ableitungen). $\\
 {
   id:'ch2', title:'Elektrische Ladung & Coulomb-Gesetz', num:'02',
   desc:'Grundlegende Eigenschaften elektrischer Ladung, Ladungserhaltung, Quantisierung, Coulomb-Kraft.',
-  stats:[{v:'10',l:'Karten'},{v:'2',l:'Naturkonstanten'},{v:'Skript §1.1–1.2',l:'Quelle'}],
+  stats:[{v:'18',l:'Karten'},{v:'2',l:'Naturkonstanten'},{v:'Skript §1.1–1.2',l:'Quelle'}],
   cards:[
     {q:'Was sind die zwei Arten elektrischer Ladung? Welche Kräfte wirken zwischen ihnen?',badges:['def'],ref:'Skript §1.1',
      a:`Es gibt <strong>positive</strong> und <strong>negative</strong> Ladungen (Vorzeichen ist Konvention).<br>
@@ -365,7 +365,7 @@ $$\\underbrace{0}_{n} \\;\\to\\; \\underbrace{+e}_{p} \\;+\\; \\underbrace{-e}_{
 {
   id:'ch3', title:'Das elektrische Feld', num:'03',
   desc:'Definition und Visualisierung des E-Feldes, Feldlinien, spezielle Konfigurationen, Dipol.',
-  stats:[{v:'10',l:'Karten'},{v:'3',l:'Spezialfelder'},{v:'Skript §1.3',l:'Quelle'}],
+  stats:[{v:'16',l:'Karten'},{v:'3',l:'Spezialfelder'},{v:'Skript §1.3',l:'Quelle'}],
   cards:[
     {q:'Definition des elektrischen Feldes $\\vec{E}(\\vec{r})$.',badges:['def'],ref:'Skript §1.3',
      a:`$$\\vec{E}(\\vec{r}) = \\frac{\\vec{F}}{q_0}$$
@@ -465,7 +465,7 @@ $$E=\\frac{\\sigma}{2\\varepsilon_0}\\ \\text{(eine Platte)},\\qquad E=\\frac{\\
 {
   id:'ch4', title:'Potential & Spannung', num:'04',
   desc:'Potentielle Energie, elektrostatisches Potential, Spannung, Äquipotentialflächen, Relation E = -grad(phi).',
-  stats:[{v:'10',l:'Karten'},{v:'1',l:'Zentralrelation'},{v:'Skript §1.4',l:'Quelle'}],
+  stats:[{v:'16',l:'Karten'},{v:'1',l:'Zentralrelation'},{v:'Skript §1.4',l:'Quelle'}],
   cards:[
     {q:'Elektrostatisches Potential $\\varphi(\\vec{r})$: Definition und Bezugspunkt.',badges:['def'],ref:'Skript §1.4',
      a:`Das el. Potential ist die potentielle Energie pro Ladung:
@@ -580,7 +580,7 @@ Das Coulomb-Feld ist <strong>überall quellenfrei außer am Ort der Ladung</stro
 {
   id:'ch5', title:'Gauß\'scher Satz & Maxwell I', num:'05',
   desc:'Elektrischer Fluss, Gauß\'scher Satz, erste Maxwell-Gleichung, Anwendungen auf symmetrische Ladungsverteilungen.',
-  stats:[{v:'10',l:'Karten'},{v:'3',l:'Anwendungen'},{v:'Skript §2 / Übung 3',l:'Quelle'}],
+  stats:[{v:'17',l:'Karten'},{v:'3',l:'Anwendungen'},{v:'Skript §2 / Übung 3',l:'Quelle'}],
   cards:[
     {q:'Elektrischer Fluss $\\Phi_E$ durch eine Fläche — Definition.',badges:['def'],ref:'Skript / Übung 3B',
      a:`$$\\Phi_E = \\oiint_S \\vec{E}\\cdot d\\vec{A} = \\oiint_S \\vec{E}\\cdot\\hat{n}\\,dA$$
@@ -683,7 +683,7 @@ $$\\Phi=E\\cdot 4\\pi r^2=\\frac{Q}{4\\pi\\varepsilon_0 r^2}\\cdot 4\\pi r^2=\\f
 {
   id:'ch6', title:'Kondensatoren & Dielektrika', num:'06',
   desc:'Kapazität, Kondensator-Typen, Serien-/Parallelschaltung, Energie, Dielektrika, D-Feld.',
-  stats:[{v:'12',l:'Karten'},{v:'3',l:'Kondensator-Typen'},{v:'Skript §2 / Übungen 3–4',l:'Quelle'}],
+  stats:[{v:'19',l:'Karten'},{v:'3',l:'Kondensator-Typen'},{v:'Skript §2 / Übungen 3–4',l:'Quelle'}],
   cards:[
     {q:'Definition der Kapazität. Einheit.',badges:['def'],ref:'Skript §2 / Übung 3C',
      a:`$$C = \\frac{Q}{U} = \\frac{Q}{\\varphi_+ - \\varphi_-}$$
@@ -802,7 +802,7 @@ $$A=\\frac{C_0d_0}{\\varepsilon_0}=\\frac{0{,}19\\cdot10^{-9}\\cdot2{,}7\\cdot10
 {
   id:'ch7', title:'Elektrischer Strom & Widerstand', num:'07',
   desc:'Stromstärke, Stromdichte, Ohm\'sches Gesetz, Kirchhoff, Widerstandsnetzwerke, Wheatstone-Brücke, RC-Glied.',
-  stats:[{v:'14',l:'Karten'},{v:'2',l:'Kirchhoff-Regeln'},{v:'Skript §3 / Übungen 4–6',l:'Quelle'}],
+  stats:[{v:'31',l:'Karten'},{v:'2',l:'Kirchhoff-Regeln'},{v:'Skript §3 / Übungen 4–6',l:'Quelle'}],
   cards:[
     {q:'Elektrische Stromstärke $I$ und Stromdichte $\\vec{j}$: Definitionen.',badges:['def'],ref:'Skript §3 / Übung 5A',
      a:`$$I = \\frac{dQ}{dt}, \\quad [I] = \\text{A (Ampère)}$$
@@ -1001,7 +1001,7 @@ $$m=\\frac{M}{zF}\\,Q,\\qquad F=N_Ae=96\\,485\\,\\frac{\\text{C}}{\\text{mol}}$$
 {
   id:'ch8', title:'Magnetostatik & Lorentz-Kraft', num:'08',
   desc:'Magnetisches Feld, Lorentz-Kraft, Biot-Savart, Ampère\'sches Gesetz, B-Felder spezieller Konfigurationen.',
-  stats:[{v:'12',l:'Karten'},{v:'2',l:'Grundgesetze'},{v:'Skript §4',l:'Quelle'}],
+  stats:[{v:'30',l:'Karten'},{v:'2',l:'Grundgesetze'},{v:'Skript §4',l:'Quelle'}],
   cards:[
     {q:'Lorentz-Kraft auf eine bewegte Ladung.',badges:['def'],ref:'Skript §4',
      a:`$$\\vec{F} = q(\\vec{E} + \\vec{v}\\times\\vec{B})$$
@@ -1226,7 +1226,7 @@ $$\\vec{B}=\\frac{\\mu_0}{2}\\vec{j}\\times\\vec{r}-\\frac{\\mu_0}{2}\\vec{j}\\t
 {
   id:'ch9', title:'Induktion & Induktivität', num:'09',
   desc:'Faraday-Gesetz, Lenz\'sche Regel, Selbstinduktion, Energie im Magnetfeld, Transformator, LC-Schwingkreis.',
-  stats:[{v:'10',l:'Karten'},{v:'2',l:'Energieformeln'},{v:'Skript §4–5 / Probeklausur 8',l:'Quelle'}],
+  stats:[{v:'19',l:'Karten'},{v:'2',l:'Energieformeln'},{v:'Skript §4–5 / Probeklausur 8',l:'Quelle'}],
   cards:[
     {q:'Faraday\'sches Induktionsgesetz.',badges:['def'],ref:'Skript §5',
      a:`$$U_{\\text{ind}} = -\\frac{d\\Phi_B}{dt} = -\\frac{d}{dt}\\iint_S \\vec{B}\\cdot d\\vec{A}$$
@@ -1383,7 +1383,7 @@ Genau die Hälfte der Anfangsenergie wird im Widerstand in Wärme umgesetzt — 
 {
   id:'ch9b', title:'Materie im Magnetfeld', num:'09b',
   desc:'Magnetische Momente, Dia-, Para- und Ferromagnetismus, Hysterese, H-Feld, Toroid mit Luftspalt, Feldenergie.',
-  stats:[{v:'12',l:'Karten'},{v:'3',l:'Ordnungstypen'},{v:'Skript §5',l:'Quelle'}],
+  stats:[{v:'13',l:'Karten'},{v:'3',l:'Ordnungstypen'},{v:'Skript §5',l:'Quelle'}],
   cards:[
     {q:'Woher kommt das magnetische Moment eines Atoms? Leite $\\vec{\\mu}=-\\frac{e}{2m}\\vec{L}$ her und definiere das Bohrsche Magneton.',badges:['proof','def'],ref:'Skript §5.1',
      a:`<div class="step"><strong>Klassisches Bild:</strong> Ein Elektron auf einer Kreisbahn (Radius $r$, Umlaufdauer $T$) entspricht dem Kreisstrom
@@ -1523,7 +1523,7 @@ $$\\vec{H}_{\\text{innen}}=\\vec{H}_{\\text{ext}}-N\\vec{M}$$</div>
 {
   id:'ch10', title:'Maxwell-Gleichungen & Elektromagnetische Wellen', num:'10',
   desc:'Alle vier Maxwell-Gleichungen, EM-Wellen, Lichtgeschwindigkeit, Energie- und Impulsdichte.',
-  stats:[{v:'9',l:'Karten'},{v:'4',l:'Maxwell-Gleichungen'},{v:'Skript §5–6',l:'Quelle'}],
+  stats:[{v:'21',l:'Karten'},{v:'4',l:'Maxwell-Gleichungen'},{v:'Skript §5–6',l:'Quelle'}],
   cards:[
     {q:'Die vier Maxwell-Gleichungen im Vakuum.',badges:['def'],ref:'Skript §5 / Probeklausur (s)',
      a:`$$\\nabla\\cdot\\vec{E} = \\frac{\\rho}{\\varepsilon_0} \\quad \\text{(I: Gauß el.)}$$
@@ -1701,7 +1701,7 @@ Am idealen Leiter muss $E_\\parallel=0$ sein → die EM-Welle erleidet dort eine
 {
   id:'ch11', title:'Optik', num:'11',
   desc:'Polarisation, Brechung, Snellius, Brewster, Interferenz, Beugung, geometrische Optik.',
-  stats:[{v:'9',l:'Karten'},{v:'2',l:'Interferenzphänomene'},{v:'Skript §7 / Probeklausur (t)',l:'Quelle'}],
+  stats:[{v:'26',l:'Karten'},{v:'2',l:'Interferenzphänomene'},{v:'Skript §7–8 / Probeklausur (t)',l:'Quelle'}],
   cards:[
     {q:'Lineare Polarisation: Definition und Erzeugung.',badges:['def'],ref:'Skript §7 / Probeklausur (t)',
      a:`Linear polarisiertes Licht: $\\vec{E}$-Vektor schwingt in einer festen Ebene (der Polarisationsebene).<br>
@@ -1922,7 +1922,7 @@ Fokus auf der Rückseite bedeutet $f=R$ und liefert wieder $n=2$. Ein Fokus im <
 {
   id:'ch11b', title:'Wechselstrom & Schwingkreise', num:'11b',
   desc:'Effektivwerte, komplexe Widerstände, LC/RLC-Schwingkreise, Resonanz, Filter, Tesla-Transformator, Skin-Effekt.',
-  stats:[{v:'12',l:'Karten'},{v:'3',l:'Bauteile'},{v:'Skript §7',l:'Quelle'}],
+  stats:[{v:'18',l:'Karten'},{v:'3',l:'Bauteile'},{v:'Skript §7',l:'Quelle'}],
   cards:[
     {q:'Effektivwerte $U_{\\text{eff}}$, $I_{\\text{eff}}$ von Wechselspannung — Definition und Bezug zur Leistung.',badges:['def'],ref:'Skript §7.1',
      a:`Für $U(t)=U_0\\cos(\\omega t)$: $$U_{\\text{eff}}=\\sqrt{\\langle U^2\\rangle}=\\frac{U_0}{\\sqrt{2}}, \\quad I_{\\text{eff}}=\\frac{I_0}{\\sqrt{2}}$$
@@ -2046,7 +2046,7 @@ Für $\\omega\\gg\\omega_g$ gilt $U_a\\approx\\frac{1}{RC}\\int U_e\\,dt$ — de
 {
   id:'ch11c', title:'Spezielle Relativitätstheorie', num:'11c',
   desc:'Postulate, Zeitdilatation, Längenkontraktion, Lorentz-Transformation, relativistischer Impuls/Energie, Ursprung der Lorentz-Kraft.',
-  stats:[{v:'12',l:'Karten'},{v:'2',l:'Postulate'},{v:'Skript §11',l:'Quelle'}],
+  stats:[{v:'19',l:'Karten'},{v:'2',l:'Postulate'},{v:'Skript §11',l:'Quelle'}],
   cards:[
     {q:'Die zwei Postulate der speziellen Relativitätstheorie (Einstein 1905).',badges:['def'],ref:'Skript §11.2',
      a:`<strong>1) Relativitätsprinzip:</strong> Die Gesetze der Physik gelten in allen Inertialsystemen gleichermaßen — kein System ist bevorzugt.<br>
@@ -2178,7 +2178,7 @@ Erlebt der Reisende $2$ Jahre, vergehen auf der Erde $2\\cdot28{,}9=57{,}7$ Jahr
 {
   id:'ch12', title:'Schlüsselaufgaben aus den Übungen', num:'12',
   desc:'Die wichtigsten Aufgabentypen aus Übungen 0–6, mit vollständigen Lösungswegen.',
-  stats:[{v:'10',l:'Karten'},{v:'6',l:'Übungsblätter'},{v:'Übungen 0–6',l:'Quelle'}],
+  stats:[{v:'41',l:'Karten'},{v:'13',l:'Übungsblätter'},{v:'Übungen 0–12',l:'Quelle'}],
   cards:[
     {q:'[ÜB 0C] Konservatives Kraftfeld: Ist $\\vec{F} = -\\nabla E_{\\text{pot}}$ mit $E_{\\text{pot}} = \\alpha x^3 y/(1+z^2)$ konservativ?',badges:['ex','proof'],ref:'Übung 0, Aufg. C',
      a:`Konservativ $\\Leftrightarrow$ $\\text{rot}(\\vec{F}) = 0$.<br>
@@ -2609,7 +2609,7 @@ Teilchen <em>kleiner</em> als $\\approx0{,}6\\,\\mu$m werden aus dem Sonnensyste
 {
   id:'ch13', title:'Probeklausur A (Neu)', num:'13',
   desc:'Neue Probeklausur für 3 Stunden — andere Aufgabentypen als die original Probeklausur. Inhalt aus Übungen und Skript.',
-  stats:[{v:'14',l:'Aufgaben'},{v:'3 h',l:'Dauer'},{v:'~65',l:'Punkte'}],
+  stats:[{v:'15',l:'Aufgaben'},{v:'3 h',l:'Dauer'},{v:'~65',l:'Punkte'}],
   cards:[
     {q:'[PKA Basiswissen 1] Erläutern Sie den Unterschied zwischen elektrischem Feld $\\vec{E}$ und elektrischem Flussdichte $\\vec{D}$. Wie hängen sie zusammen?',badges:['exam'],ref:'Probeklausur A',
      a:`$\\vec{D} = \\varepsilon_0\\varepsilon_r\\vec{E} = \\varepsilon_0\\vec{E} + \\vec{P}$<br>
