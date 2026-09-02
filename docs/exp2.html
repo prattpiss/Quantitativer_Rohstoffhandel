@@ -108,20 +108,25 @@
     <a class="nav-link" href="#ch11">11 · Optik</a>
   </div>
   <div class="nav-group">
+    <div class="nav-label">Wechselstrom & Relativität</div>
+    <a class="nav-link" href="#ch11b">12 · Wechselstrom & Schwingkreise</a>
+    <a class="nav-link" href="#ch11c">13 · Spezielle Relativitätstheorie</a>
+  </div>
+  <div class="nav-group">
     <div class="nav-label">Prüfung</div>
-    <a class="nav-link" href="#ch12">12 · Übungsaufgaben</a>
-    <a class="nav-link" href="#ch13">13 · Probeklausur A</a>
-    <a class="nav-link" href="#ch14">14 · Probeklausur B</a>
+    <a class="nav-link" href="#ch12">14 · Übungsaufgaben</a>
+    <a class="nav-link" href="#ch13">15 · Probeklausur A</a>
+    <a class="nav-link" href="#ch14">16 · Probeklausur B</a>
   </div>
 </nav>
 
 <main id="content">
 <div class="hero">
   <h1>Experimentalphysik II — Lernkarten</h1>
-  <p>Elektrostatik, Elektrodynamik, Magnetismus, Maxwell-Gleichungen und Optik — vollständig mit Definitionen, Formeln, Beweisen und 2 neuen Probeklausuren.</p>
+  <p>Elektrostatik, Elektrodynamik, Magnetismus, Maxwell-Gleichungen, Wechselstrom, Optik und Spezielle Relativitätstheorie — vollständig mit Definitionen, Formeln, Beweisen, allen Experimenten/Maschinen und 2 neuen Probeklausuren.</p>
   <div class="badges">
-    <span class="badge">14 Kapitel</span>
-    <span class="badge">160+ Karten</span>
+    <span class="badge">16 Kapitel</span>
+    <span class="badge">200+ Karten</span>
     <span class="badge">Übungsaufgaben</span>
     <span class="badge">2 Probeklausuren</span>
     <span class="badge">SoSe 2026 · Braden/Petsch</span>
@@ -566,7 +571,44 @@ Supraleiter: bei $T < T_c$ springt $\\rho_W \\to 0$ abrupt.`},
 • Amperemeter in Reihe zum Widerstand (muss $R_A \\ll R$ haben)<br>
 • Voltmeter parallel zum Widerstand (muss $R_V \\gg R$ haben)<br>
 • Spannungsquelle in den äußeren Kreis<br>
-Systematische Fehler: Amperemeter misst auch Strom durch Voltmeter, Voltmeter misst auch Spannung an Amperemeter.`}
+Systematische Fehler: Amperemeter misst auch Strom durch Voltmeter, Voltmeter misst auch Spannung an Amperemeter.`},
+    {q:'Bändermodell: Wie erklärt es den Unterschied zwischen Metall, Halbleiter und Isolator (>23 Größenordnungen im spez. Widerstand)?',badges:['def'],ref:'Skript §2.2',
+     a:`Elektronen sind nur in erlaubten Energiebändern erlaubt (aus periodischem Potential der Ionenrümpfe, quantenmechanisch).<br>
+<strong>Metall:</strong> oberstes Band (Leitungsband) nur teilweise gefüllt $\\to$ Transport möglich bei $T=0$.<br>
+<strong>Isolator:</strong> Valenzband komplett voll, Leitungsband komplett leer, große Bandlücke $E_g > 3$–$4\\,\\text{eV}$ $\\to$ kein Transport.<br>
+<strong>Halbleiter:</strong> Isolator mit kleiner Lücke ($n\\propto e^{-E_g/2k_BT}$) — durch Dotierung (3-/5-wertige Fremdatome) gezielt einstellbare Ladungsträgerdichte $\\to$ Transistor, Diode.`},
+    {q:'Supraleitung: Definition, BCS-Mechanismus, Typ I vs. Typ II, Hochtemperatursupraleiter.',badges:['def'],ref:'Skript §2.2',
+     a:`<strong>Supraleitung</strong> = vollständiges Verschwinden des elektrischen Widerstands unterhalb $T_c$ + perfekter Diamagnetismus (Feldverdrängung).<br>
+Entdeckung: Kamerlingh Onnes 1911 (Hg, $T_c=4{,}15\\,\\text{K}$). BCS-Theorie (1957): Elektronen bilden über Phononen-Kopplung <strong>Cooper-Paare</strong>.<br>
+<strong>Typ I:</strong> Feld bis $B_c$ komplett verdrängt, dann abrupt normalleitend.<br>
+<strong>Typ II:</strong> partielle Verdrängung zwischen $B_{c1}$ und $B_{c2}$ (technisch wichtig für Magnete).<br>
+<strong>Kuprat-Hochtemperatursupraleiter</strong> (z.B. YBCO, $T_c$ bis $\\sim$130–190K unter Druck): Mechanismus vermutlich magnetische statt phononische Kopplung, bis heute nicht vollständig verstanden.`},
+    {q:'Galvanisches Element (Daniell-Element): Funktionsprinzip.',badges:['def'],ref:'Skript §2.4',
+     a:`Zn-Elektrode (unedler, gibt leichter Elektronen ab) und Cu-Elektrode in Elektrolytlösung, durch Leiter verbunden.<br>
+Unterschiedliches Redoxpotential $\\to$ Zn geht als Zn$^{2+}$ in Lösung, Elektronen fließen über äußeren Leiter zur Cu-Elektrode, dort Abscheidung von Cu aus Cu$^{2+}$.<br>
+Batterie "verbraucht", wenn Zn-Elektrode aufgelöst oder Cu$^{2+}$ aus der Lösung aufgebraucht ist.<br>
+<div class="info">Li-Ionen-Akku (Nobelpreis Chemie 2019): Li$^+$-Ionen wandern zwischen Graphit- und Metalloxid-Elektrode; Li$^+$ ist klein und diffundiert sehr gut.</div>`},
+    {q:'Zitteraal (Electrophorus): Wie erzeugt er hohe Spannung ohne sich selbst zu schädigen?',badges:['ex','calc'],ref:'Skript §2.3 (Zitteraal-Beispiel)',
+     a:`5000 Zellen pro Reihe ($U_Z=0{,}15\\,\\text{V}$, $R_Z=0{,}25\\,\\Omega$) in Serie $\\to$ $U_R=750\\,\\text{V}$, $R_R=1250\\,\\Omega$ pro Reihe.<br>
+140 Reihen parallel $\\to R_{\\text{ges}}\\approx 8{,}93\\,\\Omega$; mit $R_{\\text{Wasser}}=800\\,\\Omega$: $I_{\\text{ges}}\\approx 0{,}93\\,\\text{A}$.<br>
+<div class="result">Durch jede einzelne Reihe (= durch den Aal selbst) fließt aber nur $I_{\\text{ges}}/140\\approx 7\\,\\text{mA}$ — die Parallelschaltung schützt das Tier, während das Opfer den vollen Strom im Wasser spürt!</div>`},
+    {q:'Röntgenröhre: Erzeugung und zwei Arten von Röntgenstrahlung.',badges:['def'],ref:'Skript §2.4',
+     a:`Glühkathode emittiert Elektronen $\\to$ Beschleunigung über $U\\sim10$–$100\\,\\text{kV}$ $\\to$ Aufprall auf Anode.<br>
+<strong>Bremsstrahlung:</strong> kontinuierliches Spektrum durch harte Abbremsung der Elektronen; max. Energie = $eU$ (Duane-Hunt).<br>
+<strong>Charakteristische Strahlung:</strong> Elektronen schlagen innere Schalenelektronen der Anode heraus; beim Wiederauffüllen aus höheren Schalen wird scharfe, elementspezifische Linie emittiert.<br>
+$\\lambda=1\\,\\text{Å}\\;\\Leftrightarrow\\;E\\approx12{,}4\\,\\text{keV}$. Ionisierende, schädliche Strahlung — Strahlenschutz erforderlich!`},
+    {q:'Geiger-Müller-Zählrohr: Betriebsbereiche der I-U-Kennlinie.',badges:['def'],ref:'Skript §2.4',
+     a:`Ionisierende Strahlung erzeugt Ladungsträgerpaare im Gas, die im äußeren Feld abgesaugt werden.<br>
+<strong>I) Ohm'scher Bereich</strong> (kleine $U$): Ladungsträger rekombinieren teilweise.<br>
+<strong>II) Sättigungsbereich</strong> (Ionisationskammer): alle erzeugten Ladungen werden gesammelt, Signal $\\propto$ Energie.<br>
+<strong>III) Proportionalbereich</strong>: Stoßionisation verstärkt Signal, noch proportional zur Erregung.<br>
+<strong>V) Geiger-Müller-Bereich</strong>: Signal unabhängig von Erregung (nur Ja/Nein-Zählung, "Knacken").<br>
+<strong>VI) Selbstständige Entladung</strong>: unbrauchbar als Zähler (Dauerkurzschluss).`},
+    {q:'Leuchtstoffröhre (Energiesparlampe): Rolle von Starter und Drossel.',badges:['def'],ref:'Skript §2.4',
+     a:`a) Lampe hat hohen Widerstand $\\to$ Glimmentladung im Starter beginnt.<br>
+b) Starter schließt kurz $\\to$ hoher Strom $\\to$ Glühemission an den Elektroden.<br>
+c) Drossel (Spule) begrenzt die Spannung, Starter öffnet wieder $\\to$ stabile Gasentladung zündet.<br>
+Das im Gas erzeugte UV-Licht wird durch eine Leuchtstoffbeschichtung in sichtbares Licht konvertiert — viel effizienter als die Glühbirne (kein Aufheizen eines Festkörpers)!`}
   ]
 },
 {
@@ -601,6 +643,26 @@ Ampère-Kreis entlang der Spulenachse:<br>
 $$B = \\mu_0 n I = \\mu_0 \\frac{N}{L} I$$
 Außerhalb: $B = 0$ (für ideale unendliche Spule).<br>
 <div class="result">Solenoid ist das Pendant zum Plattenkondensator: erzeugt homogenes $\\vec{B}$-Feld.</div>`},
+    {q:'Fadenstrahlrohr: Prinzip und Bestimmung der spezifischen Ladung $e/m$ des Elektrons.',badges:['def','calc'],ref:'Übung 6 / Praktikum A',
+     a:`Glühkathode emittiert Elektronen, beschleunigt über $U$ (Energie $eU=\\tfrac12 mv^2$), fliegen durch verdünntes Edelgas (leuchtende Spur durch Anregung).<br>
+Homogenes $\\vec{B}$ (z.B. Helmholtz-Spulenpaar) senkrecht zu $\\vec{v}$ lenkt Elektronen auf Kreisbahn mit Radius $R=mv/(eB)$.<br>
+<div class="step">$eU=\\tfrac12 mv^2$ und $R=mv/(eB)$ kombinieren: $\\frac{e}{m}=\\frac{2U}{R^2B^2}$</div>
+<div class="result">Für $U=1\\,\\text{kV}$, $B=2{,}6\\,\\text{mT}$, $R=4{,}1\\,\\text{cm}$: $e/m\\approx1{,}76\\cdot10^{11}\\,\\text{C/kg}$ — historisch fundamentale Messung (J.J. Thomson).</div>`},
+    {q:'Geschwindigkeitsfilter (gekreuzte Felder) und Massenspektrometer.',badges:['def','calc'],ref:'Übung 7, Aufg. B',
+     a:`Geschwindigkeitsfilter: Teilchen mit $\\vec{v}=v\\hat{e}_x$ durchqueren gekreuzte Felder $\\vec{E}=E\\hat{e}_y$, $\\vec{B}=B\\hat{e}_z$. Nur Teilchen mit $qE=qvB\\;\\Rightarrow\\;v=E/B$ passieren geradlinig ein kleines Loch (unabhängig von $q$, $m$!).<br>
+<strong>Massenspektrometer:</strong> nach dem Filter läuft das Teilchen im reinen $\\vec{B}$-Feld auf Kreisbahn $r=mv/(qB)$ — Radius $\\propto$ Masse bei fixem $v,q,B$. So werden z.B. Ge-Isotope (verschiedene $A$) getrennt und identifiziert.`},
+    {q:'Magnetische Flasche: Prinzip der Teilchenspeicherung.',badges:['def'],ref:'Übung 10, Aufg. A',
+     a:`Inhomogenes, zylindersymmetrisches $\\vec{B}$-Feld, an den Enden stärker als in der Mitte.<br>
+Bewegt sich ein geladenes Teilchen (mit erhaltenem magn. Moment $\\mu$, da adiabatische Invariante) von schwachem in starkes Feld, sinkt $v_\\parallel$ (parallel zur Achse), bis Umkehrpunkt erreicht ist — das Teilchen wird reflektiert.<br>
+<div class="result">Anwendung: <strong>Van-Allen-Gürtel der Erde</strong> — geladene Teilchen werden zwischen den Polen (starkes Feld) gefangen; Verlust in die Atmosphäre erzeugt Polarlichter durch Stoßionisation.</div>`},
+    {q:'Paulsche Ionenfalle: Funktionsprinzip (Nobelpreis Wolfgang Paul 1989).',badges:['def'],ref:'Skript / Übung 10',
+     a:`Ein rotierendes elektrisches Vierpolfeld (Wechselfeld $\\sim1\\,\\text{MHz}$) hält geladene Teilchen (Ionen/Elektronen) über lange Zeit in einer kleinen Falle gefangen.<br>
+Da ein statisches E-Feld kein stabiles Gleichgewicht erzeugen kann (Laplace-Gleichung erlaubt kein Minimum in allen Richtungen), wird durch schnelles Wechseln der Feldrichtung ein effektives Einschlusspotential erzeugt.<br>
+<div class="info">Ermöglicht Präzisionsmessungen an einzelnen Elementarteilchen mit bis dahin unerreichter Genauigkeit.</div>`},
+    {q:'Kathodenstrahlröhre (klassischer Röhrenfernseher): Wie wurde damit das Elektron entdeckt (Thomson 1897)?',badges:['def','calc'],ref:'Skript §3.2 / Übung 6',
+     a:`Elektronen aus Glühkathode werden durch $U$ beschleunigt, passieren dann gekreuzte Felder $\\vec{E}$ (elektrostatische Platten) und $\\vec{B}$ (Ablenkspulen).<br>
+Wird keine Nettoablenkung beobachtet: $qE=qvB \\Rightarrow v=E/B$ (Geschwindigkeitsfilter-Prinzip).<br>
+Durch Variieren nur des E-Feldes (bei bekanntem $v$) und Messen der Ablenkung ließ sich $e/m$ bestimmen — damit wies J.J. Thomson erstmals das Elektron als Teilchen mit definiertem $e/m$ nach.`},
     {q:'Magnetische Monopole und $\\nabla\\cdot\\vec{B} = 0$.',badges:['def'],ref:'Skript §4 / Maxwell-Gleichungen',
      a:`$$\\nabla\\cdot\\vec{B} = 0 \\quad (\\text{oder} \\quad \\oiint\\vec{B}\\cdot d\\vec{A} = 0)$$
 Es gibt keine magnetischen Monopole — $\\vec{B}$-Feldlinien sind immer geschlossen!<br>
@@ -804,6 +866,122 @@ Konvexlinse: $f > 0$; Konkavlinse: $f < 0$<br>
 Kohärenzlänge $l_c = c/\\Delta f$ (Laser: sehr lang, Glühbirne: sehr kurz).<br>
 <strong>Laser</strong>: Stimulierte Emission → alle Photonen gleiche $\\lambda$, Phase, Richtung → kohärentes Licht.<br>
 Holographie, Interferometrie, Faseroptik benötigen Laserkohärenz.`}
+  ]
+},
+{
+  id:'ch11b', title:'Wechselstrom & Schwingkreise', num:'11b',
+  desc:'Effektivwerte, komplexe Widerstände, LC/RLC-Schwingkreise, Resonanz, Filter, Tesla-Transformator, Skin-Effekt.',
+  stats:[{v:'12',l:'Karten'},{v:'3',l:'Bauteile'},{v:'Skript §7',l:'Quelle'}],
+  cards:[
+    {q:'Effektivwerte $U_{\\text{eff}}$, $I_{\\text{eff}}$ von Wechselspannung — Definition und Bezug zur Leistung.',badges:['def'],ref:'Skript §7.1',
+     a:`Für $U(t)=U_0\\cos(\\omega t)$: $$U_{\\text{eff}}=\\sqrt{\\langle U^2\\rangle}=\\frac{U_0}{\\sqrt{2}}, \\quad I_{\\text{eff}}=\\frac{I_0}{\\sqrt{2}}$$
+Mittlere Leistung am Ohm'schen Widerstand: $\\langle P\\rangle = \\tfrac{1}{2}U_0I_0 = U_{\\text{eff}}I_{\\text{eff}}$.<br>
+<div class="info">Haushaltsnetz: $U_{\\text{eff}}=230\\,\\text{V}$, $U_0=325\\,\\text{V}$ — die effektive Spannung erzeugt im Widerstand die gleiche Wärme wie eine Gleichspannung gleicher Zahl.</div>`},
+    {q:'Komplexe Widerstände (Impedanzen) von Kondensator und Spule — Herleitung und Phasenverschiebung.',badges:['def','proof'],ref:'Skript §7.2',
+     a:`Ansatz $U(t)=U_0 e^{i\\omega t}$.<br>
+<strong>Kondensator:</strong> $I=C\\,dU/dt=i\\omega C\\,U \\Rightarrow Z_C=\\dfrac{1}{i\\omega C}=-\\dfrac{i}{\\omega C}$. Strom eilt der Spannung um $90°$ voraus.<br>
+<strong>Spule:</strong> $U=L\\,dI/dt \\Rightarrow Z_L=i\\omega L$. Strom läuft der Spannung um $90°$ hinterher.<br>
+<strong>Ohm'scher Widerstand:</strong> $Z_R=R$ (reell, keine Phasenverschiebung).<br>
+Grenzfälle: $\\omega\\to0$: $Z_C\\to\\infty$ (Kondensator sperrt), $Z_L\\to0$ (Spule leitet); $\\omega\\to\\infty$: umgekehrt.`},
+    {q:'Mittlere Leistung bei Phasenverschiebung $\\phi$ zwischen $U$ und $I$ — warum verbrauchen Spule/Kondensator keine Wirkleistung?',badges:['def','calc'],ref:'Skript §7.2',
+     a:`$$\\langle P(t)\\rangle = \\tfrac{1}{2}U_0I_0\\cos\\phi$$
+Für reinen Ohm'schen Widerstand ($\\phi=0$): maximale Leistung.<br>
+Für Spule ($\\phi=+90°$) und Kondensator ($\\phi=-90°$): $\\cos(90°)=0$ $\\Rightarrow$ <strong>Blindleistung</strong>, keine Wärme erzeugt — Energie pendelt nur zwischen Quelle und Bauteil (E- bzw. B-Feld wird auf- und abgebaut).`},
+    {q:'Ungedämpfter LC-Schwingkreis: Differentialgleichung, Lösung, mechanische Analogie.',badges:['def','proof'],ref:'Skript §7.3',
+     a:`Maschenregel: $L\\,dI/dt + Q/C = 0$, mit $I=dQ/dt$:
+$$\\ddot{Q} + \\omega_0^2 Q = 0, \\quad \\omega_0 = \\frac{1}{\\sqrt{LC}}$$
+Lösung: $Q(t)=Q_0\\cos(\\omega_0t+\\varphi_0)$.<br>
+<strong>Mechanische Analogie:</strong> Ladung $Q\\leftrightarrow$ Auslenkung $x$; Strom $I\\leftrightarrow$ Geschwindigkeit $v$; $L\\leftrightarrow m$ (Trägheit); $1/C\\leftrightarrow D$ (Federkonstante). Energie pendelt zwischen $W_L=\\tfrac12 LI^2$ und $W_C=\\tfrac12 Q^2/C$, Summe konstant.`},
+    {q:'Gedämpfter RLC-Schwingkreis: drei Fälle (Kriechfall, aperiodischer Grenzfall, Schwingfall).',badges:['def'],ref:'Skript §7.3',
+     a:`DGL: $\\ddot{I}+\\gamma\\dot{I}+\\omega_0^2 I=0$ mit $\\gamma=R/L$. Exponentialansatz liefert $\\alpha_{1,2}=-\\gamma/2\\pm\\sqrt{\\gamma^2/4-\\omega_0^2}$.<br>
+<strong>$\\gamma>2\\omega_0$ (Kriechfall):</strong> zwei reelle negative Exponenten, kein Überschwingen.<br>
+<strong>$\\gamma=2\\omega_0$ (aperiodischer Grenzfall):</strong> schnellstes Abklingen ohne Schwingung.<br>
+<strong>$\\gamma<2\\omega_0$ (Schwingfall):</strong> gedämpfte Schwingung $I(t)=I_0e^{-\\gamma t/2}\\cos(\\tilde\\omega t+\\varphi)$ mit $\\tilde\\omega=\\sqrt{\\omega_0^2-\\gamma^2/4}$.`},
+    {q:'Erzwungene Schwingung und Resonanz im RLC-Kreis: Impedanz, Resonanzbedingung, Phase.',badges:['def','calc'],ref:'Skript §7.3',
+     a:`Reihenschaltung, äußere Spannung $U=U_0e^{i\\omega t}$:
+$$Z = R + i\\left(\\omega L - \\frac{1}{\\omega C}\\right), \\quad \\tan\\phi = \\frac{\\omega L - 1/(\\omega C)}{R}$$
+$|Z|$ minimal (Strom maximal) für $\\omega L=1/(\\omega C) \\Rightarrow \\omega=\\omega_0=1/\\sqrt{LC}$ — <strong>Resonanz</strong>.<br>
+Bei Resonanz ist $Z=R$ rein reell, Strom und Spannung in Phase, maximaler Strom $I_0=U_0/R$.`},
+    {q:'Hoch- und Tiefpass (RC-Glieder als Frequenzfilter).',badges:['def','calc'],ref:'Skript §7.3',
+     a:`<strong>Hochpass</strong> ($U_a$ am Widerstand $R$, in Reihe mit $C$): $\\left|\\dfrac{U_a}{U}\\right|=\\dfrac{R}{\\sqrt{R^2+1/(\\omega C)^2}}$ — dämpft tiefe Frequenzen ($\\omega\\to0$: $U_a\\to0$), lässt hohe passieren.<br>
+<strong>Tiefpass</strong> ($U_a$ am Kondensator): umgekehrtes Verhalten — dämpft hohe Frequenzen.<br>
+Grenzfrequenz jeweils bei $\\omega=1/(RC)$ (Amplitude auf $1/\\sqrt2$ abgefallen).`},
+    {q:'RLC-Bandpass und Sperrfilter (Parallel- vs. Reihenschaltung von L und C).',badges:['def'],ref:'Skript §7.3',
+     a:`<strong>Reihen-RLC als Bandpass:</strong> lässt nur Frequenzen nahe $\\omega_0=1/\\sqrt{LC}$ durch (Resonanzüberhöhung des Stroms).<br>
+<strong>Parallelschaltung von L und C (Sperrfilter):</strong> Admittanzen addieren sich; bei $\\omega_0$ kompensieren sich $Z_L$ und $Z_C$ genau — die Parallelschaltung sperrt exakt die Resonanzfrequenz (unendliche Impedanz im Idealfall).`},
+    {q:'Zeige: $[L][C]=\\text{s}^2$ und berechne die Eigenfrequenz für $C=1\\,\\mu\\text{F}$, $L=1\\,\\text{mH}$.',badges:['calc','proof'],ref:'Probeklausur Aufg. 8',
+     a:`$[L]=\\text{H}=\\text{Vs/A}$, $[C]=\\text{F}=\\text{As/V}$:
+$$[LC] = \\frac{\\text{Vs}}{\\text{A}}\\cdot\\frac{\\text{As}}{\\text{V}} = \\text{s}^2 \\checkmark$$
+Damit hat $\\omega_0=1/\\sqrt{LC}$ die Einheit $1/\\text{s}$. Für $L=1\\,\\text{mH}$, $C=1\\,\\mu\\text{F}$:
+$$\\omega_0=\\frac{1}{\\sqrt{10^{-3}\\cdot10^{-6}}}\\approx3{,}16\\cdot10^4\\,\\text{rad/s}, \\quad f_0=\\omega_0/(2\\pi)\\approx5{,}03\\,\\text{kHz}$$`},
+    {q:'Tesla-Transformator (Resonanztransformator): Funktionsprinzip.',badges:['def'],ref:'Skript §7.3',
+     a:`Primärkreis: hohe Kapazität $C_1$, geringe Induktivität $L_1$ (schnell aufladbar, hohe Spannung durch Funkenstrecke).<br>
+Sekundärkreis: geringe Kapazität, hohe Induktivität $L_2$ — beide Kreise auf gleiche Resonanzfrequenz $\\omega_0=1/\\sqrt{L_1C_1}=1/\\sqrt{L_2C_2}$ abgestimmt.<br>
+Funkenstrecke zündet hochfrequente, gedämpfte Schwingung im Primärkreis, die resonant auf die Sekundärseite übertragen wird $\\to$ Spannungen $>100\\,\\text{kV}$, sichtbare Luftentladungen (ungefährlich bei hoher Frequenz, da Haut/Skin-Effekt den Strom oberflächlich hält).`},
+    {q:'Skin-Effekt: Ursache und Eindringtiefe.',badges:['def'],ref:'Skript §7.4',
+     a:`Bei Wechselstrom erzeugt das zeitlich veränderliche B-Feld im Leiterinneren Wirbelströme, die dem Strom in der Mitte entgegenwirken $\\to$ Stromverdrängung an die Oberfläche ("Haut").<br>
+Eindringtiefe $\\delta\\propto 1/\\sqrt{f}$ — bei $50\\,\\text{Hz}$ ca. $9\\,\\text{mm}$ (Cu), bei $1\\,\\text{GHz}$ nur $\\sim2\\,\\mu\\text{m}$.<br>
+<div class="info">Anwendung: Überlandleitungen ummanteln ein tragendes Stahlseil mit Cu/Al — der Skin-Effekt beschränkt den Stromfluss ohnehin auf die äußere Schicht, sodass Stahl im Inneren die mechanische Last tragen kann.</div>`},
+    {q:'Drehstrom (Dreiphasenwechselstrom): Prinzip und Nullleiter.',badges:['def'],ref:'Skript §7.1',
+     a:`Drei um $120°$ phasenverschobene Spannungen $U_j=U_0\\cos(\\omega t-\\tfrac{2\\pi}{3}(j-1))$, $j=1,2,3$, erzeugt durch drei sternförmig angeordnete Spulen.<br>
+Bei gleicher (symmetrischer) Belastung aller drei Phasen verschwindet der Strom im gemeinsamen Nullleiter: $I_1+I_2+I_3=0$ — leicht im Zeigerdiagramm zu sehen (3 Vektoren im 120°-Stern summieren sich zu 0).<br>
+Vorteil: gleichmäßigere Leistungsabgabe als Einphasenwechselstrom.`}
+  ]
+},
+{
+  id:'ch11c', title:'Spezielle Relativitätstheorie', num:'11c',
+  desc:'Postulate, Zeitdilatation, Längenkontraktion, Lorentz-Transformation, relativistischer Impuls/Energie, Ursprung der Lorentz-Kraft.',
+  stats:[{v:'12',l:'Karten'},{v:'2',l:'Postulate'},{v:'Skript §11',l:'Quelle'}],
+  cards:[
+    {q:'Die zwei Postulate der speziellen Relativitätstheorie (Einstein 1905).',badges:['def'],ref:'Skript §11.2',
+     a:`<strong>1) Relativitätsprinzip:</strong> Die Gesetze der Physik gelten in allen Inertialsystemen gleichermaßen — kein System ist bevorzugt.<br>
+<strong>2) Konstanz der Lichtgeschwindigkeit:</strong> Licht breitet sich im Vakuum in allen Inertialsystemen mit derselben Geschwindigkeit $c$ aus, unabhängig vom Bewegungszustand der Quelle.<br>
+$c$ ist zugleich Grenzgeschwindigkeit für Energie- und Informationsübertragung.`},
+    {q:'Relativität der Gleichzeitigkeit: Gedankenexperiment mit bewegtem Zug.',badges:['def','proof'],ref:'Skript §11.2',
+     a:`Zwei Lichtblitze (bei B und R) treffen für einen ruhenden Beobachter Sam gleichzeitig in der Mitte ein.<br>
+Für die im Zug (System $S'$) bewegte Beobachterin Sally, für die B' und R' gleich weit entfernt sind, aber sich die Quelle relativ zu ihr bewegt, kommt eines der Signale zuerst an.<br>
+<div class="result">Gleichzeitigkeit ist relativ — abhängig vom Bezugssystem, nicht absolut wie in der klassischen Mechanik!</div>`},
+    {q:'Zeitdilatation: Herleitung mit dem "Lichtuhr"-Gedankenexperiment.',badges:['proof','calc'],ref:'Skript §11.2',
+     a:`Photon läuft im bewegten Zug (Geschwindigkeit $v$) vertikal zwischen Boden und Spiegel (Abstand $D$) hin und zurück.<br>
+Beobachter im Zug misst Eigenzeit $\\Delta t_0=2D/c$. Beobachter im Bahnhof sieht zusätzlich horizontale Bewegung: $c^2\\Delta t^2 = c^2\\Delta t_0^2 + v^2\\Delta t^2$
+$$\\Rightarrow \\Delta t=\\gamma\\Delta t_0, \\quad \\gamma=\\frac{1}{\\sqrt{1-v^2/c^2}}=\\frac{1}{\\sqrt{1-\\beta^2}}$$
+Bewegte Uhren gehen (aus Sicht des ruhenden Beobachters) langsamer — $\\Delta t>\\Delta t_0$.`},
+    {q:'Längenkontraktion: Herleitung und Formel.',badges:['proof','calc'],ref:'Skript §11.2',
+     a:`Ein im System $S$ ruhender Maßstab hat die Eigenlänge $L_0$. Für einen Beobachter, relativ zu dem sich der Stab mit $v$ bewegt, muss die Messung der Endpunkte gleichzeitig erfolgen (Problem der Gleichzeitigkeit!):
+$$L = \\frac{L_0}{\\gamma}$$
+Bewegte Objekte erscheinen in Bewegungsrichtung verkürzt — symmetrisch: jeder Beobachter sieht den Maßstab des anderen als verkürzt.`},
+    {q:'Lorentz-Transformation: vollständige Formeln und Grenzfall $v\\ll c$.',badges:['def'],ref:'Skript §11.3',
+     a:`$S'$ bewegt sich mit $v$ entlang $x$ gegen $S$, Ursprünge fallen bei $t=t'=0$ zusammen:
+$$x' = \\gamma(x-vt), \\quad y'=y,\\quad z'=z, \\quad t' = \\gamma\\left(t-\\frac{v}{c^2}x\\right)$$
+Für $v\\ll c$: $\\gamma\\to1$, die Lorentz-Transformation geht in die klassische <strong>Galilei-Transformation</strong> über ($x'=x-vt$, $t'=t$).<br>
+Die Verknüpfung von Ort und Zeit in der letzten Zeile ist der zentrale neue Aspekt gegenüber der klassischen Mechanik.`},
+    {q:'Zwillingsparadoxon: Auflösung der scheinbaren Symmetrie.',badges:['def','calc'],ref:'Skript §11.2',
+     a:`Zwilling 2 fliegt mit $v$ weg und zurück, Zwilling 1 bleibt auf der Erde. Beide Perspektiven scheinen symmetrisch — sind es aber nicht!<br>
+<strong>Auflösung:</strong> Zwilling 2 muss das Bezugssystem wechseln (Beschleunigung beim Umkehren) — nur er durchläuft kein einziges Inertialsystem durchgehend.<br>
+<div class="result">Ergebnis: Zwilling 1 (Erde) ist bei Wiedertreffen älter als Zwilling 2 (Reisender) — quantitativ bestätigt durch Atomuhren in Flugzeugen.</div>`},
+    {q:'Relativistischer Impuls und Energie: Formeln und Grenzfälle.',badges:['def','calc'],ref:'Skript §11.3',
+     a:`$$\\vec{p} = \\gamma m_0\\vec{v}, \\quad E = \\gamma m_0 c^2, \\quad E^2 = (pc)^2+(m_0c^2)^2$$
+Für $v\\to c$: $\\gamma\\to\\infty \\Rightarrow p,E\\to\\infty$ (unerreichbar für massive Teilchen).<br>
+Für $v\\ll c$: Taylorentwicklung liefert $E\\approx m_0c^2+\\tfrac12 m_0v^2$ — <strong>Ruheenergie</strong> $m_0c^2$ plus klassische kinetische Energie.<br>
+Bindungsenergie z.B. Deuteron: Summe der freien Nukleonenmassen $>$ Kernmasse — Differenz wird bei Fusion als Energie frei ($E=\\Delta m\\,c^2$).`},
+    {q:'Warum ist die bewegte Masse in Stoßprozessen "schwerer" als die Ruhemasse? (Impulserhaltung im Zweiteilchenstoß)',badges:['proof'],ref:'Skript §11.3',
+     a:`Zwei Teilchen mit $m_0$ stoßen sich im gemeinsamen Ruhesystem $S'$ symmetrisch ab. Im Ruhesystem eines der Teilchen (System $S$) bewegt sich das andere mit geringerer Geschwindigkeit als naiv erwartet (relativistisches Additionstheorem der Geschwindigkeiten).<br>
+Damit Impulserhaltung weiterhin gilt, muss die Masse des sich langsamer entfernenden Teilchens größer sein: $m=\\gamma m_0$ — die "bewegte Masse" wächst mit der Geschwindigkeit.`},
+    {q:'Wie erklärt die Relativitätstheorie die Lorentz-Kraft als relativistischen Effekt der Coulomb-Kraft?',badges:['def','proof'],ref:'Skript §11.4',
+     a:`Ladung ist relativistisch invariant (unabhängig vom Bezugssystem). Ein stromführender Draht ist im Laborsystem elektrisch neutral ($\\lambda_+=\\lambda_-$).<br>
+Im Ruhesystem einer bewegten Probeladung $q$ erfahren die (unterschiedlich schnell bewegten) positiven und negativen Ladungsträger jeweils <strong>unterschiedliche Lorentz-Kontraktion</strong> $\\Rightarrow$ die Ladungsdichten $\\lambda'_+\\neq\\lambda'_-$ im bewegten System sind ungleich.<br>
+<div class="result">Der Draht erscheint im bewegten Bezugssystem geladen $\\to$ Coulomb-Kraft auf $q$. Zurücktransformiert entspricht das genau der Lorentz-Kraft $q\\vec{v}\\times\\vec{B}$ — Magnetismus ist ein relativistischer Effekt der Elektrostatik!</div>`},
+    {q:'Transformation der elektrischen Feldkomponenten $E_\\parallel$, $E_\\perp$ beim Wechsel des Bezugssystems.',badges:['def'],ref:'Skript §11.4',
+     a:`Für eine im System $S$ ruhende Ladungsverteilung, beobachtet aus $S'$ (Relativgeschwindigkeit $v$):
+$$E'_\\parallel = E_\\parallel, \\qquad E'_\\perp = \\gamma E_\\perp$$
+Die Feldkomponente parallel zur Bewegungsrichtung bleibt unverändert, die senkrechte Komponente wird um den Faktor $\\gamma$ verstärkt — das Feld einer schnell bewegten Ladung ist in Bewegungsrichtung "gestaucht" und quer dazu verstärkt (nicht mehr kugelsymmetrisch).`},
+    {q:'Beschleunigte Bezugssysteme: schwaches Äquivalenzprinzip.',badges:['def'],ref:'Skript §11 (Bezug Mechanik-Vorlesung)',
+     a:`Träge Masse (Widerstand gegen Kraft, $F=ma$) und schwere Masse (Kopplung an Gravitation, $F=m_sg$) sind experimentell ununterscheidbar: $m=m_s$.<br>
+Konsequenz: Im frei fallenden Fahrstuhl ($\\vec{a}=\\vec{g}$) herrscht Schwerelosigkeit — man kann lokal freien Fall nicht von Schwerelosigkeit unterscheiden.<br>
+Dies motiviert (in der Allgemeinen Relativitätstheorie) das <strong>starke Äquivalenzprinzip</strong>: lokale Ununterscheidbarkeit von Trägheits- und Gravitationskräften.`},
+    {q:'β-Zerfall $^{90}$Sr $\\to$ $^{90}$Y: Warum sind die Zerfallselektronen relativistisch zu behandeln?',badges:['ex','calc'],ref:'Skript §11.3',
+     a:`Maximale kinetische Energie der Elektronen $E_{\\text{kin,max}}\\approx2{,}2\\,\\text{MeV} \\gg m_0c^2=511\\,\\text{keV}$ (Elektronen-Ruheenergie) $\\Rightarrow$ die Elektronen sind hochrelativistisch ($\\gamma\\gg1$).<br>
+Impulsmessung über Ablenkradius im Magnetfeld: $p=qBr$; Energiemessung über Szintillator. Beide Messungen zusammen bestätigen $E^2=(pc)^2+(m_0c^2)^2$.`}
   ]
 },
 {
