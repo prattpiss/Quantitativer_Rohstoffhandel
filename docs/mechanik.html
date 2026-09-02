@@ -371,14 +371,14 @@ Integral konvergiert $\\Leftrightarrow$ $-\\alpha/2 > -1$ $\\Leftrightarrow$ $\\
      a:`<strong>Passiv:</strong> Das Koordinatensystem wird transformiert, die Bahnkurve bleibt fest.<br>
 <strong>Aktiv:</strong> Die Bahnkurve wird transformiert, das Koordinatensystem bleibt fest.<br>
 In der Mechanik ist die passive Sichtweise natürlicher.`},
-    {q:'[ÜB 3.3a] Rotierte Einheitsvektoren: $\\hat{e}'_x$ und $\\hat{e}'_y$ durch $\\hat{e}_x, \\hat{e}_y$ ausdrücken (passive Rotation um $\\omega$).',badges:['ex'],ref:'Übung Blatt 3, Aufg. 3a',
+    {q:'[ÜB 3.3a] Rotierte Einheitsvektoren: $\\hat{e}\'_x$ und $\\hat{e}\'_y$ durch $\\hat{e}_x, \\hat{e}_y$ ausdrücken (passive Rotation um $\\omega$).',badges:['ex'],ref:'Übung Blatt 3, Aufg. 3a',
      a:`<div class="result">$$\\hat{e}'_x = \\cos\\omega\\,\\hat{e}_x + \\sin\\omega\\,\\hat{e}_y$$
 $$\\hat{e}'_y = -\\sin\\omega\\,\\hat{e}_x + \\cos\\omega\\,\\hat{e}_y$$</div>`},
-    {q:'[ÜB 3.3b] Koordinatentransformation $x',y'$ aus $x,y$ bei Rotation um $\\omega$.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 3b',
+    {q:'[ÜB 3.3b] Koordinatentransformation $x\',y\'$ aus $x,y$ bei Rotation um $\\omega$.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 3b',
      a:`<div class="step">$x' = \\hat{e}'_x\\cdot\\vec{r} = \\cos\\omega\\,x + \\sin\\omega\\,y$<br>
 $y' = \\hat{e}'_y\\cdot\\vec{r} = -\\sin\\omega\\,x + \\cos\\omega\\,y$</div>
 <div class="result">$$\\begin{pmatrix}x'\\\\y'\\end{pmatrix} = \\begin{pmatrix}\\cos\\omega & \\sin\\omega\\\\-\\sin\\omega & \\cos\\omega\\end{pmatrix}\\begin{pmatrix}x\\\\y\\end{pmatrix} = R^T\\vec{r}$$</div>`},
-    {q:'[ÜB 3.3c] Ableitungsoperatoren $\\partial/\\partial x'$ und $\\partial/\\partial y'$ in Abhängigkeit der alten Ableitungen.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 3c',
+    {q:'[ÜB 3.3c] Ableitungsoperatoren $\\partial/\\partial x\'$ und $\\partial/\\partial y\'$ in Abhängigkeit der alten Ableitungen.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 3c',
      a:`<div class="step">Kettenregel: $\\frac{\\partial}{\\partial x'} = \\frac{\\partial x}{\\partial x'}\\frac{\\partial}{\\partial x} + \\frac{\\partial y}{\\partial x'}\\frac{\\partial}{\\partial y}$<br>
 Aus Umkehrtransformation $x = \\cos\\omega\\,x' - \\sin\\omega\\,y'$: $\\frac{\\partial x}{\\partial x'} = \\cos\\omega$, $\\frac{\\partial y}{\\partial x'} = \\sin\\omega$.</div>
 <div class="result">$\\partial/\\partial x' = \\cos\\omega\\,\\partial/\\partial x + \\sin\\omega\\,\\partial/\\partial y$<br>
@@ -913,7 +913,7 @@ Coriolis $(-2m\\vec{\\omega}\\times\\dot{\\vec{r}}')$ und Zentrifugal $(-m\\vec{
 <div class="step">b) $A = \\frac{k}{m}\\begin{pmatrix}1&-1&0\\\\-1&2&-1\\\\0&-1&1\\end{pmatrix}$</div>
 <div class="step">c) Eigenwerte: $\\omega_1=0$ (Translation), $\\omega_2=\\sqrt{k/m}$ (asym.), $\\omega_3=\\sqrt{3k/m}$ (sym.)</div>
 <div class="result">Drei Normalmoden. $\\omega_1=0$: alle Atome zusammen. $\\omega_2$: Randatome gleich, Mitte entgegen. $\\omega_3$: Mitte ruht, Ränder entgegen.</div>`},
-    {q:'[ÜB 3.3d] Skalentransformation: $\\hat{e}'_x = 2\\hat{e}_x$, $\\hat{e}'_y = \\frac{1}{3}\\hat{e}_y$.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 3d · Skript §2.4',
+    {q:'[ÜB 3.3d] Skalentransformation: $\\hat{e}\'_x = 2\\hat{e}_x$, $\\hat{e}\'_y = \\frac{1}{3}\\hat{e}_y$.',badges:['ex','calc'],ref:'Übung Blatt 3, Aufg. 3d · Skript §2.4',
      a:`<div class="step">$\\vec{r} = x\\hat{e}_x + y\\hat{e}_y = x'\\cdot 2\\hat{e}_x + y'\\cdot\\frac{1}{3}\\hat{e}_y$<br>
 Vergleich: $x = 2x'$, $y = y'/3$ → $x' = x/2$, $y' = 3y$</div>
 <div class="result">Ableitungen:<br>$\\partial/\\partial x' = 2\\,\\partial/\\partial x$<br>$\\partial/\\partial y' = \\frac{1}{3}\\,\\partial/\\partial y$<br>
@@ -986,7 +986,7 @@ function initSection(ch) {
         <div class="fc-hint">Zurückdrehen oder weiter</div>
       </div>
     </div>`;
-    if (window.renderMathInElement) renderMathInElement(cardEl,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
+    if (window.renderMathInElement) renderMathInElement(cardEl,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$\',right:\'$',display:false}]});
     counter.innerHTML = `${idx+1} / ${cards.length} · <span style="color:var(--green)">${good.size} gut</span> · <span style="color:var(--red)">${bad.size} wiederholen</span>`;
     pbar.style.width = (((idx+1)/cards.length)*100)+'%';
   }
