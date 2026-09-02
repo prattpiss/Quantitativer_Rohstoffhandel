@@ -1577,7 +1577,36 @@ Drehimpuls: $\\dot{\\vec{l}} = \\vec{N}$<br>
 Energie: $E = T+U = \\text{const.}$ (konservativ)<br>
 Lagrange: $\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot{q}_k} - \\frac{\\partial L}{\\partial q_k} = 0$<br>
 Hamilton: $\\dot{q}_k = \\partial H/\\partial p_k$, $\\dot{p}_k = -\\partial H/\\partial q_k$<br>
-Noether: Symmetrie ↔ Erhaltungsgröße`}
+Noether: Symmetrie ↔ Erhaltungsgröße`},
+    {q:'[ÜB 2.1c] Anna fährt Fahrrad. $\\vec v$ und $\\vec a$ schließen einen Winkel von $\\pi/4$ ein. Wird sie schneller oder langsamer — und wohin biegt sie ab?',badges:['ex','exam'],ref:'Übung Blatt 2, Aufg. 1c',
+     a:`<div class="step"><strong>Rezept:</strong> Zerlege $\\vec a$ in die <em>natürliche</em> Basis der Bahnkurve:
+$$\\vec a = \\underbrace{\\dot v\\,\\hat e_t}_{\\text{Tangential}} + \\underbrace{\\frac{v^2}{\\rho}\\,\\hat e_n}_{\\text{Normal (Zentripetal)}}$$
+mit $\\hat e_t = \\vec v/v$ und $\\rho$ = Krümmungsradius.</div>
+<div class="step"><strong>Tangentialteil entscheidet über das Tempo:</strong>
+$$\\vec a\\cdot\\hat e_t = |\\vec a|\\cos\\tfrac{\\pi}{4} = \\frac{|\\vec a|}{\\sqrt2} > 0$$
+Denn allgemein gilt $\\frac{d}{dt}\\left(\\tfrac12 v^2\\right) = \\vec v\\cdot\\vec a$, also
+$$\\dot v = \\frac{\\vec v\\cdot\\vec a}{v} = |\\vec a|\\cos(\\pi/4) > 0$$</div>
+<div class="step"><strong>Normalteil entscheidet über die Kurve:</strong> $\\vec a$ ist gegenüber $\\vec v$ um $+\\pi/4$ (gegen den Uhrzeigersinn, aus der Vogelperspektive) verdreht — die Zentripetalkomponente zeigt also nach <strong>links</strong>. Der Krümmungsmittelpunkt liegt links, folglich fährt sie eine Linkskurve.</div>
+<div class="result"><strong>Antwort b):</strong> Sie <strong>erhöht ihre Geschwindigkeit</strong> und <strong>biegt nach links ab</strong>.</div>
+<div class="info"><strong>Merkschema (Winkel $\\alpha$ zwischen $\\vec v$ und $\\vec a$):</strong><br>
+• $\\alpha = 0$: reine Beschleunigung, Geradeausfahrt<br>
+• $0<\\alpha<90°$: schneller werden + Kurve<br>
+• $\\alpha = 90°$: <strong>konstantes Tempo</strong>, reine Kurve (Kreisbahn)<br>
+• $90°<\\alpha<180°$: bremsen + Kurve<br>
+• $\\alpha = 180°$: reines Bremsen, geradeaus<br>
+Die Kurvenrichtung ist immer die Seite, auf der die Normalkomponente von $\\vec a$ liegt.</div>
+<div class="warn">Typischer Fehler: "$\\vec a$ zeigt nach vorne-links, also fährt sie nach links" — das Ergebnis stimmt zwar, die Begründung nicht. $\\vec a$ gibt <em>nicht</em> die Fahrtrichtung an, sondern nur deren Änderung. Die Richtung ist und bleibt $\\vec v$.</div>`},
+    {q:'[ÜB 2.1d] Wenn nach Newtons drittem Gesetz $\\vec F_{12} = -\\vec F_{21}$ gilt — wie kann dann überhaupt jemand ein Tauziehen gewinnen?',badges:['ex','exam','ch'],ref:'Übung Blatt 2, Aufg. 1d',
+     a:`<div class="warn"><strong>Der Denkfehler:</strong> actio = reactio betrifft <em>zwei verschiedene Körper</em>. Die Kraft von Team A auf Team B und die von B auf A greifen an <strong>unterschiedlichen Körpern</strong> an und können sich deshalb <em>niemals</em> gegenseitig aufheben. Für die Bewegung eines Teams zählt nur die Summe der Kräfte, die an <strong>diesem</strong> Team angreifen.</div>
+<div class="step"><strong>Korrekte Kräftebilanz für Team A:</strong>
+$$M_A\\ddot{\\vec X}_A = \\underbrace{\\vec T}_{\\text{Seil zieht nach vorn}} + \\underbrace{\\vec R_A}_{\\text{Haftreibung vom Boden}}$$
+Analog für B mit $-\\vec T$ und $\\vec R_B$. Die Seilkräfte $\\pm\\vec T$ sind tatsächlich betragsgleich (masseloses Seil).</div>
+<div class="result">Es gewinnt das Team, das die größere <strong>Reibungskraft gegen den Boden</strong> aufbringt:
+$$|\\vec R| \\le \\mu_H\\,N = \\mu_H\\,Mg$$
+Das Tauziehen ist also <strong>kein Kräftemessen am Seil, sondern ein Wettkampf gegen den Erdboden</strong>. Entscheidend sind: Haftreibungskoeffizient $\\mu_H$ (Schuhe!), Gesamtgewicht $M$ und die Körperhaltung.</div>
+<div class="step"><strong>Warum man sich zurücklehnt:</strong> Nur die Horizontalkomponente der Bodenreaktion zieht. Bei Neigungswinkel $\\theta$ gegen die Vertikale braucht man $\\tan\\theta \\le \\mu_H$, sonst rutscht man. Zurücklehnen richtet die Reibungskraft optimal aus und verlagert den Schwerpunkt so, dass kein Kippmoment entsteht.</div>
+<div class="info"><strong>Die dritte Kraft nicht vergessen:</strong> Das ganze System (A + Seil + B + Erde) hat Gesamtimpuls null — auch dafür sorgt actio = reactio. Der Impuls, den das Siegerteam gewinnt, wird der <em>Erde</em> entzogen. Auf einer reibungsfreien Eisfläche würde niemand gewinnen: Beide Teams gliten mit $\\vec v_A M_A = -\\vec v_B M_B$ auf ihren gemeinsamen Schwerpunkt zu, der in Ruhe bleibt.</div>
+<div class="warn"><strong>Gleiches Muster</strong> bei den Klassikern: "Warum kann ein Pferd einen Wagen ziehen?" und "Warum beschleunigt eine Rakete im Vakuum?" — immer: <em>Systemgrenze richtig ziehen, dann nur die Kräfte innerhalb bilanzieren.</em></div>`}
   ]
 },
 {
@@ -1734,7 +1763,36 @@ $$\\left(1+\\frac{ma^2}{I}\\right)\\dot{\\vec v}=\\Omega\\,\\hat e_z\\times\\vec
 $$\\boxed{\\;\\frac{d\\vec v}{dt}=\\frac{2}{7}\\,\\Omega\\,\\hat e_z\\times\\vec v\\;}$$
 <strong>g) Ansatz</strong> $\\vec r=\\vec r_0+R\\left[\\cos(\\lambda t)\\hat e_x+\\sin(\\lambda t)\\hat e_y\\right]$ ⇒ $\\vec v=R\\lambda\\left[-\\sin\\hat e_x+\\cos\\hat e_y\\right]$, $\\dot{\\vec v}=-\\lambda^2\\vec\\rho$ und $\\hat e_z\\times\\vec v=-R\\lambda\\left[\\cos\\hat e_x+\\sin\\hat e_y\\right]$. Einsetzen liefert $\\lambda=\\frac27\\Omega$ ✓</div>
 <div class="warn"><strong>Bemerkenswert:</strong> Der Ball läuft auf einem <em>Kreis</em> mit fester Frequenz $\\frac27\\Omega$ — unabhängig von Radius $R$ und Mittelpunkt $\\vec r_0$. Er wird also niemals von der Scheibe geworfen; die Zentrifugalkraft „verliert" gegen die Rollreibung.<br>
-<strong>Formale Analogie</strong> zur Lorentzkraft $\\dot{\\vec v}=-\\frac{qB}{m}\\hat e_z\\times\\vec v$: der rollende Ball auf der Drehscheibe verhält sich wie ein geladenes Teilchen im Magnetfeld (Zyklotronbewegung). Genutzt in Zufalls-Mischtrommeln und als klassisches Demonstrationsexperiment.</div>`}
+<strong>Formale Analogie</strong> zur Lorentzkraft $\\dot{\\vec v}=-\\frac{qB}{m}\\hat e_z\\times\\vec v$: der rollende Ball auf der Drehscheibe verhält sich wie ein geladenes Teilchen im Magnetfeld (Zyklotronbewegung). Genutzt in Zufalls-Mischtrommeln und als klassisches Demonstrationsexperiment.</div>`},
+    {q:'[ÜB 8.2a] Pendel mit bewegter Aufhängung $y_0(t)=L\\sin\\omega t$: Stelle die Lagrange-Funktion auf.',badges:['ex','calc'],ref:'Übung Blatt 8, Aufg. 2a',
+     a:`<div class="step"><strong>Geometrie:</strong> Der Aufhängepunkt schwingt vertikal mit $y_0(t) = L\\sin\\omega t$ (vorgegeben — <strong>rheonome</strong> Zwangsbedingung). Pendelstange der Länge $l$, Masse $m$, Auslenkwinkel $\\varphi$ gegen die Vertikale. Ein Freiheitsgrad: $q = \\varphi$.
+$$x = l\\sin\\varphi,\\qquad y = y_0(t) - l\\cos\\varphi$$</div>
+<div class="step"><strong>Geschwindigkeiten:</strong>
+$$\\dot x = l\\dot\\varphi\\cos\\varphi,\\qquad \\dot y = \\dot y_0 + l\\dot\\varphi\\sin\\varphi$$
+$$v^2 = l^2\\dot\\varphi^2\\cos^2\\varphi + \\dot y_0^2 + 2l\\dot\\varphi\\dot y_0\\sin\\varphi + l^2\\dot\\varphi^2\\sin^2\\varphi$$
+$$= l^2\\dot\\varphi^2 + \\dot y_0^2 + 2l\\dot\\varphi\\,\\dot y_0\\sin\\varphi$$</div>
+<div class="step"><strong>Energien:</strong>
+$$T = \\tfrac12 m\\left(l^2\\dot\\varphi^2 + \\dot y_0^2 + 2l\\dot\\varphi\\dot y_0\\sin\\varphi\\right),\\qquad V = mgy = mg\\left(y_0 - l\\cos\\varphi\\right)$$</div>
+<div class="result">$$L = \\tfrac12 ml^2\\dot\\varphi^2 + ml\\,\\dot y_0\\,\\dot\\varphi\\sin\\varphi + mgl\\cos\\varphi \\;+\\; \\underbrace{\\tfrac12 m\\dot y_0^2 - mg y_0}_{\\text{nur Funktion von }t}$$
+Der letzte Klammerterm hängt weder von $\\varphi$ noch von $\\dot\\varphi$ ab — er ist eine totale Zeitableitung und darf wegen der <strong>Eichfreiheit</strong> $L \\to L + \\frac{dF(t)}{dt}$ ersatzlos gestrichen werden.</div>
+<div class="warn">Beachte die Struktur $T = T_2 + T_1 + T_0$ mit dem <strong>linearen</strong> Term $T_1 = ml\\dot y_0\\dot\\varphi\\sin\\varphi$ — typisches Kennzeichen einer rheonomen Zwangsbedingung. Konsequenz: $H \\ne E$, und $H$ ist hier wegen $\\partial_t L \\ne 0$ auch <em>nicht</em> erhalten.</div>`},
+    {q:'[ÜB 8.2b] Leite die Bewegungsgleichung des Pendels mit bewegter Aufhängung her. Was folgt daraus für das Kapitza-Pendel?',badges:['ex','calc','exam'],ref:'Übung Blatt 8, Aufg. 2b',
+     a:`<div class="step"><strong>Generalisierter Impuls:</strong>
+$$\\frac{\\partial L}{\\partial\\dot\\varphi} = ml^2\\dot\\varphi + ml\\,\\dot y_0\\sin\\varphi$$
+$$\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot\\varphi} = ml^2\\ddot\\varphi + ml\\,\\ddot y_0\\sin\\varphi + ml\\,\\dot y_0\\dot\\varphi\\cos\\varphi$$</div>
+<div class="step"><strong>Ortsableitung:</strong>
+$$\\frac{\\partial L}{\\partial\\varphi} = ml\\,\\dot y_0\\dot\\varphi\\cos\\varphi - mgl\\sin\\varphi$$</div>
+<div class="step"><strong>Euler-Lagrange:</strong> Der Term $ml\\dot y_0\\dot\\varphi\\cos\\varphi$ kürzt sich beidseitig heraus:
+$$ml^2\\ddot\\varphi + ml\\,\\ddot y_0\\sin\\varphi + mgl\\sin\\varphi = 0$$</div>
+<div class="result">$$\\boxed{\\;\\ddot\\varphi = -\\frac{g + \\ddot y_0(t)}{l}\\,\\sin\\varphi\\;}$$
+Das ist das <strong>gewöhnliche Pendel mit einer zeitabhängigen „Effektiv-Schwerkraft“</strong> $g_{\\text{eff}}(t) = g + \\ddot y_0(t)$ — genau das Äquivalenzprinzip: Ein beschleunigter Aufhängepunkt ist von einem veränderten Schwerefeld nicht zu unterscheiden.</div>
+<div class="step"><strong>Mit $y_0 = L\\sin\\omega t$:</strong> $\\ddot y_0 = -L\\omega^2\\sin\\omega t$, also
+$$\\ddot\\varphi + \\frac{g - L\\omega^2\\sin\\omega t}{l}\\sin\\varphi = 0$$
+Für kleine $\\varphi$ ($\\sin\\varphi\\approx\\varphi$) ist das eine <strong>Mathieu-Gleichung</strong> — mit Stabilitätszungen und <strong>parametrischer Resonanz</strong> bei $\\omega \\approx 2\\omega_0/n$, $\\omega_0=\\sqrt{g/l}$.</div>
+<div class="info"><strong>Kapitza-Pendel (der spektakuläre Grenzfall):</strong> Bei sehr schneller Anregung ($\\omega \\gg \\omega_0$) mittelt man über die Zitterbewegung. Es entsteht ein <strong>effektives Potential</strong>
+$$V_{\\text{eff}}(\\varphi) = -mgl\\cos\\varphi + \\frac{m(L\\omega)^2}{4}\\sin^2\\varphi$$
+Für $(L\\omega)^2 > 2gl$ wird $\\varphi = \\pi$ zum <strong>Minimum</strong>: Das Pendel steht <em>stabil auf dem Kopf</em> und kehrt nach einem Anstoß dorthin zurück. Schnelle Anregung kann also einen instabilen Fixpunkt stabilisieren — dasselbe Prinzip nutzt die <strong>Paul-Falle</strong> zum Einfangen einzelner Ionen (Nobelpreis 1989).</div>
+<div class="warn"><strong>Probe:</strong> $y_0 = \\text{const.} \\Rightarrow \\ddot y_0 = 0 \\Rightarrow \\ddot\\varphi = -\\frac{g}{l}\\sin\\varphi$ ✓ (mathematisches Pendel). Freier Fall $\\ddot y_0 = -g \\Rightarrow \\ddot\\varphi = 0$ ✓ (Schwerelosigkeit, das Pendel rotiert gleichförmig oder steht still).</div>`}
   ]
 }
 ];
