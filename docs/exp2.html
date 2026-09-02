@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experimentalphysik II – Vollständige Lernkarten</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+  <style>
+    :root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--blue:#58a6ff;--green:#3fb950;--red:#f85149;--yellow:#e3b341;--purple:#d2a8ff;--orange:#f0883e;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:-apple-system,"Segoe UI",sans-serif;line-height:1.6;display:flex;}
+    #sidebar{width:268px;min-height:100vh;background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;overflow-y:auto;z-index:30;padding:0 0 2rem;}
+    .logo{padding:.9rem 1.1rem .8rem;border-bottom:1px solid var(--border);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);font-weight:700;}
+    .nav-group{padding:.35rem 0;}
+    .nav-label{padding:.25rem 1.1rem;color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.4rem;}
+    .nav-link{display:block;text-decoration:none;color:var(--muted);font-size:.82rem;padding:.4rem 1.1rem .4rem 1.35rem;border-left:3px solid transparent;transition:.15s;}
+    .nav-link:hover,.nav-link.active{background:rgba(240,136,62,.08);border-left-color:var(--orange);color:var(--text);}
+    #content{margin-left:268px;padding:2rem 1.8rem 5rem;max-width:1060px;width:100%;}
+    .hero{text-align:center;padding:1.8rem 1rem 2.5rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem;}
+    .hero h1{font-size:clamp(1.8rem,3.5vw,2.7rem);background:linear-gradient(135deg,var(--orange),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.03em;}
+    .hero p{color:var(--muted);margin:.7rem auto 0;max-width:740px;font-size:.97rem;}
+    .badges{margin-top:1.1rem;display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;}
+    .badge{background:var(--bg2);border:1px solid var(--border);border-radius:999px;padding:.35rem .75rem;font-size:.77rem;color:var(--muted);}
+    .chapter{margin-bottom:3.5rem;border-bottom:1px solid var(--border);padding-bottom:2.5rem;}
+    .ch-header h2{font-size:1.55rem;color:var(--orange);display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;}
+    .ch-num{background:var(--orange);color:#0d1117;font-size:.78rem;font-weight:700;border-radius:5px;padding:.18rem .45rem;white-space:nowrap;}
+    .ch-header p{color:var(--muted);font-size:.93rem;}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.7rem;margin:1.1rem 0 1.6rem;}
+    .stat{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem;}
+    .stat strong{display:block;font-size:1.2rem;color:var(--text);margin-bottom:.15rem;}
+    .stat span{color:var(--muted);font-size:.78rem;}
+    .fc-section{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.1rem 1.2rem;}
+    .fc-section h3{font-size:1.1rem;color:var(--yellow);margin-bottom:1rem;}
+    .filter-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem;}
+    .chip{background:var(--bg3);color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:.38rem .8rem;font-size:.8rem;cursor:pointer;transition:.15s;}
+    .chip:hover,.chip.active{background:var(--orange);border-color:var(--orange);color:#0d1117;font-weight:700;}
+    .chip.ex.active{background:var(--orange);border-color:var(--orange);}
+    .chip.proof.active{background:var(--purple);border-color:var(--purple);color:#0d1117;}
+    .chip.exam.active{background:var(--red);border-color:var(--red);color:#fff;}
+    .counter-row{display:flex;justify-content:space-between;font-size:.81rem;color:var(--muted);margin-bottom:.5rem;}
+    .pbar-wrap{width:100%;height:8px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:.9rem;}
+    .pbar{height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--orange));border-radius:999px;transition:width .25s;}
+    .stage{perspective:1400px;margin-bottom:1rem;}
+    .fc-card{position:relative;min-height:310px;cursor:pointer;user-select:none;}
+    .fc-inner{position:relative;width:100%;min-height:310px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1);}
+    .fc-card.flipped .fc-inner{transform:rotateY(180deg);}
+    .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--border);border-radius:12px;background:var(--bg3);padding:1.1rem 1.3rem 1rem;display:flex;flex-direction:column;}
+    .face.back{transform:rotateY(180deg);border-color:var(--green);background:rgba(63,185,80,.07);}
+    .fc-badge-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.65rem;}
+    .fc-badge{font-size:.67rem;text-transform:uppercase;letter-spacing:.07em;border-radius:4px;padding:.15rem .45rem;font-weight:600;}
+    .badge-ch{background:rgba(240,136,62,.15);color:var(--orange);}
+    .badge-ex{background:rgba(240,136,62,.18);color:var(--orange);}
+    .badge-proof{background:rgba(210,168,255,.18);color:var(--purple);}
+    .badge-def{background:rgba(63,185,80,.15);color:var(--green);}
+    .badge-calc{background:rgba(227,179,65,.15);color:var(--yellow);}
+    .badge-exam{background:rgba(248,81,73,.18);color:var(--red);}
+    .fc-q{font-size:1.02rem;font-weight:600;line-height:1.6;color:var(--text);flex:1;}
+    .fc-ref{margin-top:auto;padding-top:.7rem;font-size:.73rem;color:var(--muted);border-top:1px solid var(--border);}
+    .fc-hint{text-align:center;font-size:.73rem;color:var(--muted);padding-top:.5rem;}
+    .fc-a{font-size:.93rem;line-height:1.75;color:var(--text);flex:1;overflow-y:auto;max-height:340px;}
+    .fc-a .step{margin:.5rem 0;padding:.5rem .8rem;background:rgba(240,136,62,.06);border-radius:6px;border-left:3px solid var(--orange);}
+    .fc-a .result{margin:.5rem 0;padding:.5rem .8rem;background:rgba(63,185,80,.07);border-radius:6px;border-left:3px solid var(--green);}
+    .fc-a .warn{margin:.4rem 0;padding:.4rem .8rem;background:rgba(227,179,65,.07);border-radius:6px;border-left:3px solid var(--yellow);}
+    .fc-a .info{margin:.4rem 0;padding:.4rem .8rem;background:rgba(88,166,255,.06);border-radius:6px;border-left:3px solid var(--blue);}
+    .btn-row{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem;}
+    .btn{border-radius:8px;cursor:pointer;font-size:.88rem;padding:.55rem 1.05rem;border:1px solid var(--border);background:var(--bg3);color:var(--text);transition:.15s;}
+    .btn:hover{border-color:var(--orange);}
+    .btn.primary{background:var(--orange);border-color:var(--orange);color:#0d1117;font-weight:700;}
+    .btn.good{background:rgba(63,185,80,.14);border-color:var(--green);color:var(--green);}
+    .btn.bad{background:rgba(248,81,73,.12);border-color:var(--red);color:var(--red);}
+    .btn.shuffle{background:rgba(210,168,255,.12);border-color:var(--purple);color:var(--purple);}
+    .kbd-hint{text-align:center;font-size:.72rem;color:#444;margin-top:.65rem;}
+    kbd{background:var(--bg2);border:1px solid var(--border);border-radius:3px;padding:.1em .4em;font-size:.73em;}
+    @media(max-width:820px){#sidebar{position:static;width:100%;min-height:unset;}#content{margin-left:0;padding:1.2rem .9rem 3rem;}}
+  </style>
+</head>
+<body>
+<nav id="sidebar">
+  <div class="logo">⚡ Experimentalphysik II</div>
+  <div class="nav-group" style="padding:.6rem 1.1rem .2rem">
+    <a href="index.html" style="display:block;font-size:.78rem;color:var(--muted);text-decoration:none;padding:.3rem 0;border-left:3px solid transparent;padding-left:.5rem">← Quant-Finance App</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Grundlagen</div>
+    <a class="nav-link" href="#ch1">1 · Mathematik</a>
+    <a class="nav-link" href="#ch2">2 · Ladung & Coulomb</a>
+    <a class="nav-link" href="#ch3">3 · Elektrisches Feld</a>
+    <a class="nav-link" href="#ch4">4 · Potential & Spannung</a>
+    <a class="nav-link" href="#ch5">5 · Gauß &amp; Maxwell I</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Elektrizität</div>
+    <a class="nav-link" href="#ch6">6 · Kondensatoren</a>
+    <a class="nav-link" href="#ch7">7 · Strom & Widerstand</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Magnetismus</div>
+    <a class="nav-link" href="#ch8">8 · Magnetostatik</a>
+    <a class="nav-link" href="#ch9">9 · Induktion</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Wellen & Optik</div>
+    <a class="nav-link" href="#ch10">10 · Maxwell-Gleichungen</a>
+    <a class="nav-link" href="#ch11">11 · Optik</a>
+  </div>
+  <div class="nav-group">
+    <div class="nav-label">Prüfung</div>
+    <a class="nav-link" href="#ch12">12 · Übungsaufgaben</a>
+    <a class="nav-link" href="#ch13">13 · Probeklausur A</a>
+    <a class="nav-link" href="#ch14">14 · Probeklausur B</a>
+  </div>
+</nav>
+
+<main id="content">
+<div class="hero">
+  <h1>Experimentalphysik II — Lernkarten</h1>
+  <p>Elektrostatik, Elektrodynamik, Magnetismus, Maxwell-Gleichungen und Optik — vollständig mit Definitionen, Formeln, Beweisen und 2 neuen Probeklausuren.</p>
+  <div class="badges">
+    <span class="badge">14 Kapitel</span>
+    <span class="badge">160+ Karten</span>
+    <span class="badge">Übungsaufgaben</span>
+    <span class="badge">2 Probeklausuren</span>
+    <span class="badge">SoSe 2026 · Braden/Petsch</span>
+  </div>
+</div>
+</main>
+
+<script>
+const chapters = [
+{
+  id:'ch1', title:'Mathematische Grundlagen', num:'01',
+  desc:'Vektoranalysis, Kurvenintegrale, Koordinatensysteme, lineare DGLn — Werkzeuge für die gesamte Vorlesung.',
+  stats:[{v:'12',l:'Karten'},{v:'3',l:'Koordinatensysteme'},{v:'Mathe-Übersicht',l:'Quelle'}],
+  cards:[
+    {q:'Skalares vs. vektorielles Kurvenintegral — Formeln und physikalische Bedeutung.',badges:['def'],ref:'Mathe-Übersicht §1.1',
+     a:`<div class="step"><strong>Skalar</strong> (z.B. Masse eines Drahtes): $\\int_C f\\,ds = \\int_a^b f(\\vec{r}(t))\\,|\\vec{r}^{\\prime}(t)|\\,dt$</div>
+<div class="step"><strong>Vektoriell</strong> (Arbeit im Kraftfeld): $\\int_C \\vec{F}\\cdot d\\vec{r} = \\int_a^b \\vec{F}(\\vec{r}(t))\\cdot\\vec{r}^{\\prime}(t)\\,dt$</div>
+<div class="result">Das vektorielle Kurvenintegral liefert die geleistete Arbeit entlang einem Weg. Bei konservativen Feldern ist es wegunabhängig.</div>`},
+    {q:'Nabla-Operator $\\nabla$: Definition und drei Anwendungen.',badges:['def'],ref:'Mathe-Übersicht §3.1–3.2',
+     a:`$$\\nabla = \\left(\\frac{\\partial}{\\partial x},\\frac{\\partial}{\\partial y},\\frac{\\partial}{\\partial z}\\right)$$
+<strong>Gradient</strong> (Skalar→Vektor): $\\text{grad}\\,f = \\nabla f = (\\partial_x f, \\partial_y f, \\partial_z f)$<br>
+<strong>Divergenz</strong> (Vektor→Skalar): $\\text{div}\\,\\vec{F} = \\nabla\\cdot\\vec{F} = \\partial_x F_x + \\partial_y F_y + \\partial_z F_z$<br>
+<strong>Rotation</strong> (Vektor→Vektor): $\\text{rot}\\,\\vec{F} = \\nabla\\times\\vec{F}$`},
+    {q:'Laplace-Operator $\\Delta$: Definition und Herleitung aus rot(rot $\\vec{F}$).',badges:['def','proof'],ref:'Mathe-Übersicht §3.3',
+     a:`$$\\Delta = \\nabla\\cdot\\nabla = \\partial_x^2 + \\partial_y^2 + \\partial_z^2$$
+Herleitung via BAC-CAB: $\\vec{a}\\times(\\vec{b}\\times\\vec{c}) = \\vec{b}(\\vec{a}\\cdot\\vec{c}) - \\vec{c}(\\vec{a}\\cdot\\vec{b})$<br>
+$$\\nabla\\times(\\nabla\\times\\vec{F}) = \\nabla(\\nabla\\cdot\\vec{F}) - (\\nabla\\cdot\\nabla)\\vec{F} = \\text{grad}(\\text{div}\\,\\vec{F}) - \\Delta\\vec{F}$$`},
+    {q:'Zylinderkoordinaten: Transformation und Volumenelement.',badges:['def'],ref:'Mathe-Übersicht §1.3',
+     a:`$x = \\rho\\cos\\varphi,\\quad y = \\rho\\sin\\varphi,\\quad z = z$ mit $\\rho\\geq 0,\\; \\varphi\\in[0,2\\pi)$<br><br>
+Volumenelement: $dV = \\rho\\,d\\rho\\,d\\varphi\\,dz$<br>
+<div class="warn">Nicht vergessen: den Jacobi-Faktor $\\rho$ im Volumenelement!</div>`},
+    {q:'Kugelkoordinaten: Transformation, Volumenelement und nützliche Substitution.',badges:['def'],ref:'Mathe-Übersicht §1.4–1.5',
+     a:`$x = r\\sin\\theta\\cos\\varphi,\\quad y = r\\sin\\theta\\sin\\varphi,\\quad z = r\\cos\\theta$<br>
+$r\\geq 0,\\; \\theta\\in[0,\\pi],\\; \\varphi\\in[0,2\\pi)$<br><br>
+Volumenelement: $dV = r^2\\sin\\theta\\,dr\\,d\\theta\\,d\\varphi$<br><br>
+<strong>Substitution $u = \\cos\\theta$:</strong> $du = -\\sin\\theta\\,d\\theta$, Grenzen: $\\theta=0\\to u=1$, $\\theta=\\pi\\to u=-1$
+$$\\int_0^\\pi f(\\cos\\theta)\\sin\\theta\\,d\\theta = \\int_{-1}^1 f(u)\\,du$$`},
+    {q:'Homogene lineare DGL: Lösungsansatz und vollständige Lösung.',badges:['def'],ref:'Mathe-Übersicht §2.1',
+     a:`$$a_n y^{(n)} + \\cdots + a_1 y^{\\prime} + a_0 y = 0$$
+<div class="step"><strong>Exponentialansatz:</strong> $y(t)=e^{\\lambda t}$ → Charakteristisches Polynom: $a_n\\lambda^n + \\cdots + a_0 = 0$</div>
+<div class="step">Für $\\lambda = \\pm i\\omega$ (rein imaginär): $y(t) = c_1\\cos(\\omega t) + c_2\\sin(\\omega t)$</div>
+<div class="result">Vollständige Lösung: $y(t) = \\sum_\\lambda A_\\lambda e^{\\lambda t}$ (Superposition aller Eigenlösungen)</div>`},
+    {q:'Inhomogene lineare DGL: Lösungsstrategie.',badges:['def'],ref:'Mathe-Übersicht §2.2',
+     a:`$$a_n y^{(n)} + \\cdots + a_0 y = g(t)$$
+<div class="step">1. Homogene Lösung $y_{\\text{hom}}$ bestimmen (rechte Seite = 0).</div>
+<div class="step">2. Partikuläre Lösung $y_p$: Variation der Konstanten — setze $A_\\lambda \\to A_\\lambda(t)$ und löse die resultierende Gleichung für $A_\\lambda(t)$.</div>
+<div class="result">Gesamtlösung: $y(t) = y_{\\text{hom}}(t) + y_p(t)$</div>`},
+    {q:'Gradient physikalisch: Was zeigt $\\nabla f$ an?',badges:['def'],ref:'Skript §1.4 / Mathe-Übersicht §3.2',
+     a:`$\\nabla f$ zeigt in die Richtung der <strong>stärksten Zunahme</strong> von $f$.<br>
+Betrag $|\\nabla f|$ = Änderungsrate in dieser Richtung.<br><br>
+Zentrales Beispiel: $\\vec{E} = -\\nabla\\varphi$ — das E-Feld zeigt in Richtung des größten <em>Abfalls</em> des Potentials.`},
+    {q:'Fluss eines Vektorfeldes durch eine Fläche — Formel.',badges:['def'],ref:'Mathe-Übersicht §1.2',
+     a:`$$\\Phi = \\iint_S \\vec{F}\\cdot d\\vec{A} = \\iint_S \\vec{F}\\cdot\\hat{n}\\,dS$$
+$d\\vec{A} = \\hat{n}\\,dS$ ist das vektorielle Flächenelement (Normale $\\hat{n}$, Betrag $dS$).<br>
+Physikalisch: Anzahl der Feldlinien, die durch die Fläche treten (mit Vorzeichen).<br>
+Einheit des el. Flusses: $[\\Phi_E] = \\text{Vm}$ oder $\\text{NC}^{-1}\\text{m}^2$`},
+    {q:'Gauß\'scher Integralsatz (Divergenztheorem).',badges:['def'],ref:'Übung 3A / Skript',
+     a:`$$\\oint_{\\partial V} \\vec{F}\\cdot d\\vec{A} = \\iiint_V (\\nabla\\cdot\\vec{F})\\,dV$$
+Verknüpft den Fluss durch die geschlossene Oberfläche $\\partial V$ mit der Divergenz im Inneren.<br>
+<div class="result">Anwendung: Gaussscher Satz in der Elektrostatik: $\\oint \\vec{E}\\cdot d\\vec{A} = Q_{\\text{innen}}/\\varepsilon_0$</div>`},
+    {q:'Stokes\'scher Satz.',badges:['def'],ref:'Übung 3 / Maxwell-Gleichungen',
+     a:`$$\\oint_{\\partial S} \\vec{F}\\cdot d\\vec{r} = \\iint_S (\\nabla\\times\\vec{F})\\cdot d\\vec{A}$$
+Verknüpft das Ringintegral über die Randkurve $\\partial S$ mit dem Fluss der Rotation durch die Fläche $S$.<br>
+<div class="result">Anwendung: Ampère'sches Gesetz in integraler Form $\\oint\\vec{B}\\cdot d\\vec{r} = \\mu_0 I_{\\text{eingeschlossen}}$</div>`},
+    {q:'Wie berechnet man $\\text{div}(\\vec{E})$ für $\\vec{E} = r^{2n}\\hat{e}_r + \\vec{b}$ (aus Übung 2D)?',badges:['ex','calc'],ref:'Übung 2, Aufg. D',
+     a:`Mit $\\vec{E} = r^{2n}\\hat{e}_r + \\vec{b}$ und $\\hat{e}_r = \\vec{r}/r$:<br>
+$$\\text{div}(r^{2n}\\hat{e}_r) = \\frac{1}{r^2}\\frac{d}{dr}(r^2 \\cdot r^{2n}) = \\frac{1}{r^2}\\cdot(2n+2)r^{2n+1} = (2n+2)r^{2n-1} = \\frac{2n+2}{r}\\cdot r^{2n}$$
+$\\text{div}(\\vec{b}) = 0$ (konstanter Vektor). Gilt für $r\\neq 0$ wenn $n<0$.`}
+  ]
+},
+{
+  id:'ch2', title:'Elektrische Ladung & Coulomb-Gesetz', num:'02',
+  desc:'Grundlegende Eigenschaften elektrischer Ladung, Ladungserhaltung, Quantisierung, Coulomb-Kraft.',
+  stats:[{v:'10',l:'Karten'},{v:'2',l:'Naturkonstanten'},{v:'Skript §1.1–1.2',l:'Quelle'}],
+  cards:[
+    {q:'Was sind die zwei Arten elektrischer Ladung? Welche Kräfte wirken zwischen ihnen?',badges:['def'],ref:'Skript §1.1',
+     a:`Es gibt <strong>positive</strong> und <strong>negative</strong> Ladungen (Vorzeichen ist Konvention).<br>
+<strong>Gleichnamige</strong> Ladungen: abstoßend · <strong>Ungleichnamige</strong> Ladungen: anziehend<br><br>
+In neutralen Körpern kompensieren sich + und – Ladungen. Durch Reibung kann man Ladungen trennen (unterschiedliche Elektronenbindungsenergien).<br>
+Leiter: Ladungen frei beweglich · Isolatoren: Ladungen ortsfest`},
+    {q:'Ladungserhaltung und Ladungsquantisierung.',badges:['def'],ref:'Skript §1.1',
+     a:`<strong>Erhaltung:</strong> Die Gesamtladung in einem abgeschlossenen System ist konstant.<br>
+Bsp.: $\\beta^-$-Zerfall: $n \\to p^+ + e^- + \\bar{\\nu}$ — Ladung 0 → +e − e + 0 = 0. ✓<br><br>
+<strong>Quantisierung:</strong> Jede freie Ladung ist ein ganzzahliges Vielfaches der Elementarladung:
+$$Q = z\\cdot e, \\quad e = 1{,}602\\cdot 10^{-19}\\,\\text{C}$$
+Quarks haben Ladungen $\\pm e/3, \\pm 2e/3$, kommen aber nicht frei vor.`},
+    {q:'Coulomb-Gesetz: skalare und vektorielle Form.',badges:['def'],ref:'Skript §1.2',
+     a:`Skalare Kraft zwischen zwei Punktladungen:
+$$F = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q_1 q_2}{r^2}, \\quad \\varepsilon_0 = 8{,}854\\cdot 10^{-12}\\,\\frac{\\text{C}^2}{\\text{Nm}^2}$$
+Vektorielle Form (Kraft auf $q_1$ durch $q_2$):
+$$\\vec{F}_{12} = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q_1 q_2}{|\\vec{r}_1-\\vec{r}_2|^2}\\hat{r}_{12}$$
+$q_1 q_2 > 0$: Abstoßung · $q_1 q_2 < 0$: Anziehung`},
+    {q:'Vergleich Coulomb-Kraft mit Gravitationskraft am Beispiel zweier Elektronen.',badges:['calc'],ref:'Skript §1.2 / Übung 1A',
+     a:`$$F_C = \\frac{e^2}{4\\pi\\varepsilon_0 r^2}, \\quad F_G = G\\frac{m_e^2}{r^2}$$
+$$\\frac{F_C}{F_G} = \\frac{e^2}{4\\pi\\varepsilon_0 G m_e^2} \\approx 10^{42}$$
+<div class="result">Die Coulomb-Kraft ist $10^{42}$-mal stärker als die Gravitationskraft! Trotzdem ist die meiste Materie ladungsneutral.</div>
+Für Wasserstoff ($r = 5\\cdot 10^{-11}\\,\\text{m}$):
+$$F_C = \\frac{(1{,}6\\cdot10^{-19})^2}{4\\pi\\cdot 8{,}85\\cdot10^{-12}\\cdot(5\\cdot10^{-11})^2} \\approx 9{,}2\\cdot 10^{-8}\\,\\text{N}$$`},
+    {q:'Superpositionsprinzip für Coulomb-Kräfte.',badges:['def'],ref:'Skript §1.2',
+     a:`Coulomb-Kräfte addieren sich vektoriell:
+$$\\vec{F}_1 = \\sum_{i\\neq 1} \\vec{F}_{i1} = \\frac{q_1}{4\\pi\\varepsilon_0}\\sum_{i\\neq 1} q_i \\frac{\\hat{r}_{i1}}{r_{i1}^2}$$
+<div class="warn">Gilt nur für ruhende Ladungen (Elektrostatik). Bei bewegten Ladungen kommen magnetische Kräfte hinzu.</div>`},
+    {q:'Influenz: Erklärung und Unterschied zu Ladungsübertragung.',badges:['def'],ref:'Skript §1.1',
+     a:`<strong>Influenz:</strong> Eine externe Ladung verschiebt die frei beweglichen Ladungsträger in einem Leiter, ohne dass Ladung übertragen wird.<br><br>
+Nach Entfernen der externen Ladung geht alles zurück auf 0 (wenn kein Kontakt).<br>
+Wenn man während der Influenz den Leiter teilt: Ladungen bleiben getrennt gespeichert.<br>
+<div class="info">Anwendung: Wimshurst-Maschine, Kelvin-Generator — Verstärkung kleiner Ladungsungleichgewichte durch Influenz</div>`},
+    {q:'Millikan-Versuch: Prinzip und Ergebnis.',badges:['def','ex'],ref:'Skript §1.1 / Übung 1C',
+     a:`<strong>Prinzip:</strong> Geladenes Öltröpfchen im Gleichgewicht zwischen Gravitation ($mg$), elektrischer Kraft ($qE$) und Stokes-Reibung ($6\\pi\\eta r v$).<br><br>
+<strong>Schwebezustand:</strong> $qE = mg$, mit $m = \\frac{4}{3}\\pi r^3 \\rho$<br>
+<strong>Sinkgeschwindigkeit:</strong> $mg = 6\\pi\\eta r v$ → Radius $r$ bestimmbar<br><br>
+<div class="result">Ergebnis: $Q = z\\cdot e$ — Quantisierung der Ladung nachgewiesen. Nobelpreis 1923 (Millikan).</div>`},
+    {q:'[ÜB 1B] Feynman-Behauptung: 1% Ladungsüberschuss zweier Personen auf Armlänge — Abschätzung.',badges:['ex','calc'],ref:'Übung 1, Aufg. B',
+     a:`Eine Person $\\approx 60\\,\\text{kg}$, Mittlere Atommasse $\\approx 10\\,u$, $N_{\\text{Atome}} \\approx 4\\cdot 10^{27}$<br>
+$1\\%$ Überschuss: $\\Delta Q \\approx 0{,}01\\cdot N_{\\text{Atome}}\\cdot e \\approx 6\\cdot 10^5\\,\\text{C}$<br><br>
+Coulomb auf 1 m: $F = \\frac{(6\\cdot10^5)^2}{4\\pi\\varepsilon_0} \\approx 3\\cdot 10^{21}\\,\\text{N}$<br>
+Gewichtskraft Erde: $F = M_E g \\approx 6\\cdot 10^{24}\\cdot 9{,}81 \\approx 5{,}9\\cdot 10^{25}\\,\\text{N}$<br>
+<div class="result">Feynman hat Recht: Die Kraft liegt in derselben Größenordnung oder sogar darüber. Die elektromagnetische Kraft ist enorm!</div>`},
+    {q:'Was ist die Dielektrizitätskonstante $\\varepsilon_0$ und welche Einheit hat sie?',badges:['def'],ref:'Skript §1.2',
+     a:`$$\\varepsilon_0 = 8{,}854\\cdot 10^{-12}\\,\\frac{\\text{C}^2}{\\text{Nm}^2} = 8{,}854\\cdot 10^{-12}\\,\\frac{\\text{As}}{\\text{Vm}}$$
+Sie tritt im Coulomb-Gesetz als Proportionalitätskonstante auf und verbindet elektrische Felder mit Ladungsquellen.<br>
+Im Vakuum: $c_0 = 1/\\sqrt{\\varepsilon_0\\mu_0}$ — Verknüpfung mit Lichtgeschwindigkeit und Permeabilität.`},
+    {q:'[ÜB 1D] Geladenes Pendel: Zwei Kugeln $Q = 60\\,\\text{nC}$, $m = 1\\,\\text{g}$, $L = 0{,}5\\,\\text{m}$. Winkel $\\theta$?',badges:['ex','calc'],ref:'Übung 1, Aufg. D',
+     a:`<div class="step">Gleichgewicht: $\\tan\\theta = F_C/(mg)$, wobei Abstand $d = 2L\\sin(\\theta/2) \\approx 2L\\sin(\\theta/2)$</div>
+<div class="step">Für kleine Winkel: $d\\approx L\\theta$, $F_C = \\frac{Q^2}{4\\pi\\varepsilon_0(L\\theta)^2}$</div>
+<div class="step">$\\theta^3 \\approx \\frac{Q^2}{4\\pi\\varepsilon_0 m g L^2} = \\frac{(60\\cdot10^{-9})^2}{4\\pi\\cdot8{,}85\\cdot10^{-12}\\cdot10^{-3}\\cdot9{,}81\\cdot0{,}25}\\approx 1{,}19\\cdot10^{-5}$</div>
+<div class="result">$\\theta \\approx 0{,}023\\,\\text{rad} \\approx 1{,}3°$</div>`}
+  ]
+},
+{
+  id:'ch3', title:'Das elektrische Feld', num:'03',
+  desc:'Definition und Visualisierung des E-Feldes, Feldlinien, spezielle Konfigurationen, Dipol.',
+  stats:[{v:'10',l:'Karten'},{v:'3',l:'Spezialfelder'},{v:'Skript §1.3',l:'Quelle'}],
+  cards:[
+    {q:'Definition des elektrischen Feldes $\\vec{E}(\\vec{r})$.',badges:['def'],ref:'Skript §1.3',
+     a:`$$\\vec{E}(\\vec{r}) = \\frac{\\vec{F}}{q_0}$$
+Das E-Feld ist die Kraft pro Probeladung (positive Probeladung $q_0$) — Eigenschaft des Raumes, unabhängig von $q_0$.<br><br>
+E-Feld einer Punktladung $q$ im Ursprung:
+$$\\vec{E}(\\vec{r}) = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q}{r^2}\\hat{r}$$
+Einheit: $[E] = \\text{V/m} = \\text{N/C}$`},
+    {q:'Eigenschaften von Feldlinien im elektrostatischen Feld.',badges:['def'],ref:'Skript §1.3',
+     a:`• Tangente parallel zu $\\vec{E}(\\vec{r})$ in jedem Punkt<br>
+• Verlaufen von + zu − Ladungen<br>
+• Beginnen/enden nie im freien Raum (+Ladungen: Quellen, −Ladungen: Senken)<br>
+• Schneiden sich <strong>niemals</strong> (da $\\vec{E}$ eindeutig)<br>
+• Dichte $\\propto$ Feldstärke<br>
+• Stehen senkrecht auf Leiteroberflächen<br>
+• Keine geschlossenen Feldlinien im Elektrostatikfeld`},
+    {q:'E-Feld einer unendlichen homogen geladenen Platte ($\\sigma = $ const).',badges:['def'],ref:'Skript §1.3',
+     a:`Aus Symmetriegründen steht $\\vec{E}$ senkrecht zur Platte und ist homogen:<br>
+$$E = \\frac{\\sigma}{2\\varepsilon_0}$$
+Eine Platte erzeugt beidseitig ein homogenes Feld.<br>
+<strong>Plattenkondensator</strong> (zwei entgegengesetzte Platten):
+$$E_{\\text{innen}} = \\frac{\\sigma}{\\varepsilon_0}, \\quad E_{\\text{außen}} = 0$$
+<div class="result">Der Plattenkondensator ist das Standard-Element für ein homogenes E-Feld.</div>`},
+    {q:'E-Feld und Dipolmoment eines elektrischen Dipols.',badges:['def'],ref:'Skript §1.3',
+     a:`Dipol: $+q$ und $-q$ im Abstand $d$. <strong>Dipolmoment:</strong> $\\vec{p} = q\\vec{d}$ (von − nach +).<br><br>
+E-Feld auf der Dipolachse für $z\\gg d$:
+$$E = \\frac{1}{2\\pi\\varepsilon_0}\\frac{p}{z^3}$$
+E-Feld allgemein für $r\\gg d$: fällt $\\sim 1/r^3$ ab (vs. $1/r^2$ Punktladung).`},
+    {q:'Kraft und Drehmoment auf einen Dipol im homogenen E-Feld.',badges:['def'],ref:'Skript §1.3',
+     a:`<strong>Gesamtkraft:</strong> $\\vec{F} = q\\vec{E} - q\\vec{E} = 0$ (homogenes Feld)<br>
+<strong>Drehmoment:</strong> $\\vec{M} = \\vec{p}\\times\\vec{E}$, Betrag $M = pE\\sin\\theta$<br><br>
+Der Dipol wird zum Feld hin ausgerichtet (parallele Stellung = Energieminimum).<br>
+<div class="info">Im inhomogenen Feld gilt $\\vec{F}\\neq 0$: Dipol wird in Richtung größerer Feldstärke gezogen — erklärt Hydrathüllen, Grieskörner im E-Feld.</div>`},
+    {q:'Wie sieht das E-Feld von zwei gleichnamigen Ladungen im Vergleich zum Dipol aus?',badges:['def'],ref:'Skript §1.3',
+     a:`<strong>2 gleichnamige Ladungen:</strong> Felder heben sich in der Mitte auf, verstärken sich außen. Für $r\\gg d$: verhält sich wie Punktladung $2q$ (Abfall $\\sim 1/r^2$).<br><br>
+<strong>Dipol (2 ungleichnamige):</strong> Felder verstärken sich in der Mitte, heben sich außen auf. $q_{\\text{ges}}=0$, daher $\\sim 1/r^3$.<br>
+Dipol-Abfall schneller wegen Kompensation: $1/r^3$ statt $1/r^2$.`},
+    {q:'[ÜB 2B] E-Feld eines Dipols $\\pm Q$ an Positionen $(-L,0)$ und $(+L,0)$ im Punkt $P(L/2, L)$.',badges:['ex','calc'],ref:'Übung 2, Aufg. B',
+     a:`<div class="step">Abstand $P$ zu $-Q$: $r_- = \\sqrt{(3L/2)^2 + L^2} = \\frac{L}{2}\\sqrt{13}$; zu $+Q$: $r_+ = \\sqrt{(L/2)^2+L^2} = \\frac{L}{2}\\sqrt{5}$</div>
+<div class="step">$\\vec{E} = \\vec{E}_+ + \\vec{E}_-$, jeder Beitrag mit $\\vec{E} = \\frac{Q}{4\\pi\\varepsilon_0 r^2}\\hat{r}$ (Richtungen berechnen!)</div>
+<div class="result">Das Nullfeld liegt auf der $y$-Achse zwischen den Ladungen und auf der Mittelsenkrechten. Explizite Rechnung: Vektoraddition.</div>`},
+    {q:'Potential verschwindet — wo und warum beim Dipol $\\pm Q$?',badges:['ex'],ref:'Übung 2B',
+     a:`Das skalare Potential ist $\\varphi(\\vec{r}) = \\frac{Q}{4\\pi\\varepsilon_0}\\left(\\frac{1}{r_+} - \\frac{1}{r_-}\\right)$.<br>
+$\\varphi = 0$ wenn $r_+ = r_-$, also auf der Mittelsenkrechten ($x=0$-Ebene).<br>
+<strong>Maximum:</strong> nahe $+Q$ (Potential $\\to +\\infty$) · <strong>Minimum:</strong> nahe $-Q$ (Potential $\\to -\\infty$).`},
+    {q:'E-Feld auf der Oberfläche eines Leiters — welche Bedingung muss gelten?',badges:['def'],ref:'Skript §1.3',
+     a:`Auf der Oberfläche eines Leiters im Gleichgewicht gilt:<br>
+• $\\vec{E}$ steht <strong>senkrecht</strong> auf der Oberfläche (sonst würden sich Ladungen verschieben)<br>
+• Im Inneren des Leiters: $\\vec{E} = 0$<br>
+• Die Ladung sitzt auf der <strong>Oberfläche</strong><br>
+$$E_{\\text{Oberfläche}} = \\frac{\\sigma}{\\varepsilon_0}$$`},
+    {q:'Superpositionsprinzip für E-Felder und Kraft auf Probeladung.',badges:['def'],ref:'Skript §1.3',
+     a:`$$\\vec{E}(\\vec{r}) = \\sum_{i=1}^n \\vec{E}_i(\\vec{r}) = \\frac{1}{4\\pi\\varepsilon_0}\\sum_i q_i\\frac{\\hat{r}-\\hat{r}_i}{|\\vec{r}-\\vec{r}_i|^2}$$
+Kraft auf Probeladung $q_0$: $\\vec{F} = q_0\\vec{E}(\\vec{r})$<br>
+<div class="warn">Das Superpositionsprinzip ist ein fundamentales Prinzip — gilt exakt für klassische Elektrostatik.</div>`}
+  ]
+},
+{
+  id:'ch4', title:'Potential & Spannung', num:'04',
+  desc:'Potentielle Energie, elektrostatisches Potential, Spannung, Äquipotentialflächen, Relation E = -grad(phi).',
+  stats:[{v:'10',l:'Karten'},{v:'1',l:'Zentralrelation'},{v:'Skript §1.4',l:'Quelle'}],
+  cards:[
+    {q:'Elektrostatisches Potential $\\varphi(\\vec{r})$: Definition und Bezugspunkt.',badges:['def'],ref:'Skript §1.4',
+     a:`Das el. Potential ist die potentielle Energie pro Ladung:
+$$\\varphi(\\vec{r}) = -\\int_{\\infty}^{\\vec{r}} \\vec{E}\\cdot d\\vec{r}^{\\prime}$$
+Bezugspunkt bei $\\varphi(\\infty)=0$ (für endliche Ladungsverteilungen).<br>
+Einheit: $[\\varphi] = \\text{V} = \\text{J/C}$`},
+    {q:'Potential einer Punktladung $q$ im Ursprung.',badges:['def'],ref:'Skript §1.4',
+     a:`Integration des Coulomb-Feldes $\\vec{E} = \\frac{q}{4\\pi\\varepsilon_0 r^2}\\hat{r}$ entlang eines radialen Weges:
+$$\\varphi(r) = \\frac{1}{4\\pi\\varepsilon_0}\\frac{q}{r}$$
+<div class="result">Coulomb-Potential fällt wie $1/r$ ab (E-Feld wie $1/r^2$).</div>
+Mehrere Ladungen: $\\varphi = \\sum_i \\frac{q_i}{4\\pi\\varepsilon_0 r_i}$ (Superposition skalarer Größen!)`},
+    {q:'Fundamentale Relation zwischen E-Feld und Potential.',badges:['def'],ref:'Skript §1.4',
+     a:`$$\\vec{E}(\\vec{r}) = -\\nabla\\varphi(\\vec{r}) = -\\text{grad}\\,\\varphi$$
+E-Feld zeigt in Richtung des stärksten Potentialabfalls.<br>
+Betrag $E = |\\nabla\\varphi|$ entspricht dem Potentialgefälle.<br>
+<div class="warn">Umgekehrt: $\\varphi(\\vec{r}) = -\\int_{\\text{Ref}}^{\\vec{r}} \\vec{E}\\cdot d\\vec{s}$ (Pfadintegral)</div>`},
+    {q:'Elektrische Spannung $U_{ab}$: Definition und Einheit.',badges:['def'],ref:'Skript §1.4',
+     a:`Die Spannung $U_{ab}$ zwischen Punkten $a$ und $b$ ist die Potentialdifferenz:
+$$U_{ab} = \\varphi(\\vec{r}_a) - \\varphi(\\vec{r}_b) = -\\int_b^a \\vec{E}\\cdot d\\vec{r}$$
+Physikalisch: Arbeit pro Ladung beim Verschieben von $b$ nach $a$.<br>
+$W = q_0 U_{ab}$<br>
+Einheit: $[U] = \\text{V} = \\text{J/C}$`},
+    {q:'Äquipotentialflächen: Eigenschaften und Zusammenhang mit Feldlinien.',badges:['def'],ref:'Skript §1.4',
+     a:`Äquipotentialflächen: $\\varphi = \\text{const}$<br>
+• Arbeit beim Verschieben auf Äquipotentialfläche: $W = 0$<br>
+• Stehen <strong>senkrecht</strong> auf Feldlinien ($\\vec{E}\\perp d\\vec{r}$)<br>
+• Punktladung: Kugelschalen; Plattenkondensator: parallele Ebenen; Dipol: komplexe Form<br>
+Analog: Höhenlinien auf einer Landkarte.`},
+    {q:'Poisson-Gleichung und Laplace-Gleichung.',badges:['def'],ref:'Skript §1.4 / Übung 3',
+     a:`Aus $\\vec{E} = -\\nabla\\varphi$ und $\\nabla\\cdot\\vec{E} = \\rho/\\varepsilon_0$:<br>
+$$\\Delta\\varphi = -\\frac{\\rho}{\\varepsilon_0} \\quad \\text{(Poisson-Gleichung)}$$
+Im ladungsfreien Raum ($\\rho = 0$):
+$$\\Delta\\varphi = 0 \\quad \\text{(Laplace-Gleichung)}$$
+Diese PDG beschreibt das Potential vollständig bei gegebener Ladungsverteilung.`},
+    {q:'[ÜB 2C] Arbeit im radialen E-Feld $\\vec{E} = -q/r^3\\,\\vec{r}$ entlang Weg 1-2-3-4-1.',badges:['ex','proof'],ref:'Übung 2, Aufg. C',
+     a:`<div class="step">Radiale Abschnitte (1→2, 3→4): $W = \\int_{r_1}^{r_2} \\vec{E}\\cdot d\\vec{r}$, mit $\\vec{E}\\parallel d\\vec{r}$</div>
+<div class="step">Kreissegmente (2→3, 4→1): $\\vec{E}\\perp d\\vec{r}$ (radial ⊥ tangential) → $W = 0$</div>
+<div class="step">Radiale Abschnitte: $W_{12} = -\\int_{r_1}^{r_2} \\frac{q}{r^2}dr = q\\left(\\frac{1}{r_2}-\\frac{1}{r_1}\\right)$; $W_{34} = q\\left(\\frac{1}{r_1}-\\frac{1}{r_2}\\right)$</div>
+<div class="result">Gesamtarbeit: $W_{1234} = W_{12} + 0 + W_{34} + 0 = 0$ — Das Feld ist konservativ!</div>`},
+    {q:'Potential im Plattenkondensator.',badges:['def'],ref:'Skript §1.4',
+     a:`Im Plattenkondensator mit Plattenabstand $d$ und Spannung $U$:<br>
+$\\vec{E} = -E_0\\hat{x}$ (konstant), daher $\\varphi(x) = E_0 x + \\text{const}$ — lineares Potential.<br>
+$$U = E_0 d \\Rightarrow E_0 = \\frac{U}{d}$$
+<div class="result">E-Feld ist Spannungsgradient: $E = U/d$. Grundlegende Beziehung!</div>`},
+    {q:'Wie hängen potentielle Energie $E_{\\text{pot}}$, Potential $\\varphi$ und Spannung $U$ zusammen?',badges:['def'],ref:'Skript §1.4',
+     a:`$$E_{\\text{pot}}(\\vec{r}) = q\\cdot\\varphi(\\vec{r})$$
+$$U_{ab} = \\varphi_a - \\varphi_b = \\frac{E_{\\text{pot},a} - E_{\\text{pot},b}}{q}$$
+$$W_{a\\to b} = q\\cdot U_{ab} = E_{\\text{pot},a} - E_{\\text{pot},b}$$
+Analogie: Gravitation → $E_{\\text{pot}} = mgh$; Potential $\\leftrightarrow g h$; Spannung $\\leftrightarrow g\\Delta h$.`},
+    {q:'[ÜB 2D] Berechne $\\text{grad}\\,\\varphi$ für $\\varphi(\\vec{r}) = r^{-n}-1$.',badges:['ex','calc'],ref:'Übung 2, Aufg. D',
+     a:`$\\varphi = r^{-n}-1$, mit $r = \\sqrt{x^2+y^2+z^2}$:<br>
+$$\\frac{\\partial\\varphi}{\\partial x} = (-n)r^{-n-1}\\frac{\\partial r}{\\partial x} = -n r^{-n-1}\\frac{x}{r} = -n x r^{-n-2}$$
+Analog für $y, z$: $\\nabla\\varphi = -n r^{-n-2}\\vec{r} = -n r^{-n-1}\\hat{e}_r$<br>
+<div class="result">$\\vec{E} = -\\nabla\\varphi = n r^{-n-1}\\hat{e}_r$ — radiales Feld mit Potenzgesetz.</div>`}
+  ]
+},
+{
+  id:'ch5', title:'Gauß\'scher Satz & Maxwell I', num:'05',
+  desc:'Elektrischer Fluss, Gauß\'scher Satz, erste Maxwell-Gleichung, Anwendungen auf symmetrische Ladungsverteilungen.',
+  stats:[{v:'10',l:'Karten'},{v:'3',l:'Anwendungen'},{v:'Skript §2 / Übung 3',l:'Quelle'}],
+  cards:[
+    {q:'Elektrischer Fluss $\\Phi_E$ durch eine Fläche — Definition.',badges:['def'],ref:'Skript / Übung 3B',
+     a:`$$\\Phi_E = \\oiint_S \\vec{E}\\cdot d\\vec{A} = \\oiint_S \\vec{E}\\cdot\\hat{n}\\,dA$$
+Einheit: $[\\Phi_E] = \\text{Vm} = \\frac{\\text{N}}{\\text{C}}\\cdot\\text{m}^2$<br><br>
+Für eine Kugel mit Radius $R$ und zentrierter Punktladung $q$:
+$$\\Phi_E = \\frac{q}{4\\pi\\varepsilon_0 R^2}\\cdot 4\\pi R^2 = \\frac{q}{\\varepsilon_0}$$`},
+    {q:'Gauß\'scher Satz der Elektrostatik (Integralform).',badges:['def'],ref:'Skript §2 / Übung 3',
+     a:`$$\\oiint_{\\partial V} \\vec{E}\\cdot d\\vec{A} = \\frac{Q_{\\text{innen}}}{\\varepsilon_0} = \\frac{1}{\\varepsilon_0}\\iiint_V \\rho\\,dV$$
+Der Fluss des E-Feldes durch eine geschlossene Fläche = eingeschlossene Ladung / $\\varepsilon_0$.<br>
+<div class="result">Ermöglicht einfache Berechnung von E-Feldern bei hoher Symmetrie.</div>`},
+    {q:'Erste Maxwell-Gleichung (Differentialform).',badges:['def'],ref:'Skript / Maxwell-Gleichungen',
+     a:`$$\\nabla\\cdot\\vec{E} = \\frac{\\rho}{\\varepsilon_0}$$
+oder mit $\\vec{D} = \\varepsilon_0\\vec{E}$ (im Vakuum):
+$$\\nabla\\cdot\\vec{D} = \\rho_{\\text{frei}}$$
+Interpretation: Ladungsdichte $\\rho$ ist Quelle/Senke des E-Feldes.`},
+    {q:'E-Feld eines unendlich langen Drahtes mit Ladungsdichte $\\lambda$ via Gauß (Übung 3A).',badges:['ex','calc'],ref:'Übung 3, Aufg. A',
+     a:`<div class="step">Symmetrie: $\\vec{E}$ radial, abhängig nur von $r$ (Zylinderkoordinaten)</div>
+<div class="step">Gauß-Zylinder Radius $r$, Länge $\\ell$: $\\oiint \\vec{E}\\cdot d\\vec{A} = E\\cdot 2\\pi r \\ell = \\frac{\\lambda\\ell}{\\varepsilon_0}$</div>
+<div class="result">$E(r) = \\frac{\\lambda}{2\\pi\\varepsilon_0 r}$ für $r > R$ — fällt mit $1/r$ ab!</div>
+Potential: $\\varphi(r) - \\varphi(100R) = -\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\left(\\frac{r}{100R}\\right)$`},
+    {q:'E-Feld einer homogen geladenen Kugel $r < R$ und $r > R$ (Gauß-Anwendung).',badges:['calc'],ref:'Skript §2',
+     a:`Gauß-Kugel Radius $r$, Gesamtladung $Q$:<br>
+$$r > R: \\quad E = \\frac{Q}{4\\pi\\varepsilon_0 r^2} \\quad\\text{(wie Punktladung)}$$
+$$r < R: \\quad Q_{\\text{innen}} = Q\\cdot\\frac{r^3}{R^3} \\Rightarrow E = \\frac{Q}{4\\pi\\varepsilon_0}\\frac{r}{R^3} \\propto r$$
+<div class="result">Im Inneren: E wächst linear mit $r$ an; außen: $1/r^2$.</div>`},
+    {q:'[ÜB 3B] Fluss von $\\vec{E}_1(\\vec{r}) = c_1\\frac{Q}{4\\pi\\varepsilon_0}\\frac{\\vec{r}}{r^2}$ vs. $\\vec{E}_2 = c_2\\frac{Q}{4\\pi\\varepsilon_0}\\frac{\\vec{r}}{r^4}$.',badges:['ex','calc'],ref:'Übung 3, Aufg. B2',
+     a:`<div class="step">$\\vec{E}_1$: $\\Phi_1 = \\oiint \\vec{E}_1\\cdot d\\vec{A} = c_1 \\frac{Q}{4\\pi\\varepsilon_0 R^2}\\cdot 4\\pi R^2 = c_1\\frac{Q}{\\varepsilon_0}$ (R-unabhängig!)</div>
+<div class="step">$\\vec{E}_2$: $\\Phi_2 = c_2 \\frac{Q}{4\\pi\\varepsilon_0 R^4}\\cdot 4\\pi R^2 = c_2\\frac{Q}{\\varepsilon_0 R^2}$ (R-abhängig!)</div>
+<div class="result">$\\vec{E}_2$ kann nicht durch eine Punktladung erzeugt werden — verletzt Gauß. $\\vec{E}_1$ entspricht dem Coulomb-Feld mit $c_1=1$.</div>`},
+    {q:'Divergenz der Punktladung: $\\nabla\\cdot\\vec{E} = 0$ für $r\\neq 0$ (Übung 4).',badges:['ex','proof'],ref:'Probeklausur Aufg. 4',
+     a:`$\\vec{E}(\\vec{r}) = \\frac{q}{4\\pi\\varepsilon_0}\\frac{\\vec{r}}{r^3}$, für $r\\neq 0$:<br>
+<div class="step">$\\partial_x E_x = \\frac{q}{4\\pi\\varepsilon_0}\\frac{r^2 - 3x^2}{r^5}$ (analog $y, z$)</div>
+<div class="step">$\\nabla\\cdot\\vec{E} = \\frac{q}{4\\pi\\varepsilon_0}\\frac{3r^2 - 3(x^2+y^2+z^2)}{r^5} = \\frac{q}{4\\pi\\varepsilon_0}\\frac{3r^2-3r^2}{r^5} = 0$</div>
+<div class="result">$\\nabla\\cdot\\vec{E} = 0$ für $r\\neq 0$. Im Ursprung: $\\nabla\\cdot\\vec{E} = q\\delta^3(\\vec{r})/\\varepsilon_0$.</div>`},
+    {q:'Gauß\'scher Satz für $\\vec{D}$-Feld und Bedeutung in Materie.',badges:['def'],ref:'Skript §2',
+     a:`$\\vec{D} = \\varepsilon_0\\varepsilon_r\\vec{E} = \\varepsilon_0\\vec{E} + \\vec{P}$ (mit Polarisation $\\vec{P}$)<br>
+$$\\nabla\\cdot\\vec{D} = \\rho_{\\text{frei}} \\quad \\text{bzw.} \\quad \\oiint\\vec{D}\\cdot d\\vec{A} = Q_{\\text{frei,innen}}$$
+<div class="info">$\\vec{D}$ berücksichtigt nur freie Ladungen; $\\vec{E}$ reagiert auf alle Ladungen (frei + Polarisation).</div>`},
+    {q:'Kontinuitätsgleichung für elektrische Ladung.',badges:['def'],ref:'Skript §3 / Maxwell',
+     a:`$$\\frac{\\partial\\rho}{\\partial t} + \\nabla\\cdot\\vec{j} = 0$$
+Ladungserhaltung in differentieller Form: Abnahme der Ladungsdichte = Divergenz der Stromdichte.<br>
+Im Gleichgewicht: $\\nabla\\cdot\\vec{j} = 0$ (stationärer Strom).`},
+    {q:'Warum ist das E-Feld im Inneren eines Hohlleiters null? (Faraday-Käfig)',badges:['def'],ref:'Skript §1.1',
+     a:`Im Gleichgewicht: $\\vec{E}_{\\text{innen}} = 0$, da sonst Kräfte auf Elektronen wirken würden → Elektronen bewegen sich → Gleichgewicht nicht erreicht.<br>
+Ladungen verteilen sich ausschließlich auf der <strong>äußeren Oberfläche</strong>.<br>
+<div class="result">Faraday-Käfig: Metall schirmt das Innere vollständig gegen externe E-Felder ab.</div>`}
+  ]
+},
+{
+  id:'ch6', title:'Kondensatoren & Dielektrika', num:'06',
+  desc:'Kapazität, Kondensator-Typen, Serien-/Parallelschaltung, Energie, Dielektrika, D-Feld.',
+  stats:[{v:'12',l:'Karten'},{v:'3',l:'Kondensator-Typen'},{v:'Skript §2 / Übungen 3–4',l:'Quelle'}],
+  cards:[
+    {q:'Definition der Kapazität. Einheit.',badges:['def'],ref:'Skript §2 / Übung 3C',
+     a:`$$C = \\frac{Q}{U} = \\frac{Q}{\\varphi_+ - \\varphi_-}$$
+Einheit: $[C] = \\text{F} = \\text{C/V} = \\text{As/V}$<br>
+Typische Werte: pF–μF (Elektronik), F (Superkondensatoren).`},
+    {q:'Kapazität des Plattenkondensators.',badges:['def'],ref:'Skript §2',
+     a:`$E = \\sigma/\\varepsilon_0 = Q/(\\varepsilon_0 A)$; $U = E\\cdot d$:<br>
+$$C = \\frac{Q}{U} = \\frac{\\varepsilon_0 A}{d}$$
+Mit Dielektrikum: $C = \\varepsilon_0\\varepsilon_r A/d$<br>
+<div class="result">Kapazität $\\propto A$, $\\propto 1/d$, $\\propto \\varepsilon_r$.</div>`},
+    {q:'Kapazität des Zylinderkondensators (Übung 3C).',badges:['ex','calc'],ref:'Übung 3, Aufg. C',
+     a:`Innenradius $r_1$, Außenradius $r_2$, Länge $L$.<br>
+<div class="step">E-Feld via Gauß: $E(r) = \\frac{Q}{2\\pi\\varepsilon_0 L r}$ für $r_1 < r < r_2$</div>
+<div class="step">Spannung: $U = \\int_{r_1}^{r_2} E\\,dr = \\frac{Q}{2\\pi\\varepsilon_0 L}\\ln\\frac{r_2}{r_1}$</div>
+<div class="result">$C = \\frac{2\\pi\\varepsilon_0 L}{\\ln(r_2/r_1)}$; mit Dielektrikum $\\varepsilon_r$: $C = \\frac{2\\pi\\varepsilon_0\\varepsilon_r L}{\\ln(r_2/r_1)}$</div>`},
+    {q:'Kapazität des Kugelkondensators (Probeklausur Aufg. 2).',badges:['ex','calc'],ref:'Probeklausur Aufg. 2',
+     a:`Innenradius $r_1$, Außenradius $r_2$.<br>
+<div class="step">E-Feld: nur zwischen Kugeln ($r_1 < r < r_2$): $E = \\frac{Q}{4\\pi\\varepsilon_0 r^2}$</div>
+<div class="step">$U = \\int_{r_1}^{r_2} E\\,dr = \\frac{Q}{4\\pi\\varepsilon_0}\\left(\\frac{1}{r_1}-\\frac{1}{r_2}\\right)$</div>
+<div class="result">$C = 4\\pi\\varepsilon_0\\frac{r_1 r_2}{r_2-r_1}$; mit $\\varepsilon_r$: $C = 4\\pi\\varepsilon_0\\varepsilon_r\\frac{r_1 r_2}{r_2-r_1}$</div>`},
+    {q:'Serien- und Parallelschaltung von Kondensatoren.',badges:['def'],ref:'Skript / Übung 4A',
+     a:`<strong>Parallelschaltung</strong> (gleiches $U$):
+$$C_{\\text{ges}} = C_1 + C_2 + \\cdots$$
+<strong>Reihenschaltung</strong> (gleiche $Q$):
+$$\\frac{1}{C_{\\text{ges}}} = \\frac{1}{C_1} + \\frac{1}{C_2} + \\cdots$$
+<div class="warn">Analog zu Widerständen, aber invertiert! Parallel → addieren; Reihe → reziproke addieren.</div>`},
+    {q:'Im Kondensator gespeicherte Energie.',badges:['def'],ref:'Skript §2 / Übung 4B',
+     a:`$$W = \\frac{1}{2}CU^2 = \\frac{Q^2}{2C} = \\frac{1}{2}QU$$
+Energiedichte im E-Feld:
+$$w = \\frac{W}{V} = \\frac{1}{2}\\varepsilon_0 E^2$$
+<div class="result">Energie ist im E-Feld gespeichert — gilt auch allgemein im EM-Feld.</div>`},
+    {q:'Dielektrikum: Was passiert physikalisch? $\\vec{D}$, $\\vec{P}$, $\\varepsilon_r$.',badges:['def'],ref:'Skript §2 / Übung 4B',
+     a:`Im Dielektrikum werden Dipole ausgerichtet (Polarisation $\\vec{P}$):<br>
+$$\\vec{D} = \\varepsilon_0\\vec{E} + \\vec{P} = \\varepsilon_0(1+\\chi_e)\\vec{E} = \\varepsilon_0\\varepsilon_r\\vec{E}$$
+$\\varepsilon_r = 1 + \\chi_e$ (dielektrische Zahl, $> 1$ für Isolatoren)<br>
+Dielektrikum erhöht Kapazität um Faktor $\\varepsilon_r$, da es das E-Feld abschwächt.<br>
+<div class="warn">Dielektrikum darf kein Leiter sein — sonst Kurzschluss!</div>`},
+    {q:'[ÜB 4B] Kondensator mit Dielektrikum $\\varepsilon_r = 42$: was ändert sich bei angeschlossener Quelle vs. getrennt?',badges:['ex'],ref:'Übung 4, Aufg. B3–B4',
+     a:`<strong>Angeschlossene Quelle (U = const):</strong><br>
+$C \\to \\varepsilon_r C$; $Q \\to \\varepsilon_r Q$; $E = U/d$ = const; $W = \\frac{1}{2}CU^2 \\to \\varepsilon_r W$<br><br>
+<strong>Getrennte Quelle (Q = const):</strong><br>
+$C \\to \\varepsilon_r C$; $U \\to U/\\varepsilon_r$; $E \\to E/\\varepsilon_r$; $W = Q^2/(2C) \\to W/\\varepsilon_r$<br>
+<div class="result">Bei getrenner Quelle sinkt die gespeicherte Energie — der Rest geht in die Arbeit beim Einbringen des Dielektrikums.</div>`},
+    {q:'[ÜB 3D] Experimentelle Bestimmung von $\\varepsilon_0$ mit Waage und Plattenkondensator.',badges:['ex','calc'],ref:'Übung 3, Aufg. D',
+     a:`Gleichgewicht der Waage: Schwerkraft = elektrostatische Anziehungskraft zwischen Platten.<br>
+<div class="step">Kraft: $F = -\\frac{dW}{dd} = -\\frac{d}{dd}\\left(\\frac{\\varepsilon_0 A U^2}{2d}\\right) = \\frac{\\varepsilon_0 A U^2}{2d^2}$</div>
+<div class="step">Gleichgewicht: $F = mg$ bzw. $F\\cdot s_1 = mg\\cdot s_2$ (Hebelgesetz)</div>
+<div class="result">$\\varepsilon_0 = \\frac{2mgd^2 s_2}{AU^2 s_1}$ — direkte Messung von $\\varepsilon_0$!</div>`},
+    {q:'Felder an der Grenzfläche zweier Dielektrika (Übung 5E).',badges:['ex','proof'],ref:'Übung 5, Aufg. E',
+     a:`<strong>Normalkomponente $D_n$:</strong> stetig ($\\nabla\\cdot\\vec{D} = 0$ ohne freie Ladungen → Gauß-Pillbox):<br>
+$D_{1n} = D_{2n}$, also $\\varepsilon_1 E_{1n} = \\varepsilon_2 E_{2n}$<br><br>
+<strong>Tangentialkomponente $E_t$:</strong> stetig (Ringintegral $\\oint\\vec{E}\\cdot d\\vec{s} = 0$ im Elektrostatikfall):<br>
+$E_{1t} = E_{2t}$<br>
+<div class="warn">$E_n$ und $D_t$ sind <em>unstetig</em> an der Grenzfläche!</div>`},
+    {q:'Energie-Änderung beim Einbringen einer Platte mit $\\varepsilon_r$ in Kondensator.',badges:['calc'],ref:'Übung 4B',
+     a:`<strong>Bei $U$ = const (Quelle angeschlossen):</strong> $W$ wächst um Faktor $\\varepsilon_r$ — Energie kommt von der Quelle.<br>
+<strong>Bei $Q$ = const (getrennt):</strong> $W$ sinkt um Faktor $\\varepsilon_r$ — der Unterschied wird als Arbeit abgegeben.<br>
+In beiden Fällen: $F = -\\frac{dW}{dx}$ bestimmt die Kraft auf das Dielektrikum (wird hineingezogen).`},
+    {q:'Wie lautet die erste Maxwell-Gleichung in Materie?',badges:['def'],ref:'Skript',
+     a:`$$\\nabla\\cdot\\vec{D} = \\rho_{\\text{frei}}$$
+Mit $\\vec{D} = \\varepsilon_0\\varepsilon_r\\vec{E}$ und $\\nabla\\cdot(\\varepsilon_r\\vec{E}) = \\rho_{\\text{frei}}/\\varepsilon_0$.<br>
+Die Polarisationsladung ist in $\\vec{P}$ versteckt: $\\rho_{\\text{Pol}} = -\\nabla\\cdot\\vec{P}$.`}
+  ]
+},
+{
+  id:'ch7', title:'Elektrischer Strom & Widerstand', num:'07',
+  desc:'Stromstärke, Stromdichte, Ohm\'sches Gesetz, Kirchhoff, Widerstandsnetzwerke, Wheatstone-Brücke, RC-Glied.',
+  stats:[{v:'14',l:'Karten'},{v:'2',l:'Kirchhoff-Regeln'},{v:'Skript §3 / Übungen 4–6',l:'Quelle'}],
+  cards:[
+    {q:'Elektrische Stromstärke $I$ und Stromdichte $\\vec{j}$: Definitionen.',badges:['def'],ref:'Skript §3 / Übung 5A',
+     a:`$$I = \\frac{dQ}{dt}, \\quad [I] = \\text{A (Ampère)}$$
+$$\\vec{j} = nq\\vec{v}_D, \\quad [j] = \\text{A/m}^2$$
+($n$ = Ladungsträgerdichte, $q$ = Ladung, $\\vec{v}_D$ = Driftgeschwindigkeit)<br>
+Zusammenhang: $I = \\int_S \\vec{j}\\cdot d\\vec{A}$`},
+    {q:'Ohm\'sches Gesetz: makroskopisch und mikroskopisch.',badges:['def'],ref:'Skript §3',
+     a:`<strong>Makroskopisch:</strong> $U = R\\cdot I$, mit Widerstand $R$ in Ohm ($\\Omega = \\text{V/A}$).<br>
+<strong>Mikroskopisch:</strong> $\\vec{j} = \\sigma\\vec{E} = \\vec{E}/\\rho_W$<br>
+($\\sigma$ = spez. Leitfähigkeit, $\\rho_W$ = spez. Widerstand in $\\Omega\\text{m}$)<br>
+Für Zylinder: $R = \\rho_W L/A$<br>
+<div class="info">Für Cu bei RT: $\\rho_W \\approx 1{,}7\\cdot10^{-8}\\,\\Omega\\text{m}$; bei tiefen $T$: $\\rho_W \\to 0$ (Supraleitung).</div>`},
+    {q:'Kirchhoff\'sche Regeln.',badges:['def'],ref:'Skript §3',
+     a:`<strong>Knotenregel</strong> (Ladungserhaltung): $$\\sum_k I_k = 0 \\quad \\text{(an jedem Knoten)}$$
+<strong>Maschenregel</strong> (Energieerhaltung): $$\\sum_k U_k = 0 \\quad \\text{(entlang jeder Masche)}$$`},
+    {q:'Serien- und Parallelschaltung von Widerständen.',badges:['def'],ref:'Skript §3',
+     a:`<strong>Reihenschaltung</strong> (gleicher Strom $I$):
+$$R_{\\text{ges}} = R_1 + R_2 + \\cdots$$
+<strong>Parallelschaltung</strong> (gleiche Spannung $U$):
+$$\\frac{1}{R_{\\text{ges}}} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\cdots$$
+<div class="warn">Umgekehrt zu Kondensatoren! Reihe → addieren; Parallel → reziproke addieren.</div>`},
+    {q:'[ÜB 5C] Effektiver Widerstand am Würfel.',badges:['ex','calc'],ref:'Übung 5, Aufg. C2',
+     a:`Würfel mit Widerstand $R$ auf jeder Kante. Spannung $U$ zwischen gegenüberliegenden Ecken $A$ und $B$.<br>
+<div class="step">Symmetrie: Je 3 Kanten pro Ebene, Knoten $X$ und $Y$ (Mittelachse) auf gleichen Potentialen</div>
+<div class="step">$U_{XY} = 0$ → Kante $XY$ kann entfernt werden. Drei Gruppen: $3R$, $6R$, $3R$ in Reihe</div>
+<div class="result">$R_{\\text{eff}} = \\frac{R}{3} + \\frac{R}{6} + \\frac{R}{3} = \\frac{5R}{6}$</div>`},
+    {q:'[ÜB 5D] Widerstand eines Kegelstumpfs (spez. Widerstand $\\rho_W$).',badges:['ex','calc'],ref:'Übung 5, Aufg. D',
+     a:`Radius bei $x$: $r(x) = r_1 + (r_2-r_1)\\frac{x}{L}$, Querschnitt $A(x) = \\pi r(x)^2$<br>
+<div class="step">$dR = \\rho_W \\frac{dx}{A(x)} = \\frac{\\rho_W dx}{\\pi r(x)^2}$</div>
+<div class="step">$R = \\int_0^L \\frac{\\rho_W dx}{\\pi(r_1 + (r_2-r_1)x/L)^2}$</div>
+<div class="result">$R = \\frac{\\rho_W L}{\\pi r_1 r_2}$</div>`},
+    {q:'Wheatstone-Brücke: Prinzip und Nullbedingung.',badges:['def'],ref:'Skript §3 / Probeklausur',
+     a:`4 Widerstände $R_1, R_2, R_3, R_x$ in Brückenschaltung.<br>
+<strong>Nullbedingung</strong> (Galvanometer zeigt 0): $$\\frac{R_1}{R_2} = \\frac{R_3}{R_x} \\Rightarrow R_x = \\frac{R_2 R_3}{R_1}$$
+Vorteil: Sehr präzise Widerstandsmessung, unabhängig vom genauen Wert der Versorgungsspannung.`},
+    {q:'Innenwiderstand einer Batterie / Spannungsquelle.',badges:['def'],ref:'Skript §3 / Probeklausur',
+     a:`Reale Quelle = ideale Quelle + Innenwiderstand $R_i$ in Reihe:<br>
+$$U_{\\text{klemme}} = U_0 - R_i I$$
+Bei Leerlauf ($I=0$): $U = U_0$. Bei Kurzschluss: $I_{\\text{max}} = U_0/R_i$.<br>
+<div class="info">Voltmeter (hoher $R_V$) und Amperemeter (kleiner $R_A$) messen anders genau — warum? Spannungsfall am Innenwiderstand.</div>`},
+    {q:'Be- und Entladen eines Kondensators (Probeklausur Aufg. 3).',badges:['ex','calc'],ref:'Probeklausur Aufg. 3',
+     a:`<strong>Aufladen</strong> ($t=0$: Schalter $S_1$ geschlossen, $U_0$, $R$, $C$):<br>
+$\\tau = RC$ (Zeitkonstante)<br>
+$$I(t) = \\frac{U_0}{R}e^{-t/\\tau}, \\quad Q(t) = CU_0\\left(1-e^{-t/\\tau}\\right)$$
+$$W_C(t) = \\frac{1}{2}C U_0^2(1-e^{-t/\\tau})^2$$
+<strong>Entladen</strong> (nur $C$ und $R$): $I(t) = I_0 e^{-t/\\tau}$, $U_C(t) = U_0 e^{-t/\\tau}$`},
+    {q:'Leistung $P$ und Joule-Wärme in einem Widerstand.',badges:['def'],ref:'Skript §3',
+     a:`$$P = UI = I^2 R = \\frac{U^2}{R}$$
+Einheit: $[P] = \\text{W}$. In Zeit $\\Delta t$: $Q_{\\text{Wärme}} = P\\cdot\\Delta t$.<br>
+Energiebilanz beim Aufladen: Batterie gibt $CU_0^2$ Energie ab, $\\frac{1}{2}CU_0^2$ im Kondensator, $\\frac{1}{2}CU_0^2$ als Wärme im Widerstand.`},
+    {q:'[ÜB 4D] Ladungsträger-Dichte und Driftgeschwindigkeit in Kupfer.',badges:['ex','calc'],ref:'Übung 4, Aufg. D',
+     a:`Kupfer: $\\rho = 8{,}93\\,\\text{g/cm}^3$, $M = 63{,}5\\,\\text{g/mol}$, 1 Leitungselektron/Atom.<br>
+$$n = \\frac{\\rho N_A}{M} = \\frac{8930\\cdot6{,}022\\cdot10^{23}}{0{,}0635} \\approx 8{,}5\\cdot10^{28}\\,\\text{m}^{-3}$$
+Driftgeschwindigkeit für $I = 3\\,\\text{A}$, $r = 0{,}581\\,\\text{mm}$:
+$$v_D = \\frac{I}{neA} = \\frac{3}{8{,}5\\cdot10^{28}\\cdot1{,}6\\cdot10^{-19}\\cdot\\pi(5{,}81\\cdot10^{-4})^2}^{} \\approx 2{,}35\\cdot10^{-4}\\,\\text{m/s}$$`},
+    {q:'[ÜB 5A] Strom durch mittleren Drahtteil für homogene und radial abhängige Stromdichte.',badges:['ex','calc'],ref:'Übung 5, Aufg. A',
+     a:`<strong>1) Homogen</strong> $j = 2\\cdot10^5\\,\\text{A/m}^2$, Ring $R/3$ bis $2R/3$:<br>
+$I = j\\cdot\\pi\\left((2R/3)^2-(R/3)^2\\right) = j\\pi R^2\\cdot\\frac{3}{9} = j\\pi R^2/3 \\approx 0{,}84\\,\\text{A}$<br><br>
+<strong>2) $j(r) = ar^2$</strong> mit $a = 3\\cdot10^{11}$:<br>
+$I = \\int_{R/3}^{2R/3} ar^2\\cdot 2\\pi r\\,dr = 2\\pi a\\left[r^4/4\\right]_{R/3}^{2R/3} \\approx 0{,}59\\,\\text{A}$`},
+    {q:'Spezifischer Widerstand als Funktion der Temperatur.',badges:['def'],ref:'Skript §3',
+     a:`Für Metalle (klassisches Bild):<br>
+$$\\rho_W(T) = \\rho_0(1 + \\alpha(T-T_0))$$
+$\\alpha > 0$: Widerstand steigt mit $T$ (mehr Phonon-Streuung).<br>
+Bei sehr tiefen $T$: $\\rho_W \\to \\rho_W^{\\text{Restwiderstand}}$ (Verunreinigungen).<br>
+Supraleiter: bei $T < T_c$ springt $\\rho_W \\to 0$ abrupt.`},
+    {q:'Spannungsquelle, Amperemeter, Voltmeter: korrekte Schaltung zur $R$-Messung.',badges:['def'],ref:'Probeklausur / Skript',
+     a:`<strong>Richtige Schaltung:</strong><br>
+• Amperemeter in Reihe zum Widerstand (muss $R_A \\ll R$ haben)<br>
+• Voltmeter parallel zum Widerstand (muss $R_V \\gg R$ haben)<br>
+• Spannungsquelle in den äußeren Kreis<br>
+Systematische Fehler: Amperemeter misst auch Strom durch Voltmeter, Voltmeter misst auch Spannung an Amperemeter.`}
+  ]
+},
+{
+  id:'ch8', title:'Magnetostatik & Lorentz-Kraft', num:'08',
+  desc:'Magnetisches Feld, Lorentz-Kraft, Biot-Savart, Ampère\'sches Gesetz, B-Felder spezieller Konfigurationen.',
+  stats:[{v:'12',l:'Karten'},{v:'2',l:'Grundgesetze'},{v:'Skript §4',l:'Quelle'}],
+  cards:[
+    {q:'Lorentz-Kraft auf eine bewegte Ladung.',badges:['def'],ref:'Skript §4',
+     a:`$$\\vec{F} = q(\\vec{E} + \\vec{v}\\times\\vec{B})$$
+Magnetischer Anteil: $\\vec{F}_m = q\\vec{v}\\times\\vec{B}$<br>
+• Senkrecht zu $\\vec{v}$ und $\\vec{B}$ → keine Arbeit!<br>
+• Führt zu Kreisbewegung: $r = mv/(qB)$ (Zyklotronradius)<br>
+Kraft auf stromdurchflossenen Leiter der Länge $l$: $\\vec{F} = I\\vec{l}\\times\\vec{B}$`},
+    {q:'Biot-Savart-Gesetz.',badges:['def'],ref:'Skript §4',
+     a:`$$d\\vec{B} = \\frac{\\mu_0}{4\\pi}\\frac{I\\,d\\vec{l}\\times\\hat{r}}{r^2}$$
+$\\mu_0 = 4\\pi\\cdot10^{-7}\\,\\text{Vs/Am}$ (magnetische Permeabilität des Vakuums)<br>
+Einheit: $[B] = \\text{T} = \\text{Vs/m}^2$<br>
+<div class="info">Analogon zum Coulomb-Gesetz, aber für Ströme. Direktes Berechnen von $\\vec{B}$ aus Stromverteilung.</div>`},
+    {q:'Ampère\'sches Gesetz (stationärer Fall) und B-Feld eines geraden Leiters.',badges:['def','calc'],ref:'Skript §4 / Probeklausur Aufg. 5',
+     a:`$$\\oint_{\\partial S}\\vec{B}\\cdot d\\vec{r} = \\mu_0 I_{\\text{eingeschlossen}}$$
+Für einen unendlich langen geraden Leiter mit Strom $I$:<br>
+Ampère-Kreis Radius $r$: $B\\cdot 2\\pi r = \\mu_0 I$<br>
+$$B(r) = \\frac{\\mu_0 I}{2\\pi r}$$
+Feldlinien: konzentrische Kreise um den Leiter.`},
+    {q:'[Prob. Aufg. 5] B-Feld einer unendlichen Flächenstromdichte $\\vec{j}_A$ via Ampère.',badges:['ex','calc'],ref:'Probeklausur Aufg. 5',
+     a:`<div class="step">Symmetrie: $\\vec{B}$ parallel zur Ebene, senkrecht zu $\\vec{j}_A$; gleiche Stärke beiderseits (unendliche Ebene)</div>
+<div class="step">Ampère-Rechteck Breite $a$: $\\oint\\vec{B}\\cdot d\\vec{r} = 2Ba = \\mu_0 j_A a$</div>
+<div class="result">$B = \\mu_0 j_A/2$, Richtung: parallel zur Ebene, gemäß Rechte-Hand-Regel. Analog zum E-Feld der geladenen Platte!</div>`},
+    {q:'B-Feld einer langen Zylinderspule (Solenoid).',badges:['def'],ref:'Skript §4',
+     a:`$n$ = Windungen pro Längeneinheit, Strom $I$:<br>
+Ampère-Kreis entlang der Spulenachse:<br>
+$$B = \\mu_0 n I = \\mu_0 \\frac{N}{L} I$$
+Außerhalb: $B = 0$ (für ideale unendliche Spule).<br>
+<div class="result">Solenoid ist das Pendant zum Plattenkondensator: erzeugt homogenes $\\vec{B}$-Feld.</div>`},
+    {q:'Magnetische Monopole und $\\nabla\\cdot\\vec{B} = 0$.',badges:['def'],ref:'Skript §4 / Maxwell-Gleichungen',
+     a:`$$\\nabla\\cdot\\vec{B} = 0 \\quad (\\text{oder} \\quad \\oiint\\vec{B}\\cdot d\\vec{A} = 0)$$
+Es gibt keine magnetischen Monopole — $\\vec{B}$-Feldlinien sind immer geschlossen!<br>
+Dies ist die zweite Maxwell-Gleichung. Im Gegensatz zum E-Feld hat $\\vec{B}$ keine Quellen/Senken.`},
+    {q:'Materie im B-Feld: Dia-, Para- und Ferromagnetismus.',badges:['def'],ref:'Skript §4',
+     a:`$\\vec{B} = \\mu_0\\mu_r\\vec{H}$, $\\mu_r = 1 + \\chi_m$ (magnetische Suszeptibilität)<br>
+<strong>Diamagnetismus:</strong> $\\chi_m < 0$ — leichte Abstoßung, Induktion entgegen $\\vec{B}$<br>
+<strong>Paramagnetismus:</strong> $\\chi_m > 0$ klein — thermische Ausrichtung von Spins<br>
+<strong>Ferromagnetismus:</strong> $\\chi_m \\gg 1$ — spontane Magnetisierung, Curie-Temperatur, Hysterese`},
+    {q:'Magnetische Suszeptibilität für Paramagneten: Curie-Gesetz.',badges:['def'],ref:'Probeklausur §r / Skript §4',
+     a:`$$\\chi_m = \\frac{C}{T} \\quad \\text{(Curie-Gesetz)}$$
+Die magnetische Suszeptibilität des Paramagneten nimmt mit wachsender Temperatur ab — thermische Bewegung stört die Ausrichtung.<br>
+Bei tiefen $T$: vollständige Ausrichtung (Sättigung), $\\chi_m$ groß.<br>
+Curie-Konstante $C \\propto \\mu_{\\text{Atom}}^2/k_B$.`},
+    {q:'Kraft auf stromdurchflossene Leiterschleife im B-Feld (Probeklausur Aufg. 6).',badges:['ex'],ref:'Probeklausur Aufg. 6',
+     a:`Quadratische Leiterschleife (Strom $I$, Seite $a$, Masse $m$), eine Seite als Achse fixiert, vertikales $\\vec{B}$.<br>
+<div class="step">Kraft auf jede Seite: $\\vec{F} = I\\vec{l}\\times\\vec{B}$</div>
+<div class="step">Nettodrehmoment: $\\tau = IAB\\cos\\varphi$ (bei Winkel $\\varphi$ zur Feldnormalen)</div>
+<div class="result">Gleichgewichtspositionen: $\\varphi = 0$ (stabil) und $\\varphi = \\pi$ (instabil). Prinzip des Elektromotors!</div>`},
+    {q:'Ringspule (Toroid) mit Luftspalt (Probeklausur Aufg. 7).',badges:['ex','calc'],ref:'Probeklausur Aufg. 7',
+     a:`Toroid: Radius $R_T$, $N$ Wicklungen, Strom $I$, Permeabilität $\\mu_r$, Spaltbreite $d$:<br>
+<div class="step">Ampère: $\\oint\\vec{H}\\cdot d\\vec{r} = NI$: $H_{\\text{Eisen}}l_{\\text{E}} + H_{\\text{Spalt}}d = NI$</div>
+<div class="step">$B_{\\text{Eisen}} = B_{\\text{Spalt}}$ (Flusserhaltung), $H_{\\text{Eisen}} = B/\\mu_0\\mu_r$, $H_{\\text{Spalt}} = B/\\mu_0$</div>
+<div class="result">$B = \\frac{\\mu_0 N I}{l_{\\text{E}}/\\mu_r + d}$ — Luftspalt wirkt wie dominanter Widerstand!</div>`},
+    {q:'Gyromagnetisches Verhältnis und mikroskopische Magnetisierung.',badges:['def'],ref:'Skript §4 / Probeklausur',
+     a:`Magnetisierung durch Elektronen-Spins und Bahnimpulse.<br>
+Magnetisches Moment: $\\mu = g \\mu_B s/\\hbar$ ($\\mu_B = e\\hbar/(2m_e)$ = Bohr-Magneton)<br>
+Drei mikroskopische Ursachen der Magnetisierung:<br>
+1. Elektronenspins (Eigendrehimpuls)<br>
+2. Bahnmomente der Elektronen<br>
+3. Kernspins (viel kleiner)`},
+    {q:'B-H-Relation und Magnetisierung $\\vec{M}$.',badges:['def'],ref:'Skript §4',
+     a:`$$\\vec{B} = \\mu_0(\\vec{H} + \\vec{M}), \\quad \\vec{M} = \\chi_m\\vec{H}$$
+$$\\vec{B} = \\mu_0(1+\\chi_m)\\vec{H} = \\mu_0\\mu_r\\vec{H}$$
+$\\vec{H}$ = Magnetfeldstärke, $\\vec{M}$ = Magnetisierung.<br>
+$[H] = \\text{A/m}$, $[B] = \\text{T} = \\text{Vs/m}^2$, $[M] = \\text{A/m}$`}
+  ]
+},
+{
+  id:'ch9', title:'Induktion & Induktivität', num:'09',
+  desc:'Faraday-Gesetz, Lenz\'sche Regel, Selbstinduktion, Energie im Magnetfeld, Transformator, LC-Schwingkreis.',
+  stats:[{v:'10',l:'Karten'},{v:'2',l:'Energieformeln'},{v:'Skript §4–5 / Probeklausur 8',l:'Quelle'}],
+  cards:[
+    {q:'Faraday\'sches Induktionsgesetz.',badges:['def'],ref:'Skript §5',
+     a:`$$U_{\\text{ind}} = -\\frac{d\\Phi_B}{dt} = -\\frac{d}{dt}\\iint_S \\vec{B}\\cdot d\\vec{A}$$
+(Minus = Lenz'sche Regel: Induktionsstrom wirkt der Ursache entgegen)<br>
+Differentialform: $\\nabla\\times\\vec{E} = -\\frac{\\partial\\vec{B}}{\\partial t}$ (dritte Maxwell-Gleichung)<br>
+<div class="result">Jede Änderung des magnetischen Flusses erzeugt eine EMK!</div>`},
+    {q:'Lenz\'sche Regel: Formulierung und Beispiel.',badges:['def'],ref:'Skript §5 / Probeklausur n',
+     a:`Der Induktionsstrom ist stets so gerichtet, dass er der <strong>Ursache seiner Entstehung entgegenwirkt</strong>.<br>
+Bsp. (Probeklausur): Nordpol des Stabmagneten nähert sich Leiterschleife:<br>
+→ Magnetischer Fluss durch Schleife nimmt zu<br>
+→ Induktionsstrom erzeugt B-Feld entgegen dem äußeren (Abstoßung!)<br>
+→ Schleife wird abgestoßen (Lenzsches Prinzip).`},
+    {q:'Selbstinduktivität $L$: Definition und Einheit.',badges:['def'],ref:'Skript §5 / Probeklausur 8',
+     a:`$$U_{\\text{ind}} = -L\\frac{dI}{dt}, \\quad L = \\frac{\\Phi_B}{I}$$
+Einheit: $[L] = \\text{H (Henry)} = \\text{Vs/A} = \\Omega\\text{s}$<br>
+Zeige SI: $L$ und $C$ haben Einheiten s$^2$/$C^2$... Beweis: $[LC] = \\text{H}\\cdot\\text{F} = (\\text{Vs/A})(\\text{As/V}) = \\text{s}^2$.`},
+    {q:'Induktivität einer langen Zylinderspule.',badges:['def'],ref:'Skript §5 / Probeklausur',
+     a:`Spule: $N$ Windungen, Länge $l$, Querschnitt $A$, $n = N/l$:<br>
+$\\Phi = B\\cdot A = \\mu_0 nI \\cdot A$ pro Windung. Gesamt: $\\Phi_{\\text{ges}} = N\\Phi = \\mu_0 n^2 l A I$<br>
+$$L = \\frac{\\Phi_{\\text{ges}}}{I} = \\mu_0\\frac{N^2}{l}A = \\mu_0 n^2 V$$
+Mit Eisenkern: $L = \\mu_0\\mu_r n^2 V$`},
+    {q:'Im Magnetfeld gespeicherte Energie.',badges:['def'],ref:'Skript §5',
+     a:`$$W_L = \\frac{1}{2}LI^2$$
+Energiedichte im B-Feld:
+$$w_B = \\frac{B^2}{2\\mu_0} = \\frac{1}{2}\\mu_0 H^2$$
+<div class="result">Analog: $W_C = \\frac{1}{2}CU^2$ (E-Feld); $W_L = \\frac{1}{2}LI^2$ (B-Feld). Beide = Feldenergie!</div>`},
+    {q:'LC-Schwingkreis: DGL, Lösung und Eigenfrequenz (Probeklausur Aufg. 8).',badges:['ex','calc'],ref:'Probeklausur Aufg. 8',
+     a:`Maschen-Regel: $U_L + U_C = 0$ → $L\\frac{dI}{dt} + \\frac{Q}{C} = 0$<br>
+Mit $I = \\dot{Q}$:
+$$L\\ddot{Q} + \\frac{Q}{C} = 0 \\Rightarrow \\ddot{Q} + \\omega_0^2 Q = 0, \\quad \\omega_0 = \\frac{1}{\\sqrt{LC}}$$
+Lösung: $Q(t) = Q_0\\cos(\\omega_0 t + \\varphi_0)$, $I(t) = -Q_0\\omega_0\\sin(\\omega_0 t+\\varphi_0)$<br>
+Für $C=1\\mu F$, $L=1\\text{mH}$: $f_0 = \\omega_0/(2\\pi) \\approx 5{,}03\\,\\text{kHz}$`},
+    {q:'Transformator: Prinzip und Spannungsverhältnis.',badges:['def'],ref:'Skript §5 / Probeklausur',
+     a:`Primär- ($N_1$) und Sekundärwicklung ($N_2$) auf gemeinsamen Eisenkern.<br>
+Gemeinsamer Fluss $\\Phi$:
+$$\\frac{U_2}{U_1} = \\frac{N_2}{N_1}$$
+Leistungserhaltung (ideal): $U_1 I_1 = U_2 I_2$ → $\\frac{I_2}{I_1} = \\frac{N_1}{N_2}$<br>
+<div class="info">Hochspannungsübertragung: $U$ hoch → $I$ klein → weniger Ohm'sche Verluste!</div>`},
+    {q:'Verschiebungsstrom von Maxwell.',badges:['def'],ref:'Skript §5 / Maxwell',
+     a:`Ampère-Gesetz ohne Verschiebungsstrom verletzt Ladungserhaltung im Kondensator!<br>
+Maxwell ergänzte:
+$$\\oint\\vec{B}\\cdot d\\vec{r} = \\mu_0\\left(I_{\\text{Leitung}} + \\varepsilon_0\\frac{d\\Phi_E}{dt}\\right)$$
+$$\\nabla\\times\\vec{B} = \\mu_0\\vec{j} + \\mu_0\\varepsilon_0\\frac{\\partial\\vec{E}}{\\partial t}$$
+<div class="result">Der Verschiebungsstrom $\\varepsilon_0\\partial\\vec{E}/\\partial t$ ist die Grundlage für EM-Wellen!</div>`},
+    {q:'Energie-Übergabe beim Auf- und Entladen eines Kondensators.',badges:['calc'],ref:'Probeklausur Aufg. 3',
+     a:`Beim Aufladen ($U_0$, $R$, $C$):<br>
+Energie aus Batterie: $W_{\\text{Bat}} = CU_0^2$<br>
+Im Kondensator gespeichert: $W_C = \\frac{1}{2}CU_0^2$<br>
+Im Widerstand verbraucht: $W_R = \\frac{1}{2}CU_0^2$<br>
+<div class="result">Genau die Hälfte der Energie wird als Wärme dissipiert — unabhängig von $R$!</div>`},
+    {q:'Wechselstrom und Impedanz von L und C.',badges:['def'],ref:'Skript §5',
+     a:`Bei Frequenz $\\omega = 2\\pi f$:<br>
+<strong>Kondensator:</strong> $Z_C = \\frac{1}{i\\omega C}$ — wirkt wie Widerstand, der mit $\\omega$ sinkt<br>
+<strong>Spule:</strong> $Z_L = i\\omega L$ — wirkt wie Widerstand, der mit $\\omega$ steigt<br>
+Resonanzfrequenz LC-Kreis: $\\omega_0 = 1/\\sqrt{LC}$ (gleiche Impedanzbeträge)`}
+  ]
+},
+{
+  id:'ch10', title:'Maxwell-Gleichungen & Elektromagnetische Wellen', num:'10',
+  desc:'Alle vier Maxwell-Gleichungen, EM-Wellen, Lichtgeschwindigkeit, Energie- und Impulsdichte.',
+  stats:[{v:'9',l:'Karten'},{v:'4',l:'Maxwell-Gleichungen'},{v:'Skript §5–6',l:'Quelle'}],
+  cards:[
+    {q:'Die vier Maxwell-Gleichungen im Vakuum.',badges:['def'],ref:'Skript §5 / Probeklausur (s)',
+     a:`$$\\nabla\\cdot\\vec{E} = \\frac{\\rho}{\\varepsilon_0} \\quad \\text{(I: Gauß el.)}$$
+$$\\nabla\\cdot\\vec{B} = 0 \\quad \\text{(II: kein Monopol)}$$
+$$\\nabla\\times\\vec{E} = -\\frac{\\partial\\vec{B}}{\\partial t} \\quad \\text{(III: Faraday)}$$
+$$\\nabla\\times\\vec{B} = \\mu_0\\vec{j} + \\mu_0\\varepsilon_0\\frac{\\partial\\vec{E}}{\\partial t} \\quad \\text{(IV: Ampère+Maxwell)}$$`},
+    {q:'Maxwell-Gleichungen in Materie: $\\vec{D}$ und $\\vec{H}$.',badges:['def'],ref:'Skript §5',
+     a:`$$\\nabla\\cdot\\vec{D} = \\rho_{\\text{frei}}, \\quad \\vec{D} = \\varepsilon_0\\varepsilon_r\\vec{E}$$
+$$\\nabla\\cdot\\vec{B} = 0$$
+$$\\nabla\\times\\vec{E} = -\\frac{\\partial\\vec{B}}{\\partial t}$$
+$$\\nabla\\times\\vec{H} = \\vec{j}_{\\text{frei}} + \\frac{\\partial\\vec{D}}{\\partial t}, \\quad \\vec{B} = \\mu_0\\mu_r\\vec{H}$$`},
+    {q:'Herleitung der Wellengleichung aus den Maxwell-Gleichungen.',badges:['proof'],ref:'Skript §6',
+     a:`Im Vakuum ($\\rho=0$, $\\vec{j}=0$): rot von (III) und (IV):<br>
+$\\nabla\\times(\\nabla\\times\\vec{E}) = -\\frac{\\partial}{\\partial t}(\\nabla\\times\\vec{B}) = -\\mu_0\\varepsilon_0\\frac{\\partial^2\\vec{E}}{\\partial t^2}$<br>
+Mit $\\nabla\\times(\\nabla\\times\\vec{E}) = \\nabla(\\nabla\\cdot\\vec{E}) - \\Delta\\vec{E} = -\\Delta\\vec{E}$:<br>
+$$\\Delta\\vec{E} - \\mu_0\\varepsilon_0\\frac{\\partial^2\\vec{E}}{\\partial t^2} = 0 \\Rightarrow c^2 = \\frac{1}{\\mu_0\\varepsilon_0}$$`},
+    {q:'Lichtgeschwindigkeit $c_0$ aus Maxwell-Gleichungen.',badges:['def'],ref:'Skript §6',
+     a:`$$c_0 = \\frac{1}{\\sqrt{\\mu_0\\varepsilon_0}} = 2{,}998\\cdot10^8\\,\\frac{\\text{m}}{\\text{s}}$$
+In Materie: $c = c_0/n$, mit Brechungsindex $n = \\sqrt{\\varepsilon_r\\mu_r}$<br>
+<div class="result">Maxwell erkannte, dass Licht ein EM-Phänomen ist — enorme historische Entdeckung!</div>`},
+    {q:'Struktur einer ebenen EM-Welle.',badges:['def'],ref:'Skript §6',
+     a:`Transversalwelle: $\\vec{E}$, $\\vec{B}$, und $\\vec{k}$ bilden ein rechtshändiges System ($\\vec{k}\\perp\\vec{E}\\perp\\vec{B}$).<br>
+$$\\vec{E} = E_0\\cos(\\vec{k}\\cdot\\vec{r} - \\omega t)\\hat{e}, \\quad B = E/c$$
+Dispersionsrelation: $\\omega = ck$<br>
+<div class="result">$|\\vec{B}| = |\\vec{E}|/c$ — im Vakuum gilt immer $E = cB$.</div>`},
+    {q:'Energie und Intensität einer EM-Welle (Poynting-Vektor).',badges:['def'],ref:'Skript §6',
+     a:`Energieflussdichte (Poynting-Vektor):
+$$\\vec{S} = \\frac{1}{\\mu_0}\\vec{E}\\times\\vec{B}$$
+Intensität (zeitgemittelt):
+$$I = \\langle|\\vec{S}|\\rangle = \\frac{c\\varepsilon_0 E_0^2}{2} = \\frac{E_0^2}{2\\mu_0 c}$$
+Energiedichte: $u = \\varepsilon_0 E^2 = B^2/\\mu_0$`},
+    {q:'Strahlungsdruck und Impuls von EM-Wellen.',badges:['def'],ref:'Skript §6',
+     a:`EM-Welle trägt Impuls! Strahlungsdruck:
+$$p = \\frac{I}{c} \\quad \\text{(absorbierend)}; \\quad p = \\frac{2I}{c} \\quad \\text{(reflektierend)}$$
+Anwendung: Sonnensegel, Strahlungsdruck auf Staubkörner.<br>
+Impulsdichte: $g = S/c^2 = u/c$.`},
+    {q:'Elektromagnetisches Spektrum.',badges:['def'],ref:'Skript §6',
+     a:`$\\lambda$ von kurz nach lang:<br>
+$\\gamma$-Strahlung ($< 10^{-12}\\,\\text{m}$) → Röntgen → UV → <strong>sichtbar ($400$–$700\\,\\text{nm}$)</strong> → IR → Mikrowellen → Radiowellen ($>1\\,\\text{m}$)<br>
+Alle bewegen sich mit $c_0 = 3\\cdot10^8\\,\\text{m/s}$, unterscheiden sich nur durch $\\lambda$ (oder $f = c/\\lambda$).`},
+    {q:'Vollständige Energiebilanz der Elektromagnetik: wo steckt die Energie?',badges:['def'],ref:'Skript §6',
+     a:`$$w_{\\text{ges}} = \\frac{\\varepsilon_0 E^2}{2} + \\frac{B^2}{2\\mu_0}$$
+Energie steckt im E- und B-Feld. Ändert sich das Feld, transportiert der Poynting-Vektor die Energie fort.<br>
+<div class="result">Poynting-Theorem: $\\frac{\\partial u}{\\partial t} + \\nabla\\cdot\\vec{S} = -\\vec{j}\\cdot\\vec{E}$ (rechts = Ohm'sche Verluste)</div>`}
+  ]
+},
+{
+  id:'ch11', title:'Optik', num:'11',
+  desc:'Polarisation, Brechung, Snellius, Brewster, Interferenz, Beugung, geometrische Optik.',
+  stats:[{v:'9',l:'Karten'},{v:'2',l:'Interferenzphänomene'},{v:'Skript §7 / Probeklausur (t)',l:'Quelle'}],
+  cards:[
+    {q:'Lineare Polarisation: Definition und Erzeugung.',badges:['def'],ref:'Skript §7 / Probeklausur (t)',
+     a:`Linear polarisiertes Licht: $\\vec{E}$-Vektor schwingt in einer festen Ebene (der Polarisationsebene).<br>
+<strong>Erzeugung:</strong><br>
+• Polarisationsfilter (absorbiert eine Komponente)<br>
+• Reflexion unter Brewster-Winkel<br>
+• Doppelbrechende Kristalle (Kalkspat)<br>
+Unpolarisiertes Licht: gleichmäßige Verteilung über alle Richtungen.`},
+    {q:'Snellius\'sches Brechungsgesetz.',badges:['def'],ref:'Skript §7 / Probeklausur (d)',
+     a:`An der Grenzfläche zweier Medien mit Brechungsindizes $n_1$, $n_2$:
+$$n_1\\sin\\theta_1 = n_2\\sin\\theta_2$$
+Für Luft/Glas ($n_2 > n_1$): Strahl bricht zum Lot hin ($\\theta_2 < \\theta_1$).<br>
+Totalreflexion: für $n_1 > n_2$, wenn $\\sin\\theta_1 > n_2/n_1$ ($\\theta_{\\text{krit}} = \\arcsin(n_2/n_1)$)<br>
+Anwendung: Glasfaserkabel, Prismen.`},
+    {q:'Brewster-Winkel: Formel und Bedeutung.',badges:['def'],ref:'Skript §7',
+     a:`Beim Brewster-Winkel $\\theta_B$ ist der reflektierte Strahl vollständig linear polarisiert (⊥ zur Einfallsebene).<br>
+$$\\tan\\theta_B = \\frac{n_2}{n_1}$$
+Bedingung: reflektierter und gebrochener Strahl stehen senkrecht aufeinander ($\\theta_B + \\theta_t = 90°$).<br>
+Anwendung: Polarisationsfilter in der Fotografie.`},
+    {q:'Interferenz: Konstruktive und destruktive Bedingung.',badges:['def'],ref:'Skript §7',
+     a:`Zwei kohärente Wellen mit Wegdifferenz $\\Delta$:<br>
+<strong>Konstruktiv:</strong> $\\Delta = m\\lambda$ ($m = 0, \\pm1, \\pm2, \\ldots$) → Intensitätsmaximum<br>
+<strong>Destruktiv:</strong> $\\Delta = (m+\\frac{1}{2})\\lambda$ → Intensitätsminimum<br>
+<div class="info">Kohärenz erfordert feste Phazenbeziehung — Laser kohärent, Glühbirne nicht.</div>`},
+    {q:'Doppelspalt-Interferenz: Maxima- und Minima-Positionen.',badges:['def','calc'],ref:'Skript §7',
+     a:`Spaltabstand $d$, Abstand Schirm $L$, Wellenlänge $\\lambda$:<br>
+Wegdifferenz: $\\Delta = d\\sin\\theta \\approx d\\cdot y/L$ (für kleine Winkel)<br>
+<strong>Maxima:</strong> $y_m = m\\frac{\\lambda L}{d}$ für $m = 0, \\pm1, \\pm2, \\ldots$<br>
+<strong>Minima:</strong> $y = (m+\\frac{1}{2})\\frac{\\lambda L}{d}$`},
+    {q:'Beugung am Einfachspalt: Intensitätsminima.',badges:['def'],ref:'Skript §7',
+     a:`Spaltbreite $b$, Wellenlänge $\\lambda$:<br>
+$$\\text{Minima bei: } \\sin\\theta_m = m\\frac{\\lambda}{b}, \\quad m = \\pm1, \\pm2, \\ldots$$
+Zentralmaximum doppelt so breit wie die Nebenmaxima.<br>
+<div class="warn">Beim Doppelspalt: Einhüllende durch Einfachspaltbeugung!</div>`},
+    {q:'Reflexion und Brechung: Energie-Aufteilung (qualitativ).',badges:['def'],ref:'Skript §7',
+     a:`• Reflexionskoeffizient $R$ und Transmissionskoeffizient $T$: $R + T = 1$<br>
+• Bei senkrechtem Einfall: $R = \\left(\\frac{n_1-n_2}{n_1+n_2}\\right)^2$<br>
+• Glas-Luft: $R \\approx 4\\%$ pro Oberfläche → wichtig bei optischen Systemen<br>
+• Antireflexschicht: $\\lambda/4$ dickige Schicht mit $n = \\sqrt{n_1 n_2}$ → destruktive Interferenz der Reflexe`},
+    {q:'Geometrische Optik: Linsengleichung.',badges:['def'],ref:'Skript §7',
+     a:`$$\\frac{1}{f} = \\frac{1}{g} + \\frac{1}{b}$$
+$f$ = Brennweite, $g$ = Gegenstandsweite, $b$ = Bildweite.<br>
+Abbildungsmaßstab: $m = -b/g$<br>
+Konvexlinse: $f > 0$; Konkavlinse: $f < 0$<br>
+<div class="info">Brechkraft $D = 1/f$ in Dioptrien (dpt = 1/m).</div>`},
+    {q:'Kohärenz und Laserphysik (kurz).',badges:['def'],ref:'Skript §7',
+     a:`<strong>Kohärenz:</strong> Feste Phazenbeziehung zwischen Wellenzügen — notwendig für Interferenz.<br>
+Kohärenzlänge $l_c = c/\\Delta f$ (Laser: sehr lang, Glühbirne: sehr kurz).<br>
+<strong>Laser</strong>: Stimulierte Emission → alle Photonen gleiche $\\lambda$, Phase, Richtung → kohärentes Licht.<br>
+Holographie, Interferometrie, Faseroptik benötigen Laserkohärenz.`}
+  ]
+},
+{
+  id:'ch12', title:'Schlüsselaufgaben aus den Übungen', num:'12',
+  desc:'Die wichtigsten Aufgabentypen aus Übungen 0–6, mit vollständigen Lösungswegen.',
+  stats:[{v:'10',l:'Karten'},{v:'6',l:'Übungsblätter'},{v:'Übungen 0–6',l:'Quelle'}],
+  cards:[
+    {q:'[ÜB 0C] Konservatives Kraftfeld: Ist $\\vec{F} = -\\nabla E_{\\text{pot}}$ mit $E_{\\text{pot}} = \\alpha x^3 y/(1+z^2)$ konservativ?',badges:['ex','proof'],ref:'Übung 0, Aufg. C',
+     a:`Konservativ $\\Leftrightarrow$ $\\text{rot}(\\vec{F}) = 0$.<br>
+$\\vec{F} = -\\nabla E_{\\text{pot}}$ ist <strong>immer konservativ</strong>, da $\\text{rot}(\\text{grad}(f)) = 0$ für jede glatte Funktion $f$.<br>
+Beweis: $(\\nabla\\times\\nabla f)_i = \\varepsilon_{ijk}\\partial_j\\partial_k f = 0$ (Schwarz'scher Satz: gemischte Ableitung symmetrisch, Epsilon antisymmetrisch)<br>
+<div class="result">Alle aus einem skalaren Potential abgeleiteten Felder sind konservativ. ✓</div>`},
+    {q:'[ÜB 0B] Wanderung als geometrische Reihe.',badges:['ex','calc'],ref:'Übung 0, Aufg. B',
+     a:`Schritte: $1, \\frac{1}{2}, \\frac{1}{4}, \\ldots$ — geometrische Reihe mit $q = 1/2$.<br>
+In komplexer Notation: Richtungsdrehung 90° je Schritt → Faktor $e^{i\\pi/2} = i$.<br>
+Abstand nach $n$ Schritten: $z_n = \\sum_{k=0}^n (i/2)^k\\cdot 1 \\to \\frac{1}{1-i/2} = \\frac{2}{2-i} = \\frac{4+2i}{5}$<br>
+<div class="result">Enddistanz: $|z_\\infty| = \\frac{2}{\\sqrt{5}} \\approx 0{,}894\\,\\text{km}$; Gesamtstrecke: $\\sum_{k=0}^\\infty (1/2)^k = 2\\,\\text{km}$</div>`},
+    {q:'[ÜB 2A] Schwingende Ladung $Q_2$ zwischen zwei festen $Q_1$ und $Q_1^{\\prime}$ — Eigenfrequenz.',badges:['ex','calc'],ref:'Übung 2, Aufg. A',
+     a:`<div class="step">Gleichgewicht bei $\\Delta x = 0$ (Mitte): Kräfte von $Q_1$ und $Q_1^{\\prime}$ heben sich auf.</div>
+<div class="step">Für kleine Auslenkung $\\Delta x$: Nettokraft $\\approx -k_{\\text{eff}}\\Delta x$ (harmonische Näherung via Taylor)</div>
+<div class="step">$F = \\frac{Q_1 Q_2}{4\\pi\\varepsilon_0}\\left[\\frac{1}{(r-\\Delta x)^2}-\\frac{1}{(r+\\Delta x)^2}\\right] \\approx \\frac{Q_1 Q_2}{4\\pi\\varepsilon_0}\\frac{4r\\Delta x}{r^4}$</div>
+<div class="result">$\\omega = \\sqrt{k_{\\text{eff}}/M_2}$ mit $k_{\\text{eff}} = \\frac{Q_1 Q_2}{\\pi\\varepsilon_0 r^3}$.</div>`},
+    {q:'[ÜB 3A] Potential um geladenen Draht — Logarithmus und Bezugspunkt.',badges:['ex'],ref:'Übung 3, Aufg. A',
+     a:`$E(r) = \\frac{\\lambda}{2\\pi\\varepsilon_0 r}$ → $\\varphi(r) = -\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln r + C$<br>
+<div class="warn">Bezugspunkt $r = \\infty$ geht nicht! (Ladungsverteilung unendlich ausgedehnt)</div>
+Potentialdifferenz:
+$$\\varphi(r) - \\varphi(r_0) = -\\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\frac{r}{r_0} = \\frac{\\lambda}{2\\pi\\varepsilon_0}\\ln\\frac{r_0}{r}$$`},
+    {q:'[ÜB 4A] Kondensatorschaltung: Schalter $S_1$ erst, dann $S_2$ — Spannungen berechnen.',badges:['ex','calc'],ref:'Übung 4, Aufg. A2a',
+     a:`Phase 1: $S_1$ geschlossen, $S_2$ offen. Spannung lädt $C_1$ auf $U_0$.<br>
+Phase 2: $S_1$ öffnet, $S_2$ schließt. $C_1$ und $C_2$ teilen Ladung.<br>
+Ladungserhaltung: $Q_{\\text{gesamt}} = C_1 U_0 = (C_1 + C_2)U_f$<br>
+$$U_f = \\frac{C_1 U_0}{C_1 + C_2}$$`},
+    {q:'[ÜB 4C] Stromdichte einer radioaktiven Punktquelle — Divergenz berechnen.',badges:['ex','calc'],ref:'Übung 4, Aufg. C',
+     a:`Alphastrahler emittiert mit Rate $\\Gamma$, $q_{He} = 2e$, isotrop mit Geschwindigkeit $v$:<br>
+$$\\vec{j}(\\vec{r}) = \\frac{\\Gamma\\cdot 2e}{4\\pi r^2}\\hat{r} = \\frac{\\Gamma e}{2\\pi r^2}\\hat{r}$$
+Strom durch Kreisfläche Radius $R$, Abstand $a$:
+$$I_S = \\int_S\\vec{j}\\cdot d\\vec{A} = \\Gamma e\\cdot\\frac{1-\\cos\\theta_{\\text{max}}}{2}$$
+Divergenz: $\\nabla\\cdot\\vec{j} = 0$ für $\\vec{r}\\neq 0$ (Quelleterm nur im Ursprung).`},
+    {q:'[ÜB 5B] E-Feld einer unendlich ausgedehnten geladenen Platte — via Gauß.',badges:['ex','proof'],ref:'Übung 5, Aufg. B',
+     a:`<div class="step">Symmetrie: $\\vec{E}$ zeigt senkrecht zur Platte, Richtungsumkehr beim Durchqueren</div>
+<div class="step">Gauß-Pillbox (Quader): $\\oiint\\vec{E}\\cdot d\\vec{A} = 2E\\cdot A = \\frac{\\sigma A}{\\varepsilon_0}$</div>
+<div class="result">$E = \\frac{\\sigma}{2\\varepsilon_0}$ beiderseits der Platte — homogenes Feld, unabhängig vom Abstand!</div>`},
+    {q:'[ÜB 6] Be- und Entladen Kondensator — Warum wird genau halb die Energie verbraucht?',badges:['ex','proof'],ref:'Übung 6 / Probeklausur Aufg. 3',
+     a:`Beim Aufladen: $I(t) = \\frac{U_0}{R}e^{-t/RC}$<br>
+Wärme im Widerstand: $W_R = \\int_0^\\infty R I^2 dt = \\int_0^\\infty \\frac{U_0^2}{R}e^{-2t/RC}dt = \\frac{U_0^2 RC}{2R} = \\frac{CU_0^2}{2}$<br>
+Im Kondensator: $W_C = \\frac{1}{2}CU_0^2$<br>
+<div class="result">$W_R = W_C = \\frac{1}{2}CU_0^2$ — immer genau halb, egal wie groß $R$ ist!</div>`},
+    {q:'Taylorentwicklung wichtiger Funktionen (Übung 0D).',badges:['def'],ref:'Übung 0, Aufg. D',
+     a:`Für kleine $x$:<br>
+$$\\frac{1}{1+x} \\approx 1 - x + x^2 - x^3$$
+$$\\sqrt{1+x} \\approx 1 + \\frac{x}{2} - \\frac{x^2}{8} + \\frac{x^3}{16}$$
+$$\\ln(1+x) \\approx x - \\frac{x^2}{2} + \\frac{x^3}{3}$$
+<div class="result">Diese drei Näherungen werden ständig gebraucht (Dipol, Kondensator, Wellen)!</div>`},
+    {q:'Eulerformel und komplexe Zahlen (Übung 0A).',badges:['def'],ref:'Übung 0, Aufg. A',
+     a:`$$e^{i\\varphi} = \\cos\\varphi + i\\sin\\varphi \\quad \\text{(Euler)}$$
+$$\\sin\\varphi = \\frac{e^{i\\varphi}-e^{-i\\varphi}}{2i}, \\quad \\cos\\varphi = \\frac{e^{i\\varphi}+e^{-i\\varphi}}{2}$$
+Additionstheoreme folgen direkt: $e^{i(\\alpha+\\beta)} = e^{i\\alpha}e^{i\\beta}$<br>
+Multiplikation: Beträge multiplizieren, Argumente addieren.`}
+  ]
+},
+{
+  id:'ch13', title:'Probeklausur A (Neu)', num:'13',
+  desc:'Neue Probeklausur für 3 Stunden — andere Aufgabentypen als die original Probeklausur. Inhalt aus Übungen und Skript.',
+  stats:[{v:'14',l:'Aufgaben'},{v:'3 h',l:'Dauer'},{v:'~65',l:'Punkte'}],
+  cards:[
+    {q:'[PKA Basiswissen 1] Erläutern Sie den Unterschied zwischen elektrischem Feld $\\vec{E}$ und elektrischem Flussdichte $\\vec{D}$. Wie hängen sie zusammen?',badges:['exam'],ref:'Probeklausur A',
+     a:`$\\vec{D} = \\varepsilon_0\\varepsilon_r\\vec{E} = \\varepsilon_0\\vec{E} + \\vec{P}$<br>
+$\\vec{E}$: physikalisches Feld, wirkt auf Ladungen. Einheit: V/m<br>
+$\\vec{D}$: berücksichtigt nur freie Ladungen, enthält Polarisation. Einheit: C/m²<br>
+$\\nabla\\cdot\\vec{D} = \\rho_{\\text{frei}}$ (einfacher als $\\nabla\\cdot\\vec{E} = (\\rho_{\\text{frei}}+\\rho_{\\text{Pol}})/\\varepsilon_0$)`},
+    {q:'[PKA Basiswissen 2] Was ist der Poynting-Vektor? Welche physikalische Bedeutung hat er?',badges:['exam'],ref:'Probeklausur A',
+     a:`$$\\vec{S} = \\frac{1}{\\mu_0}\\vec{E}\\times\\vec{B}$$
+$\\vec{S}$ gibt die elektromagnetische <strong>Energiestromdichte</strong> (Leistung pro Fläche) und deren Richtung an.<br>
+Einheit: $[S] = \\text{W/m}^2$<br>
+Beispiel: Bei einer EM-Welle zeigt $\\vec{S}$ in Ausbreitungsrichtung. Intensität = $\\langle|\\vec{S}|\\rangle$.`},
+    {q:'[PKA Basiswissen 3] Wie lautet das Faraday\'sche Induktionsgesetz in integraler und differentieller Form?',badges:['exam'],ref:'Probeklausur A',
+     a:`Integral: $U_{\\text{ind}} = \\oint\\vec{E}\\cdot d\\vec{r} = -\\frac{d}{dt}\\iint_S\\vec{B}\\cdot d\\vec{A}$<br>
+Differentiell: $\\nabla\\times\\vec{E} = -\\frac{\\partial\\vec{B}}{\\partial t}$<br>
+Minus-Zeichen: Lenz'sche Regel — Induktionsstrom wirkt der Ursache entgegen.`},
+    {q:'[PKA Basiswissen 4] Was versteht man unter der Kontinuitätsgleichung? Was folgt im stationären Fall?',badges:['exam'],ref:'Probeklausur A',
+     a:`$\\frac{\\partial\\rho}{\\partial t} + \\nabla\\cdot\\vec{j} = 0$ (Ladungserhaltung in differentieller Form)<br>
+Stationärer Fall ($\\partial\\rho/\\partial t = 0$): $\\nabla\\cdot\\vec{j} = 0$ → Knotenregel (Kirchhoff)<br>
+Integral: $\\oiint\\vec{j}\\cdot d\\vec{A} = 0$ — was in einen Knoten hineinfließt, muss herausfließen.`},
+    {q:'[PKA Basiswissen 5] Wie wirkt ein Dielektrikum auf die Kapazität und das E-Feld eines Kondensators?',badges:['exam'],ref:'Probeklausur A',
+     a:`Dielektrikum (Faktor $\\varepsilon_r > 1$) im Kondensator:<br>
+• Kapazität steigt: $C = \\varepsilon_r C_0$<br>
+• Bei $Q$ = const: $E$ sinkt: $E = Q/(\varepsilon_0\\varepsilon_r A) = E_0/\\varepsilon_r$<br>
+• Bei $U$ = const: $Q$ steigt (mehr Ladung gespeichert), $E$ bleibt<br>
+Ursache: Polarisation der Dielektrikum-Dipole schwächt $\\vec{E}$ ab.`},
+    {q:'[PKA Aufgabe 1 · 6P] Geladene Hohlkugel: $E$-Feld überall, Potential, Energie.',badges:['exam','calc'],ref:'Probeklausur A · Aufg. 1',
+     a:`Hohlkugel Radius $R$, Gesamtladung $Q$.<br>
+<strong>E-Feld:</strong> $r < R$: $E = 0$ (Faraday-Käfig); $r > R$: $E = \\frac{Q}{4\\pi\\varepsilon_0 r^2}$<br>
+<strong>Potential:</strong> $r > R$: $\\varphi = \\frac{Q}{4\\pi\\varepsilon_0 r}$; $r \\leq R$: $\\varphi = \\frac{Q}{4\\pi\\varepsilon_0 R}$ (konstant!)<br>
+<strong>Energie:</strong> $W = \\frac{1}{2}\\varepsilon_0\\int E^2 dV = \\frac{Q^2}{8\\pi\\varepsilon_0 R}$`},
+    {q:'[PKA Aufgabe 2 · 6P] Zwei parallele Drähte mit Strömen $I_1 = 3\\,\\text{A}$ und $I_2 = 2\\,\\text{A}$, Abstand $d = 10\\,\\text{cm}$. B-Feld und Kraft pro Länge.',badges:['exam','calc'],ref:'Probeklausur A · Aufg. 2',
+     a:`<div class="step">B-Feld von Draht 1 am Ort von Draht 2: $B_1 = \\frac{\\mu_0 I_1}{2\\pi d} = \\frac{4\\pi\\cdot10^{-7}\\cdot3}{2\\pi\\cdot0{,}1} = 6\\cdot10^{-6}\\,\\text{T}$</div>
+<div class="step">Kraft pro Länge auf Draht 2: $f = I_2 B_1 = 2\\cdot6\\cdot10^{-6} = 1{,}2\\cdot10^{-5}\\,\\text{N/m}$</div>
+<div class="result">Gleichsinnige Ströme: anziehend; entgegengesetzt: abstoßend. Definition des Ampère!</div>`},
+    {q:'[PKA Aufgabe 3 · 7P] Widerstandsnetzwerk: Dreieck mit je $R = 6\\,\\Omega$, Spannung $U = 12\\,\\text{V}$ außen. Gesamtstrom und Spannungen.',badges:['exam','calc'],ref:'Probeklausur A · Aufg. 3',
+     a:`Dreieck $A$-$B$-$C$ mit $R$ an jeder Seite. Spannung $U$ zwischen $A$ und $B$.<br>
+<div class="step">$R_{AB}$ direkt = $R = 6\\,\\Omega$. $R_{ACB}$ = $2R = 12\\,\\Omega$ in Reihe, aber parallel zu $R$.</div>
+<div class="step">$R_{\\text{ges}} = \\frac{R\\cdot 2R}{R+2R} = \\frac{2R}{3} = 4\\,\\Omega$</div>
+<div class="result">$I_{\\text{ges}} = U/R_{\\text{ges}} = 3\\,\\text{A}$; $I_{AB} = 2\\,\\text{A}$; $I_{ACB} = 1\\,\\text{A}$ (Spannungsteiler)</div>`},
+    {q:'[PKA Aufgabe 4 · 6P] LC-Schwingkreis mit Dämpfungswiderstand $R$: DGL und Lösung.',badges:['exam','calc'],ref:'Probeklausur A · Aufg. 4',
+     a:`Kirchhoff: $U_L + U_R + U_C = 0 \\Rightarrow L\\ddot{Q} + R\\dot{Q} + Q/C = 0$<br>
+Charakteristisches Polynom: $L\\lambda^2 + R\\lambda + 1/C = 0$<br>
+$$\\lambda = -\\frac{R}{2L} \\pm \\sqrt{\\left(\\frac{R}{2L}\\right)^2 - \\frac{1}{LC}}$$
+Schwingfall ($\\omega_1^2 = 1/LC - (R/2L)^2 > 0$):
+$$Q(t) = Q_0 e^{-t/\\tau}\\cos(\\omega_1 t + \\varphi_0), \\quad \\tau = 2L/R$$`},
+    {q:'[PKA Aufgabe 5 · 6P] Magnetfeld einer kreisförmigen Leiterschleife auf der Achse.',badges:['exam','calc'],ref:'Probeklausur A · Aufg. 5',
+     a:`Kreis Radius $R$, Strom $I$, Abstand $x$ entlang der Achse.<br>
+Via Biot-Savart (alle $d\\vec{l}$ senkrecht zu $\\hat{r}$, tangentiale Komponente hebt sich auf):
+$$B(x) = \\frac{\\mu_0 I R^2}{2(R^2+x^2)^{3/2}}$$
+Im Zentrum ($x=0$): $B = \\frac{\\mu_0 I}{2R}$<br>
+Für $x\\gg R$: $B \\approx \\frac{\\mu_0 I R^2}{2x^3}$ (wie magnetischer Dipol mit $m = I\\pi R^2$)`},
+    {q:'[PKA Aufgabe 6 · 6P] Plattenkondensator: Kraft zwischen Platten bei konstantem $Q$.',badges:['exam','calc'],ref:'Probeklausur A · Aufg. 6',
+     a:`<div class="step">Energie: $W = Q^2/(2C) = Q^2 d/(2\\varepsilon_0 A)$</div>
+<div class="step">Kraft: $F = -\\frac{\\partial W}{\\partial d}\\bigg|_Q = -\\frac{Q^2}{2\\varepsilon_0 A}$ (Minus = anziehend)</div>
+<div class="result">$F = -\\frac{\\sigma^2 A}{2\\varepsilon_0} = -\\frac{\\varepsilon_0 E^2 A}{2}$ — beachte: nur das halbe $E$-Feld zieht! (Wechselwirkung, nicht Selbstkraft)</div>`},
+    {q:'[PKA Aufgabe 7 · 7P] Doppelspalt: $d = 0{,}1\\,\\text{mm}$, $\\lambda = 500\\,\\text{nm}$, $L = 1\\,\\text{m}$. Abstand der ersten 3 Maxima.',badges:['exam','calc'],ref:'Probeklausur A · Aufg. 7',
+     a:`$\\Delta y = \\frac{\\lambda L}{d} = \\frac{500\\cdot10^{-9}\\cdot1}{10^{-4}} = 5\\cdot10^{-3}\\,\\text{m} = 5\\,\\text{mm}$<br>
+Maxima bei $y_m = m\\cdot 5\\,\\text{mm}$:<br>
+$m=0$: $y = 0$ (Zentrum) · $m=\\pm1$: $y = \\pm5\\,\\text{mm}$ · $m=\\pm2$: $y = \\pm10\\,\\text{mm}$<br>
+Abstand zwischen benachbarten Maxima: $\\Delta y = 5\\,\\text{mm}$`},
+    {q:'[PKA Aufgabe 8 · 5P] Transformator: Primär 230 V, 50 Hz, 1000 Windungen. Sekundär 12 V. Wie viele Windungen? Strom bei $P = 100\\,\\text{W}$?',badges:['exam','calc'],ref:'Probeklausur A · Aufg. 8',
+     a:`$\\frac{U_2}{U_1} = \\frac{N_2}{N_1} \\Rightarrow N_2 = N_1\\frac{U_2}{U_1} = 1000\\cdot\\frac{12}{230} \\approx 52$<br>
+Primärstrom: $I_1 = P/U_1 = 100/230 \\approx 0{,}43\\,\\text{A}$<br>
+Sekundärstrom: $I_2 = P/U_2 = 100/12 \\approx 8{,}3\\,\\text{A}$<br>
+<div class="result">Hochspannung → wenig Strom; Niederspannung → viel Strom. Leistung bleibt (ideal) gleich.</div>`},
+    {q:'[PKA Aufgabe 9 · 6P] Dipol zwischen Kondensatorplatten: Gleichgewicht und Energie.',badges:['exam','calc'],ref:'Probeklausur A · Aufg. 9',
+     a:`Dipol $\\vec{p}$ im homogenen Feld $\\vec{E}$ (Plattenkondensator):<br>
+Potentielle Energie: $U(\\theta) = -\\vec{p}\\cdot\\vec{E} = -pE\\cos\\theta$<br>
+Drehmoment: $\\vec{M} = \\vec{p}\\times\\vec{E}$, Betrag $M = pE\\sin\\theta$<br>
+<strong>Gleichgewicht:</strong> $\\theta = 0$ (stabil, Minimum) und $\\theta = \\pi$ (instabil, Maximum)<br>
+Arbeit bei Drehung $0\\to90°$: $W = pE`},
+    {q:'[PKA Aufgabe 10 · 5P] Zeige: $[LC] = \\text{s}^2$ (aus Probeklausur Aufg. 8).',badges:['exam','proof'],ref:'Probeklausur Aufg. 8 / PKA',
+     a:`$[L] = \\text{H} = \\text{Vs/A} = \\frac{\\text{V}\\cdot\\text{s}}{\\text{A}}$<br>
+$[C] = \\text{F} = \\text{C/V} = \\text{As/V}$<br>
+$$[LC] = \\frac{\\text{Vs}}{\\text{A}}\\cdot\\frac{\\text{As}}{\\text{V}} = \\frac{\\text{V}\\cdot\\text{s}\\cdot\\text{A}\\cdot\\text{s}}{\\text{A}\\cdot\\text{V}} = \\text{s}^2 \\checkmark$$
+Daher: $\\omega_0 = 1/\\sqrt{LC}$ hat die Einheit $1/\\text{s}$ = rad/s. ✓`}
+  ]
+},
+{
+  id:'ch14', title:'Probeklausur B (Neu)', num:'14',
+  desc:'Zweite neue Probeklausur — anderer Schwerpunkt als Klausur A. Magnetismus, Induktion, Optik und komplexe Schaltkreise.',
+  stats:[{v:'12',l:'Aufgaben'},{v:'3 h',l:'Dauer'},{v:'~60',l:'Punkte'}],
+  cards:[
+    {q:'[PKB BW 1] Was beschreibt der Verschiebungsstrom und warum ist er wichtig?',badges:['exam'],ref:'Probeklausur B',
+     a:`Maxwell ergänzte Ampère um den Verschiebungsstrom $\\varepsilon_0\\partial\\vec{E}/\\partial t$:<br>
+$\\nabla\\times\\vec{B} = \\mu_0\\vec{j} + \\mu_0\\varepsilon_0\\frac{\\partial\\vec{E}}{\\partial t}$<br>
+Wichtig: ohne ihn wäre Ladungserhaltung verletzt (z.B. Kondensator im Stromkreis).<br>
+<div class="result">Erst durch den Verschiebungsstrom ergibt sich die Wellengleichung und damit die Existenz von EM-Wellen!</div>`},
+    {q:'[PKB BW 2] Was ist Totalreflexion und unter welcher Bedingung tritt sie auf?',badges:['exam'],ref:'Probeklausur B',
+     a:`Totalreflexion: Beim Übergang dichtes → dünnes Medium ($n_1 > n_2$), ab dem <strong>kritischen Winkel</strong>:<br>
+$$\\theta_c = \\arcsin\\left(\\frac{n_2}{n_1}\\right)$$
+Für $\\theta_1 > \\theta_c$: kein gebrochener Strahl, vollständige Reflexion.<br>
+Anwendung: Glasfaserkabel, Prismen, optische Isolatoren.`},
+    {q:'[PKB BW 3] Was ist der Unterschied zwischen Dia-, Para- und Ferromagnetismus?',badges:['exam'],ref:'Probeklausur B',
+     a:`<strong>Diamagnetismus:</strong> $\\chi_m < 0$ (schwach, alle Materialien). Abstoßung aus B-Feld.<br>
+<strong>Paramagnetismus:</strong> $\\chi_m > 0$, klein ($\\sim 10^{-5}$). Thermische Fluktuationen → schwache Ausrichtung. $\\chi \\propto 1/T$<br>
+<strong>Ferromagnetismus:</strong> $\\chi_m \\gg 1$. Spontane Magnetisierung, Weiss-Bezirke, Curie-Temperatur, Hysterese.`},
+    {q:'[PKB BW 4] Wie hängen Brechungsindex $n$ und Maxwell-Gleichungen zusammen?',badges:['exam'],ref:'Probeklausur B',
+     a:`Lichtgeschwindigkeit im Medium: $c = c_0/n$, mit:<br>
+$$n = \\sqrt{\\varepsilon_r\\mu_r}$$
+Für nichtmagnetische Medien ($\\mu_r = 1$): $n = \\sqrt{\\varepsilon_r}$.<br>
+Dispersion: $n(\\lambda)$ frequenzabhängig → Prisma zerlegt Licht.`},
+    {q:'[PKB Aufgabe 1 · 6P] Magnetfeld eines solenoidalen Ringkerns (Toroid), keine Lücke. Vergleiche mit dem Fall mit Lücke.',badges:['exam','calc'],ref:'Probeklausur B · Aufg. 1',
+     a:`<strong>Ohne Lücke:</strong> Ampère auf Kreisbahn: $H\\cdot 2\\pi R = NI$ → $H = NI/(2\\pi R)$<br>
+$B = \\mu_0\\mu_r H = \\frac{\\mu_0\\mu_r N I}{2\\pi R}$<br><br>
+<strong>Mit Lücke $d$:</strong> gleicher Fluss: $B$ überall gleich<br>
+$H_{\\text{Eisen}}(2\\pi R-d) + H_{\\text{Luft}}d = NI$<br>
+$B\\left(\\frac{2\\pi R-d}{\\mu_0\\mu_r} + \\frac{d}{\\mu_0}\\right) = NI$<br>
+<div class="result">Lücke dominiert bei $\\mu_r\\gg1$: $B \\approx \\mu_0 NI/d$ wenn $d \\ll \\mu_r\\cdot 2\\pi R$</div>`},
+    {q:'[PKB Aufgabe 2 · 7P] Zylinderkondensator: Energie, Kraft auf den Innenleiter.',badges:['exam','calc'],ref:'Probeklausur B · Aufg. 2',
+     a:`Innenradius $r_1$, Außenradius $r_2$, Länge $L$, Ladung $Q$.<br>
+$C = 2\\pi\\varepsilon_0 L/\\ln(r_2/r_1)$<br>
+<div class="step">Energie: $W = Q^2/(2C) = Q^2\\ln(r_2/r_1)/(4\\pi\\varepsilon_0 L)$</div>
+<div class="step">Kraft auf Innenleiter (Dehnung): $F_r = -\\partial W/\\partial r_1 = +\\frac{Q^2}{4\\pi\\varepsilon_0 r_1 L}$ (nach außen)</div>
+<div class="result">Innenleiter wird nach außen gedrückt — elektrostatischer Druck auf Leiteroberfläche = $\\sigma^2/(2\\varepsilon_0) = \\varepsilon_0 E^2/2$</div>`},
+    {q:'[PKB Aufgabe 3 · 6P] Induktionsgesetz: Rechteckspule dreht sich in homogenem $\\vec{B}$-Feld.',badges:['exam','calc'],ref:'Probeklausur B · Aufg. 3',
+     a:`Spule: $N$ Windungen, Fläche $A$, dreht mit $\\omega$. Winkel $\\theta(t) = \\omega t$.<br>
+Magnetischer Fluss: $\\Phi(t) = NBA\\cos(\\omega t)$<br>
+Induktionsspannung:
+$$U_{\\text{ind}}(t) = -N\\frac{d\\Phi}{dt} = NBA\\omega\\sin(\\omega t)$$
+<div class="result">Amplitude $U_0 = NBA\\omega$ — Prinzip des Wechselstromgenerators!</div>`},
+    {q:'[PKB Aufgabe 4 · 6P] Millikan: Öltröpfchen, $v_{\\text{sink}} = 0{,}3\\,\\text{mm/s}$, $E = 16{,}7\\,\\text{kV/m}$ hält schwebend.',badges:['exam','calc'],ref:'Probeklausur B · Aufg. 4 (= Übung 1C)',
+     a:`<div class="step">Sinkgeschwindigkeit: $mg = 6\\pi\\eta r v_s$ → $r = \\sqrt{\\frac{9\\eta v_s}{2\\rho g}} = \\sqrt{\\frac{9\\cdot1{,}8\\cdot10^{-5}\\cdot0{,}3\\cdot10^{-3}}{2\\cdot900\\cdot9{,}81}} \\approx 5{,}2\\cdot10^{-7}\\,\\text{m}$</div>
+<div class="step">$m = \\frac{4}{3}\\pi r^3\\rho \\approx 5{,}3\\cdot10^{-16}\\,\\text{kg}$</div>
+<div class="step">Schwebezustand: $qE = mg$ → $q = mg/E \\approx 3{,}1\\cdot10^{-19}\\,\\text{C} \\approx 2e$ (ca. 2 Elementarladungen)</div>`},
+    {q:'[PKB Aufgabe 5 · 6P] RLC-Serienschwingkreis im Resonanzfall.',badges:['exam','calc'],ref:'Probeklausur B · Aufg. 5',
+     a:`Resonanzfrequenz: $\\omega_r = 1/\\sqrt{LC}$ (wie LC-Kreis)<br>
+Impedanz: $Z = R + i(\\omega L - 1/(\\omega C))$; bei Resonanz: $Z = R$ (rein reell!)<br>
+Strom bei Resonanz: $I = U/R$ — maximal!<br>
+Gütefaktor: $Q = \\omega_r L/R = 1/(\\omega_r RC)$ — bei hohem $Q$: scharfe Resonanz<br>
+<div class="result">Am Kondensator liegt die $Q$-fache Versorgungsspannung an — Resonanzüberhöhung!</div>`},
+    {q:'[PKB Aufgabe 6 · 5P] Snellius am Glasfaser: $n_{\\text{Kern}} = 1{,}5$, $n_{\\text{Mantel}} = 1{,}45$. Akzeptanzwinkel?',badges:['exam','calc'],ref:'Probeklausur B · Aufg. 6',
+     a:`Kritischer Winkel im Glas: $\\sin\\theta_c = n_{\\text{Mantel}}/n_{\\text{Kern}} = 1{,}45/1{,}5 \\approx 0{,}967$ → $\\theta_c \\approx 75°$<br>
+Akzeptanzwinkel $\\theta_a$ (außerhalb, Luft $n=1$):<br>
+Snellius: $\\sin\\theta_a = n_{\\text{Kern}}\\sin(90°-\\theta_c) = n_{\\text{Kern}}\\cos\\theta_c$<br>
+$\\sin\\theta_a = 1{,}5\\sqrt{1-0{,}967^2} \\approx 0{,}384$ → $\\theta_a \\approx 22{,}5°$`},
+    {q:'[PKB Aufgabe 7 · 6P] Energiebilanz: Warum strahlt ein beschleunigtes Elektron?',badges:['exam'],ref:'Probeklausur B · Aufg. 7',
+     a:`Ein beschleunigtes Elektron emittiert EM-Strahlung (Larmor-Strahlung):<br>
+$$P = \\frac{q^2 a^2}{6\\pi\\varepsilon_0 c^3}$$
+Ursache: Beschleunigung $\\to$ Änderung des E-Feldes $\\to$ EM-Welle (via Maxwell IV: $\\partial\\vec{E}/\\partial t$ erzeugt $\\nabla\\times\\vec{B}$).<br>
+<div class="result">Atomphysikalische Konsequenz: Klassisch würde das Elektron im Bohr-Atom spiralförmig abstürzen — braucht Quantenmechanik zur Erklärung.</div>`},
+    {q:'[PKB Aufgabe 8 · 6P] Kondensator mit zwei verschiedenen Dielektrika nebeneinander.',badges:['exam','calc'],ref:'Probeklausur B · Aufg. 8',
+     a:`Platte mit Fläche $A/2$ auf $\\varepsilon_1$, $A/2$ auf $\\varepsilon_2$, gleicher Abstand $d$:<br>
+Beide Hälften mit gleicher Spannung $U$:<br>
+$C_1 = \\varepsilon_0\\varepsilon_1 A/(2d)$, $C_2 = \\varepsilon_0\\varepsilon_2 A/(2d)$<br>
+Parallelschaltung:
+$$C_{\\text{ges}} = C_1 + C_2 = \\frac{\\varepsilon_0 A(\\varepsilon_1+\\varepsilon_2)}{2d}$$`}
+  ]
+}
+];
+
+// ═══════════════════════════════════════════════════════════════════
+//  RENDERING ENGINE
+// ═══════════════════════════════════════════════════════════════════
+
+function initSection(ch) {
+  const sec = document.getElementById(ch.id);
+  const filterRow = sec.querySelector('.filter-row');
+  const cardEl = sec.querySelector('.fc-card');
+  const counter = sec.querySelector('.counter-row');
+  const pbar = sec.querySelector('.pbar');
+
+  let idx = 0, flipped = false, activeFilter = 'all';
+  let good = new Set(), bad = new Set();
+
+  function filtered() {
+    if (activeFilter === 'all') return ch.cards;
+    return ch.cards.filter(c => c.badges && c.badges.includes(activeFilter));
+  }
+
+  function badgeHTML(b) {
+    const map = {
+      ex:'<span class="fc-badge badge-ex">Übung</span>',
+      proof:'<span class="fc-badge badge-proof">Beweis</span>',
+      def:'<span class="fc-badge badge-def">Definition</span>',
+      calc:'<span class="fc-badge badge-calc">Rechnung</span>',
+      ch:'<span class="fc-badge badge-ch">Skript</span>',
+      exam:'<span class="fc-badge badge-exam">Klausur</span>'
+    };
+    return map[b] || '';
+  }
+
+  function render() {
+    const cards = filtered();
+    if (!cards.length) { cardEl.innerHTML='<div class="fc-inner"><div class="face front"><div class="fc-q">Keine Karten in dieser Kategorie.</div></div></div>'; return; }
+    if (idx >= cards.length) idx = 0;
+    const card = cards[idx];
+    flipped = false; cardEl.classList.remove('flipped');
+    cardEl.innerHTML = `<div class="fc-inner">
+      <div class="face front">
+        <div class="fc-badge-row">${(card.badges||[]).map(badgeHTML).join('')}</div>
+        <div class="fc-q">${card.q}</div>
+        <div class="fc-ref">${card.ref||''}</div>
+        <div class="fc-hint">Klicken oder <kbd>F</kbd> zum Umdrehen</div>
+      </div>
+      <div class="face back">
+        <div class="fc-badge-row"><span class="fc-badge badge-ch">Antwort</span></div>
+        <div class="fc-a">${card.a}</div>
+        <div class="fc-hint">Zurückdrehen oder weiter</div>
+      </div>
+    </div>`;
+    if (window.renderMathInElement) renderMathInElement(cardEl,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
+    counter.innerHTML = `${idx+1} / ${cards.length} · <span style="color:var(--green)">${good.size} gut</span> · <span style="color:var(--red)">${bad.size} wiederholen</span>`;
+    pbar.style.width = (((idx+1)/cards.length)*100)+'%';
+  }
+
+  function flip() { flipped=!flipped; cardEl.classList.toggle('flipped',flipped); }
+
+  sec.querySelector('.btn.primary').onclick = flip;
+  sec.querySelector('#prev-'+ch.id).onclick = () => { const c=filtered(); idx=(idx-1+c.length)%c.length; render(); };
+  sec.querySelector('#next-'+ch.id).onclick = () => { const c=filtered(); idx=(idx+1)%c.length; render(); };
+  sec.querySelector('.btn.good').onclick = () => { good.add(idx); sec.querySelector('#next-'+ch.id).click(); };
+  sec.querySelector('.btn.bad').onclick = () => { bad.add(idx); sec.querySelector('#next-'+ch.id).click(); };
+  sec.querySelector('.btn.shuffle').onclick = () => {
+    const c=filtered(); for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];}
+    idx=0; render();
+  };
+  cardEl.onclick = flip;
+  cardEl.setAttribute('tabindex','0');
+  cardEl.onkeydown = e => {
+    if(e.key==='ArrowRight') sec.querySelector('#next-'+ch.id).click();
+    else if(e.key==='ArrowLeft') sec.querySelector('#prev-'+ch.id).click();
+    else if(e.key.toLowerCase()==='f') flip();
+  };
+
+  ['all','ex','def','proof','calc','exam'].forEach(f => {
+    const b=document.createElement('button');
+    b.className='chip'+(f==='all'?' active':'')+(f==='ex'?' ex':'')+(f==='proof'?' proof':'')+(f==='exam'?' exam':'');
+    b.textContent={all:'Alle',ex:'Übungen',def:'Definitionen',proof:'Beweise',calc:'Rechnungen',exam:'Klausur'}[f];
+    b.onclick = () => {
+      filterRow.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); activeFilter=f; idx=0; render();
+    };
+    filterRow.appendChild(b);
+  });
+  render();
+}
+
+function buildAll() {
+  const content = document.getElementById('content');
+  chapters.forEach(ch => {
+    const sec = document.createElement('section');
+    sec.className='chapter'; sec.id=ch.id;
+    sec.innerHTML = `
+      <div class="ch-header" style="margin-bottom:1.1rem">
+        <h2><span class="ch-num">${ch.num}</span>${ch.title}</h2>
+        <p>${ch.desc}</p>
+      </div>
+      <div class="stats">${(ch.stats||[]).map(s=>`<div class="stat"><strong>${s.v}</strong><span>${s.l}</span></div>`).join('')}</div>
+      <div class="fc-section">
+        <h3>${ch.title} — Lernkarten</h3>
+        <div class="filter-row"></div>
+        <div class="counter-row">Lade...</div>
+        <div class="pbar-wrap"><div class="pbar"></div></div>
+        <div class="stage"><div class="fc-card"></div></div>
+        <div class="btn-row">
+          <button class="btn" id="prev-${ch.id}">◀ Zurück</button>
+          <button class="btn primary">⟳ Umdrehen</button>
+          <button class="btn" id="next-${ch.id}">Weiter ▶</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn good">✓ Verstanden</button>
+          <button class="btn bad">✗ Wiederholen</button>
+          <button class="btn shuffle">⇄ Mischen</button>
+        </div>
+        <div class="kbd-hint"><kbd>F</kbd> umdrehen · <kbd>←</kbd><kbd>→</kbd> navigieren</div>
+      </div>`;
+    content.appendChild(sec);
+    initSection(ch);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', buildAll);
+</script>
+</body>
+</html>
