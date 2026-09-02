@@ -130,13 +130,14 @@
   <div class="nav-group">
     <div class="nav-label">Übungen</div>
     <a class="nav-link" href="#ch16">16 · Übungsblätter 1–5</a>
+    <a class="nav-link" href="#ch17">17 · Übungsblätter 6–12</a>
   </div>
 </nav>
 
 <main id="content">
 <div class="hero">
   <h1>Klassische Mechanik – Vollständige Lernkarten</h1>
-  <p>Alle Definitionen, Sätze, Beweise und Übungsaufgaben aus Skript und Übungsblättern 1–5, mit Rechenwegen, Herkunftsangaben und vollständiger Mathematik.</p>
+  <p>Alle Definitionen, Sätze, Beweise und Übungsaufgaben aus Skript und allen 12 Übungsblättern, mit Rechenwegen, Herkunftsangaben und vollständiger Mathematik.</p>
   <div class="badges">
     <span class="badge">16 Abschnitte</span>
     <span class="badge">160+ Karten</span>
@@ -939,6 +940,101 @@ Energie: $E = T+U = \\text{const.}$ (konservativ)<br>
 Lagrange: $\\frac{d}{dt}\\frac{\\partial L}{\\partial\\dot{q}_k} - \\frac{\\partial L}{\\partial q_k} = 0$<br>
 Hamilton: $\\dot{q}_k = \\partial H/\\partial p_k$, $\\dot{p}_k = -\\partial H/\\partial q_k$<br>
 Noether: Symmetrie ↔ Erhaltungsgröße`}
+  ]
+},
+{
+  id:'ch17', title:'Übungsblätter 6–12 – Vollständig', num:'17',
+  desc:'Alle Aufgaben aus Übungsblättern 6–12: generalisierte Koordinaten, Lagrange-Anwendungen, Noether-Theorem, Trägheitstensor-Tricks, Kreisel/Tennisschläger-Effekt, Phasenraum, Legendre-Transformation.',
+  stats:[{v:'20',l:'Aufgaben'},{v:'7',l:'Blätter (6–12)'},{v:'Alle Typen',l:'Aufgabenform'}],
+  cards:[
+    {q:'[ÜB 6.1] Teilchen auf Bahn aus Halbkreisen mit konstanter Geschwindigkeit: Woher zeigen die Zwangskräfte, und wie verhält sich ihre Stärke im großen vs. kleinen Halbkreis?',badges:['ex','calc'],ref:'Übung Blatt 6, Aufg. 1',
+     a:`Auf jedem Kreisbogen ist die Zwangskraft die <strong>Zentripetalkraft</strong>, die zum Mittelpunkt des jeweiligen Bogens zeigt: $Z=mv^2/r$.<br>
+Bei konstanter Geschwindigkeit $v$ und Radius des großen Halbkreises $r_{\\text{groß}}=3r_{\\text{klein}}$: $Z_{\\text{groß}}=mv^2/(3r)=\\tfrac13 Z_{\\text{klein}}$ — die Zwangskraft im großen Bogen ist nur ein Drittel so groß.<br>
+Verdoppelt man $v$: $Z\\propto v^2$ vervierfacht sich in beiden Bögen.`},
+    {q:'[ÜB 6.2] Zwei Teilchen auf Kugeloberfläche mit festem Winkel $\\pi/4$ zueinander: Freiheitsgrade und Zwangsbedingungen.',badges:['ex','calc'],ref:'Übung Blatt 6, Aufg. 2',
+     a:`<div class="step">a) Ohne Zwang: $2\\times3=6$ Freiheitsgrade.</div>
+<div class="step">b) Zwangsbedingungen: je 1 pro Teilchen für die Kugeloberfläche ($r_1^2=R^2$, $r_2^2=R^2$) plus 1 für den festen Winkel ($\\vec{r}_1\\cdot\\vec{r}_2=R^2\\cos(\\pi/4)$) $\\Rightarrow$ 3 Zwangsbedingungen.</div>
+<div class="result">d) $6-3=3$ Freiheitsgrade. e) Generalisierte Koordinaten: z.B. zwei Winkel $(\\theta,\\varphi)$ für Teilchen 1 (legt dessen Position auf der Kugel fest) plus ein Drehwinkel $\\psi$ um die Achse durch Teilchen 1, der die Position von Teilchen 2 auf dem festen-Winkel-Kegel bestimmt.</div>`},
+    {q:'[ÜB 6.3] Teilchen gleitet auf rotierendem Stab ($\\omega=$ const.): Zwangsbedingung, kartesische Koordinaten und kinetische Energie durch $s$ ausdrücken.',badges:['ex','calc'],ref:'Übung Blatt 6, Aufg. 3',
+     a:`<div class="step">a) Zwangsbedingung: $g(x,y,t)=y\\cos(\\omega t)-x\\sin(\\omega t)=0$ (Punkt liegt auf der Linie unter Winkel $\\omega t$).</div>
+<div class="step">b) $x=s\\cos(\\omega t)$, $y=s\\sin(\\omega t)$.</div>
+<div class="step">c) $\\dot x = \\dot s\\cos(\\omega t)-s\\omega\\sin(\\omega t)$, $\\dot y=\\dot s\\sin(\\omega t)+s\\omega\\cos(\\omega t)$.</div>
+<div class="result">d) $T=\\tfrac12 m(\\dot x^2+\\dot y^2)=\\tfrac12 m(\\dot s^2+s^2\\omega^2)$ — Radialbewegung plus Zentrifugalterm!</div>`},
+    {q:'[ÜB 6.4] Teilchen auf Parabelbahn $y=\\alpha x^2$ unter Kraft $\\vec{F}=-\\beta\\hat{e}_y$: Bewegungsgleichung in $x$ und Zwangskraft.',badges:['ex','calc'],ref:'Übung Blatt 6, Aufg. 4',
+     a:`<div class="step">a) Lagrange-1.-Art: $m\\ddot x = \\lambda\\partial_xg=-2\\lambda\\alpha x$, $m\\ddot y=-\\beta+\\lambda$, mit $g=y-\\alpha x^2$.</div>
+<div class="step">b) Aus $y=\\alpha x^2$: $\\ddot y = 2\\alpha\\dot x^2+2\\alpha x\\ddot x$. Einsetzen und $\\lambda$ eliminieren liefert eine (nichtlineare) DGL allein in $x,\\dot x$.</div>
+<div class="result">c) Die Zwangskraft $\\vec{Z}=\\lambda\\vec{\\nabla}g$ hängt über $\\lambda(x,\\dot x)$ auch von der Geschwindigkeit $\\dot x$ ab (Zentrifugalanteil der Bahnkrümmung geht ein) — anders als beim einfachen Pendel mit reiner $\\dot\\varphi^2$-Abhängigkeit ist hier die Krümmung ortsabhängig.`},
+    {q:'[ÜB 7.1] Teilchen auf Oberfläche $y=f(x)$ im Schwerefeld: Lagrangefunktion und Bewegungsgleichung.',badges:['ex','calc'],ref:'Übung Blatt 7, Aufg. 1',
+     a:`$U(x)=mgf(x)$, $T(x,\\dot x)=\\tfrac12 m(\\dot x^2+\\dot y^2)=\\tfrac12 m\\dot x^2(1+f'(x)^2)$ (da $\\dot y=f'(x)\\dot x$).<br>
+$$L=\\tfrac12 m\\dot x^2\\left[1+f'(x)^2\\right]-mgf(x)$$
+Euler-Lagrange: $\\frac{d}{dt}\\left[m\\dot x(1+f'^2)\\right]-\\left[m\\dot x^2 f'f''-mgf'\\right]=0$ — nichtlineare Bewegungsgleichung, die Bahnkrümmung geht über $f',f''$ ein.`},
+    {q:'[ÜB 7.2] Keil (Masse $M$) mit Block (Masse $m$) auf reibungsfreier Ebene: Lagrangefunktion, Bewegungsgleichungen, Anfangsbeschleunigung, Erhaltungsgröße.',badges:['ex','calc'],ref:'Übung Blatt 7, Aufg. 2',
+     a:`Generalisierte Koordinaten: $R$ (Keilposition), $r$ (Blockposition relativ zum Keil).<br>
+$$L=\\tfrac12 M\\dot R^2+\\tfrac12 m\\left[(\\dot R+\\dot r\\cos\\theta)^2+(\\dot r\\sin\\theta)^2\\right]+mgr\\sin\\theta$$
+<div class="step">$R$ ist zyklisch ($\\partial L/\\partial R=0$) $\\Rightarrow$ $p_R=\\partial L/\\partial\\dot R=$ Gesamtimpuls in $x$-Richtung ist erhalten — physikalisch: keine äußere horizontale Kraft auf das Gesamtsystem (Keil+Block)!</div>
+<div class="result">Anfangsbeschleunigung des Keils: $\\ddot R(0) = \\dfrac{-mg\\sin\\theta\\cos\\theta}{M+m\\sin^2\\theta}$.</div>`},
+    {q:'[ÜB 7.3] Perle auf rotierendem Ring ($\\Omega=$ const.): Lagrangefunktion in $\\theta$ und Bewegungsgleichung.',badges:['ex','calc'],ref:'Übung Blatt 7, Aufg. 3',
+     a:`$x=R\\sin\\theta\\cos(\\Omega t)$, $y=R\\sin\\theta\\sin(\\Omega t)$, $z=-R\\cos\\theta$ (Ring rotiert um vertikale Achse).<br>
+$$T=\\tfrac12 mR^2(\\dot\\theta^2+\\Omega^2\\sin^2\\theta), \\qquad U=-mgR\\cos\\theta$$
+$$L=\\tfrac12 mR^2(\\dot\\theta^2+\\Omega^2\\sin^2\\theta)+mgR\\cos\\theta$$
+Bewegungsgleichung: $R\\ddot\\theta = R\\Omega^2\\sin\\theta\\cos\\theta - g\\sin\\theta$ — identisch zur "rotierenden Schleife" aus Kapitel 11 (Skript §3.4), nur andere Variablenbenennung!`},
+    {q:'[ÜB 7.4, Goldstern] Perle auf Pendel mit federndem Radius $V(r)=\\tfrac{1}{2\\epsilon}(r-\\ell)^2$: Störungsrechnung im Grenzfall $\\epsilon\\to0$.',badges:['ex','proof'],ref:'Übung Blatt 7, Aufg. 4',
+     a:`Volle Lagrangefunktion in $r,\\varphi$ liefert:
+$$mr^2\\ddot\\varphi+2mr\\dot r\\dot\\varphi-mgr\\sin\\varphi=0, \\qquad m\\ddot r-mr\\dot\\varphi^2+mg\\cos\\varphi+\\tfrac1\\epsilon(r-\\ell)=0$$
+Entwicklung $r=r_0+\\epsilon r_1+\\ldots$, $\\varphi=\\varphi_0+\\epsilon\\varphi_1+\\ldots$ in der 2. Gleichung: Ordnung $1/\\epsilon$ liefert $r_0=\\ell$ (harte Zwangsbedingung wird im Limes $\\epsilon\\to0$ exakt reproduziert!). Ordnung $1$ liefert die bekannte Pendelgleichung $\\ell\\ddot\\varphi_0=-g\\sin\\varphi_0$ und die Zwangskraft $Z=-\\tfrac1\\epsilon r_1$ aus der Vorlesung.`},
+    {q:'[ÜB 8.1] Stationäre Punkte einer quadratischen Funktion $s(\\vec x)=\\|\\vec x\\|^2-2\\vec x\\cdot\\vec\\gamma+\\|\\gamma\\|^2+C$: Minimum, Maximum oder Sattelpunkt?',badges:['ex','proof'],ref:'Übung Blatt 8, Aufg. 1a',
+     a:`$s(\\vec\\gamma+\\epsilon\\vec h)=\\|\\vec\\gamma+\\epsilon\\vec h\\|^2-2(\\vec\\gamma+\\epsilon\\vec h)\\cdot\\vec\\gamma+\\|\\gamma\\|^2+C = \\underbrace{\\|\\gamma\\|^2+C}_{A}+\\epsilon^2\\underbrace{\\|\\vec h\\|^2}_{B}$<br>
+Der lineare Term in $\\epsilon$ verschwindet für jedes $\\vec h$ $\\Rightarrow$ $\\vec\\gamma$ ist stationär.<br>
+<div class="result">Da $B=\\|\\vec h\\|^2\\geq0$ für alle $\\vec h$: $\\vec\\gamma$ ist ein <strong>Minimum</strong>.</div>`},
+    {q:'[ÜB 8.1] Freier Fall im Wirkungsprinzip: Zeige, dass $\\gamma(t)$ (Lösung der Newton-Gleichung) die Wirkung $S[y]$ extremalisiert.',badges:['ex','proof'],ref:'Übung Blatt 8, Aufg. 1b–e',
+     a:`$L(y,\\dot y)=\\tfrac12 m\\dot y^2-mgy$, Lösung $\\gamma(t)=-\\tfrac12 gt^2$ (mit $y(0)=0,\\dot y(0)=0$).<br>
+$$S[\\gamma+\\epsilon h]=\\int_0^1\\left[\\tfrac12 m(\\dot\\gamma+\\epsilon\\dot h)^2-mg(\\gamma+\\epsilon h)\\right]dt = \\int A(t)\\,dt+\\epsilon^2\\int\\tfrac12 m\\dot h^2\\,dt$$
+Der lineare Term $\\epsilon\\int m(\\dot\\gamma\\dot h-gh)dt=0$ nach partieller Integration + Euler-Lagrange (mit $h(0)=h(1)=0$).<br>
+<div class="result">Da der quadratische Term $\\int\\tfrac12 m\\dot h^2\\,dt\\geq0$: $\\gamma$ ist ein <strong>Minimum</strong> der Wirkung (Prinzip der kleinsten Wirkung wörtlich erfüllt).</div>`},
+    {q:'[ÜB 9.1] Koordinatentransformation vereinfacht Bewegungsgleichung: $L=\\cosh(2u)(\\dot v^2+v^2\\dot u^2)+2\\sinh(2u)v\\dot v\\dot u$ mit $x=ve^u,\\,y=ve^{-u}$.',badges:['ex','calc'],ref:'Übung Blatt 9, Aufg. 1',
+     a:`In $x,y$-Koordinaten vereinfacht sich die Lagrangefunktion drastisch zu $L=\\dot x\\dot y$ (nachrechnen via Kettenregel), mit entkoppelten, linearen Bewegungsgleichungen $\\ddot x=\\ddot y=0$.<br>
+<div class="result">Lösung: $x(t)=x_0+v_xt$, $y(t)=y_0+v_yt$ — <strong>lineare</strong> Bewegung in den neuen Koordinaten! Zurücktransformiert in $u,v$ ergibt sich eine komplizierte, aber exakt lösbare Bahnkurve. Moral: geschickte Koordinatenwahl kann ein Problem drastisch vereinfachen.`},
+    {q:'[ÜB 9.2] Noether-Theorem am kräftefreien Doppelpendel: $L=A\\dot\\theta_1^2+B\\dot\\theta_2^2+C\\dot\\theta_1\\dot\\theta_2\\cos(\\theta_2-\\theta_1)$. Symmetrie und Erhaltungsgröße.',badges:['ex','calc'],ref:'Übung Blatt 9, Aufg. 2',
+     a:`$A=\\tfrac12(m_1+m_2)\\ell_1^2$, $B=\\tfrac12 m_2\\ell_2^2$, $C=m_2\\ell_1\\ell_2$ (ohne Gravitation ist $U=$ const.).<br>
+<div class="step">Transformation $\\theta_i\\to\\theta_i+\\alpha$ (beide Winkel um denselben Betrag) lässt $L$ invariant, da nur die Differenz $\\theta_2-\\theta_1$ eingeht $\\Rightarrow$ Symmetrie.</div>
+<div class="result">Noether-Ladung: $I=p_{\\theta_1}+p_{\\theta_2}=2A\\dot\\theta_1+2B\\dot\\theta_2+C(\\dot\\theta_1+\\dot\\theta_2)\\cos(\\theta_2-\\theta_1)$ ist erhalten — der <strong>Gesamtdrehimpuls</strong> des Systems.`},
+    {q:'[ÜB 9.3] Verallgemeinertes Noether-Theorem: Teilchen im zeitabhängigen linearen Potential $V(q,t)=g(t)q$.',badges:['ex','proof'],ref:'Übung Blatt 9, Aufg. 3',
+     a:`$L=\\tfrac12 m\\dot q^2-g(t)q$. Transformation $q\\to q+\\alpha$: $S[q^\\alpha]=S[q]-\\alpha\\int g(t)\\,dt = S[q]+\\alpha\\int\\frac{d}{dt}\\left(-\\int_0^t g\\,dt'\\right)dt$, also verallgemeinerte Symmetrie mit $R=-\\int_0^t g\\,dt'$.<br>
+<div class="result">Erhaltene Größe: $I=p-R=m\\dot q+\\int_0^t g(t')\\,dt'$ — dies ist gerade der Impuls plus den bereits übertragenen Kraftstoß, äquivalent zu $\\dot p=-g(t)$ direkt aus der Bewegungsgleichung.`},
+    {q:'[ÜB 10.2] Steiner\'sches Theorem (Parallelachsensatz): Beweis $I_{11}^{\\prime}=I_{11}+Md^2$.',badges:['ex','proof'],ref:'Übung Blatt 10, Aufg. 2b',
+     a:`Verschiebt man den Körper (statt die Achse) um $\\vec d=(0,d_2,d_3)$, so ist $\\rho^{\\prime}(r_1,r_2,r_3)=\\rho(r_1,r_2-d_2,r_3-d_3)$.<br>
+$$I_{11}^{\\prime}=\\int d^3r\\,\\rho^{\\prime}(\\vec r)(r_2^2+r_3^2)=\\int d^3r^{\\prime}\\,\\rho(\\vec r^{\\prime})\\left[(r_2^{\\prime}+d_2)^2+(r_3^{\\prime}+d_3)^2\\right]$$
+Ausmultiplizieren: gemischte Terme $\\propto\\int\\rho\\,r_2^{\\prime}\\,d^3r^{\\prime}=0$ (Ursprung im Schwerpunkt!) verschwinden.<br>
+<div class="result">$$I_{11}^{\\prime}=I_{11}+M(d_2^2+d_3^2)=I_{11}+Md^2\\;\\checkmark$$</div>`},
+    {q:'[ÜB 10.2] Symmetrie-Tricks für den Trägheitstensor: $\\pi$-Rotationssymmetrie und volle Rotationssymmetrie um eine Achse.',badges:['ex','proof'],ref:'Übung Blatt 10, Aufg. 2c–e',
+     a:`<div class="step">Ist $\\rho$ invariant unter $\\pi$-Rotation um Achse 1 ($r_2\\to-r_2,r_3\\to-r_3$): alle Terme mit $r_2$ oder $r_3$ in ungerader Potenz in $I_{12},I_{13}$ verschwinden im Integral $\\Rightarrow I_{12}=I_{13}=0$ — Achse 1 ist eine <strong>Hauptachse</strong>.</div>
+<div class="result">Volle Rotationssymmetrie um Achse 1 (z.B. Zylinder): zusätzlich $I_{22}=I_{33}$ und $I_{23}=0$ (folgt aus Mittelung über alle Winkel $\\theta$: $I_{23}(\\theta)$ muss für alle $\\theta$ gleich sein, was nur für $I_{23}=0$, $I_{22}=I_{33}$ möglich ist).</div>`},
+    {q:'[ÜB 10.3] Trägheitstensor des "Objekts Å" (Kugel mit Radius $R_2$ und kugelförmigem Hohlraum $R_1$ im Abstand $d$ vom Zentrum).',badges:['ex','calc'],ref:'Übung Blatt 10, Aufg. 3',
+     a:`Hauptachse: die Verbindungsachse durch beide Kugelmittelpunkte (Rotationssymmetrie um diese Achse).<br>
+Nutze Additivität des Trägheitstensors (voll gefüllte Kugel $R_2$ minus kleine Kugel $R_1$, letztere mit Steiner-Verschiebung um $d$):
+$$I_{\\parallel} = \\tfrac25 M_2 R_2^2 - \\tfrac25 M_1 R_1^2, \\qquad I_{\\perp}=\\tfrac25 M_2R_2^2-\\left(\\tfrac25 M_1R_1^2+M_1d^2\\right)$$
+mit den (negativen, da Hohlraum) effektiven Massen $M_1\\propto R_1^3$, $M_2\\propto R_2^3$ aus der homogenen Dichte.`},
+    {q:'[ÜB 11.2] Frisbee als freier symmetrischer Kreisel: Präzessionsfrequenz $\\omega_{\\text{pr}}$ und Verhältnis $\\omega_{\\text{pr}}/\\omega_z$.',badges:['ex','calc'],ref:'Übung Blatt 11, Aufg. 2',
+     a:`Für $I_x=I_y=I$, $I_z\\neq I$: $\\vec\\omega=\\tfrac1I\\vec L+(\\omega_z-L_z/I)\\hat e_z$, und $\\hat e_z$ präzediert um $\\vec L$ mit $\\omega_{\\text{pr}}=L/I$.<br>
+Im Grenzfall $\\omega_z\\gg\\omega_{x,y}$: $$\\omega_{\\text{pr}}\\approx\\frac{I_z}{I}\\omega_z$$
+Für eine dünne homogene Scheibe: $I_z=\\tfrac12 mr^2$ (Symmetrieachse), $I=\\tfrac14 mr^2$ (in der Scheibenebene) $\\Rightarrow$
+$$\\frac{\\omega_{\\text{pr}}}{\\omega_z}=\\frac{I_z}{I}=2$$
+Die Frisbee taumelt doppelt so schnell wie sie um ihre eigene Achse rotiert!`},
+    {q:'[ÜB 11.3] Tennisschläger-Effekt: Stabilität der Rotation um die drei Hauptachsen ($I_1>I_2>I_3$) aus den Euler-Gleichungen.',badges:['ex','proof'],ref:'Übung Blatt 11, Aufg. 3',
+     a:`Euler-Gleichungen (drehmomentfrei): $I_1\\dot\\omega_1=(I_2-I_3)\\omega_2\\omega_3$ etc.<br>
+Linearisierung um reine Rotation entlang Achse 1 ($\\omega_1\\approx$ const. $\\gg\\omega_2,\\omega_3$) liefert gekoppelte lineare DGL für $\\omega_2,\\omega_3$ mit Lösung $\\propto e^{\\pm i\\Omega t}$, $\\Omega^2=\\dfrac{(I_1-I_2)(I_1-I_3)}{I_2I_3}\\omega_1^2>0$ (oszillierend, <strong>stabil</strong>) — analog für Achse 3 (kleinstes Trägheitsmoment).<br>
+<div class="result">Für Achse 2 (mittleres Trägheitsmoment) wird $(I_1-I_2)(I_2-I_3)$ so kombiniert, dass $\\Omega^2<0$ $\\Rightarrow$ <strong>exponentiell instabil</strong> — das ist der berühmte Tennisschläger-Effekt (Dschanibekow-Effekt): Rotation um die mittlere Achse ist instabil!`},
+    {q:'[ÜB 12.1] Phasenraumporträt eines Doppelmulden-Potentials: Fixpunkte, Separatrizen, Flussrichtung.',badges:['ex','calc'],ref:'Übung Blatt 12, Aufg. 1',
+     a:`Für ein Potential mit zwei Minima und einem Maximum dazwischen: stabile Gleichgewichte an den Minima (umgeben von geschlossenen Bahnen = gebundene Schwingungen), instabiles Gleichgewicht am Maximum (Sattelpunkt im Phasenraum mit je 2 ein- und auslaufenden Separatrizen).<br>
+Die Separatrix durch den Sattelpunkt trennt gebundene Bahnen um die einzelnen Minima von "durchlaufenden" Bahnen mit genug Energie, um über beide Mulden zu gelangen.<br>
+Flussrichtung: obere Halbebene ($p>0$) $\\Rightarrow \\dot q>0$ (Bewegung nach rechts), untere Halbebene umgekehrt.`},
+    {q:'[ÜB 12.2/3] Legendre-Transformation: Beispiele und Übergang von Lagrange- zu Hamiltonfunktion (Rezept).',badges:['ex','calc'],ref:'Übung Blatt 12, Aufg. 2–3',
+     a:`Für $f(x)=x^4$: $u=f'(x)=4x^3 \\Rightarrow x=(u/4)^{1/3}$, $g(u)=ux-f(x)=\\tfrac34(u/4)^{4/3}$.<br>
+<strong>Rezept Lagrange → Hamilton:</strong><br>
+1) Kanonische Impulse $p_j=\\partial L/\\partial\\dot q_j$.<br>
+2) Invertiere nach $\\dot q_j(\\vec q,\\vec p,t)$.<br>
+3) $H(\\vec q,\\vec p,t)=\\sum_j p_j\\dot q_j-L$, ausgedrückt durch $\\vec q,\\vec p,t$.<br>
+Für $L=\\tfrac12 m\\dot q^2-U(q)$: $p=m\\dot q$, $\\dot q=p/m$, $H=p^2/(2m)+U(q)=T+U$ — die vertraute Gesamtenergie!`}
   ]
 }
 ];
