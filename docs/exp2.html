@@ -1567,7 +1567,135 @@ Alle bewegen sich mit $c_0 = 3\\cdot10^8\\,\\text{m/s}$, unterscheiden sich nur 
     {q:'Vollständige Energiebilanz der Elektromagnetik: wo steckt die Energie?',badges:['def'],ref:'Skript §6',
      a:`$$w_{\\text{ges}} = \\frac{\\varepsilon_0 E^2}{2} + \\frac{B^2}{2\\mu_0}$$
 Energie steckt im E- und B-Feld. Ändert sich das Feld, transportiert der Poynting-Vektor die Energie fort.<br>
-<div class="result">Poynting-Theorem: $\\frac{\\partial u}{\\partial t} + \\nabla\\cdot\\vec{S} = -\\vec{j}\\cdot\\vec{E}$ (rechts = Ohm'sche Verluste)</div>`}
+<div class="result">Poynting-Theorem: $\\frac{\\partial u}{\\partial t} + \\nabla\\cdot\\vec{S} = -\\vec{j}\\cdot\\vec{E}$ (rechts = Ohm'sche Verluste)</div>`},
+    {q:'Der Verschiebungsstrom: Welcher <em>Widerspruch</em> am Kondensator zwingt Maxwell zu seiner Ergänzung des Ampère-Gesetzes?',badges:['proof','def','exam'],ref:'Skript §7.1',
+     a:`<div class="step"><strong>Der Widerspruch:</strong> Das Ampère-Gesetz $\\oint\\vec{B}\\cdot d\\vec{r}=\\mu_0I_{\\text{umschlossen}}$ verlangt eine Randkurve — die zugehörige Fläche ist aber <em>beliebig</em>. Legt man die Randkurve um die Zuleitung eines ladenden Kondensators, so gilt:<br>
+• <strong>Fläche A</strong> (eben, durchstößt den Draht): $I_{\\text{umschlossen}}=I$<br>
+• <strong>Fläche B</strong> (ausgebeult, verläuft <em>zwischen</em> den Platten): $I_{\\text{umschlossen}}=0$<br>
+Beide haben dieselbe Randkurve — das Ergebnis darf nicht davon abhängen!</div>
+<div class="step"><strong>Maxwells Lösung:</strong> Zwischen den Platten ändert sich das E-Feld. Mit $\\sigma=\\varepsilon_0E$ und $I=\\dot Q=A\\dot\\sigma$ gilt
+$$I=\\varepsilon_0 A\\frac{\\partial E}{\\partial t}=A\\frac{\\partial D}{\\partial t}$$
+Der Ausdruck $\\vec{j}_V=\\dfrac{\\partial\\vec{D}}{\\partial t}$ hat die Dimension einer Stromdichte und "schließt" den Stromkreis.</div>
+<div class="result">$$\\nabla\\times\\vec{B}=\\mu_0\\left(\\vec{j}+\\varepsilon_0\\frac{\\partial\\vec{E}}{\\partial t}\\right)$$</div>
+<div class="step"><strong>Zweiter, formaler Beweis</strong> über die Kontinuitätsgleichung: Aus $\\text{div}(\\text{rot}\\,\\vec{B})\\equiv0$ folgte ohne Zusatzterm $\\nabla\\cdot\\vec{j}=0$ — das widerspricht $\\nabla\\cdot\\vec{j}=-\\partial_t\\rho$ bei zeitabhängiger Ladungsdichte. Erst mit dem Verschiebungsstrom passt alles zusammen.</div>
+<div class="warn"><strong>Die Konsequenz ist gewaltig:</strong> Ein sich änderndes E-Feld erzeugt ein B-Feld — auch im <em>Vakuum</em>, ohne jede Ladung. Zusammen mit dem Induktionsgesetz ergibt das die sich selbst tragende elektromagnetische Welle. Ohne den Verschiebungsstrom gäbe es kein Licht, kein Radio, kein Handy.</div>`},
+    {q:'Mechanische Wellen als Vorbild: Wellengleichung, allgemeine Lösung und Phasengeschwindigkeit.',badges:['def','proof'],ref:'Skript §7.2',
+     a:`<div class="step"><strong>Wellengleichung</strong> (1D):
+$$\\frac{\\partial^2u}{\\partial x^2}=\\frac{1}{v^2}\\frac{\\partial^2u}{\\partial t^2}$$</div>
+<div class="step"><strong>Allgemeine Lösung (d'Alembert):</strong>
+$$u(x,t)=u_1(x-vt)+u_2(x+vt)$$
+Jede beliebige Funktionsform, die sich unverändert nach rechts bzw. links bewegt. Beweis durch Einsetzen mit der Kettenregel.</div>
+<div class="step"><strong>Harmonische Welle:</strong> $u=u_0\\sin(kx-\\omega t+\\varphi)$ mit Wellenzahl $k=2\\pi/\\lambda$ und Kreisfrequenz $\\omega=2\\pi\\nu$.
+$$v_{\\text{Ph}}=\\frac{\\omega}{k}=\\lambda\\nu$$
+Herleitung: Ein Punkt konstanter Phase erfüllt $kx-\\omega t=$ const, also $dx/dt=\\omega/k$.</div>
+<div class="result"><strong>Modellversuch:</strong> Die Kette gekoppelter Drehpendel zeigt Ausbreitung, Reflexion, stehende Wellen und Dispersion. <strong>Fourier-Synthese:</strong> Jede periodische Wellenform lässt sich aus harmonischen Wellen zusammensetzen — deshalb genügt es, die harmonische Welle zu verstehen.</div>
+<div class="warn">Ebene Welle in 3D: $u(\\vec{r},t)=u_0\\,e^{i(\\vec{k}\\cdot\\vec{r}-\\omega t)}$. Die Flächen konstanter Phase stehen senkrecht auf $\\vec{k}$; $\\vec k$ zeigt in Ausbreitungsrichtung. Kugelwelle: $u\\propto\\frac1r e^{i(kr-\\omega t)}$ — der Faktor $1/r$ sorgt für Energieerhaltung ($I\\propto1/r^2$).</div>`},
+    {q:'Dispersionsrelation und Struktur der EM-Welle: Wie hängen $\\vec{E}$, $\\vec{B}$ und $\\vec{k}$ zusammen?',badges:['proof','def'],ref:'Skript §7.3',
+     a:`<div class="step">Einsetzen der ebenen Welle $\\vec{E}=\\vec{E}_0e^{i(\\vec{k}\\vec{r}-\\omega t)}$ in die Maxwell-Gleichungen ersetzt $\\nabla\\to i\\vec{k}$ und $\\partial_t\\to-i\\omega$:</div>
+<div class="step">$\\nabla\\cdot\\vec{E}=0\\;\\Rightarrow\\;\\vec{k}\\cdot\\vec{E}=0$ und $\\vec{k}\\cdot\\vec{B}=0$ → <strong>rein transversal</strong>.</div>
+<div class="step">$\\nabla\\times\\vec{E}=-\\partial_t\\vec{B}\\;\\Rightarrow\\;\\vec{k}\\times\\vec{E}=\\omega\\vec{B}$ → $\\vec{E}\\perp\\vec{B}$, und $(\\vec{E},\\vec{B},\\vec{k})$ bilden ein <strong>Rechtssystem</strong>.</div>
+<div class="result">Betragsmäßig: $kE=\\omega B$, also
+$$|E|=\\frac{\\omega}{k}|B|=c\\,|B|$$
+Dispersionsrelation im Vakuum: $\\omega=ck$ — <strong>linear</strong>, daher $v_{\\text{Ph}}=v_{\\text{Gr}}=c$ und keine Dispersion.</div>
+<div class="step"><strong>Energiedichte:</strong> Beide Anteile sind exakt gleich groß:
+$$w_E=\\tfrac12\\varepsilon_0E^2=w_B=\\frac{B^2}{2\\mu_0}\\;\\Rightarrow\\;w_{\\text{elm}}=\\varepsilon_0E^2$$
+$$\\bar{I}=c\\,\\bar{w}=\\tfrac12 c\\varepsilon_0E_0^2$$ (Faktor $\\tfrac12$ aus $\\langle\\sin^2\\rangle$).</div>
+<div class="warn">Zahlenbeispiel Sonnenlicht ($I\\approx1000\\,$W/m²): $E_0=\\sqrt{2I/(c\\varepsilon_0)}\\approx 870\\,$V/m und $B_0=E_0/c\\approx 2{,}9\\,\\mu$T. Das B-Feld des Lichts ist also winzig — trotzdem sind beide Energieanteile gleich groß!</div>`},
+    {q:'Strahlungsdruck: Herleitung, Kometenschweif — und warum sich die Lichtmühle <em>falsch herum</em> dreht.',badges:['def','calc','exam'],ref:'Skript §7.3 / Übung 12, Aufg. E',
+     a:`<div class="step"><strong>Photonenimpuls:</strong> $p=\\dfrac{E}{c}=\\hbar k$. Trifft die Intensität $I$ auf eine Fläche, gilt für den übertragenen Impuls pro Zeit und Fläche:
+$$P_{\\text{Strahl}}=\\frac{I}{c}\\ \\text{(Absorption)},\\qquad P=\\frac{2I}{c}\\ \\text{(Reflexion)}$$</div>
+<div class="step"><strong>Zahlenbeispiel [ÜB 12E]:</strong> $I=200\\,$W/m² auf $A=0{,}2\\times0{,}3\\,$m²$=0{,}06\\,$m²:
+$$P=\\frac{200}{3\\cdot10^8}=6{,}7\\cdot10^{-7}\\,\\text{Pa},\\qquad F=PA\\approx 4\\cdot10^{-8}\\,\\text{N}$$
+Verschwindend klein gegen den Luftdruck von $10^5\\,$Pa.</div>
+<div class="step"><strong>Kritischer Teilchenradius bei der Sonne</strong> ($L=3{,}83\\cdot10^{26}\\,$W): Strahlungsdruckkraft $\\propto r^2$, Gravitation $\\propto r^3$ — beide $\\propto1/d^2$, der Abstand fällt heraus:
+$$\\frac{L\\pi r^2}{4\\pi d^2c}=\\frac{GM_\\odot\\frac43\\pi r^3\\rho}{d^2}\\;\\Rightarrow\\;r=\\frac{3L}{16\\pi cGM_\\odot\\rho}\\approx 0{,}6\\,\\mu\\text{m}$$</div>
+<div class="result">Staubkörner kleiner als $\\sim1\\,\\mu$m werden von der Sonne <strong>weggeblasen</strong> — das ist der Grund, warum der Kometenschweif <em>immer</em> von der Sonne weg zeigt, auch beim Rückflug (Donati 1858). Weitere Anwendungen: Sonnensegel, optische Pinzette, <strong>Laserkühlung</strong> und Bose-Einstein-Kondensation.</div>
+<div class="warn"><strong>Klausurfalle Lichtmühle (Crookes-Radiometer):</strong> Sie dreht sich <em>nicht</em> wegen des Strahlungsdrucks! Der wäre um Größenordnungen zu klein und würde außerdem in die <em>andere</em> Richtung wirken (die spiegelnde Seite bekommt den doppelten Impuls). Tatsächlich läuft die schwarze Seite <em>voran</em>: Bei dem Restgasdruck von $\\sim0{,}05\\,$mbar erwärmt die absorbierende schwarze Fläche die auftreffenden Gasmoleküle, die energiereicher zurückprallen → thermische Rückstoßkraft (Radiometereffekt).</div>`},
+    {q:'Hertz\'scher Dipol: Nah- und Fernfeld, Abstrahlcharakteristik und die $\\omega^4$-Abhängigkeit.',badges:['def','proof','exam'],ref:'Skript §7.4',
+     a:`<div class="step"><strong>Grundaussage:</strong> Jede <em>beschleunigte</em> Ladung strahlt. Ein oszillierender Dipol $p(t)=p_0\\cos(\\omega t)$ ist der einfachste Sender.</div>
+<div class="step"><strong>Nahfeld</strong> ($r\\ll\\lambda$): Quasistatisches Dipolfeld, $E\\propto1/r^3$; $\\vec E$ und $\\vec B$ sind um $90°$ phasenverschoben → <em>keine</em> Nettoenergieabstrahlung, die Energie pendelt.<br>
+<strong>Fernfeld</strong> ($r\\gg\\lambda$): $E\\propto1/r$, $\\vec{E}$ und $\\vec{B}$ <em>in Phase</em> und transversal → echte Abstrahlung mit $I\\propto1/r^2$.</div>
+<div class="result"><strong>Abgestrahlte Intensität:</strong>
+$$\\bar{I}(\\vartheta,r)=\\frac{p_0^2\\omega^4\\sin^2\\vartheta}{32\\pi^2\\varepsilon_0c^3r^2}$$
+Zwei Kernaussagen:<br>
+• <strong>$\\sin^2\\vartheta$:</strong> Maximum <em>senkrecht</em> zur Dipolachse, <strong>keine</strong> Abstrahlung in Achsenrichtung (Torus-Charakteristik).<br>
+• <strong>$\\omega^4$:</strong> Die Leistung wächst mit der vierten Potenz der Frequenz.</div>
+<div class="step"><strong>Rayleigh-Streuung:</strong> Luftmoleküle werden vom Licht zu Dipolschwingungen angeregt und strahlen mit $I\\propto\\omega^4\\propto1/\\lambda^4$ wieder ab. Blau ($450\\,$nm) wird gegenüber Rot ($650\\,$nm) um $(650/450)^4\\approx4{,}4$-mal stärker gestreut → <strong>blauer Himmel</strong>, roter Sonnenuntergang (langer Weg, Blau herausgestreut), Polarisation des Himmelslichts bei $90°$ zur Sonne.</div>
+<div class="warn"><strong>Nachweisexperimente:</strong> Glimmlampe oder Induktionsring leuchten im Feld des Senders auf; die Empfangsantenne zeigt maximales Signal bei paralleler Ausrichtung zum Sendedipol (Polarisation!) und null bei $90°$. Optimale Antennenlänge: $\\lambda/2$ (Halbwellendipol) bzw. $\\lambda/4$ über Grund.</div>`},
+    {q:'Frequenz, Wellenlänge und Antennenlänge: Rechne die wichtigsten Bereiche des EM-Spektrums durch.',badges:['calc','exam'],ref:'Skript §7.4',
+     a:`<div class="step"><strong>Grundformel:</strong> $\\lambda=\\dfrac{c}{\\nu}$, im Medium $\\lambda_m=\\dfrac{\\lambda}{n}$.</div>
+<div class="step"><strong>Tabelle:</strong><br>
+$1\\,$kHz $\\to 300\\,$km · $1\\,$MHz (Mittelwelle) $\\to 300\\,$m · $100\\,$MHz (UKW) $\\to 3\\,$m · $1\\,$GHz (Handy) $\\to 30\\,$cm · $2{,}45\\,$GHz (Mikrowelle/WLAN) $\\to 12{,}2\\,$cm · $300\\,$GHz $\\to 1\\,$mm</div>
+<div class="step"><strong>Optisch und darüber:</strong> sichtbares Licht $380\\!-\\!780\\,$nm ($4\\!-\\!8\\cdot10^{14}\\,$Hz) · Röntgen $\\sim0{,}1\\,$nm · Gamma $<10\\,$pm.</div>
+<div class="result"><strong>Nützliche Umrechnung:</strong>
+$$E[\\text{keV}]=\\frac{12{,}4}{\\lambda[\\text{Å}]}\\quad\\Rightarrow\\quad 1\\,\\text{Å}\\ \\hat{=}\\ 12{,}4\\,\\text{keV}$$
+Genau diese Wellenlänge liegt im Bereich der Atomabstände — deshalb eignet sich Röntgenstrahlung zur Strukturbestimmung (Bragg).</div>
+<div class="warn">Praktische Folge: UKW-Antennen sind ca. $75\\,$cm ($\\lambda/4$) lang, Handy-Antennen wenige Zentimeter — deshalb verschwanden sie im Gehäuse. Für Mittelwelle bräuchte man $75\\,$m; daher dort riesige Sendemasten. Umgekehrt schirmt das Gitter der Mikrowellentür ($\\lambda=12\\,$cm) bei $\\sim2\\,$mm Maschenweite perfekt ab, lässt aber sichtbares Licht ($0{,}5\\,\\mu$m) durch.</div>`},
+    {q:'Polarisation: Arten, Malus\'sches Gesetz und die Drei-Filter-Rechnung.',badges:['def','calc','exam'],ref:'Skript §7.5',
+     a:`<div class="step"><strong>Arten:</strong><br>
+• <strong>linear:</strong> $\\vec{E}$ schwingt in einer festen Ebene<br>
+• <strong>zirkular</strong> ($\\sigma^\\pm$): zwei senkrechte Komponenten gleicher Amplitude mit $90°$ Phasendifferenz — $\\vec{E}$ rotiert. Trägt den Photonendrehimpuls $\\pm\\hbar$.<br>
+• <strong>elliptisch:</strong> allgemeiner Fall (ungleiche Amplituden und/oder beliebige Phase)<br>
+• <strong>unpolarisiert:</strong> statistisch wechselnde Richtungen (Glühlampe, Sonne)</div>
+<div class="step"><strong>Polarisator:</strong> Im Mikrowellenbereich genügt ein Drahtgitter — parallel zu den Drähten regt $\\vec E$ Ströme an und wird absorbiert, senkrecht dazu geht die Welle durch. <em>Merke: Das Gitter lässt die Komponente <strong>senkrecht</strong> zu den Drähten durch.</em> Im Optischen: dichroitische Folien, Nicol- oder Glan-Prismen.</div>
+<div class="result"><strong>Malus'sches Gesetz:</strong> Nur die Projektion $E\\cos\\theta$ passiert, und $I\\propto E^2$:
+$$I_t=I_0\\cos^2\\theta$$
+Unpolarisiertes Licht durch den ersten Filter: $I=I_0/2$ (Mittelwert von $\\cos^2$).</div>
+<div class="step"><strong>Drei-Filter-Beispiel</strong> ($0°$, $60°$, $90°$), unpolarisiert einfallend:
+$$I=\\frac{I_0}{2}\\cdot\\cos^2(60°)\\cdot\\cos^2(30°)=\\frac{I_0}{2}\\cdot 0{,}25\\cdot 0{,}75=0{,}094\\,I_0$$</div>
+<div class="warn"><strong>Das Verblüffende:</strong> Ohne den mittleren Filter ($0°$ und $90°$ gekreuzt) kommt <em>nichts</em> durch. Fügt man einen dritten Filter dazwischen ein, werden es plötzlich 9,4 %. Grund: Jeder Filter <em>projiziert</em> die Polarisation neu — er entfernt nicht nur Licht, er dreht auch die Schwingungsrichtung.</div>`},
+    {q:'Geführte Wellen I: Lecherleitung und Koaxialkabel (Telegraphengleichung).',badges:['def','proof','calc'],ref:'Skript §7.6',
+     a:`<div class="step"><strong>Lecherleitung</strong> (zwei parallele Drähte): Am offenen Ende wird die Welle reflektiert; es bilden sich stehende Wellen mit Knoten und Bäuchen, nachweisbar mit einer Glimmlampe. Resonanz bei
+$$L=(2n+1)\\frac{\\lambda}{4}$$
+Typischer Wellenwiderstand $Z_W\\approx 600\\,\\Omega$ (die 600-Ohm-Bandleitung der Rundfunktechnik).</div>
+<div class="step"><strong>Koaxialkabel</strong> (Innenleiter $a$, Außenleiter $b$): Belaggrößen pro Länge
+$$L^{\\prime}=\\frac{\\mu\\mu_0}{2\\pi}\\ln\\frac{b}{a},\\qquad C^{\\prime}=\\frac{2\\pi\\varepsilon\\varepsilon_0}{\\ln(b/a)}$$</div>
+<div class="step"><strong>Telegraphengleichung</strong> (verlustfrei) liefert daraus die Wellengleichung mit
+$$v=\\frac{1}{\\sqrt{L^{\\prime}C^{\\prime}}}=\\frac{1}{\\sqrt{\\mu\\mu_0\\varepsilon\\varepsilon_0}}=\\frac{c}{\\sqrt{\\varepsilon\\mu}}$$
+Bemerkenswert: Der Logarithmus kürzt sich vollständig heraus — die Geschwindigkeit hängt <strong>nur vom Dielektrikum</strong> ab, nicht von der Geometrie.</div>
+<div class="result"><strong>Wellenwiderstand:</strong>
+$$Z_W=\\sqrt{\\frac{L^{\\prime}}{C^{\\prime}}}=\\frac{1}{2\\pi}\\sqrt{\\frac{\\mu\\mu_0}{\\varepsilon\\varepsilon_0}}\\ln\\frac{b}{a}$$
+Mit Polyethylen ($\\varepsilon\\approx2{,}25$, also $v\\approx0{,}67c$) ergibt $b/a\\approx3{,}6$ genau die Standard-$50\\,\\Omega$ und $b/a\\approx6{,}5$ die $75\\,\\Omega$ der Antennentechnik.</div>
+<div class="warn"><strong>Fehlanpassung</strong> führt zu Reflexionen ($r=\\frac{Z_L-Z_W}{Z_L+Z_W}$) und stehenden Wellen auf dem Kabel — deshalb Abschlusswiderstände und die exakte Einhaltung von $50\\,\\Omega$ in der Messtechnik.</div>`},
+    {q:'Geführte Wellen II: Rechteckhohlleiter und seine Grenzfrequenz.',badges:['def','proof'],ref:'Skript §7.6',
+     a:`<div class="step"><strong>Randbedingung:</strong> An den idealen Metallwänden muss $E_\\parallel=0$ sein. In einem Hohlleiter der Breite $a$ passt daher nur ein Feldmuster mit
+$$E_y\\propto\\sin\\left(\\frac{n\\pi x}{a}\\right),\\qquad n=1,2,\\dots$$</div>
+<div class="step"><strong>Dispersionsrelation:</strong> Einsetzen in die Wellengleichung ergibt
+$$\\frac{\\omega^2}{c^2}=k_z^2+\\left(\\frac{n\\pi}{a}\\right)^2$$
+Ausbreitung ist nur möglich, wenn $k_z$ <em>reell</em> ist:</div>
+<div class="result">$$\\omega>\\omega_c=\\frac{n\\pi c}{a}\\qquad\\Longleftrightarrow\\qquad \\lambda<2a$$
+Unterhalb der <strong>Grenzfrequenz</strong> wird $k_z$ imaginär → die Welle klingt exponentiell ab (evaneszent), sie wird <em>nicht</em> transportiert. Der Hohlleiter ist ein perfekter <strong>Hochpass</strong>.</div>
+<div class="warn">Weitere Besonderheiten:<br>
+• Die Phasengeschwindigkeit $v_{\\text{Ph}}=\\omega/k_z>c$ (!) — kein Widerspruch zur Relativität, denn die Energie läuft mit $v_{\\text{Gr}}=c^2/v_{\\text{Ph}}<c$. Es gilt $v_{\\text{Ph}}\\,v_{\\text{Gr}}=c^2$.<br>
+• Hohlleiter sind praktisch verlustfrei (kein Dielektrikum) → Radar, Satellitentechnik, Mikrowellenherd-Einkopplung.<br>
+• Typische Bänder von $1$ bis $170\\,$GHz mit entsprechend abgestuften Querschnitten.</div>`},
+    {q:'Superposition: Stehende Wellen, Schwebung, Gruppengeschwindigkeit und Reflexion am festen/losen Ende.',badges:['def','proof','exam'],ref:'Skript §7.7',
+     a:`<div class="step"><strong>Stehende Welle</strong> (zwei gegenläufige Wellen gleicher Amplitude):
+$$u=u_0\\sin(kx-\\omega t)+u_0\\sin(kx+\\omega t)=2u_0\\sin(kx)\\cos(\\omega t)$$
+Orts- und Zeitabhängigkeit sind <strong>separiert</strong>: Knoten bei $kx=n\\pi$ (also $x=n\\lambda/2$) bleiben ortsfest, Bäuche liegen dazwischen. <em>Kein Energietransport</em> — die Energie pendelt nur zwischen den Knoten.</div>
+<div class="step"><strong>Schwebung</strong> (zwei Frequenzen am selben Ort):
+$$u=2u_0\\cos\\!\\left(\\frac{\\Delta\\omega}{2}t\\right)\\cos(\\bar\\omega t)$$
+Schwebungsfrequenz $=\\Delta\\nu$ (die Amplitude ist doppelt so oft null wie die Einhüllende Perioden hat) — Grundlage des Stimmens von Instrumenten und des Überlagerungsempfängers.</div>
+<div class="step"><strong>Gruppengeschwindigkeit:</strong>
+$$v_{\\text{Gr}}=\\frac{d\\omega}{dk}\\ \\left(\\approx\\frac{\\Delta\\omega}{\\Delta k}\\right)$$
+Sie beschreibt die Ausbreitung der <em>Einhüllenden</em> und damit von Energie und Information. Nur bei linearer Dispersion ($\\omega=ck$) ist $v_{\\text{Gr}}=v_{\\text{Ph}}$; sonst laufen Wellenpakete auseinander.</div>
+<div class="result"><strong>Reflexion:</strong><br>
+• <strong>festes Ende</strong> (fest eingespannt bzw. optisch dichteres Medium): Phasensprung $\\pi$ ($\\lambda/2$), am Ende entsteht ein <strong>Knoten</strong>.<br>
+• <strong>loses/offenes Ende</strong>: kein Phasensprung, am Ende entsteht ein <strong>Bauch</strong>.<br>
+Am idealen Leiter muss $E_\\parallel=0$ sein → die EM-Welle erleidet dort einen Phasensprung, es entsteht ein E-Knoten und um $\\lambda/4$ versetzt ein B-Bauch.</div>
+<div class="warn">Der Phasensprung $\\lambda/2$ bei Reflexion am dichteren Medium ist der Grund für den Zusatzterm in der Interferenz an dünnen Schichten — Klausurklassiker bei Seifenblasen und Entspiegelung!</div>`},
+    {q:'Synchrotronstrahlung: Wiggler, Undulator und Freie-Elektronen-Laser.',badges:['def'],ref:'Skript §7.4',
+     a:`<div class="step"><strong>Grundprinzip:</strong> Relativistische Elektronen, die abgelenkt (also beschleunigt) werden, strahlen. Anders als beim ruhenden Dipol wird die Abstrahlung durch die Lorentz-Transformation in einen engen Kegel mit Öffnungswinkel $1/\\gamma$ in Flugrichtung gebündelt.</div>
+<div class="step"><strong>Ablenkmagnet:</strong> Breites, kontinuierliches Spektrum, mäßige Brillianz.</div>
+<div class="step"><strong>Wiggler:</strong> Periodische Magnetstruktur mit <em>großer</em> Auslenkung. Die Beiträge der $N$ Perioden addieren sich <strong>inkohärent</strong> → Intensität $\\propto N$, breites Spektrum.</div>
+<div class="step"><strong>Undulator:</strong> <em>Kleine</em> Auslenkung (innerhalb des $1/\\gamma$-Kegels). Die Beiträge <strong>interferieren kohärent</strong> → schmalbandige Linien mit Intensität $\\propto N^2$ und deutlich höherer Brillianz.</div>
+<div class="result"><strong>FEL / XFEL:</strong> Bei hoher Elektronendichte moduliert die erzeugte Strahlung den Elektronenstrahl selbst und bildet Mikrobündel ("Microbunching", SASE). Alle Elektronen strahlen dann phasengleich → Intensität $\\propto N_e^2$ und Laserqualität im Röntgenbereich. Der <strong>European XFEL</strong> in Hamburg ist seit 2017 in Betrieb; weitere Quellen: ESRF Grenoble, PETRA III, LCLS.</div>
+<div class="warn">Anwendungen: Strukturaufklärung von Proteinen, zeitaufgelöste Chemie im fs-Bereich ("Molekularfilm"), Materialforschung. Nebenbedingung im Speicherring: Pro Umlauf gehen einige Zehntelprozent der Elektronenenergie durch Abstrahlung verloren und müssen durch Hochfrequenz-Kavitäten nachgeliefert werden.</div>`},
+    {q:'Historische Meilensteine der EM-Wellen: Von Hertz über Marconi bis zur Yagi-Uda-Antenne.',badges:['def'],ref:'Skript §7.4',
+     a:`<div class="step"><strong>Maxwell 1864:</strong> Sagt EM-Wellen theoretisch voraus und erkennt, dass $1/\\sqrt{\\varepsilon_0\\mu_0}$ genau der gemessenen Lichtgeschwindigkeit entspricht → "Licht <em>ist</em> eine elektromagnetische Welle".</div>
+<div class="step"><strong>Heinrich Hertz 1886–88:</strong> Erzeugt und weist EM-Wellen experimentell nach (Funkenstrecke als Sender, Ringantenne mit Funkenspalt als Empfänger). Er misst Reflexion, Brechung, Polarisation und stehende Wellen — und damit die Wellenlänge. Berühmt sein Fehlurteil zur praktischen Nutzbarkeit.</div>
+<div class="step"><strong>Marconi 1901:</strong> Erste transatlantische Funkübertragung (der Buchstabe "S" in Morsezeichen, Cornwall → Neufundland), möglich durch Reflexion an der Ionosphäre. Nobelpreis 1909 zusammen mit Ferdinand Braun.</div>
+<div class="result"><strong>Yagi-Uda-Antenne (1926):</strong> Ein aktiver Halbwellendipol plus passive Elemente — ein etwas <em>längerer</em> <strong>Reflektor</strong> dahinter und mehrere etwas <em>kürzere</em> <strong>Direktoren</strong> davor. Durch die Phasenlage der induzierten Ströme entsteht konstruktive Interferenz in Vorwärtsrichtung → hoher Gewinn und Richtwirkung. Das ist die klassische Fernsehantenne auf dem Dach.</div>`}
   ]
 },
 {
