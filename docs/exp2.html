@@ -1976,7 +1976,71 @@ Eindringtiefe $\\delta\\propto 1/\\sqrt{f}$ — bei $50\\,\\text{Hz}$ ca. $9\\,\
     {q:'Drehstrom (Dreiphasenwechselstrom): Prinzip und Nullleiter.',badges:['def'],ref:'Skript §7.1',
      a:`Drei um $120°$ phasenverschobene Spannungen $U_j=U_0\\cos(\\omega t-\\tfrac{2\\pi}{3}(j-1))$, $j=1,2,3$, erzeugt durch drei sternförmig angeordnete Spulen.<br>
 Bei gleicher (symmetrischer) Belastung aller drei Phasen verschwindet der Strom im gemeinsamen Nullleiter: $I_1+I_2+I_3=0$ — leicht im Zeigerdiagramm zu sehen (3 Vektoren im 120°-Stern summieren sich zu 0).<br>
-Vorteil: gleichmäßigere Leistungsabgabe als Einphasenwechselstrom.`}
+Vorteil: gleichmäßigere Leistungsabgabe als Einphasenwechselstrom.`},
+    {q:'Zeigerdarstellung: Wie rechnet man Wechselstromkreise grafisch, und was sind Wirk-, Blind- und Scheinleistung?',badges:['def','calc','exam'],ref:'Skript §7.4',
+     a:`<div class="step"><strong>Zeiger (Phasoren):</strong> Jede Größe $U(t)=\\hat{U}\\cos(\\omega t+\\varphi)$ wird als Vektor der Länge $\\hat{U}$ dargestellt, der mit $\\omega$ rotiert; der Momentanwert ist seine Projektion. Weil alle Zeiger gleich schnell rotieren, sind ihre <em>relativen</em> Winkel konstant — man kann sie wie statische Vektoren addieren.</div>
+<div class="step"><strong>Regeln:</strong> In der <em>Reihenschaltung</em> ist $I$ gemeinsam → addiere die Spannungszeiger:
+$$U=\\sqrt{U_R^2+(U_L-U_C)^2},\\qquad \\tan\\varphi=\\frac{U_L-U_C}{U_R}=\\frac{\\omega L-\\frac{1}{\\omega C}}{R}$$
+In der <em>Parallelschaltung</em> ist $U$ gemeinsam → rechne mit der <strong>Admittanz</strong> $Y=1/Z=G+iB$ und addiere die Stromzeiger.</div>
+<div class="warn">Kuriosum: In der Reihenschaltung können $U_L$ und $U_C$ einzeln <em>größer</em> sein als die angelegte Spannung (Spannungsüberhöhung um den Faktor $Q$) — sie sind gegenphasig und heben sich in der Summe teilweise auf.</div>
+<div class="result"><strong>Leistungen:</strong><br>
+• <strong>Scheinleistung</strong> $S=U_{\\text{eff}}I_{\\text{eff}}$ [VA] — das, was die Leitung tragen muss.<br>
+• <strong>Wirkleistung</strong> $P=U_{\\text{eff}}I_{\\text{eff}}\\cos\\varphi$ [W] — nur sie wird wirklich verbraucht; $\\cos\\varphi$ heißt <em>Leistungsfaktor</em>.<br>
+• <strong>Blindleistung</strong> $Q=U_{\\text{eff}}I_{\\text{eff}}\\sin\\varphi$ [var] — pendelt zwischen Quelle und Feld hin und her.<br>
+Es gilt $S^2=P^2+Q^2$. Industriebetriebe müssen ihren $\\cos\\varphi$ durch <strong>Kompensationskondensatoren</strong> nahe 1 bringen, weil Blindströme die Netze belasten, ohne Nutzen zu bringen.</div>`},
+    {q:'Resonanzkurve in Lorentz-Näherung: Halbwertsbreite und Güte des Schwingkreises.',badges:['proof','calc'],ref:'Skript §7.4',
+     a:`<div class="step">Exakt gilt für die Reihenschaltung $|Z|=\\sqrt{R^2+\\left(\\omega L-\\frac{1}{\\omega C}\\right)^2}$, also $I(\\omega)=U/|Z|$ mit Maximum bei $\\omega_0=1/\\sqrt{LC}$.</div>
+<div class="step"><strong>Näherung nahe der Resonanz</strong> ($\\omega=\\omega_0+\\Delta\\omega$, $|\\Delta\\omega|\\ll\\omega_0$): Mit $\\omega L-\\frac{1}{\\omega C}\\approx 2L\\,\\Delta\\omega$ folgt
+$$I(\\omega)\\approx\\frac{U}{\\sqrt{R^2+4L^2\\Delta\\omega^2}}\\;\\Rightarrow\\; P\\propto\\frac{1}{\\Delta\\omega^2+(R/2L)^2}$$
+Das ist eine <strong>Lorentzkurve</strong> — dieselbe Form wie bei jeder gedämpften erzwungenen Schwingung und bei Spektrallinien.</div>
+<div class="result">Volle Halbwertsbreite und Güte:
+$$\\Delta\\omega_{\\text{FWHM}}=\\frac{R}{L}=2\\delta,\\qquad Q=\\frac{\\omega_0}{\\Delta\\omega}=\\frac{\\omega_0 L}{R}=\\frac{1}{R}\\sqrt{\\frac{L}{C}}$$
+$Q$ ist zugleich der Faktor der <strong>Spannungsüberhöhung</strong> an L und C und gibt an, nach wie vielen Perioden ($\\approx Q/\\pi$) die freie Schwingung auf $1/e$ abgeklungen ist.</div>
+<div class="warn">Merke die Kette: <em>kleines $R$ → geringe Dämpfung → schmale, hohe Resonanz → großes $Q$ → langes Nachschwingen</em>. Radioempfänger brauchen großes $Q$ (Trennschärfe), Messgeräte oft kleines $Q$ (schnelles Einschwingen).</div>`},
+    {q:'Experiment: Glühlampe in Reihe mit $C=1\\,\\mu$F am $230\\,$V-Netz. Rechne Impedanz, Strom, Phase und Leistung aus.',badges:['calc','ex','exam'],ref:'Skript §7.4 (Demonstration)',
+     a:`<div class="step"><strong>Blindwiderstand des Kondensators</strong> bei $f=50\\,$Hz:
+$$X_C=\\frac{1}{\\omega C}=\\frac{1}{2\\pi\\cdot50\\cdot10^{-6}}=3183\\,\\Omega$$</div>
+<div class="step"><strong>Impedanz</strong> mit einer kalten Glühwendel von $R\\approx112\\,\\Omega$:
+$$|Z|=\\sqrt{R^2+X_C^2}=\\sqrt{112^2+3183^2}\\approx3200\\,\\Omega$$
+Der Kondensator dominiert vollständig.</div>
+<div class="step"><strong>Strom und Phase:</strong>
+$$I_{\\text{eff}}=\\frac{230\\,\\text{V}}{3200\\,\\Omega}=72\\,\\text{mA},\\qquad \\tan\\varphi=\\frac{X_C}{R}=\\frac{3183}{112}=28{,}4\\;\\Rightarrow\\;\\varphi\\approx-88°$$
+Der Strom eilt der Spannung um fast $90°$ voraus.</div>
+<div class="result"><strong>Leistungen:</strong>
+$$P=I^2R=(0{,}072)^2\\cdot112\\approx0{,}58\\,\\text{W},\\qquad Q=I^2X_C\\approx16{,}5\\,\\text{var}$$
+Leistungsfaktor $\\cos\\varphi\\approx0{,}035$. Die Lampe bleibt dunkel — obwohl ein deutlicher Strom fließt! Der Kondensator wirkt als <strong>verlustloser Vorwiderstand</strong>: Er begrenzt den Strom, ohne selbst Wärme zu erzeugen (Kondensator-Netzteil).</div>
+<div class="warn">Vergleich: Derselbe Effekt mit einem ohmschen Vorwiderstand von $3183\\,\\Omega$ würde $P=I^2R\\approx16{,}5\\,$W in Wärme verheizen. Ersetzt man $C$ durch eine Spule, eilt der Strom stattdessen <em>nach</em> ($\\varphi=+90°$) — bei gleicher Helligkeit.</div>`},
+    {q:'Skin-Effekt quantitativ: Eindringtiefen-Tabelle und Konsequenzen für Überlandleitungen.',badges:['calc','ex'],ref:'Skript §7.4',
+     a:`<div class="step"><strong>Ursache:</strong> Der Wechselstrom erzeugt im Leiterinneren ein Wechsel-B-Feld, dieses induziert nach Lenz Wirbelströme, die dem Strom in der Mitte entgegenwirken und ihn an den Rand drängen.</div>
+<div class="result">$$\\delta=\\sqrt{\\frac{2\\rho}{\\omega\\mu}}=\\sqrt{\\frac{\\rho}{\\pi f\\mu}}$$
+Die Stromdichte fällt nach außen hin exponentiell: $j(r)=j_0e^{-(R-r)/\\delta}$.</div>
+<div class="step"><strong>Kupfer</strong> ($\\rho=1{,}7\\cdot10^{-8}\\,\\Omega$m):<br>
+$50\\,$Hz → $\\delta=9{,}38\\,$mm &nbsp;·&nbsp; $1\\,$kHz → $2{,}1\\,$mm &nbsp;·&nbsp; $1\\,$MHz → $66\\,\\mu$m &nbsp;·&nbsp; $1\\,$GHz → $2{,}1\\,\\mu$m<br>
+Bei $\\delta\\propto1/\\sqrt{f}$ gilt: zehnfache Frequenz → dreifach dünnere Schicht.</div>
+<div class="step"><strong>Überlandleitungen:</strong> Bei $50\\,$Hz sind nur die äußeren $\\approx9\\,$mm stromführend. Deshalb baut man <em>Verbundseile</em>: eine <strong>Stahlseele</strong> trägt die mechanische Last (Spannweiten von mehreren hundert Metern), außen liegen <strong>Aluminium-</strong> bzw. Kupferdrähte, die den Strom führen. Massives Kupfer wäre unnötig schwer und teuer.</div>
+<div class="warn">Weitere Folgen: HF-Spulen werden aus <strong>Litze</strong> (viele isolierte dünne Drähte) gewickelt; Hohlleiter und Mikrowellenbauteile werden nur <em>versilbert</em>, da ohnehin nur die Oberfläche leitet; der effektive Widerstand steigt mit $\\sqrt{f}$.</div>`},
+    {q:'ÜB11 D: Reihenschwingkreis mit $L=0{,}88\\,$H, $R=1000\\,\\Omega$, $f_0=350\\,$Hz, $U_{\\text{eff}}=16\\,$V. Bestimme $C$, $Q$, Strom und Bandbreite.',badges:['ex','calc'],ref:'Übungsblatt 11 D1/D2',
+     a:`<div class="step"><strong>D1 — Kapazität aus der Resonanzbedingung</strong> $\\omega_0=1/\\sqrt{LC}$ mit $\\omega_0=2\\pi\\cdot350=2199\\,$s$^{-1}$:
+$$C=\\frac{1}{\\omega_0^2L}=\\frac{1}{(2199)^2\\cdot0{,}88}=\\frac{1}{4{,}26\\cdot10^6}=2{,}35\\cdot10^{-7}\\,\\text{F}=235\\,\\text{nF}$$</div>
+<div class="step"><strong>Blindwiderstände in Resonanz:</strong> $X_L=\\omega_0L=2199\\cdot0{,}88=1935\\,\\Omega=X_C$. Sie heben sich exakt auf, es bleibt $|Z|=R=1000\\,\\Omega$ (rein reell, $\\varphi=0$).</div>
+<div class="step"><strong>D2 — Strom und Leistung in Resonanz:</strong>
+$$I_{\\text{eff}}=\\frac{U_{\\text{eff}}}{R}=\\frac{16}{1000}=16\\,\\text{mA},\\qquad P=\\frac{U^2}{R}=0{,}256\\,\\text{W}$$
+Spannungsüberhöhung: $U_L=I\\cdot X_L=0{,}016\\cdot1935=31\\,$V — also fast <em>doppelt</em> so viel wie die Quellspannung, und dieselbe Größe (gegenphasig) an $C$.</div>
+<div class="result"><strong>Güte und Bandbreite:</strong>
+$$Q=\\frac{\\omega_0L}{R}=\\frac{1935}{1000}=1{,}94,\\qquad \\Delta f=\\frac{f_0}{Q}=\\frac{350}{1{,}94}=180\\,\\text{Hz}$$
+Ein relativ <em>schlecht</em> gedämpfter Kreis wäre das nicht — bei $Q\\approx2$ ist die Resonanz breit und flach. Der Kreis schwingt frei mit $\\omega_d=\\sqrt{\\omega_0^2-\\delta^2}$, $\\delta=R/2L=568\\,$s$^{-1}$, also $\\omega_d=2124\\,$s$^{-1}$ ($f_d=338\\,$Hz) und klingt mit $\\tau=1/\\delta=1{,}8\\,$ms ab.</div>`},
+    {q:'ÜB11 E: RC-Tiefpass — leite Amplitudengang und Phasengang her und bestimme die Grenzfrequenz.',badges:['ex','proof','calc'],ref:'Übungsblatt 11 E',
+     a:`<div class="step"><strong>Schaltung:</strong> $R$ in Reihe, Ausgang <em>über dem Kondensator</em> abgegriffen. Komplexer Spannungsteiler:
+$$\\frac{U_a}{U_e}=\\frac{Z_C}{R+Z_C}=\\frac{1/(i\\omega C)}{R+1/(i\\omega C)}=\\frac{1}{1+i\\omega RC}$$</div>
+<div class="result">$$\\left|\\frac{U_a}{U_e}\\right|=\\frac{1}{\\sqrt{1+(\\omega RC)^2}},\\qquad \\varphi=-\\arctan(\\omega RC)$$</div>
+<div class="step"><strong>Grenzverhalten:</strong><br>
+• $\\omega\\ll1/RC$: Verhältnis $\\to1$, $\\varphi\\to0$ — tiefe Frequenzen passieren ungehindert.<br>
+• $\\omega\\gg1/RC$: Verhältnis $\\to1/(\\omega RC)$, also Abfall mit $-20\\,$dB/Dekade, $\\varphi\\to-90°$.</div>
+<div class="step"><strong>Grenzfrequenz</strong> (Abfall auf $1/\\sqrt2$, d.h. halbe Leistung, $-3\\,$dB):
+$$\\omega_g=\\frac{1}{RC}\\;\\Rightarrow\\; f_g=\\frac{1}{2\\pi RC},\\qquad \\varphi(\\omega_g)=-45°$$
+Beispiel $R=1\\,$k$\\Omega$, $C=1\\,\\mu$F: $f_g=159\\,$Hz.</div>
+<div class="warn">Vertauscht man $R$ und $C$ (Abgriff über $R$), erhält man den <strong>Hochpass</strong>: $\\frac{U_a}{U_e}=\\frac{i\\omega RC}{1+i\\omega RC}$, gleiche Grenzfrequenz, Phase $+45°$ bei $\\omega_g$.<br>
+Für $\\omega\\gg\\omega_g$ gilt $U_a\\approx\\frac{1}{RC}\\int U_e\\,dt$ — der Tiefpass wirkt als <strong>Integrator</strong>, der Hochpass entsprechend als <strong>Differenzierer</strong>.</div>`}
   ]
 },
 {
