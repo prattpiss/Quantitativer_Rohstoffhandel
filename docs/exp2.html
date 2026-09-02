@@ -2340,7 +2340,270 @@ $$n=\\frac{\\rho\\,N_A}{M}=\\frac{8{,}93\\,\\frac{\\text{g}}{\\text{cm}^3}\\cdot
 <div class="result"><strong>Driftgeschwindigkeit</strong> aus $I=n\\,e\\,A\\,v_d$:
 $$v_d=\\frac{I}{neA}=\\frac{3}{8{,}47\\cdot10^{28}\\cdot1{,}6\\cdot10^{-19}\\cdot1{,}06\\cdot10^{-6}}=2{,}1\\cdot10^{-4}\\,\\frac{\\text{m}}{\\text{s}}\\approx0{,}21\\,\\frac{\\text{mm}}{\\text{s}}$$</div>
 <div class="warn"><strong>Das große Paradoxon:</strong> Die Elektronen kriechen mit $0{,}2\\,$mm/s — für $1\\,$m brauchen sie über eine Stunde. Trotzdem leuchtet die Lampe sofort, weil sich das <em>elektrische Feld</em> mit nahezu Lichtgeschwindigkeit ausbreitet und alle Elektronen im Leiter gleichzeitig in Bewegung setzt (wie eine bereits mit Wasser gefüllte Leitung).<br>
-Zum Vergleich: Die <em>thermische</em> Geschwindigkeit der Elektronen beträgt $\\sim10^6\\,$m/s — die Drift ist nur eine winzige Zusatzbewegung darauf.</div>`}
+Zum Vergleich: Die <em>thermische</em> Geschwindigkeit der Elektronen beträgt $\\sim10^6\\,$m/s — die Drift ist nur eine winzige Zusatzbewegung darauf.</div>`},
+    {q:'[ÜB 5A] Strom durch einen Teilquerschnitt: homogene Stromdichte und $j(r)=ar^2$ zwischen $R/3$ und $2R/3$.',badges:['ex','calc'],ref:'Übung 5, Aufg. A',
+     a:`<div class="step"><strong>1) Homogen</strong> ($j=2\\cdot10^5\\,$A/m², $R=2\\,$mm): Die Ringfläche ist
+$$A=\\pi\\left[\\left(\\tfrac{2R}{3}\\right)^2-\\left(\\tfrac{R}{3}\\right)^2\\right]=\\pi R^2\\frac{4-1}{9}=\\frac{\\pi R^2}{3}=\\frac{\\pi(2\\cdot10^{-3})^2}{3}=4{,}19\\cdot10^{-6}\\,\\text{m}^2$$
+$$I=jA=2\\cdot10^5\\cdot4{,}19\\cdot10^{-6}=0{,}84\\,\\text{A}$$</div>
+<div class="step"><strong>2) Inhomogen</strong> $j(r)=ar^2$ mit $a=3\\cdot10^{11}\\,$A/m⁴ — jetzt muss integriert werden, mit dem Flächenelement $dA=2\\pi r\\,dr$:
+$$I=\\int_{R/3}^{2R/3}ar^2\\cdot2\\pi r\\,dr=2\\pi a\\left[\\frac{r^4}{4}\\right]_{R/3}^{2R/3}=\\frac{\\pi a}{2}R^4\\,\\frac{16-1}{81}$$</div>
+<div class="result">$$I=\\frac{\\pi\\cdot3\\cdot10^{11}}{2}\\cdot(2\\cdot10^{-3})^4\\cdot0{,}185=4{,}71\\cdot10^{11}\\cdot1{,}6\\cdot10^{-11}\\cdot0{,}185=1{,}40\\,\\text{A}$$
+Obwohl die mittlere Stromdichte ähnlich ist, fließt hier mehr Strom durch den Ring — weil $j$ nach außen hin zunimmt und die Fläche dort ebenfalls größer ist.</div>
+<div class="warn">Merke: Nur bei homogenem $j$ darf man $I=jA$ schreiben. Sonst gilt immer $I=\\int\\vec{j}\\cdot d\\vec{A}$ — und bei Zylindersymmetrie ist $dA=2\\pi r\\,dr$ (nicht $dr$!). Die Verwechslung von $dA$ mit $dr$ ist ein Klassiker.</div>`},
+    {q:'[ÜB 5C] Würfel aus 12 gleichen Widerständen $R$: Wie groß ist der Widerstand zwischen zwei gegenüberliegenden Ecken?',badges:['ex','proof','exam'],ref:'Übung 5, Aufg. C',
+     a:`<div class="step"><strong>Symmetrieargument:</strong> Der Strom $I$ tritt in Ecke A ein. Von dort gehen <strong>3</strong> gleichwertige Kanten ab — jede trägt $I/3$.<br>
+Danach verzweigt sich jeder dieser Ströme auf 2 Kanten: die 6 mittleren Kanten tragen je $I/6$.<br>
+Schließlich laufen 3 Kanten in B zusammen: je $I/3$.</div>
+<div class="step"><strong>Spannung längs eines Pfades A→B</strong> (3 Kanten):
+$$U=\\frac{I}{3}R+\\frac{I}{6}R+\\frac{I}{3}R=IR\\left(\\frac13+\\frac16+\\frac13\\right)=\\frac{5}{6}IR$$</div>
+<div class="result">$$R_{AB}=\\frac{U}{I}=\\frac{5}{6}R$$
+Bemerkenswert: weniger als ein einzelner Widerstand, obwohl kein Weg kürzer als 3 Kanten ist.</div>
+<div class="step"><strong>Spannung zwischen X und Y:</strong> Die drei Nachbarecken von A liegen alle auf demselben Potential $\\varphi_A-\\frac{I}{3}R$, ebenso die drei Nachbarn von B. Liegen X und Y in <em>derselben</em> dieser Dreiergruppen, ist
+$$U_{XY}=0$$
+— man dürfte sie kurzschließen, ohne dass sich etwas ändert. Genau das ist der Trick: Nach dem Zusammenlegen bleibt die Reihenschaltung $3\\,\\|\\,R + 6\\,\\|\\,R + 3\\,\\|\\,R=\\frac{R}{3}+\\frac{R}{6}+\\frac{R}{3}=\\frac{5}{6}R$.</div>
+<div class="warn">Zur Kontrolle die anderen Fälle: Raumdiagonale $\\frac56R$, Flächendiagonale $\\frac34R$, benachbarte Ecken $\\frac{7}{12}R$. Grundlage bleiben stets Knotenregel ($\\sum I=0$) und Maschenregel ($\\sum U=0$).</div>`},
+    {q:'[ÜB 5D] Widerstand eines Kegelstumpfes (Durchmesser $d_1$, $d_2$, Länge $L$, spez. Widerstand $\\rho$).',badges:['ex','proof','calc'],ref:'Übung 5, Aufg. D',
+     a:`<div class="step"><strong>Ansatz:</strong> Zerlege in dünne Scheiben der Dicke $dx$ — sie liegen in <em>Reihe</em>, also addieren sich die Widerstände:
+$$dR=\\rho\\frac{dx}{A(x)}=\\frac{4\\rho\\,dx}{\\pi d(x)^2}$$</div>
+<div class="step"><strong>Lineare Interpolation des Durchmessers:</strong>
+$$d(x)=d_1+\\frac{d_2-d_1}{L}x$$
+Substitution $u=d(x)$, $du=\\frac{d_2-d_1}{L}dx$:
+$$R=\\frac{4\\rho}{\\pi}\\cdot\\frac{L}{d_2-d_1}\\int_{d_1}^{d_2}\\frac{du}{u^2}=\\frac{4\\rho L}{\\pi(d_2-d_1)}\\left[-\\frac{1}{u}\\right]_{d_1}^{d_2}$$</div>
+<div class="result">$$R=\\frac{4\\rho L}{\\pi(d_2-d_1)}\\cdot\\frac{d_2-d_1}{d_1d_2}=\\boxed{\\;\\frac{4\\rho L}{\\pi\\,d_1d_2}\\;}$$
+Elegant: Es steht das <strong>geometrische Mittel</strong> der Durchmesser im Nenner, nicht das arithmetische.</div>
+<div class="warn">Kontrolle des Grenzfalls $d_1=d_2=d$: $R=\\frac{4\\rho L}{\\pi d^2}=\\rho\\frac{L}{A}$ ✓ — der bekannte Zylinderwiderstand. Solche Grenzfallkontrollen sollten in der Klausur immer gemacht werden.</div>`},
+    {q:'[ÜB 5E] Zeige die Stetigkeitsbedingungen an der Grenzfläche zweier Dielektrika.',badges:['ex','proof','exam'],ref:'Übung 5, Aufg. E',
+     a:`<div class="step"><strong>Normalkomponente von $\\vec{D}$ — Gauß\'scher Satz:</strong> Lege eine flache „Pillendose" um die Grenzfläche (Deckel in Medium 1, Boden in Medium 2, Höhe $\\to0$, sodass der Mantel nichts beiträgt). Ohne freie Grenzflächenladung ist $\\oint\\vec{D}\\cdot d\\vec{A}=0$:
+$$D_{1,n}\\Delta A-D_{2,n}\\Delta A=0\\;\\Rightarrow\\;\\boxed{D_{1,n}=D_{2,n}}$$</div>
+<div class="step"><strong>Tangentialkomponente von $\\vec{E}$ — Wirbelfreiheit:</strong> Lege eine flache Rechteckschleife über die Grenze (lange Seiten $\\Delta l$ parallel zur Fläche, kurze Seiten $\\to0$). Aus $\\oint\\vec{E}\\cdot d\\vec{s}=0$:
+$$E_{1,t}\\Delta l-E_{2,t}\\Delta l=0\\;\\Rightarrow\\;\\boxed{E_{1,t}=E_{2,t}}$$</div>
+<div class="result"><strong>Die jeweils anderen Komponenten sind unstetig:</strong>
+$$E_{1,n}\\varepsilon_1=E_{2,n}\\varepsilon_2\\;\\Rightarrow\\;\\frac{E_{1,n}}{E_{2,n}}=\\frac{\\varepsilon_2}{\\varepsilon_1},\\qquad \\frac{D_{1,t}}{D_{2,t}}=\\frac{\\varepsilon_1}{\\varepsilon_2}$$
+Der Sprung von $E_n$ rührt von den <em>Polarisationsladungen</em> her, die sich an der Grenzfläche ansammeln.</div>
+<div class="warn"><strong>Brechungsgesetz der Feldlinien:</strong> Aus beiden Bedingungen folgt
+$$\\frac{\\tan\\alpha_1}{\\tan\\alpha_2}=\\frac{\\varepsilon_1}{\\varepsilon_2}$$
+Feldlinien werden beim Eintritt in das Medium mit größerem $\\varepsilon$ vom Lot weg gebrochen. Merkhilfe: <em>„D normal, E tangential"</em> sind stetig. Magnetisch gilt völlig analog: $B_n$ und $H_t$ stetig.</div>`},
+    {q:'[ÜB 6B] Galvanometer (Vollausschlag bei $100\\,\\mu$A, $100\\,$mV): Innenwiderstand und Umbau zum Amperemeter bis $100\\,$mA.',badges:['ex','calc','exam'],ref:'Übung 6, Aufg. B',
+     a:`<div class="step"><strong>1) Innenwiderstand:</strong>
+$$R_i=\\frac{U}{I}=\\frac{100\\cdot10^{-3}\\,\\text{V}}{100\\cdot10^{-6}\\,\\text{A}}=1000\\,\\Omega$$</div>
+<div class="step"><strong>2) Warum parallel?</strong> Das Messwerk verträgt nur $100\\,\\mu$A. Um $100\\,$mA messen zu können, muss der <em>überschüssige</em> Strom an ihm vorbeigeleitet werden — das geht nur über einen <strong>Parallelwiderstand (Shunt)</strong>. Ein Reihenwiderstand würde den Strom durch das Messwerk gar nicht begrenzen können, denn dieser ist ja vom äußeren Kreis vorgegeben.</div>
+<div class="step"><strong>Rechnung:</strong> Am Shunt liegt dieselbe Spannung $100\\,$mV, durch ihn fließt
+$$I_S=100\\,\\text{mA}-0{,}1\\,\\text{mA}=99{,}9\\,\\text{mA}$$
+$$R_S=\\frac{0{,}1\\,\\text{V}}{0{,}0999\\,\\text{A}}=1{,}001\\,\\Omega\\approx1\\,\\Omega$$
+Allgemein: $R_S=\\dfrac{R_i}{n-1}$ mit dem Erweiterungsfaktor $n=1000$.</div>
+<div class="result"><strong>Merke die beiden Umbauten:</strong><br>
+• <strong>Amperemeter</strong>: Shunt <em>parallel</em>, Gesamtwiderstand wird <em>klein</em> ($\\approx1\\,\\Omega$) — muss er auch, denn das Gerät wird in Reihe geschaltet und darf den Kreis nicht stören.<br>
+• <strong>Voltmeter</strong>: Vorwiderstand in <em>Reihe</em>, Gesamtwiderstand wird <em>groß</em> — es liegt parallel zum Messobjekt und darf keinen Strom abzweigen.<br>
+Für $10\\,$V bräuchte man hier $R_V=\\frac{10\\,\\text{V}}{100\\,\\mu\\text{A}}-1000\\,\\Omega=99\\,\\text{k}\\Omega$.</div>`},
+    {q:'[ÜB 6C] Fadenstrahlrohr: $U=1\\,$kV, $B=2{,}6\\,$mT, $R=4{,}1\\,$cm. Bestimme $e/m$.',badges:['ex','proof','calc','exam'],ref:'Übung 6, Aufg. C',
+     a:`<div class="step"><strong>1. Beschleunigung:</strong> $eU=\\frac12mv^2\\;\\Rightarrow\\;v=\\sqrt{\\dfrac{2eU}{m}}$</div>
+<div class="step"><strong>2. Kreisbahn im Magnetfeld:</strong> Lorentz-Kraft = Zentripetalkraft
+$$evB=\\frac{mv^2}{R}\\;\\Rightarrow\\;v=\\frac{eBR}{m}$$</div>
+<div class="step"><strong>3. Gleichsetzen und nach $e/m$ auflösen:</strong>
+$$\\frac{e^2B^2R^2}{m^2}=\\frac{2eU}{m}\\;\\Rightarrow\\;\\frac{e}{m}=\\frac{2U}{B^2R^2}$$</div>
+<div class="result">$$\\frac{e}{m}=\\frac{2\\cdot1000}{(2{,}6\\cdot10^{-3})^2\\cdot(0{,}041)^2}=\\frac{2000}{6{,}76\\cdot10^{-6}\\cdot1{,}68\\cdot10^{-3}}=1{,}76\\cdot10^{11}\\,\\frac{\\text{C}}{\\text{kg}}$$
+Der Literaturwert ist $1{,}7588\\cdot10^{11}\\,$C/kg — hervorragende Übereinstimmung. Zusammen mit Millikans $e$ ergibt sich daraus die Elektronenmasse $m_e=9{,}11\\cdot10^{-31}\\,$kg.</div>
+<div class="warn">Historisch: Genau so bestimmte J. J. Thomson 1897 die spezifische Ladung und schloss daraus auf ein <em>neues, sehr leichtes Teilchen</em> — die Entdeckung des Elektrons (Nobelpreis 1906). Die leuchtende Bahn entsteht durch Stoßanregung des Restgases; das homogene Feld liefert ein Helmholtz-Spulenpaar.</div>`},
+    {q:'[ÜB 6D] Leiter mit exzentrischer Bohrung: Zeige, dass das Feld in der Bohrung homogen ist.',badges:['ex','proof'],ref:'Übung 6, Aufg. D',
+     a:`<div class="step"><strong>Superpositions-Trick:</strong> Ersetze die Anordnung durch die Überlagerung von<br>
+(1) einem <em>vollen</em> Zylinder (Radius $a$) mit homogener Stromdichte $\\vec{j}$ und<br>
+(2) einem Zylinder am Ort der Bohrung (Radius $b$) mit der <em>entgegengesetzten</em> Dichte $-\\vec{j}$.<br>
+In der Bohrung heben sich beide auf → Strom null; außerhalb bleibt nur (1). Dabei ist $j=\\dfrac{I}{\\pi(a^2-b^2)}$.</div>
+<div class="step"><strong>Feld im Inneren eines vollen Zylinders</strong> (Ampère, Radius $s$ vom jeweiligen Zentrum):
+$$\\vec{B}=\\frac{\\mu_0}{2}\\,\\vec{j}\\times\\vec{s}$$</div>
+<div class="result"><strong>In der Bohrung</strong> überlagern sich die Beiträge zu
+$$\\vec{B}=\\frac{\\mu_0}{2}\\vec{j}\\times\\vec{s}_1-\\frac{\\mu_0}{2}\\vec{j}\\times\\vec{s}_2=\\frac{\\mu_0}{2}\\,\\vec{j}\\times(\\vec{s}_1-\\vec{s}_2)=\\frac{\\mu_0}{2}\\,\\vec{j}\\times\\vec{d}$$
+Die Ortsvektoren fallen heraus — das Feld hängt nur noch vom <em>Versatz</em> $\\vec{d}$ ab und ist damit im gesamten Hohlraum <strong>homogen</strong>, mit dem Betrag $B=\\frac{\\mu_0jd}{2}$ in $y$-Richtung.</div>
+<div class="step"><strong>Auf den Achsen außerhalb der Bohrung</strong> subtrahiert man einfach beide Ampère-Felder:<br>
+• $x$-Achse, $x>a$: &nbsp;$B=\\dfrac{\\mu_0}{2\\pi}\\left(\\dfrac{j\\pi a^2}{x}-\\dfrac{j\\pi b^2}{x-d}\\right)$<br>
+• $y$-Achse: hier stehen die beiden Beiträge nicht mehr parallel, also vektoriell addieren.</div>
+<div class="warn">Derselbe Trick funktioniert elektrostatisch bei einer geladenen Kugel mit kugelförmigem Hohlraum — auch dort ist das Feld im Hohlraum homogen ($\\vec{E}=\\frac{\\rho\\vec{d}}{3\\varepsilon_0}$). Ein Standardtrick, den man kennen muss.</div>`},
+    {q:'[ÜB 7B] Geschwindigkeitsfilter und Massenspektrometer: Bestimme aus den Bahnradien die Germanium-Isotope.',badges:['ex','proof','calc','exam'],ref:'Übung 7, Aufg. B',
+     a:`<div class="step"><strong>1) Wien-Filter:</strong> Im gekreuzten Feld wirken die elektrische Kraft $qE$ (in $+y$) und die Lorentz-Kraft $qvB$ (in $-y$). Nur wenn beide sich aufheben, fliegt das Teilchen geradeaus durch das Loch:
+$$qE=qvB\\;\\Rightarrow\\;v=\\frac{E}{B}$$
+Das Ergebnis ist <strong>unabhängig von Masse und Ladung</strong> — deshalb haben alle durchgelassenen Teilchen dieselbe Geschwindigkeit.</div>
+<div class="step"><strong>2) Ablenkung im Analysatorfeld:</strong> $r=\\dfrac{mv}{qB^{\\prime}}$ — bei gleichem $v$, $q$ und $B^{\\prime}$ gilt also
+$$r\\propto m\\quad\\Rightarrow\\quad \\frac{m_i}{m_{\\max}}=\\frac{r_i}{r_{\\max}}$$</div>
+<div class="result">Mit $r_{\\max}=22{,}8\\,$cm $\\hat{=}\\;A=76$:
+$$A_i=76\\cdot\\frac{r_i}{22{,}8}$$
+$22{,}2\\,$cm → $74{,}0$ &nbsp;·&nbsp; $21{,}9\\,$cm → $73{,}0$ &nbsp;·&nbsp; $21{,}6\\,$cm → $72{,}0$ &nbsp;·&nbsp; $21{,}0\\,$cm → $70{,}0$<br>
+Also die fünf stabilen Isotope <strong>$^{70}$Ge, $^{72}$Ge, $^{73}$Ge, $^{74}$Ge, $^{76}$Ge</strong> — exakt das bekannte Isotopenmuster von Germanium.</div>
+<div class="warn">Genau so entdeckte Aston Isotope (Nobelpreis 1922). Die Massenauflösung $\\frac{m}{\\Delta m}$ ist hier gut genug, um $^{73}$ von $^{74}$ zu trennen ($1{,}4\\,$% Radiusunterschied). Anwendungen: Altersdatierung, Dopingkontrolle, Proteomik, Anreicherungsüberwachung.</div>`},
+    {q:'[ÜB 7C/7D] Magnetfeld einer stromdurchflossenen Ebene und einer rotierenden geladenen Scheibe.',badges:['ex','proof','calc'],ref:'Übung 7, Aufg. C und D',
+     a:`<div class="step"><strong>C) Unendliche Stromebene</strong> mit Flächenstromdichte $j_A$ (A/m):<br>
+<em>Symmetrie:</em> Zu jedem Linienstrom gibt es einen spiegelbildlichen Partner; die Normalkomponenten heben sich auf, es bleibt ein Feld <em>parallel</em> zur Ebene und senkrecht zum Strom. In jedem Halbraum ist es homogen (unabhängig vom Abstand!) und wechselt beim Durchgang das Vorzeichen.<br>
+<em>Ampère</em> mit einer Rechteckschleife der Breite $L$, die die Ebene umschließt: $2BL=\\mu_0j_AL$:
+$$B=\\frac{\\mu_0 j_A}{2}$$</div>
+<div class="warn">Perfekte Analogie zur geladenen Ebene in der Elektrostatik ($E=\\sigma/2\\varepsilon_0$, ebenfalls abstandsunabhängig). Der Sprung über die Ebene beträgt $\\Delta B=\\mu_0j_A$.</div>
+<div class="step"><strong>D) Rotierende geladene Scheibe</strong> (Radius $R$, Flächenladung $\\sigma$, Winkelgeschwindigkeit $\\omega$):<br>
+Ein Ring bei $r$ mit der Breite $dr$ trägt $dq=\\sigma2\\pi r\\,dr$ und rotiert mit der Periode $T=2\\pi/\\omega$, entspricht also dem Ringstrom
+$$dI=\\frac{dq}{T}=\\sigma\\omega r\\,dr$$
+Mit dem Feld einer Leiterschleife auf der Achse, $dB=\\frac{\\mu_0\\,dI\\,r^2}{2(r^2+z^2)^{3/2}}$, folgt
+$$B(z)=\\frac{\\mu_0\\sigma\\omega}{2}\\int_0^R\\frac{r^3\\,dr}{(r^2+z^2)^{3/2}}=\\frac{\\mu_0\\sigma\\omega}{2}\\left[\\frac{R^2+2z^2}{\\sqrt{R^2+z^2}}-2z\\right]$$</div>
+<div class="result">Im Zentrum ($z=0$): $\\;B=\\dfrac{\\mu_0\\sigma\\omega R}{2}$.<br>
+Für $z\\gg R$ geht es in ein Dipolfeld über. <strong>Kernaussage:</strong> Bewegte Ladung <em>ist</em> Strom — auch ohne Draht. Genau dieses Prinzip (rotierende Ladung) erklärt das magnetische Moment von Planeten und, im klassischen Bild, von Elektronen.</div>`},
+    {q:'[ÜB 7E] Rotierende geladene Hohlkugel: magnetisches Moment, Drehimpuls und gyromagnetisches Verhältnis.',badges:['ex','proof','exam'],ref:'Übung 7, Aufg. E',
+     a:`<div class="step"><strong>Zerlegung in Leiterschleifen:</strong> Ein Ring bei Polarwinkel $\\theta$ hat den Radius $R\\sin\\theta$ und die Ladung $dq=\\sigma\\,2\\pi R^2\\sin\\theta\\,d\\theta$, also den Strom $dI=\\frac{\\omega}{2\\pi}dq$. Sein magnetisches Moment ist $dM=\\pi(R\\sin\\theta)^2dI$.</div>
+<div class="step"><strong>Integration:</strong>
+$$M=\\int_0^\\pi\\frac{\\omega}{2}\\sigma R^4\\cdot2\\pi\\sin^3\\theta\\,d\\theta\\cdot\\frac{1}{2}\\;\\Longrightarrow\\;M=\\frac{4\\pi}{3}\\sigma\\omega R^4$$
+(mit $\\int_0^\\pi\\sin^3\\theta\\,d\\theta=\\frac43$). Mit der Gesamtladung $q=4\\pi R^2\\sigma$ lässt sich das schreiben als
+$$M=\\frac{1}{3}q\\,\\omega R^2$$</div>
+<div class="step"><strong>Drehimpuls der Hohlkugel</strong> (Trägheitsmoment $J=\\frac23mR^2$):
+$$\\sigma_0=J\\omega=\\frac{2}{3}mR^2\\omega$$</div>
+<div class="result">$$\\gamma=\\frac{M}{\\sigma_0}=\\frac{\\frac13q\\omega R^2}{\\frac23m\\omega R^2}=\\boxed{\\;\\frac{q}{2m}\\;}$$
+Das <strong>klassische gyromagnetische Verhältnis</strong> — bemerkenswerterweise unabhängig von $R$, $\\omega$ und sogar von der Massenverteilung, solange Ladung und Masse gleich verteilt sind.</div>
+<div class="warn">Für den Bahndrehimpuls des Elektrons stimmt das exakt und liefert das <strong>Bohrsche Magneton</strong> $\\mu_B=\\frac{e\\hbar}{2m_e}$. Für den <em>Spin</em> misst man jedoch den doppelten Wert ($g\\approx2{,}0023$) — klassisch unerklärbar, erst die Dirac-Gleichung liefert $g=2$, die Quantenelektrodynamik den winzigen Rest. Die Präzision dieser Vorhersage ($10^{-12}$) ist der genaueste Test der Physik überhaupt.</div>`},
+    {q:'[ÜB 8A/8B] Flache Spule und Helmholtz-Anordnung: Feld auf der Achse, 10 %-Abstand, Homogenität.',badges:['ex','proof','calc'],ref:'Übung 8, Aufg. A und B',
+     a:`<div class="step"><strong>A) Biot-Savart für eine flache Spule</strong> ($N$ Windungen, Radius $R$): Jedes Element $d\\vec{l}$ liefert $dB=\\frac{\\mu_0I}{4\\pi}\\frac{dl}{R^2+z^2}$; nur die Achsenkomponente überlebt (Faktor $\\cos\\alpha=R/\\sqrt{R^2+z^2}$). Integration über $2\\pi R$:
+$$B(z)=\\frac{\\mu_0NI}{2}\\frac{R^2}{(R^2+z^2)^{3/2}}$$</div>
+<div class="step"><strong>1) Im Zentrum:</strong> $B(0)=\\dfrac{\\mu_0NI}{2R}$.<br>
+<strong>2) Verlauf:</strong> glockenförmig, Maximum bei $z=0$, für $z\\gg R$ Abfall wie $1/z^3$ (Dipolfeld).<br>
+<strong>3) 10 %-Punkt:</strong>
+$$\\frac{R^3}{(R^2+z^2)^{3/2}}=0{,}1\\;\\Rightarrow\\;R^2+z^2=10^{2/3}R^2=4{,}64R^2\\;\\Rightarrow\\;z=1{,}91\\,R$$</div>
+<div class="result"><strong>B) Helmholtz-Spulenpaar</strong> (Abstand $a=R$): Superposition der beiden Einzelfelder.<br>
+Im Zentrum: $B(0)=\\left(\\frac45\\right)^{3/2}\\frac{\\mu_0NI}{R}=0{,}7155\\,\\frac{\\mu_0NI}{R}$.<br>
+An einer Spule ($z=R/2$): $B=0{,}6768\\,\\frac{\\mu_0NI}{R}$.<br>
+$$\\text{Abweichung}=\\frac{0{,}7155-0{,}6768}{0{,}7155}\\approx5{,}4\\,\\%$$</div>
+<div class="warn">Der Grund für die Homogenität: Bei $a=R$ verschwindet nicht nur die erste, sondern auch die <strong>zweite Ableitung</strong> von $B$ im Zentrum — das Feld ist dort maximal flach. In der Nähe des Zentrums ist es auf besser als $0{,}1\\,$% homogen; erst weiter außen fällt es merklich ab. Anwendungen: Fadenstrahlrohr, Kompensation des Erdmagnetfelds, Elektronenmikroskope.</div>`},
+    {q:'[ÜB 8C/8E] Lange Spule ($l=22\\,$cm, $N=1100$, $d=3\\,$cm, $I=200\\,$mA) und supraleitender 6-T-Magnet.',badges:['ex','calc','exam'],ref:'Übung 8, Aufg. C und E',
+     a:`<div class="step"><strong>C1) Ist die Spule „lang"?</strong> $l/d=22/3=7{,}3\\gg1$ → ja, die Näherung des homogenen Innenfelds ist gut (Fehler wenige Prozent).</div>
+<div class="step"><strong>C2) Innenfeld:</strong>
+$$B=\\mu_0\\frac{NI}{l}=1{,}257\\cdot10^{-6}\\cdot\\frac{1100\\cdot0{,}2}{0{,}22}=1{,}26\\cdot10^{-3}\\,\\text{T}=1{,}26\\,\\text{mT}$$
+<strong>C3) Für $B=0{,}05\\,$mT</strong> (Erdfeld): $I=0{,}2\\,\\text{A}\\cdot\\frac{0{,}05}{1{,}26}=8{,}0\\,$mA.</div>
+<div class="step"><strong>E) Supraleitender Magnet</strong> ($B=6\\,$T, $l=30\\,$cm, $d=2\\,$cm, $1\\,$km NbTi-Draht):<br>
+Windungszahl aus der Drahtlänge:
+$$N=\\frac{1000\\,\\text{m}}{\\pi d}=\\frac{1000}{\\pi\\cdot0{,}02}=1{,}59\\cdot10^4\\;\\text{Windungen}$$
+Strom aus $B=\\mu_0NI/l$:
+$$I=\\frac{Bl}{\\mu_0N}=\\frac{6\\cdot0{,}3}{1{,}257\\cdot10^{-6}\\cdot1{,}59\\cdot10^4}=90\\,\\text{A}$$</div>
+<div class="result"><strong>Elektrische Verlustleistung:</strong>
+$$P=I^2R=0\\qquad(R=0\\;\\text{im supraleitenden Zustand!})$$
+Im <em>persistent mode</em> kann man die Stromquelle sogar abklemmen — der Strom fließt jahrelang von selbst weiter. Energie wird nur für die Kühlung auf $T=4{,}2\\,$K (flüssiges Helium) gebraucht.</div>
+<div class="warn">Zum Vergleich: Ein Kupferdraht gleicher Geometrie hätte bei $90\\,$A eine Verlustleistung im Bereich $10^5\\,$W — und wäre sofort geschmolzen. Deshalb sind alle MRT-Magnete supraleitend. Gefahr: der <strong>Quench</strong> — wird eine Stelle normalleitend, heizt sie sich auf, der ganze Magnet fällt aus und das Helium verdampft schlagartig.</div>`},
+    {q:'[ÜB 9A] Hall-Effekt am Silberstreifen: Herleitung von $U_H$, Zahlenwerte und Hall-Spannung im Blutgefäß.',badges:['ex','proof','calc','exam'],ref:'Übung 9, Aufg. A',
+     a:`<div class="step"><strong>1) Herleitung:</strong> Auf die driftenden Elektronen wirkt $F_L=ev_dB$ quer zum Strom. Sie sammeln sich an einer Kante an, bis das entstehende Querfeld die Lorentz-Kraft kompensiert:
+$$eE_H=ev_dB\\;\\Rightarrow\\;E_H=v_dB\\;\\Rightarrow\\;U_H=v_dBx_1$$
+Mit $I=n\\,e\\,v_d\\,x_1z_1$ folgt $v_d=\\frac{I}{nex_1z_1}$ und damit
+$$\\boxed{\\;U_H=\\frac{IB}{n\\,e\\,z_1}\\;}$$
+Die Breite $x_1$ fällt heraus — nur die <em>Dicke</em> in Feldrichtung zählt.</div>
+<div class="step"><strong>2) Zahlen</strong> ($I=240\\,$A, $B=1{,}7\\,$T, $z_1=0{,}53\\,$mm, $x_1=25{,}6\\,$mm, $n=5{,}85\\cdot10^{28}\\,$m$^{-3}$):
+$$v_d=\\frac{240}{5{,}85\\cdot10^{28}\\cdot1{,}6\\cdot10^{-19}\\cdot1{,}36\\cdot10^{-5}}=1{,}9\\cdot10^{-3}\\,\\frac{\\text{m}}{\\text{s}}$$
+$$U_H=\\frac{240\\cdot1{,}7}{5{,}85\\cdot10^{28}\\cdot1{,}6\\cdot10^{-19}\\cdot5{,}3\\cdot10^{-4}}=8{,}2\\cdot10^{-5}\\,\\text{V}=82\\,\\mu\\text{V}$$</div>
+<div class="result"><strong>3) Hall-Effekt im Blutgefäß:</strong> Hier bewegt sich das Ionenplasma als Ganzes mit $v=0{,}6\\,$m/s, Aderdurchmesser $d=0{,}8\\,$cm, $B=0{,}3\\,$T:
+$$U=v\\,B\\,d=0{,}6\\cdot0{,}3\\cdot0{,}008=1{,}4\\,\\text{mV}$$
+Das ist die Grundlage des <strong>elektromagnetischen Blutflussmessers</strong> — eine völlig berührungslose Messung der Strömungsgeschwindigkeit (auch industriell für leitfähige Flüssigkeiten).</div>
+<div class="warn">Das <em>Vorzeichen</em> der Hall-Konstante verrät die Ladungsträgersorte. Überraschend: Bei Metallen wie Beryllium, Zink oder Cadmium ist es <strong>positiv</strong>, als wären die Träger positiv geladen — Löcherleitung, erklärbar erst mit dem Bändermodell und der effektiven Masse.</div>`},
+    {q:'[ÜB 9B] Induktionsofen: Heizleistung an einem Kupferring, Primärstrom und Schmelzdauer.',badges:['ex','calc'],ref:'Übung 9, Aufg. B',
+     a:`<div class="step"><strong>Widerstand des Kupferrings</strong> ($r=3\\,$cm, $A=1\\,$mm², $\\sigma_{\\text{Cu}}=1{,}68\\cdot10^{-2}\\,\\frac{\\Omega\\,\\text{mm}^2}{\\text{m}}$):
+$$R=\\rho\\frac{l}{A}=1{,}68\\cdot10^{-2}\\cdot\\frac{2\\pi\\cdot0{,}03}{1}=3{,}17\\cdot10^{-3}\\,\\Omega$$
+Ein extrem kleiner Widerstand — genau das ist erwünscht.</div>
+<div class="step"><strong>Sekundärspannung</strong> aus der Transformatorgleichung $\\frac{U_2}{U_1}=\\frac{N_2}{N_1}$ mit $N_2=1$ (der Ring selbst!) und z. B. $N_1=100$:
+$$U_2=\\frac{230\\,\\text{V}}{100}=2{,}3\\,\\text{V}$$</div>
+<div class="step"><strong>1) Heizleistung:</strong>
+$$P=\\frac{U_2^2}{R}=\\frac{2{,}3^2}{3{,}17\\cdot10^{-3}}=1{,}67\\cdot10^3\\,\\text{W}\\approx1{,}7\\,\\text{kW}$$
+(Der Sekundärstrom ist gewaltig: $I_2=U_2/R=726\\,$A.)</div>
+<div class="result"><strong>2) Primärstrom</strong> aus der Leistungsbilanz $P_1=P_2$ (idealer Trafo):
+$$I_1=\\frac{P}{U_1}=\\frac{1670}{230}=7{,}3\\,\\text{A}\\qquad\\left(\\text{oder }I_1=\\frac{I_2}{N_1}=7{,}3\\,\\text{A}\\right)$$
+<strong>3) Schmelzdauer</strong> für $929\\,$J:
+$$t=\\frac{W}{P}=\\frac{929}{1670}=0{,}56\\,\\text{s}$$</div>
+<div class="warn">Das Prinzip: <em>wenige Windungen primär hohe Spannung / kleiner Strom → sekundär niedrige Spannung / riesiger Strom</em>. Dasselbe steckt im Punktschweißgerät und im Induktionskochfeld (dort wird das Feld direkt in den Topfboden gekoppelt, dessen Wirbelströme ihn erhitzen — das Ceranfeld selbst bleibt kalt).</div>`},
+    {q:'[ÜB 9C] Spule ($L=0{,}4\\,$H, $R=120\\,\\Omega$): Einschaltdauer bis 99 % und Induktionsspannung beim Hochfahren auf $1\\,$M$\\Omega$.',badges:['ex','calc','exam'],ref:'Übung 9, Aufg. C',
+     a:`<div class="step"><strong>Einschaltvorgang:</strong> $I(t)=I_0\\left(1-e^{-t/\\tau}\\right)$ mit der Zeitkonstante
+$$\\tau=\\frac{L}{R}=\\frac{0{,}4}{120}=3{,}33\\,\\text{ms}$$</div>
+<div class="step"><strong>99 %-Kriterium:</strong> $1-e^{-t/\\tau}=0{,}99\\;\\Rightarrow\\;e^{-t/\\tau}=0{,}01$
+$$t=\\tau\\ln100=3{,}33\\,\\text{ms}\\cdot4{,}605=15{,}4\\,\\text{ms}$$
+Faustregel: nach $5\\tau$ ist der Vorgang praktisch abgeschlossen ($99{,}3\\,$%).</div>
+<div class="step"><strong>Abschaltvorgang</strong> — Widerstand steigt in $\\Delta t=1\\,$ms linear von $0$ auf $1\\,$M$\\Omega$. Der Strom bricht dadurch von $I_0=U_0/R$ auf praktisch null zusammen:
+$$|U_{\\text{ind}}|=L\\left|\\frac{dI}{dt}\\right|\\approx L\\frac{I_0}{\\Delta t}$$</div>
+<div class="result">Mit $U_0=12\\,$V ist $I_0=\\frac{12}{120}=0{,}1\\,$A:
+$$|U_{\\text{ind}}|=0{,}4\\cdot\\frac{0{,}1}{10^{-3}}=40\\,\\text{V}$$
+Also mehr als das <strong>Dreifache</strong> der Betriebsspannung. Schaltet man noch schneller ab (z. B. mechanischer Kontakt, $\\Delta t\\sim1\\,\\mu$s), entstehen kV-Spannungen.</div>
+<div class="warn"><strong>Praxis:</strong> Genau das ist das Prinzip der <em>Zündspule</em> im Auto und der Grund für den Funken am sich öffnenden Schalter. Zum Schutz von Halbleitern schaltet man eine <strong>Freilaufdiode</strong> antiparallel zur Spule, die den Strom nach dem Abschalten weiterfließen lässt. Die gespeicherte Energie $W=\\frac12LI^2$ muss irgendwohin.</div>`},
+    {q:'[ÜB 9D] Zwei bewegliche Stangen auf Leiterschienen im Magnetfeld: Wie bewegt sich die zweite Stange?',badges:['ex','proof','exam'],ref:'Übung 9, Aufg. D',
+     a:`<div class="step"><strong>Induzierte Spannung:</strong> Der Fluss durch die Schleife ist $\\Phi=Ba(x_2-x_1)$, also
+$$U_{\\text{ind}}=-\\dot{\\Phi}=-Ba(\\dot{x}_2-\\dot{x}_1),\\qquad I=\\frac{Ba(v_2-v_1)}{2R}$$
+(zwei Stangen mit je $R$ in Reihe).</div>
+<div class="step"><strong>1) Erste Stange mit $v_0=$ const:</strong> Auf die zweite wirkt $F=BaI$, also
+$$m\\dot{v}_1=\\frac{B^2a^2}{2R}(v_0-v_1)$$
+Das ist eine Relaxationsgleichung mit der Lösung
+$$v_1(t)=v_0\\left(1-e^{-t/\\tau}\\right),\\qquad \\tau=\\frac{2mR}{B^2a^2}$$
+Die zweite Stange wird <em>mitgeschleppt</em> und nähert sich asymptotisch $v_0$ an. Dann ist die Relativgeschwindigkeit null, der Fluss konstant, der Strom verschwindet — und die Beschleunigung hört auf (Lenz\'sche Regel in Reinform).</div>
+<div class="result"><strong>2) Beliebige Verschiebung um $L$:</strong> Aus $m\\dot{v}_1=\\frac{B^2a^2}{2R}(v_2-v_1)$ folgt durch Integration über die gesamte Bewegung mit $v_1(0)=v_1(\\infty)=0$:
+$$0=\\int m\\dot v_1\\,dt=\\frac{B^2a^2}{2R}\\left(\\Delta x_2-\\Delta x_1\\right)\\;\\Rightarrow\\;\\Delta x_1=\\Delta x_2=L$$
+Die zweite Stange verschiebt sich also um <strong>exakt denselben Betrag in dieselbe Richtung</strong> — unabhängig davon, <em>wie</em> man die erste bewegt. Anschaulich: Der Endzustand muss wieder stromlos sein, und die Gesamtladung $q=\\int I\\,dt=\\frac{\\Delta\\Phi}{2R}$ verschwindet nur, wenn der Fluss unverändert bleibt.</div>
+<div class="warn"><strong>Energiebilanz:</strong> Beide Stangen ruhen am Anfang und am Ende → $\\Delta E_{\\text{kin}}=0$. Da es keine Reibung gibt, ist die geleistete Arbeit vollständig in <strong>Joule\'sche Wärme</strong> $\\int I^2\\cdot2R\\,dt$ umgewandelt worden. Das ist der Grund, warum Wirbelstrombremsen funktionieren.</div>`},
+    {q:'[ÜB 10A] Magnetische Flasche: Bahnform, magnetisches Moment als Invariante und der Spiegelpunkt.',badges:['ex','proof','exam'],ref:'Übung 10, Aufg. A',
+     a:`<div class="step"><strong>1) Homogenes Feld $\\vec{B}=B\\hat{e}_x$:</strong> Zerlege $\\vec{v}=v_\\parallel+\\vec{v}_\\perp$.<br>
+• $v_\\parallel$ erfährt keine Kraft ($\\vec{v}\\times\\vec{B}=0$) → gleichförmige Bewegung.<br>
+• $\\vec{v}_\\perp$ führt eine Kreisbewegung aus mit dem <strong>Gyroradius</strong> $r_c=\\frac{mv_\\perp}{qB}$ und der <strong>Zyklotronfrequenz</strong> $\\omega_c=\\frac{qB}{m}$ (unabhängig von $v$!).<br>
+Zusammen: eine <strong>Schraubenlinie (Helix)</strong> um die Feldlinie.</div>
+<div class="step"><strong>2) Energie und magnetisches Moment:</strong> $E=\\frac{m}{2}(v_\\parallel^2+v_\\perp^2)$ ist konstant, denn die Lorentz-Kraft leistet keine Arbeit. Der Kreisstrom $I=\\frac{q\\omega_c}{2\\pi}$ auf der Fläche $\\pi r_c^2$ ergibt
+$$\\mu=I\\pi r_c^2=\\frac{mv_\\perp^2}{2B}=\\frac{E_\\perp}{B}$$</div>
+<div class="step"><strong>3) Inhomogenes Feld:</strong> $\\mu$ ist eine <em>adiabatische Invariante</em> (bleibt konstant, solange sich $B$ auf einer Gyrationsperiode nur wenig ändert). Aus $E=\\mu B+\\frac{m}{2}v_x^2=$ const folgt
+$$v_x(B)=\\sqrt{\\frac{2}{m}\\left(E-\\mu B\\right)}=\\sqrt{v_0^2-\\frac{2\\mu B}{m}}$$
+Läuft das Teilchen ins starke Feld, wird $v_\\perp$ größer und $v_x$ kleiner.</div>
+<div class="result"><strong>4) Der Spiegelpunkt:</strong> Bei $B_{\\max}=E/\\mu$ wird $v_x=0$ — das Teilchen wird <strong>reflektiert</strong>. Ursache ist die Kraft $F_x=-\\mu\\frac{\\partial B}{\\partial x}$: Die Feldlinien laufen dort zusammen, sodass die Lorentz-Kraft eine rücktreibende Axialkomponente bekommt. Zwischen zwei solchen Spiegeln pendelt das Teilchen hin und her — die <em>magnetische Flasche</em>.</div>
+<div class="warn"><strong>Anwendungen:</strong> Der <strong>Van-Allen-Strahlungsgürtel</strong> ist eine natürliche magnetische Flasche des Erdfeldes; Teilchen pendeln in Sekunden zwischen den Polen. In den Polregionen dringen sie tief in die Atmosphäre ein und erzeugen das <strong>Polarlicht</strong>. In der Fusionsforschung dient dasselbe Prinzip dem Plasmaeinschluss — allerdings entweichen Teilchen im „Verlustkegel" (kleines $v_\\perp/v_\\parallel$), weshalb sich der Tokamak durchgesetzt hat.</div>`},
+    {q:'[ÜB 10B] Faraday-Waage: Bestimme aus den Auslenkungen die Suszeptibilitäten von Aluminium und Kupfer.',badges:['ex','proof','calc','exam'],ref:'Übung 10, Aufg. B',
+     a:`<div class="step"><strong>1) Potentielle Energie</strong> mit $\\vec{M}=\\chi_m\\vec{H}=\\frac{\\chi_m}{\\mu_0}\\vec{B}$ und $B=\\frac{\\mu_0I}{2\\pi z}$:
+$$E_{\\text{pot}}=-\\frac{1}{2}V\\,\\vec{M}\\cdot\\vec{B}=-\\frac{V\\chi_m B^2}{2\\mu_0}=-\\frac{V\\chi_m\\mu_0I^2}{8\\pi^2z^2}$$</div>
+<div class="step"><strong>2) Kraft in $z$-Richtung:</strong>
+$$F_z=-\\frac{\\partial E_{\\text{pot}}}{\\partial z}=-\\frac{V\\chi_m\\mu_0I^2}{4\\pi^2z^3}$$
+$\\chi_m>0$ (paramagnetisch) → $F_z<0$, also <strong>zum Draht hin</strong>; $\\chi_m<0$ (diamagnetisch) → <strong>vom Draht weg</strong>. Genau das beobachtet man.</div>
+<div class="step"><strong>3) Auswertung</strong> über das Federgesetz $|F|=k\\delta$, mit $z=0{,}5\\,$cm, $k=10^{-6}\\,$N/m, $I=200\\,$A, $V=1\\,$mm³:
+$$\\chi_m=\\frac{4\\pi^2z^3\\,k\\,\\delta}{V\\mu_0I^2}$$
+<strong>Aluminium</strong> ($\\delta=0{,}234\\,$mm, zum Draht gezogen):
+$$\\chi_{\\text{Al}}=\\frac{39{,}48\\cdot1{,}25\\cdot10^{-7}\\cdot2{,}34\\cdot10^{-10}}{10^{-9}\\cdot1{,}257\\cdot10^{-6}\\cdot4\\cdot10^{4}}=+2{,}3\\cdot10^{-5}$$
+<strong>Kupfer</strong> ($\\delta=100\\,\\mu$m, weggedrückt): $\\chi_{\\text{Cu}}=-2{,}3\\cdot10^{-5}\\cdot\\frac{100}{234}=-9{,}8\\cdot10^{-6}$</div>
+<div class="result">Literaturwerte: $\\chi_{\\text{Al}}=+2{,}2\\cdot10^{-5}$ (paramagnetisch, ungepaartes Leitungselektron), $\\chi_{\\text{Cu}}=-9{,}6\\cdot10^{-6}$ (diamagnetisch, abgeschlossene Schalen) — hervorragende Übereinstimmung.</div>
+<div class="warn">Beachte, wie winzig die Kräfte sind: $F_{\\text{Al}}=k\\delta=2{,}3\\cdot10^{-10}\\,$N. Deshalb braucht man eine extrem weiche Feder ($k=10^{-6}\\,$N/m) und den steilen $1/z^3$-Gradienten. Merke: Nur ein <strong>inhomogenes</strong> Feld übt eine Nettokraft auf einen Dipol aus.</div>`},
+    {q:'[ÜB 10C] Ringspule mit Eisenkern und $2\\,$mm Luftspalt ($R=20\\,$cm, $N=1000$, $I=1\\,$A, $\\mu_r=1000$): Berechne $B$ und $H$ überall.',badges:['ex','calc','exam'],ref:'Übung 10, Aufg. C',
+     a:`<div class="step"><strong>Zwei Grundgleichungen:</strong><br>
+• Durchflutungssatz: $\\oint\\vec{H}\\cdot d\\vec{s}=NI\\;\\Rightarrow\\;H_{\\text{Fe}}l_{\\text{Fe}}+H_Ld=NI$<br>
+• $B$ ist an der Grenzfläche <strong>stetig</strong> (Normalkomponente!), also $B_{\\text{Fe}}=B_L=B$ — das ist der Schlüssel.<br>
+Mit $H_{\\text{Fe}}=\\frac{B}{\\mu_0\\mu_r}$ und $H_L=\\frac{B}{\\mu_0}$:
+$$NI=\\frac{B}{\\mu_0}\\left(\\frac{l_{\\text{Fe}}}{\\mu_r}+d\\right)$$</div>
+<div class="step"><strong>Zahlen:</strong> $l=2\\pi R=1{,}257\\,$m, $l_{\\text{Fe}}=1{,}255\\,$m, $d=2\\,$mm:
+$$\\frac{l_{\\text{Fe}}}{\\mu_r}+d=1{,}255\\cdot10^{-3}+2\\cdot10^{-3}=3{,}25\\cdot10^{-3}\\,\\text{m}$$
+$$B=\\frac{\\mu_0NI}{3{,}25\\cdot10^{-3}}=\\frac{1{,}257\\cdot10^{-6}\\cdot1000}{3{,}25\\cdot10^{-3}}=0{,}39\\,\\text{T}$$
+$$H_L=\\frac{B}{\\mu_0}=3{,}1\\cdot10^5\\,\\frac{\\text{A}}{\\text{m}},\\qquad H_{\\text{Fe}}=\\frac{H_L}{1000}=307\\,\\frac{\\text{A}}{\\text{m}}$$</div>
+<div class="result"><strong>Vergleich:</strong><br>
+• <em>Mit Luftspalt:</em> $B=0{,}39\\,$T<br>
+• <em>Ohne Luftspalt:</em> $B=\\frac{\\mu_0\\mu_rNI}{l}=1{,}0\\,$T<br>
+• <em>Leere Ringspule:</em> $B=\\frac{\\mu_0NI}{l}=1{,}0\\,$mT<br>
+Ein Spalt von nur $2\\,$mm auf $1{,}26\\,$m Umfang (0,16 % der Länge!) reduziert das Feld auf <strong>39 %</strong>.</div>
+<div class="warn">Der Grund: Im Ausdruck $\\frac{l_{\\text{Fe}}}{\\mu_r}+d$ wird die Eisenstrecke durch $\\mu_r=1000$ geteilt, der Spalt aber nicht. Der Spalt dominiert daher den „magnetischen Widerstand" völlig — die Analogie zum elektrischen Kreis: Eisen = Kupferdraht, Luftspalt = großer Vorwiderstand. Deshalb müssen Elektromagnet-Polschuhe so eng wie möglich stehen. Umgekehrt macht der Spalt die Kennlinie linearer und verhindert Sättigung — bei Speicherdrosseln ist er deshalb erwünscht.</div>`},
+    {q:'[ÜB 12B] Polarisation der Welle $\\vec{E}=[E_{x0}\\cos(kz-\\omega t),\\,E_{y0}\\sin(kz-\\omega t),\\,0]$.',badges:['ex','proof','calc'],ref:'Übung 12, Aufg. B',
+     a:`<div class="step"><strong>1) Polarisationsart:</strong> Die beiden Komponenten haben $90°$ Phasenversatz ($\\cos$ vs. $\\sin$). Elimination der Zeit:
+$$\\left(\\frac{E_x}{E_{x0}}\\right)^2+\\left(\\frac{E_y}{E_{y0}}\\right)^2=1$$
+Das ist eine <strong>Ellipse</strong> → elliptisch polarisiert. Nur für $E_{x0}=E_{y0}$ wird daraus ein Kreis (zirkular), für $\\Delta\\varphi=0$ oder $\\pi$ eine Gerade (linear).</div>
+<div class="step"><strong>2) Feld bei $t=3\\,$s, $z=5\\,$cm, $\\lambda=450\\,$nm:</strong>
+$$k=\\frac{2\\pi}{\\lambda}=1{,}40\\cdot10^{7}\\,\\text{m}^{-1},\\qquad \\omega=ck=4{,}19\\cdot10^{15}\\,\\text{s}^{-1}$$
+$$kz=6{,}98\\cdot10^{5},\\qquad \\omega t=1{,}26\\cdot10^{16}$$
+Die Phase ist also astronomisch groß — sinnvoll ist nur $\\phi=(kz-\\omega t)\\bmod 2\\pi$. Praktisch bedeutet das: Nach $3\\,$s ist die Phase völlig unbestimmt, denn schon eine relative Frequenzunsicherheit von $10^{-16}$ verändert sie um mehr als $2\\pi$.<br>
+Beachte außerdem: $x$ und $y$ ($3\\,$cm, $4\\,$cm) sind <em>irrelevant</em> — die Welle läuft in $z$-Richtung und hängt nur von $z$ ab.</div>
+<div class="result"><strong>3) $\\sigma^++\\sigma^-$ ergibt linear:</strong>
+$$\\vec{E}_++\\vec{E}_-=E_0\\big[\\cos(kz-\\omega t)+\\cos(kz-\\omega t),\\;\\sin(kz-\\omega t)-\\sin(kz-\\omega t),\\;0\\big]$$
+$$=2E_0\\cos(kz-\\omega t)\\,\\hat{e}_x$$
+Die $y$-Komponenten löschen sich aus, es bleibt eine <strong>linear</strong> in $x$ polarisierte Welle doppelter Amplitude.</div>
+<div class="warn">Umgekehrt lässt sich jede lineare Polarisation als Summe zweier gegenläufig zirkularer zerlegen. Genau diese Zerlegung erklärt den <em>Faraday-Effekt</em> (die beiden Zirkularkomponenten sehen unterschiedliche Brechungsindizes → die Ebene dreht sich) und ist in der Quantenmechanik der Übergang zur Photonen-Basis $m=\\pm1$.</div>`},
+    {q:'[ÜB 12E] Strahlungsdruck: Herleitung, Kraft auf eine schwarze Fläche und Gleichgewichtsradius von Staubteilchen im Sonnensystem.',badges:['ex','proof','calc','exam'],ref:'Übung 12, Aufg. E',
+     a:`<div class="step"><strong>1) Herleitung:</strong> Die Energiedichte einer EM-Welle ist
+$$u=\\frac{\\varepsilon_0}{2}E^2+\\frac{1}{2\\mu_0}B^2=\\varepsilon_0E^2$$
+(beide Anteile sind gleich groß, da $B=E/c$). Die Welle trägt den Impuls $p=E_{\\text{ges}}/c$, also überträgt sie beim vollständigen Absorbieren pro Fläche und Zeit den Druck
+$$P=u=\\varepsilon_0E^2=\\frac{I}{c}$$
+Bei <strong>vollständiger Reflexion</strong> kehrt sich der Impuls um → doppelter Druck $2I/c$.</div>
+<div class="step"><strong>2) Zahlenbeispiel</strong> ($I=200\\,$W/m², $A=0{,}2\\times0{,}3=0{,}06\\,$m²):<br>
+absorbierend: $F=\\dfrac{IA}{c}=\\dfrac{200\\cdot0{,}06}{3\\cdot10^8}=4{,}0\\cdot10^{-8}\\,$N<br>
+reflektierend: $F=8{,}0\\cdot10^{-8}\\,$N<br>
+Winzig — deshalb muss man Lichtmühlen-Experimente sehr sorgfältig von Restgas-Effekten trennen.</div>
+<div class="step"><strong>3) Gleichgewicht Strahlungsdruck ↔ Gravitation:</strong><br>
+Strahlungskraft (Querschnitt $\\pi r^2$): $F_S=\\dfrac{L}{4\\pi R^2c}\\pi r^2$<br>
+Gravitationskraft: $F_G=\\dfrac{GM_\\odot}{R^2}\\cdot\\dfrac43\\pi r^3\\rho$<br>
+Beide fallen mit $1/R^2$ → das Verhältnis ist <strong>abstandsunabhängig</strong>! Gleichsetzen:
+$$r_0=\\frac{3L}{16\\pi c\\,G\\,M_\\odot\\,\\rho}$$</div>
+<div class="result">$$r_0=\\frac{3\\cdot3{,}83\\cdot10^{26}}{16\\pi\\cdot3\\cdot10^8\\cdot6{,}67\\cdot10^{-11}\\cdot1{,}99\\cdot10^{30}\\cdot10^3}=5{,}7\\cdot10^{-7}\\,\\text{m}\\approx0{,}6\\,\\mu\\text{m}$$
+Teilchen <em>kleiner</em> als $\\approx0{,}6\\,\\mu$m werden aus dem Sonnensystem hinausgeblasen (Kraft $\\propto r^2$ schlägt Gewicht $\\propto r^3$), größere bleiben gravitativ gebunden.</div>
+<div class="warn">Beobachtbare Folgen: Der <strong>Staubschweif eines Kometen</strong> zeigt immer von der Sonne weg (Kepler vermutete das bereits 1619); interplanetarer Staub wird ständig „gereinigt" (der Poynting-Robertson-Effekt lässt größere Körnchen zusätzlich langsam einspiralen). Technisch: <strong>Sonnensegel</strong> (IKAROS 2010, LightSail-2 2019) und optische Pinzetten für Zellen.</div>`}
   ]
 },
 {
