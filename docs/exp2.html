@@ -910,7 +910,91 @@ $\\lambda=1\\,\\text{Å}\\;\\Leftrightarrow\\;E\\approx12{,}4\\,\\text{keV}$. Io
      a:`a) Lampe hat hohen Widerstand $\\to$ Glimmentladung im Starter beginnt.<br>
 b) Starter schließt kurz $\\to$ hoher Strom $\\to$ Glühemission an den Elektroden.<br>
 c) Drossel (Spule) begrenzt die Spannung, Starter öffnet wieder $\\to$ stabile Gasentladung zündet.<br>
-Das im Gas erzeugte UV-Licht wird durch eine Leuchtstoffbeschichtung in sichtbares Licht konvertiert — viel effizienter als die Glühbirne (kein Aufheizen eines Festkörpers)!`}
+Das im Gas erzeugte UV-Licht wird durch eine Leuchtstoffbeschichtung in sichtbares Licht konvertiert — viel effizienter als die Glühbirne (kein Aufheizen eines Festkörpers)!`},
+    {q:'Leite das Drude-Modell her: Warum gilt $\\sigma=\\dfrac{ne^2\\tau}{m}$, und warum <em>muss</em> es eine Stoßzeit $\\tau$ geben?',badges:['proof','calc'],ref:'Skript §2.1',
+     a:`<div class="step"><strong>Der Widerspruch zuerst:</strong> Ohne Stöße würde ein Elektron im Feld $E$ frei beschleunigt:
+$$a=\\frac{eE}{m}=\\frac{1{,}60\\cdot10^{-19}\\cdot 0{,}01}{9{,}11\\cdot10^{-31}}\\approx 1{,}8\\cdot10^{9}\\,\\frac{\\text{m}}{\\text{s}^2}$$
+Nach nur <strong>einer Sekunde</strong> wäre $v\\approx1{,}8\\cdot10^9\\,$m/s $\\approx 6c$ — unmöglich. Der Strom wäre außerdem zeitlich ansteigend, nicht konstant. Also muss es einen Reibungsmechanismus geben.</div>
+<div class="step"><strong>Drude-Ansatz:</strong> Zwischen zwei Stößen (mittlere Zeit $\\tau$) wird das Elektron beschleunigt, beim Stoß verliert es seine gerichtete Geschwindigkeit vollständig. Mittlere <em>Driftgeschwindigkeit</em>:
+$$v_D=\\frac{1}{2}a\\tau\\ \\to\\ \\text{(genauer im stationären Mittel)}\\ v_D=\\frac{eE}{m}\\tau$$</div>
+<div class="step"><strong>Stromdichte:</strong> $j=n e v_D = \\dfrac{ne^2\\tau}{m}E \\;\\equiv\\; \\sigma E$ — das ist genau das <strong>mikroskopische Ohm\'sche Gesetz</strong> $\\vec{j}=\\sigma\\vec{E}$.</div>
+<div class="result">$$\\sigma=\\frac{ne^2\\tau}{m}=ne\\mu,\\qquad \\text{Beweglichkeit } \\mu=\\frac{v_D}{E}=\\frac{e\\tau}{m}\\ \\left[\\frac{\\text{m}^2}{\\text{Vs}}\\right]$$</div>
+<div class="step"><strong>Zahlen für Kupfer:</strong> $n=8{,}5\\cdot10^{28}\\,$m$^{-3}$, $\\tau\\approx2{,}5\\cdot10^{-14}\\,$s
+$$\\sigma=\\frac{8{,}5\\cdot10^{28}\\cdot(1{,}6\\cdot10^{-19})^2\\cdot2{,}5\\cdot10^{-14}}{9{,}11\\cdot10^{-31}}\\approx 6\\cdot10^{7}\\,\\frac{\\text{S}}{\\text{m}}\\ ✓$$</div>
+<div class="warn">Die drei Geschwindigkeiten <strong>nie verwechseln</strong>:<br>
+• Driftgeschwindigkeit $v_D\\approx 7\\cdot10^{-5}\\,$m/s (Schneckentempo!)<br>
+• Fermi-/thermische Geschwindigkeit $v_F\\approx1{,}6\\cdot10^{6}\\,$m/s (die tatsächliche Bewegung)<br>
+• Signalgeschwindigkeit $\\approx 0{,}7c$ (Ausbreitung des Feldes, deshalb geht das Licht sofort an)</div>`},
+    {q:'Spannungsteiler und Potentiometer: Herleitung und Anwendung.',badges:['def','calc'],ref:'Skript §2.2',
+     a:`<div class="step"><strong>Unbelasteter Spannungsteiler</strong> (zwei Widerstände in Reihe): Durch beide fließt derselbe Strom $I=\\dfrac{U_0}{R_1+R_2}$, also
+$$U_2=IR_2=U_0\\frac{R_2}{R_1+R_2}$$</div>
+<div class="step"><strong>Potentiometer:</strong> Ein homogener Widerstandsdraht der Länge $L$ mit Schleifkontakt bei $x$. Wegen $R\\propto x$:
+$$U(x)=U_{AB}\\cdot\\frac{x}{L}$$
+— stufenlos einstellbare Spannung von $0$ bis $U_{AB}$.</div>
+<div class="warn"><strong>Belasteter Teiler:</strong> Schließt man einen Verbraucher $R_L$ parallel zu $R_2$ an, gilt $R_2\\to R_2\\|R_L$ und die Ausgangsspannung <em>bricht ein</em>. Die Formel oben gilt nur für $R_L\\gg R_2$. Deshalb misst man mit hochohmigen Voltmetern.</div>
+<div class="result">Anwendungen: Lautstärkeregler, Sensor-Auswertung (Dehnungsmessstreifen, NTC), Referenzspannungserzeugung, Kompensationsmethode (Poggendorff) zur stromlosen Messung von Quellenspannungen.</div>`},
+    {q:'[ÜB 6B] Ein Galvanometer zeigt Vollausschlag bei $100\\,\\mu$A / $100\\,$mV. Wie erweitert man den Messbereich auf $100\\,$mA bzw. auf $100\\,$V?',badges:['ex','calc','exam'],ref:'Übung 6, Aufg. B1/B2',
+     a:`<div class="step"><strong>Innenwiderstand:</strong> $R_i=\\dfrac{U_{\\max}}{I_{\\max}}=\\dfrac{0{,}1\\,\\text{V}}{10^{-4}\\,\\text{A}}=1000\\,\\Omega$</div>
+<div class="step"><strong>a) Amperemeter bis 100 mA — Shunt <em>parallel</em>:</strong> Durch das Instrument dürfen weiter nur $100\\,\\mu$A fließen, der Rest $I_p=100\\,\\text{mA}-0{,}1\\,\\text{mA}=99{,}9\\,$mA muss am Shunt vorbei. Beide liegen an $0{,}1\\,$V:
+$$R_p=\\frac{0{,}1\\,\\text{V}}{99{,}9\\cdot10^{-3}\\,\\text{A}}\\approx 1{,}001\\,\\Omega$$
+Allgemein: $R_p=\\dfrac{R_i}{n-1}$ mit $n=I_{\\text{neu}}/I_{\\max}=1000$ → $R_p=1000/999\\approx1\\,\\Omega$ ✓</div>
+<div class="step"><strong>b) Voltmeter bis 100 V — Vorwiderstand in <em>Reihe</em>:</strong> Bei $100\\,\\mu$A müssen $100\\,\\text{V}-0{,}1\\,\\text{V}$ am Vorwiderstand abfallen:
+$$R_v=\\frac{99{,}9\\,\\text{V}}{10^{-4}\\,\\text{A}}=999\\,\\text{k}\\Omega\\approx 1\\,\\text{M}\\Omega$$
+Allgemein: $R_v=R_i(n-1)$.</div>
+<div class="result"><strong>Merkregel:</strong> Strommessbereich vergrößern → <em>parallel</em> (kleiner Shunt). Spannungsmessbereich vergrößern → <em>in Reihe</em> (großer Vorwiderstand). Amperemeter müssen niederohmig sein und werden in Reihe geschaltet, Voltmeter hochohmig und parallel.</div>`},
+    {q:'Starthilfe beim Auto: Warum fließen bei richtiger Polung nur $\\sim20\\,$A, bei falscher Polung aber $\\sim460\\,$A?',badges:['calc','ex','exam'],ref:'Skript §2.2',
+     a:`<div class="step"><strong>Modell:</strong> Zwei Batterien mit $U_1=12\\,$V (voll) und $U_2=11\\,$V (leer), Innenwiderstände je $R_i=25\\,$m$\\Omega$, also $R_{\\text{ges}}=50\\,$m$\\Omega$.</div>
+<div class="step"><strong>Richtig gepolt</strong> (+ an +, − an −): Die Quellen wirken <em>gegeneinander</em>, es zählt nur die Differenz:
+$$I=\\frac{U_1-U_2}{R_{\\text{ges}}}=\\frac{1\\,\\text{V}}{0{,}05\\,\\Omega}=20\\,\\text{A}$$
+Ein harmloser Ladestrom.</div>
+<div class="step"><strong>Falsch gepolt</strong> (+ an −): Die Quellen addieren sich:
+$$I=\\frac{U_1+U_2}{R_{\\text{ges}}}=\\frac{23\\,\\text{V}}{0{,}05\\,\\Omega}=460\\,\\text{A}$$</div>
+<div class="result">Verlustleistung <em>in jeder Batterie</em>:
+$$P=I^2R_i=(460)^2\\cdot0{,}025\\approx 5{,}3\\,\\text{kW}$$
+Das ist die Leistung von drei Wasserkochern in einem Bleiakku → Elektrolyt kocht, Knallgas explodiert, Kabel glühen.</div>
+<div class="warn">Genau dieselbe Rechnung erklärt, warum ein Kurzschluss der Autobatterie ($U=12\\,$V, $R_i=25\\,$m$\\Omega$) rund $480\\,$A liefert — die kleine Spannung täuscht, entscheidend ist der winzige Innenwiderstand.</div>`},
+    {q:'Defibrillator: Berechne Kapazität, gespeicherte Energie und Entladezeitkonstante.',badges:['calc','ex'],ref:'Skript §2.2',
+     a:`<div class="step"><strong>Typische Werte:</strong> $C\\approx32\\,\\mu$F, Ladespannung $U\\approx5\\,$kV, Thorax-Widerstand $R\\approx50\\,\\Omega$.</div>
+<div class="step"><strong>Energie:</strong>
+$$W=\\tfrac12 CU^2=\\tfrac12\\cdot32\\cdot10^{-6}\\cdot(5\\cdot10^3)^2=400\\,\\text{J}$$</div>
+<div class="step"><strong>Zeitkonstante:</strong>
+$$\\tau=RC=50\\,\\Omega\\cdot32\\,\\mu\\text{F}=1{,}6\\,\\text{ms}$$</div>
+<div class="step"><strong>Spitzenstrom und -leistung:</strong> $I_0=U/R=100\\,$A, $P_0=U I_0=500\\,$kW (aber nur für Millisekunden!).</div>
+<div class="result">Mittlere abgegebene Leistung $\\bar P\\approx W/\\tau\\approx 250\\,$kW. Der kurze, kräftige Puls depolarisiert das gesamte Myokard gleichzeitig, damit der Sinusknoten den Rhythmus neu vorgeben kann.</div>
+<div class="warn"><strong>Physiologische Stromwirkung</strong> (50 Hz, Körperweg): $\\sim2\\,$mA fühlbar · $10\\!-\\!20\\,$mA Muskelverkrampfung ("Loslassschwelle") · $100\\!-\\!300\\,$mA <strong>Kammerflimmern</strong>, lebensgefährlich · $>500\\,$mA Verbrennungen, aber oft Herzstillstand statt Flimmern. Gefährlich ist der <em>Strom</em>, nicht die Spannung.</div>`},
+    {q:'Batterien und Akkumulatoren: Vergleiche Daniell-Element, Bleiakkumulator und Lithium-Ionen-Batterie.',badges:['def'],ref:'Skript §2.4',
+     a:`<div class="step"><strong>Gemeinsames Prinzip:</strong> Zwei Elektroden mit verschiedenem <em>Redoxpotential</em> in einem Elektrolyten. An der Anode wird oxidiert (Elektronen abgegeben), an der Kathode reduziert. Die Potentialdifferenz der Halbzellen ergibt die Klemmenspannung.</div>
+<div class="step"><strong>Daniell-Element (Zn/Cu):</strong> Zn $\\to$ Zn$^{2+}$ + 2e$^-$ (unedel, $-0{,}76\\,$V), Cu$^{2+}$ + 2e$^-\\to$ Cu ($+0{,}34\\,$V). Klemmenspannung $U=1{,}1\\,$V. Nicht wiederaufladbar (Primärelement).</div>
+<div class="step"><strong>Bleiakkumulator:</strong> Pb / PbO$_2$ in H$_2$SO$_4$, $U\\approx2{,}0\\,$V pro Zelle, 6 Zellen $\\to12\\,$V. Vorteile: sehr kleiner Innenwiderstand (hohe Ströme für den Anlasser, $\\sim100\\,$A), billig, robust, reversibel. Nachteil: geringe Energiedichte ($\\sim35\\,$Wh/kg), schwer, giftig.</div>
+<div class="step"><strong>Lithium-Ionen (z. B. NMC 111 = LiNi$_{1/3}$Mn$_{1/3}$Co$_{1/3}$O$_2$):</strong> Kein klassisches Auflösen der Elektroden, sondern <strong>Interkalation</strong> — Li$^+$ wandert reversibel zwischen Graphitanode und Schichtoxidkathode ("Schaukelstuhl-Prinzip"). $U\\approx3{,}7\\,$V, $\\sim250\\,$Wh/kg, hohe Zyklenzahl.</div>
+<div class="result">Nobelpreis für Chemie <strong>2019</strong>: Goodenough, Whittingham und Yoshino für die Entwicklung der Li-Ionen-Batterie.</div>`},
+    {q:'Wie funktioniert Galvanisieren, und wie lautet die Leitfähigkeit eines Elektrolyten?',badges:['def','calc'],ref:'Skript §2.3',
+     a:`<div class="step"><strong>Ladungsträger im Elektrolyten:</strong> Beide Ionensorten tragen zum Strom bei, sie wandern in <em>entgegengesetzte</em> Richtungen, aber ihre Ladungen sind ebenfalls entgegengesetzt — die Beiträge <strong>addieren</strong> sich:
+$$\\sigma=nq(\\mu_+ + \\mu_-)$$</div>
+<div class="step"><strong>Beweglichkeit aus Stokes-Reibung:</strong> Im Gleichgewicht ist $qE=6\\pi\\eta r v$, also
+$$\\mu=\\frac{v}{E}=\\frac{q}{6\\pi\\eta r}$$
+Deshalb ist die Ionenleitung stark temperaturabhängig (über $\\eta(T)$) und nimmt mit steigender Temperatur <em>zu</em> — genau umgekehrt zum Metall.</div>
+<div class="step"><strong>Galvanisieren:</strong> Das Werkstück wird als Kathode geschaltet, das Beschichtungsmetall (Cu, Ni, Cr, Au) als Anode; es löst sich auf und scheidet sich am Werkstück ab. Nach dem <strong>Faraday-Gesetz</strong> ist die abgeschiedene Stoffmenge proportional zur geflossenen Ladung:
+$$m=\\frac{M}{zF}\\,Q,\\qquad F=N_Ae=96\\,485\\,\\frac{\\text{C}}{\\text{mol}}$$</div>
+<div class="result">Damit lässt sich die Elementarladung bestimmen: $e=F/N_A$. Anwendungen: Korrosionsschutz, Verchromen, Leiterplattenfertigung, Elektroraffination von Kupfer.</div>`},
+    {q:'Supraleitung in Zahlen: Sprungtemperaturen, HTSL-Rekorde und warum man vier statt zwei Kontakte braucht.',badges:['def','exam'],ref:'Skript §2.3',
+     a:`<div class="step"><strong>Klassische (BCS-)Supraleiter:</strong> Hg $4{,}15\\,$K (Kamerlingh Onnes 1911) · Pb $7{,}2\\,$K · Nb $9{,}2\\,$K · Nb$_3$Sn $18\\,$K · Nb$_3$Ge $23{,}2\\,$K. NbTi und Nb$_3$Sn sind die Arbeitspferde für Magnetspulen (MRT, LHC, Fusionsanlagen).</div>
+<div class="step"><strong>Hochtemperatursupraleiter (Kuprate, 1986 Bednorz/Müller, Nobelpreis 1987):</strong> YBa$_2$Cu$_3$O$_7$ ($92\\,$K, <em>über</em> dem Siedepunkt von flüssigem Stickstoff, $77\\,$K!) · BSCCO $110\\,$K · HgBaCaCuO $\\sim133\\,$K.</div>
+<div class="step"><strong>Weitere Rekorde:</strong> FeSe-Monolage auf SrTiO$_3$ $\\sim100\\,$K · H$_3$S unter $150\\,$GPa $\\sim200\\,$K · LaH$_{10}$ unter $170\\,$GPa $\\sim250\\,$K · Nickelate (La$_3$Ni$_2$O$_7$) unter Druck, ab 2023/24 intensiv untersucht. Raumtemperatursupraleitung bei Normaldruck bleibt offen.</div>
+<div class="result"><strong>Vierpunktmessung:</strong> Bei zwei Kontakten misst man immer auch die Übergangs- und Zuleitungswiderstände mit — bei $R_{\\text{Probe}}\\to0$ ist das fatal. Lösung: Über <em>zwei äußere</em> Kontakte wird der Strom eingeprägt, über <em>zwei innere</em> die Spannung <strong>stromlos</strong> (hochohmig) abgegriffen. Da über die Spannungskontakte kein Strom fließt, fällt an ihren Übergangswiderständen keine Spannung ab.</div>
+<div class="warn">Weitere Kennzeichen: idealer Diamagnetismus / <strong>Meißner-Ochsenfeld-Effekt</strong> ($\\chi=-1$, schwebender Magnet), kritisches Feld $B_c$ und kritische Stromdichte $j_c$ — oberhalb davon bricht die Supraleitung zusammen.</div>`},
+    {q:'Alltagsrechnung: Eine $100\\,$W-Glühbirne an $230\\,$V. Bestimme Strom, Widerstand und Jahreskosten — und vergleiche mit LED.',badges:['calc','exam'],ref:'Skript §3',
+     a:`<div class="step"><strong>Strom:</strong> $I=\\dfrac{P}{U}=\\dfrac{100\\,\\text{W}}{230\\,\\text{V}}\\approx 0{,}43\\,\\text{A}$</div>
+<div class="step"><strong>Betriebswiderstand:</strong> $R=\\dfrac{U^2}{P}=\\dfrac{230^2}{100}=529\\,\\Omega$ (bei $220\\,$V: $484\\,\\Omega$)</div>
+<div class="step"><strong>Energie bei 3 h/Tag:</strong> $W=0{,}1\\,\\text{kW}\\cdot3\\,\\text{h}\\cdot365=109{,}5\\,$kWh/Jahr. Bei $0{,}35\\,$€/kWh sind das $\\approx 38\\,$€ pro Jahr <em>pro Lampe</em>.</div>
+<div class="result">Eine LED gleicher Helligkeit braucht $\\approx10\\,$W → $\\approx3{,}80\\,$€/Jahr. Die Glühbirne setzt $\\sim95\\,\\%$ der Leistung in Wärme um; ihre Lichtausbeute liegt bei $\\sim12\\,$lm/W gegenüber $\\sim120\\,$lm/W bei LED.</div>
+<div class="warn">Klausurfalle: Der <strong>Kaltwiderstand</strong> der Glühwendel ist $10\\!-\\!15$-mal kleiner als der Betriebswiderstand (Wolfram: $\\rho$ steigt stark mit $T$, $\\alpha\\approx4{,}5\\cdot10^{-3}\\,$K$^{-1}$, Betriebstemperatur $\\sim2700\\,$K). Deshalb fließt beim Einschalten ein Stromstoß — und deshalb brennen Glühbirnen fast immer beim Einschalten durch.</div>`},
+    {q:'Halbleiter: Wie wirkt Dotierung, und wie entsteht daraus ein Transistor?',badges:['def'],ref:'Skript §2.3',
+     a:`<div class="step"><strong>Reines (intrinsisches) Ge/Si:</strong> Bandlücke $E_g$ (Si $1{,}12\\,$eV, Ge $0{,}67\\,$eV). Ladungsträgerdichte $n\\propto e^{-E_g/2k_BT}$ → der Widerstand <strong>sinkt</strong> exponentiell mit steigender Temperatur. Im Arrhenius-Plot $\\ln\\sigma$ gegen $1/T$ ergibt sich eine Gerade mit Steigung $-E_g/2k_B$ — so misst man die Bandlücke.</div>
+<div class="step"><strong>n-Dotierung:</strong> Fünfwertige Fremdatome (P, As) geben ein Elektron ins Leitungsband ab (Donatoren) → Elektronenleitung. <strong>p-Dotierung:</strong> Dreiwertige Atome (B, Al) erzeugen Löcher (Akzeptoren). Schon ppm-Konzentrationen ändern $\\sigma$ um Größenordnungen.</div>
+<div class="step"><strong>pn-Übergang:</strong> Ladungsträger diffundieren, es bleibt eine <em>Verarmungszone</em> mit Raumladung und Diffusionsspannung. Ergebnis: Diode — Strom fließt nur in Durchlassrichtung. Zusatzfunktionen: LED (Rekombination sendet Photon $h\\nu\\approx E_g$), Solarzelle (umgekehrt).</div>
+<div class="step"><strong>Transistor:</strong> Beim <em>Bipolartransistor</em> (npn) steuert ein kleiner Basisstrom einen großen Kollektorstrom. Beim <strong>FET/MOSFET</strong> steuert eine <em>Gate-Spannung</em> über das E-Feld (also kapazitiv, praktisch leistungslos) die Leitfähigkeit des Kanals.</div>
+<div class="result">Der MOSFET ist die Grundlage jedes integrierten Schaltkreises — moderne Prozessoren enthalten $>10^{10}$ davon. Nobelpreis Physik 1956: Shockley, Bardeen, Brattain.</div>`}
   ]
 },
 {
